@@ -56,11 +56,77 @@
     .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 24px var(--gap); display: flex; align-items: center; justify-content: space-between; transition: padding .4s var(--ease), background .4s; }
     .nav.scrolled { background: rgba(13,21,32,0.94); backdrop-filter: blur(14px); padding: 14px var(--gap); }
     .nav-logo { height: 36px; display: flex; align-items: center; overflow: visible; }
-    .nav-links { display: flex; gap: 36px; }
-    .nav-links a { font-family: var(--f-body); font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(245,242,237,0.45); transition: color .3s; position: relative; }
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+    .nav-links > li { position: relative; }
+    .nav-links a, .nav-links .nav-dropdown-trigger { font-family: var(--f-body); font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(245,242,237,0.45); transition: color .3s; position: relative; display: flex; align-items: center; gap: 5px; cursor: none; }
     .nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:var(--blue-mid); transition: width .4s var(--ease); }
     .nav-links a:hover { color: var(--offwhite); }
     .nav-links a:hover::after { width: 100%; }
+    .nav-dropdown-trigger { background: none; border: none; padding: 0; }
+    .nav-dropdown-trigger:hover { color: var(--offwhite); }
+    .nav-dropdown-trigger svg { width: 10px; height: 10px; transition: transform .3s var(--ease); }
+    .nav-links > li:hover .nav-dropdown-trigger svg { transform: rotate(180deg); }
+    .nav-links > li:hover .nav-dropdown-trigger { color: var(--offwhite); }
+
+    /* DROPDOWN — with invisible bridge so cursor doesn't lose hover */
+    .nav-dropdown-wrap {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding-top: 14px; /* invisible bridge covers the gap */
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .28s var(--ease), visibility .28s;
+      z-index: 200;
+    }
+    .nav-links > li:hover .nav-dropdown-wrap {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+    .nav-dropdown {
+      background: rgba(8,14,24,0.98);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 2px solid var(--blue-mid);
+      min-width: 220px;
+      transform: translateY(6px);
+      transition: transform .28s var(--ease);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .nav-links > li:hover .nav-dropdown {
+      transform: translateY(0);
+    }
+    .nav-dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 22px;
+      font-family: var(--f-body);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.45);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: color .22s, background .22s, padding-left .22s;
+      white-space: nowrap;
+    }
+    .nav-dropdown a::before {
+      content: '';
+      width: 0;
+      height: 1px;
+      background: var(--blue-mid);
+      transition: width .3s var(--ease);
+      flex-shrink: 0;
+    }
+    .nav-dropdown a:last-child { border-bottom: none; }
+    .nav-dropdown a::after { display: none !important; }
+    .nav-dropdown a:hover { color: var(--blue-mid); background: rgba(54,159,206,0.05); padding-left: 28px; }
+    .nav-dropdown a:hover::before { width: 12px; }
+
     .nav-cta { font-family: var(--f-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245,242,237,0.4); transition: color .3s; }
     .nav-cta:hover { color: var(--blue-mid); }
     .nav-menu-btn { display: none; flex-direction: column; gap: 6px; width: 26px; cursor: none; }
@@ -69,27 +135,140 @@
     .nav-menu-btn.open span:nth-child(2) { opacity: 0; }
     .nav-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* MOBILE MENU — UPDATED with locations */
-    .m-menu { position: fixed; inset: 0; z-index: 90; background: var(--ink); display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: clamp(40px,10vw,100px) var(--gap); opacity: 0; visibility: hidden; transition: opacity .6s var(--ease), visibility .6s; }
+    /* MOBILE MENU */
+    .m-menu {
+      position: fixed; inset: 0; z-index: 90;
+      background: #080f1c;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      opacity: 0; visibility: hidden;
+      transition: opacity .55s var(--ease), visibility .55s;
+      overflow-y: auto;
+    }
     .m-menu.open { opacity: 1; visibility: visible; }
-    .m-menu-links { margin-bottom: 40px; }
-    .m-menu-links li { overflow: hidden; }
-    .m-menu-links a { font-family: var(--f-head); font-size: clamp(44px,9vw,80px); letter-spacing: 0.06em; color: var(--offwhite); display: block; line-height: 1.1; transform: translateY(100%); transition: transform .6s var(--ease), color .3s; }
-    .m-menu.open .m-menu-links a { transform: translateY(0); }
-    .m-menu.open .m-menu-links li:nth-child(1) a { transition-delay: .08s; }
-    .m-menu.open .m-menu-links li:nth-child(2) a { transition-delay: .14s; }
-    .m-menu.open .m-menu-links li:nth-child(3) a { transition-delay: .20s; }
-    .m-menu.open .m-menu-links li:nth-child(4) a { transition-delay: .26s; }
-    .m-menu-links a:hover { color: var(--blue-mid); }
 
-    /* Location pills in mobile menu */
-    .m-menu-locations { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; opacity: 0; transform: translateY(10px); transition: opacity .5s var(--ease) .35s, transform .5s var(--ease) .35s; }
-    .m-menu.open .m-menu-locations { opacity: 1; transform: translateY(0); }
-    .m-loc-pill { display: flex; align-items: center; gap: 6px; padding: 7px 14px; border: 1px solid rgba(54,159,206,0.25); font-family: var(--f-body); font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue-mid); }
-    .m-loc-pill svg { width: 10px; height: 10px; flex-shrink: 0; }
+    /* top bar inside mobile menu */
+    .m-menu-topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px var(--gap);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .m-menu-logo { height: 30px; display: flex; align-items: center; }
 
-    .m-menu-foot { font-family: var(--f-body); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mist); opacity: 0; transition: opacity .5s var(--ease) .42s; }
-    .m-menu.open .m-menu-foot { opacity: 1; }
+    /* main links area */
+    .m-menu-body {
+      padding: 32px var(--gap) 24px;
+      display: flex; flex-direction: column;
+    }
+
+    /* big nav items */
+    .m-menu-links { margin-bottom: 0; }
+    .m-menu-links > li { border-bottom: 1px solid rgba(255,255,255,0.06); overflow: visible; }
+    .m-menu-links a,
+    .m-menu-links .m-menu-acc-btn {
+      font-family: var(--f-head);
+      font-size: clamp(36px,8vw,60px);
+      letter-spacing: 0.05em;
+      color: rgba(245,242,237,0.85);
+      display: flex; align-items: center; justify-content: space-between;
+      line-height: 1;
+      padding: 18px 0;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform .55s var(--ease), opacity .55s var(--ease), color .25s;
+      background: none; border: none; cursor: none;
+      text-align: left; width: 100%;
+    }
+    .m-menu.open .m-menu-links a,
+    .m-menu.open .m-menu-links .m-menu-acc-btn { transform: translateY(0); opacity: 1; }
+    .m-menu.open .m-menu-links li:nth-child(1) a,
+    .m-menu.open .m-menu-links li:nth-child(1) .m-menu-acc-btn { transition-delay: .07s; }
+    .m-menu.open .m-menu-links li:nth-child(2) a { transition-delay: .13s; }
+    .m-menu.open .m-menu-links li:nth-child(3) a { transition-delay: .19s; }
+    .m-menu-links a:hover,
+    .m-menu-acc-btn:hover,
+    .m-menu-acc-btn.active { color: var(--blue-mid); }
+
+    /* chevron in accordion button */
+    .m-acc-chevron {
+      width: 22px; height: 22px; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .35s var(--ease), border-color .3s, background .3s;
+    }
+    .m-acc-chevron svg { width: 12px; height: 12px; color: var(--mist); }
+    .m-menu-acc-btn.active .m-acc-chevron { transform: rotate(180deg); border-color: var(--blue-mid); background: rgba(54,159,206,0.1); }
+    .m-menu-acc-btn.active .m-acc-chevron svg { color: var(--blue-mid); }
+
+    /* Mobile accordion sub-links */
+    .m-acc-sub { max-height: 0; overflow: hidden; transition: max-height .45s var(--ease); }
+    .m-acc-sub.open { max-height: 500px; }
+    .m-acc-sub-inner { padding: 6px 0 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+    .m-acc-sub a {
+      font-family: var(--f-body) !important;
+      font-size: 11px !important;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.4) !important;
+      line-height: 1 !important;
+      padding: 12px 14px !important;
+      display: flex !important;
+      align-items: center;
+      gap: 8px;
+      transform: none !important;
+      opacity: 1 !important;
+      border: 1px solid rgba(255,255,255,0.05) !important;
+      transition: color .2s, border-color .2s, background .2s !important;
+    }
+    .m-acc-sub a::before { content:''; width: 5px; height: 1px; background: currentColor; flex-shrink: 0; }
+    .m-acc-sub a:hover { color: var(--blue-mid) !important; border-color: rgba(54,159,206,0.25) !important; background: rgba(54,159,206,0.05) !important; }
+
+    /* footer info area */
+    .m-menu-footer {
+      padding: 20px var(--gap) 32px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; flex-direction: column; gap: 16px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .5s var(--ease) .3s, transform .5s var(--ease) .3s;
+    }
+    .m-menu.open .m-menu-footer { opacity: 1; transform: translateY(0); }
+
+    /* service area badge */
+    .m-service-area {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .m-service-label {
+      font-family: var(--f-body); font-size: 9px; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase; color: var(--mist);
+    }
+    .m-service-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .m-service-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px;
+      border: 1px solid rgba(54,159,206,0.2);
+      font-family: var(--f-body); font-size: 9px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-mid);
+    }
+    .m-service-pill svg { width: 8px; height: 8px; }
+    .m-hq-row {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--f-body); font-size: 10px; font-weight: 400;
+      letter-spacing: 0.1em; color: rgba(245,242,237,0.35);
+    }
+    .m-hq-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--blue-mid); flex-shrink: 0; }
+
+    .m-contact-row {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .m-contact-row a {
+      font-family: var(--f-body); font-size: 12px; font-weight: 400;
+      color: rgba(245,242,237,0.5); letter-spacing: 0.06em;
+      transition: color .25s;
+      transform: none !important; opacity: 1 !important;
+    }
+    .m-contact-row a:hover { color: var(--blue-mid); }
 
     /* HERO */
     .hero { position: relative; height: 100svh; min-height: 600px; background: var(--ink); overflow: hidden; display: flex; align-items: center; justify-content: center; }
@@ -98,91 +277,23 @@
     .hero-bg-slide.active { opacity: 1; }
     .hero-bg-slide img { width:100%; height:100%; object-fit:cover; transform:scale(1.07); animation: kenBurns 15s ease-in-out infinite alternate; }
     @keyframes kenBurns { from{transform:scale(1.07)} to{transform:scale(1.0) translate(-1%,1%)} }
-    /* Stronger overlay for better text readability */
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(13,21,32,0.65) 0%, rgba(13,21,32,0.35) 35%, rgba(13,21,32,0.82) 100%); z-index: 1; }
     .hero-center { position: relative; z-index: 2; text-align: center; display: flex; flex-direction: column; align-items: center; padding: 0 16px; }
 
-    /* HERO TEXT — bigger, clearer, text-shadow for legibility */
-    .hero-tagline {
-      font-family: var(--f-body);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
-      color: var(--blue-mid);
-      margin-bottom: 22px;
-      opacity: 0;
-      animation: fadeSlideUp .7s var(--ease) 0.5s forwards;
-      text-shadow: 0 1px 12px rgba(0,0,0,0.5);
-    }
+    .hero-tagline { font-family: var(--f-body); font-size: 11px; font-weight: 600; letter-spacing: 0.45em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 22px; opacity: 0; animation: fadeSlideUp .7s var(--ease) 0.5s forwards; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
     .hero-title { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-    .hero-line {
-      font-family: var(--f-head);
-      font-size: clamp(44px, 8vw, 120px);
-      line-height: 0.95;
-      letter-spacing: 0.14em;
-      color: var(--offwhite);
-      display: flex;
-      flex-wrap: nowrap;
-      white-space: nowrap;
-      gap: 0;
-      text-shadow: 0 4px 40px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5);
-    }
+    .hero-line { font-family: var(--f-head); font-size: clamp(44px, 8vw, 120px); line-height: 0.95; letter-spacing: 0.14em; color: var(--offwhite); display: flex; flex-wrap: nowrap; white-space: nowrap; gap: 0; text-shadow: 0 4px 40px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5); }
     .hw { display: inline-block; white-space: nowrap; }
-    .hc {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(16px) scale(0.95);
-      filter: blur(6px);
-      animation: charReveal 0.6s var(--ease) forwards;
-    }
+    .hc { display: inline-block; opacity: 0; transform: translateY(16px) scale(0.95); filter: blur(6px); animation: charReveal 0.6s var(--ease) forwards; }
     .hw-space { display: inline-block; width: 0.22em; }
-    @keyframes charReveal {
-      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
-    }
+    @keyframes charReveal { to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); } }
     .hero-sep { width: 0; height: 1px; background: linear-gradient(to right, transparent, var(--blue-mid), transparent); margin: 24px auto 0; animation: ruleGrow 0.9s var(--ease) 2.2s forwards; }
     @keyframes ruleGrow { to { width: 260px; } }
-    .hero-sub {
-      font-family: var(--f-body);
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: rgba(245,242,237,0.65);
-      margin-top: 18px;
-      opacity: 0;
-      animation: fadeSlideUp .7s var(--ease) 2.5s forwards;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
-    }
-    /* Location badges under hero sub */
-    .hero-locations {
-      display: flex;
-      gap: 10px;
-      margin-top: 18px;
-      flex-wrap: wrap;
-      justify-content: center;
-      opacity: 0;
-      animation: fadeSlideUp .7s var(--ease) 2.8s forwards;
-    }
-    .hero-loc-badge {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      padding: 6px 14px;
-      border: 1px solid rgba(54,159,206,0.3);
-      background: rgba(13,21,32,0.45);
-      backdrop-filter: blur(8px);
-      font-family: var(--f-body);
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(245,242,237,0.6);
-    }
+    .hero-sub { font-family: var(--f-body); font-size: 12px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(245,242,237,0.65); margin-top: 18px; opacity: 0; animation: fadeSlideUp .7s var(--ease) 2.5s forwards; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+    .hero-locations { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeSlideUp .7s var(--ease) 2.8s forwards; }
+    .hero-loc-badge { display: flex; align-items: center; gap: 5px; padding: 6px 14px; border: 1px solid rgba(54,159,206,0.3); background: rgba(13,21,32,0.45); backdrop-filter: blur(8px); font-family: var(--f-body); font-size: 9px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,242,237,0.6); }
     .hero-loc-badge svg { width: 9px; height: 9px; color: var(--blue-mid); flex-shrink: 0; }
-
     @keyframes fadeSlideUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
-
     .hero-scroll { position: absolute; bottom: clamp(28px,5vh,56px); left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0; animation: fadeIn .8s ease 3.1s forwards; }
     .scroll-track { width: 1px; height: 52px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
     .scroll-fill { position: absolute; top:-40%; left:0; right:0; height:40%; background: var(--blue-mid); animation: scrollDrop 2.2s ease-in-out infinite; }
@@ -235,116 +346,37 @@
     .pm-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--blue-mid); transform:scaleX(0); transform-origin:left; transition:transform .55s var(--ease); z-index:3; }
     .pm-card:hover::after { transform:scaleX(1); }
 
-    /* PROCESS */
-    .process { background: #060c16; }
-    .process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-top: 52px; }
-    .proc-step { background: rgba(255,255,255,0.025); padding: 44px 28px 48px; position: relative; overflow: hidden; transition: background .3s; border-top: 1px solid rgba(255,255,255,0.05); }
-    .proc-step:hover { background: rgba(54,159,206,0.06); }
-    .proc-n { font-family: var(--f-head); font-size: 78px; letter-spacing: 0.04em; color: rgba(255,255,255,0.04); line-height:1; margin-bottom: 26px; transition: color .4s; }
-    .proc-step:hover .proc-n { color: rgba(54,159,206,0.16); }
-    .proc-bar { width: 24px; height: 2px; background: var(--blue-mid); margin-bottom: 16px; transition: width .4s var(--ease); }
-    .proc-step:hover .proc-bar { width: 50px; }
-    .proc-step h3 { font-family: var(--f-head); font-size: 23px; letter-spacing: 0.06em; color: var(--offwhite); margin-bottom: 10px; }
-    .proc-step p { font-size: 12px; font-weight: 300; line-height: 1.8; color: var(--mist); }
+    /* CAREERS SECTION */
+    .careers { background: #060c16; }
+    .careers-inner { display: grid; grid-template-columns: 5fr 7fr; gap: 60px; align-items: start; }
+    .careers-left h2 { font-family: var(--f-head); font-size: clamp(46px,5vw,78px); letter-spacing: 0.05em; color: var(--offwhite); line-height: 0.92; margin-bottom: 18px; }
+    .careers-left h2 span { color: var(--blue-mid); }
+    .careers-left p { font-size: 13px; font-weight: 300; line-height: 1.85; color: var(--mist); max-width: 360px; margin-bottom: 32px; }
+    .careers-perks { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .careers-perk { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .perk-icon { width: 38px; height: 38px; flex-shrink: 0; border: 1px solid rgba(54,159,206,0.2); display: flex; align-items: center; justify-content: center; color: var(--blue-mid); }
+    .perk-icon svg { width: 16px; height: 16px; }
+    .perk-text strong { display: block; font-family: var(--f-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--offwhite); margin-bottom: 3px; }
+    .perk-text span { font-size: 11px; font-weight: 300; color: var(--mist); line-height: 1.6; }
+    .careers-cta { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border: 1px solid var(--blue-mid); font-family: var(--f-body); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue-mid); transition: background .3s, color .3s; }
+    .careers-cta:hover { background: var(--blue-mid); color: var(--ink); }
+    .careers-cta svg { width: 14px; height: 14px; }
 
-    /* =============================
-       TIKTOK SECTION — SLIDER ROW
-       ============================= */
-    .tiktok-s { background: #050a12; padding: clamp(56px,8vw,110px) 0; }
-    .tiktok-head { text-align: center; margin-bottom: 48px; }
-    .tiktok-head .s-tag { justify-content: center; }
-    .tiktok-head h2 { font-family: var(--f-head); font-size: clamp(46px,5.5vw,80px); letter-spacing: 0.05em; color: var(--offwhite); }
-    .tiktok-head p { font-size: 13px; font-weight: 300; color: var(--mist); margin-top: 10px; }
-
-    .tiktok-slider-wrap { position: relative; }
-
-    .tiktok-slider-track {
-      display: flex;
-      gap: 14px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      padding: 0 var(--gap) 24px;
-      scrollbar-width: none;
-      align-items: flex-start;
-    }
-    .tiktok-slider-track::-webkit-scrollbar { display: none; }
-
-    /* Each card: fixed width, 9:16 ratio container */
-    .tiktok-card {
-      flex: 0 0 300px;
-      min-width: 300px;
-      scroll-snap-align: start;
-      border-radius: 4px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: #0a1220;
-      transition: border-color .4s var(--ease), transform .4s var(--ease);
-      position: relative;
-    }
-    .tiktok-card:hover {
-      border-color: rgba(54,159,206,0.4);
-      transform: translateY(-4px);
-    }
-
-    /* 9:16 aspect ratio box */
-    .tt-ratio-box {
-      position: relative;
-      width: 100%;
-      padding-bottom: 177.78%;
-      background: #060d1a;
-      overflow: hidden;
-    }
-    .tt-ratio-box iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    .tiktok-card-label {
-      padding: 12px 14px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-    .tiktok-card-label span {
-      font-family: var(--f-body);
-      font-size: 11px;
-      font-weight: 400;
-      color: rgba(244,241,236,0.35);
-      letter-spacing: 0.08em;
-    }
-
-    /* Slider nav arrows */
-    .slider-nav {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 24px;
-      padding: 0 var(--gap);
-    }
-    .slider-btn {
-      width: 44px; height: 44px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.03);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: border-color .3s, background .3s;
-      color: var(--mist);
-    }
-    .slider-btn:hover { border-color: var(--blue-mid); background: rgba(54,159,206,0.08); color: var(--blue-mid); }
-    .slider-btn svg { width: 18px; height: 18px; }
-
-    /* Scroll dots */
-    .slider-dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
-    .slider-dot {
-      width: 20px; height: 2px;
-      background: rgba(255,255,255,0.12);
-      transition: background .3s, width .3s;
-      cursor: pointer;
-    }
-    .slider-dot.active { background: var(--blue-mid); width: 36px; }
+    /* Job listings */
+    .jobs-list { display: flex; flex-direction: column; gap: 2px; }
+    .job-card { background: rgba(255,255,255,0.025); padding: 28px 28px 28px 24px; border-left: 2px solid transparent; transition: border-color .3s, background .3s; cursor: none; position: relative; }
+    .job-card:hover { border-color: var(--blue-mid); background: rgba(54,159,206,0.04); }
+    .job-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
+    .job-title { font-family: var(--f-head); font-size: 22px; letter-spacing: 0.06em; color: var(--offwhite); }
+    .job-badge { font-family: var(--f-body); font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; padding: 5px 12px; border: 1px solid rgba(54,159,206,0.3); color: var(--blue-mid); flex-shrink: 0; }
+    .job-badge.fulltime { border-color: rgba(54,206,130,0.3); color: #36ce82; }
+    .job-badge.parttime { border-color: rgba(206,180,54,0.3); color: #ceb436; }
+    .job-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .job-meta-item { display: flex; align-items: center; gap: 5px; font-family: var(--f-body); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); }
+    .job-meta-item svg { width: 10px; height: 10px; }
+    .job-arrow { position: absolute; right: 24px; bottom: 28px; color: var(--blue-mid); opacity: 0; transform: translateX(-6px); transition: opacity .3s, transform .3s var(--ease); }
+    .job-card:hover .job-arrow { opacity: 1; transform: translateX(0); }
+    .job-arrow svg { width: 18px; height: 18px; }
 
     /* CONTACT */
     .contact { background: var(--ink); }
@@ -358,42 +390,13 @@
     .cd-icon { width: 42px; height: 42px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.09); display: flex; align-items: center; justify-content: center; font-size: 17px; transition: all .3s; }
     .cd-label { font-family: var(--f-body); font-size: 9px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mist); display: block; margin-bottom: 2px; }
     .cd-val { font-size: 14px; font-weight: 400; color: var(--offwhite); }
-
-    /* Service locations list */
-    .service-locations {
-      margin-bottom: 28px;
-    }
-    .service-locations-label {
-      font-family: var(--f-body);
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--mist);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .service-locations { margin-bottom: 28px; }
+    .service-locations-label { font-family: var(--f-body); font-size: 9px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mist); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
     .service-locations-label::before { content:''; width:14px; height:1px; background:var(--mist); }
     .location-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .location-tag {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 14px;
-      border: 1px solid rgba(54,159,206,0.22);
-      font-family: var(--f-body);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--blue-mid);
-      transition: background .3s, border-color .3s;
-    }
+    .location-tag { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid rgba(54,159,206,0.22); font-family: var(--f-body); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-mid); transition: background .3s, border-color .3s; }
     .location-tag:hover { background: rgba(54,159,206,0.08); border-color: rgba(54,159,206,0.45); }
     .location-tag svg { width: 10px; height: 10px; }
-
     .contact-socials { display: flex; gap: 9px; }
     .contact-socials a { width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.09); display: flex; align-items: center; justify-content: center; font-family: var(--f-body); font-size: 10px; font-weight: 600; color: var(--mist); transition: all .3s; }
     .contact-socials a:hover { border-color: var(--blue-mid); color: var(--blue-mid); }
@@ -423,17 +426,15 @@
     /* RESPONSIVE */
     @media (max-width:1100px) {
       .pmr-3 { grid-template-columns: 1fr 1fr; }
-      .process-steps { grid-template-columns: repeat(2,1fr); }
     }
     @media (max-width:900px) {
-      .contact-grid { grid-template-columns: 1fr; }
+      .contact-grid, .careers-inner { grid-template-columns: 1fr; }
       .nav-links,.nav-cta { display: none; }
       .nav-menu-btn { display: flex; }
       .pmr-big-small,.pmr-small-big { grid-template-columns: 1fr; }
     }
     @media (max-width:700px) {
       .pmr-half { grid-template-columns: 1fr; }
-      .process-steps { grid-template-columns: 1fr; }
       .footer-inner { flex-direction:column; text-align:center; }
       .wa-bubble { bottom:16px; right:16px; }
       .hero-line { font-size: clamp(36px, 10.5vw, 56px); letter-spacing: 0.10em; }
@@ -462,10 +463,25 @@
       <img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:36px;"/>
     </a>
     <ul class="nav-links">
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#reels">Reels</a></li>
+      <!-- Portfolio dropdown -->
+      <li>
+        <button class="nav-dropdown-trigger">
+          Portfolio
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-wrap">
+          <div class="nav-dropdown">
+            <a href="hospitality.html">Hospitality</a>
+            <a href="residential.html">Residential</a>
+            <a href="healthcare.html">Healthcare</a>
+            <a href="club-resort.html">Club or Resort</a>
+            <a href="education.html">Education</a>
+            <a href="workplace.html">Workplace</a>
+          </div>
+        </div>
+      </li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="#careers">Careers</a></li>
     </ul>
     <a href="tel:+9779849151220" class="nav-cta">+977 9849151220</a>
     <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
@@ -473,35 +489,66 @@
     </button>
   </nav>
 
-  <!-- MOBILE MENU — with locations -->
+  <!-- MOBILE MENU -->
   <div class="m-menu" id="mMenu">
-    <div class="m-menu-links">
-      <ul>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#process">Process</a></li>
-        <li><a href="#reels">Reels</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+    <!-- top bar -->
+    <div class="m-menu-topbar">
+      <div class="m-menu-logo">
+        <img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:28px;"/>
+      </div>
+      <button class="nav-menu-btn open" id="mMenuClose" aria-label="Close" style="display:flex;">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <div class="m-menu-locations">
-      <span class="m-loc-pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-        Baluawatar
-      </span>
-      <span class="m-loc-pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-        Kathmandu
-      </span>
-      <span class="m-loc-pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-        Pokhara
-      </span>
-      <span class="m-loc-pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-        Chitwan
-      </span>
+
+    <!-- main nav links -->
+    <div class="m-menu-body">
+      <nav class="m-menu-links">
+        <ul>
+          <li>
+            <button class="m-menu-acc-btn" id="mPortfolioBtn">
+              Portfolio
+              <span class="m-acc-chevron">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+            <div class="m-acc-sub" id="mPortfolioSub">
+              <div class="m-acc-sub-inner">
+                <a href="hospitality.html">Hospitality</a>
+                <a href="residential.html">Residential</a>
+                <a href="healthcare.html">Healthcare</a>
+                <a href="club-resort.html">Club or Resort</a>
+                <a href="education.html">Education</a>
+                <a href="workplace.html">Workplace</a>
+              </div>
+            </div>
+          </li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#careers">Careers</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="m-menu-foot">+977 9849151220 &middot; info@nextgeninterior.com</div>
+
+    <!-- footer info -->
+    <div class="m-menu-footer">
+      <div class="m-service-area">
+        <div class="m-service-label">Services</div>
+        <div class="m-service-row">
+          <span class="m-service-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            All Over Nepal
+          </span>
+        </div>
+        <div class="m-hq-row">
+          <span class="m-hq-dot"></span>
+          Head Office — Baluwatar, Kathmandu
+        </div>
+      </div>
+      <div class="m-contact-row">
+        <a href="tel:+9779849151220">+977 9849151220</a>
+        <a href="mailto:info@nextgeninterior.com">info@nextgeninterior.com</a>
+      </div>
+    </div>
   </div>
 
   <!-- HERO -->
@@ -599,89 +646,144 @@
     <div style="padding-bottom: clamp(56px,8vw,96px);"></div>
   </section>
 
-  <!-- PROCESS -->
-  <section class="process s" id="process">
+  <!-- CAREERS -->
+  <section class="careers s" id="careers">
     <div class="wrap">
-      <div style="text-align:center; margin-bottom:4px;">
-        <div class="s-tag rv" style="justify-content:center;">How We Work</div>
-        <h2 class="rv" style="font-family:var(--f-head);font-size:clamp(46px,5.5vw,82px);letter-spacing:0.05em;color:var(--offwhite);text-align:center;margin-bottom:0;">OUR PROCESS</h2>
+      <div class="careers-inner">
+        <div>
+          <div class="s-tag rv">Join Our Team</div>
+          <div class="rv">
+            <h2 style="font-family:var(--f-head);font-size:clamp(46px,5vw,78px);letter-spacing:0.05em;color:var(--offwhite);line-height:0.92;margin-bottom:18px;">BUILD THE<br><span style="color:var(--blue-mid);">FUTURE</span><br>WITH US</h2>
+            <p style="font-size:13px;font-weight:300;line-height:1.85;color:var(--mist);max-width:360px;margin-bottom:32px;">We're always looking for talented, passionate designers, architects and project managers who share our love for exceptional spaces.</p>
+          </div>
+          <div class="careers-perks rv d1">
+            <div class="careers-perk">
+              <div class="perk-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div class="perk-text">
+                <strong>Flexible Hours</strong>
+                <span>We trust our team to manage their time and deliver outstanding results.</span>
+              </div>
+            </div>
+            <div class="careers-perk">
+              <div class="perk-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              </div>
+              <div class="perk-text">
+                <strong>Learning & Growth</strong>
+                <span>Regular workshops, site visits and exposure to high-end projects across Nepal.</span>
+              </div>
+            </div>
+            <div class="careers-perk">
+              <div class="perk-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div class="perk-text">
+                <strong>Collaborative Culture</strong>
+                <span>A tight-knit creative team that values every voice and every idea.</span>
+              </div>
+            </div>
+          </div>
+          <a href="careers.html" class="careers-cta rv d2">
+            View All Openings
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Job listings -->
+        <div class="jobs-list rv d1">
+          <a href="careers.html#interior-designer" class="job-card">
+            <div class="job-card-top">
+              <div class="job-title">INTERIOR DESIGNER</div>
+              <div class="job-badge fulltime">Full Time</div>
+            </div>
+            <div class="job-meta">
+              <span class="job-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                Baluawatar, Kathmandu
+              </span>
+              <span class="job-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                2+ Years Exp.
+              </span>
+            </div>
+            <div class="job-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </a>
+
+          <a href="careers.html#architect" class="job-card">
+            <div class="job-card-top">
+              <div class="job-title">ARCHITECT</div>
+              <div class="job-badge fulltime">Full Time</div>
+            </div>
+            <div class="job-meta">
+              <span class="job-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                Baluawatar, Kathmandu
+              </span>
+              <span class="job-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                3+ Years Exp.
+              </span>
+            </div>
+            <div class="job-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </a>
+
+          <a href="careers.html#3d-visualizer" class="job-card">
+            <div class="job-card-top">
+              <div class="job-title">3D VISUALIZER</div>
+              <div class="job-badge fulltime">Full Time</div>
+            </div>
+            <div class="job-meta">
+              <span class="job-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                Baluawatar, Kathmandu
+              </span>
+              <span class="job-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                1+ Year Exp.
+              </span>
+            </div>
+            <div class="job-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </a>
+
+          <a href="careers.html#project-manager" class="job-card">
+            <div class="job-card-top">
+              <div class="job-title">PROJECT MANAGER</div>
+              <div class="job-badge parttime">Part Time</div>
+            </div>
+            <div class="job-meta">
+              <span class="job-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                Kathmandu / Field
+              </span>
+              <span class="job-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                2+ Years Exp.
+              </span>
+            </div>
+            <div class="job-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </a>
+
+          <a href="careers.html#site-supervisor" class="job-card">
+            <div class="job-card-top">
+              <div class="job-title">SITE SUPERVISOR</div>
+              <div class="job-badge fulltime">Full Time</div>
+            </div>
+            <div class="job-meta">
+              <span class="job-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                Nepal-wide
+              </span>
+              <span class="job-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                3+ Years Exp.
+              </span>
+            </div>
+            <div class="job-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </a>
+        </div>
       </div>
-      <div class="process-steps">
-        <div class="proc-step rv"><div class="proc-n">01</div><div class="proc-bar"></div><h3>DISCOVERY</h3><p>We begin by understanding your vision, lifestyle, budget, and site context. Deep listening is the foundation of great design.</p></div>
-        <div class="proc-step rv d1"><div class="proc-n">02</div><div class="proc-bar"></div><h3>CONCEPT DESIGN</h3><p>Our designers craft unique concepts &mdash; mood boards, 3D visualizations, material palettes &mdash; tailored to your space and story.</p></div>
-        <div class="proc-step rv d2"><div class="proc-n">03</div><div class="proc-bar"></div><h3>DEVELOPMENT</h3><p>Detailed drawings, specifications, and BOQ &mdash; every element resolved before a single nail is driven.</p></div>
-        <div class="proc-step rv d3"><div class="proc-n">04</div><div class="proc-bar"></div><h3>EXECUTION</h3><p>Our skilled craftsmen bring the vision to life. We manage every detail, delivering on time and to the highest standards.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TIKTOK REELS — HORIZONTAL SLIDER -->
-  <section class="tiktok-s" id="reels">
-    <div class="wrap">
-      <div class="tiktok-head">
-        <div class="s-tag rv">Behind The Work</div>
-        <h2 class="rv">OUR REELS</h2>
-        <p class="rv">Watch our transformations come to life across Nepal.</p>
-      </div>
-    </div>
-
-    <div class="tiktok-slider-wrap rv">
-      <div class="tiktok-slider-track" id="ttTrack">
-
-        <div class="tiktok-card">
-          <div class="tt-ratio-box">
-            <iframe src="https://www.tiktok.com/embed/v2/7610352282936380692?lang=en" allowfullscreen allow="encrypted-media" loading="lazy"></iframe>
-          </div>
-          <div class="tiktok-card-label"><span>Premium Service &middot; Nepal</span></div>
-        </div>
-
-        <div class="tiktok-card">
-          <div class="tt-ratio-box">
-            <iframe src="https://www.tiktok.com/embed/v2/7479399652366781703?lang=en" allowfullscreen allow="encrypted-media" loading="lazy"></iframe>
-          </div>
-          <div class="tiktok-card-label"><span>Site Update &middot; Kathmandu</span></div>
-        </div>
-
-        <div class="tiktok-card">
-          <div class="tt-ratio-box">
-            <iframe src="https://www.tiktok.com/embed/v2/7479117054419782930?lang=en" allowfullscreen allow="encrypted-media" loading="lazy"></iframe>
-          </div>
-          <div class="tiktok-card-label"><span>New Home &middot; Nepal</span></div>
-        </div>
-
-        <div class="tiktok-card">
-          <div class="tt-ratio-box">
-            <iframe src="https://www.tiktok.com/embed/v2/7474979973707730183?lang=en" allowfullscreen allow="encrypted-media" loading="lazy"></iframe>
-          </div>
-          <div class="tiktok-card-label"><span>Premium Home &middot; Nepal</span></div>
-        </div>
-
-        <div class="tiktok-card">
-          <div class="tt-ratio-box">
-            <iframe src="https://www.tiktok.com/embed/v2/7216660929486785799?lang=en" allowfullscreen allow="encrypted-media" loading="lazy"></iframe>
-          </div>
-          <div class="tiktok-card-label"><span>Next Home &middot; NextGen</span></div>
-        </div>
-
-        <div class="tiktok-card">
-          <div class="tt-ratio-box">
-            <iframe src="https://www.tiktok.com/embed/v2/7184294520043916571?lang=en" allowfullscreen allow="encrypted-media" loading="lazy"></iframe>
-          </div>
-          <div class="tiktok-card-label"><span>Hotel Project &middot; Nepal</span></div>
-        </div>
-
-      </div><!-- /track -->
-
-      <div class="slider-nav">
-        <button class="slider-btn" id="ttPrev" aria-label="Previous">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="slider-btn" id="ttNext" aria-label="Next">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-
-      <div class="slider-dots" id="ttDots"></div>
     </div>
   </section>
 
@@ -698,16 +800,14 @@
           <div class="contact-deets rv">
             <a href="tel:+9779849151220" class="cd-item"><div class="cd-icon">&#128222;</div><div><span class="cd-label">Call Us</span><span class="cd-val">+977 9849151220</span></div></a>
             <a href="mailto:info@nextgeninterior.com" class="cd-item"><div class="cd-icon">&#9993;&#65039;</div><div><span class="cd-label">Email Us</span><span class="cd-val">info@nextgeninterior.com</span></div></a>
-            <div class="cd-item"><div class="cd-icon">&#128205;</div><div><span class="cd-label">Location</span><span class="cd-val">Baluawatar, Kathmandu</span></div></div>
+            <div class="cd-item"><div class="cd-icon">&#128205;</div><div><span class="cd-label">Head Office</span><span class="cd-val">Baluwatar, Kathmandu</span></div></div>
           </div>
-
-          <!-- Service locations -->
           <div class="service-locations rv">
             <div class="service-locations-label">We Serve</div>
             <div class="location-tags">
-              <span class="location-tag">
+              <span class="location-tag" style="border-color:rgba(54,159,206,0.45);color:var(--blue-mid);background:rgba(54,159,206,0.06);">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-                Baluawatar
+                All Over Nepal
               </span>
               <span class="location-tag">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
@@ -723,7 +823,6 @@
               </span>
             </div>
           </div>
-
           <div class="contact-socials rv">
             <a href="#" aria-label="Instagram">IG</a>
             <a href="#" aria-label="Facebook">FB</a>
@@ -747,7 +846,7 @@
     <div class="wrap">
       <div class="footer-inner">
         <div class="footer-logo"><img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:30px;"/></div>
-        <p class="footer-copy">&copy; 2025 NextGen Interiors &amp; Architects &middot; Kathmandu, Nepal</p>
+        <p class="footer-copy">&copy; 2025 NextGen Interiors &amp; Architects &middot; Baluwatar, Kathmandu, Nepal</p>
         <div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">LinkedIn</a></div>
       </div>
     </div>
@@ -777,8 +876,20 @@
 
     // MOBILE MENU
     const btn=document.getElementById('menuBtn'),mm=document.getElementById('mMenu');
-    btn.addEventListener('click',()=>{btn.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
-    mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{btn.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}));
+    function openMenu(){btn.classList.add('open');mm.classList.add('open');document.body.style.overflow='hidden';}
+    function closeMenu(){btn.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}
+    btn.addEventListener('click',()=>mm.classList.contains('open')?closeMenu():openMenu());
+    document.getElementById('mMenuClose').addEventListener('click', closeMenu);
+    mm.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+
+    // Mobile portfolio accordion
+    const mPortfolioBtn = document.getElementById('mPortfolioBtn');
+    const mPortfolioSub = document.getElementById('mPortfolioSub');
+    mPortfolioBtn.addEventListener('click', () => {
+      const isOpen = mPortfolioSub.classList.contains('open');
+      mPortfolioSub.classList.toggle('open', !isOpen);
+      mPortfolioBtn.classList.toggle('active', !isOpen);
+    });
 
     // REVEAL ON SCROLL
     const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});},{threshold:0.06});
@@ -822,59 +933,6 @@
           line.el.appendChild(hw);
         });
       });
-    })();
-
-    // ============================
-    // TIKTOK SLIDER
-    // ============================
-    (function initSlider() {
-      const track = document.getElementById('ttTrack');
-      const cards = track.querySelectorAll('.tiktok-card');
-      const dotsWrap = document.getElementById('ttDots');
-      const prevBtn = document.getElementById('ttPrev');
-      const nextBtn = document.getElementById('ttNext');
-      const total = cards.length;
-      let current = 0;
-
-      // Build dots
-      for (let i = 0; i < total; i++) {
-        const d = document.createElement('div');
-        d.className = 'slider-dot' + (i === 0 ? ' active' : '');
-        d.addEventListener('click', () => scrollTo(i));
-        dotsWrap.appendChild(d);
-      }
-
-      function getCardWidth() {
-        return cards[0].getBoundingClientRect().width + 16; // card + gap
-      }
-
-      function scrollTo(idx) {
-        current = Math.max(0, Math.min(idx, total - 1));
-        track.scrollTo({ left: current * getCardWidth(), behavior: 'smooth' });
-        updateDots();
-      }
-
-      function updateDots() {
-        dotsWrap.querySelectorAll('.slider-dot').forEach((d, i) => {
-          d.classList.toggle('active', i === current);
-        });
-      }
-
-      prevBtn.addEventListener('click', () => scrollTo(current - 1));
-      nextBtn.addEventListener('click', () => scrollTo(current + 1));
-
-      // Sync dots on manual scroll
-      let scrollTimer;
-      track.addEventListener('scroll', () => {
-        clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(() => {
-          const w = getCardWidth();
-          current = Math.round(track.scrollLeft / w);
-          updateDots();
-        }, 80);
-      });
-
-      // Touch drag support already handled by overflow-x scroll + snap
     })();
   </script>
 </body>
