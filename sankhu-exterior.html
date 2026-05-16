@@ -187,6 +187,9 @@
 <nav class="nav">
   <a href="index.html" class="nav-logo"><img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:32px;"/></a>
   <ul class="nav-links">
+    <li><a href="architecture.html">Architecture</a></li>
+    <li><a href="interiors.html">Interiors</a></li>
+    <li><a href="dpr-landscaping.html">DPR &amp; Landscaping</a></li>
     <li>
       <button class="nav-dropdown-trigger">Portfolio<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
       <div class="nav-dropdown-wrap"><div class="nav-dropdown">
@@ -213,6 +216,9 @@
     <button class="nav-menu-btn open" id="mMenuClose" style="display:flex;"><span></span><span></span><span></span></button>
   </div>
   <div class="m-menu-body"><nav class="m-menu-links"><ul>
+    <li><a href="architecture.html">Architecture</a></li>
+    <li><a href="interiors.html">Interiors</a></li>
+    <li><a href="dpr-landscaping.html">DPR &amp; Landscaping</a></li>
     <li>
       <button class="m-menu-acc-btn" id="mPortfolioBtn">Portfolio<span class="m-acc-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span></button>
       <div class="m-acc-sub" id="mPortfolioSub"><div class="m-acc-sub-inner">
@@ -243,7 +249,7 @@
 </div>
 
 <section class="hero">
-  <div class="hero-img"><img src="Galleries/sankhu Exterior/2.png" alt="Sankhu Residence"/></div>
+  <div class="hero-img"><img src="Galleries/sankhu Architecture/2.png" alt="Sankhu Residence"/></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Residential &middot; Heritage Architecture</div>
@@ -275,7 +281,7 @@
 <div class="gallery" id="gallery">
   <div class="g-full rv" style="position:relative;">
     <div class="g-card" style="position:absolute;inset:0;" onclick="openLb(0)">
-      <img src="Galleries/sankhu Exterior/2.png" alt="Sankhu Front Elevation"/>
+      <img src="Galleries/sankhu Architecture/2.png" alt="Sankhu Front Elevation"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Front Elevation</span></div>
     </div>
@@ -283,12 +289,12 @@
 
   <div class="g-half rv" style="margin-top:4px;">
     <div class="g-card ar-43" onclick="openLb(1)">
-      <img src="Galleries/sankhu Exterior/3.png" alt="Sankhu Garden View"/>
+      <img src="Galleries/sankhu Architecture/3.png" alt="Sankhu Garden View"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Garden Approach</span></div>
     </div>
     <div class="g-card ar-43" onclick="openLb(2)">
-      <img src="Galleries/sankhu Exterior/6.png" alt="Sankhu Hilltop"/>
+      <img src="Galleries/sankhu Architecture/6.png" alt="Sankhu Hilltop"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Hilltop Vantage</span></div>
     </div>
@@ -296,12 +302,12 @@
 
   <div class="g-feature rv" style="margin-top:4px;">
     <div class="g-card ar-32" onclick="openLb(3)">
-      <img src="Galleries/sankhu Exterior/7.png" alt="Sankhu Detail"/>
+      <img src="Galleries/sankhu Architecture/7.png" alt="Sankhu Detail"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Brickwork &amp; Detail</span></div>
     </div>
     <div class="g-card ar-32" onclick="openLb(0)">
-      <img src="Galleries/sankhu Exterior/2.png" alt="Sankhu Heritage"/>
+      <img src="Galleries/sankhu Architecture/2.png" alt="Sankhu Heritage"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Heritage Character</span></div>
     </div>
@@ -309,7 +315,7 @@
 
   <div class="g-full rv" style="margin-top:4px;aspect-ratio:16/7;position:relative;">
     <div class="g-card" style="position:absolute;inset:0;" onclick="openLb(1)">
-      <img src="Galleries/sankhu Exterior/3.png" alt="Sankhu Wide"/>
+      <img src="Galleries/sankhu Architecture/3.png" alt="Sankhu Wide"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Property Panorama</span></div>
     </div>
@@ -317,12 +323,12 @@
 
   <div class="g-feature-rev rv" style="margin-top:4px;">
     <div class="g-card ar-43" onclick="openLb(2)">
-      <img src="Galleries/sankhu Exterior/6.png" alt="Sankhu Architecture"/>
+      <img src="Galleries/sankhu Architecture/6.png" alt="Sankhu Architecture"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Architectural Form</span></div>
     </div>
     <div class="g-card ar-43" onclick="openLb(3)">
-      <img src="Galleries/sankhu Exterior/7.png" alt="Sankhu Materials"/>
+      <img src="Galleries/sankhu Architecture/7.png" alt="Sankhu Materials"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Materials &amp; Craft</span></div>
     </div>
@@ -388,10 +394,10 @@
   const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});},{threshold:0.05});
   document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
   const lbImages=[
-    {src:'Galleries/sankhu Exterior/2.png',label:'Front Elevation'},
-    {src:'Galleries/sankhu Exterior/3.png',label:'Garden Approach'},
-    {src:'Galleries/sankhu Exterior/6.png',label:'Hilltop Vantage'},
-    {src:'Galleries/sankhu Exterior/7.png',label:'Brickwork & Detail'},
+    {src:'Galleries/sankhu Architecture/2.png',label:'Front Elevation'},
+    {src:'Galleries/sankhu Architecture/3.png',label:'Garden Approach'},
+    {src:'Galleries/sankhu Architecture/6.png',label:'Hilltop Vantage'},
+    {src:'Galleries/sankhu Architecture/7.png',label:'Brickwork & Detail'},
   ];
   let lbCurrent=0;
   const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbCounter=document.getElementById('lbCounter');

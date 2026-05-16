@@ -189,6 +189,9 @@
     <img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:32px;"/>
   </a>
   <ul class="nav-links">
+    <li><a href="architecture.html">Architecture</a></li>
+    <li><a href="interiors.html">Interiors</a></li>
+    <li><a href="dpr-landscaping.html">DPR &amp; Landscaping</a></li>
     <li>
       <button class="nav-dropdown-trigger">Portfolio<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
       <div class="nav-dropdown-wrap"><div class="nav-dropdown">
@@ -215,6 +218,9 @@
     <button class="nav-menu-btn open" id="mMenuClose" style="display:flex;"><span></span><span></span><span></span></button>
   </div>
   <div class="m-menu-body"><nav class="m-menu-links"><ul>
+    <li><a href="architecture.html">Architecture</a></li>
+    <li><a href="interiors.html">Interiors</a></li>
+    <li><a href="dpr-landscaping.html">DPR &amp; Landscaping</a></li>
     <li>
       <button class="m-menu-acc-btn" id="mPortfolioBtn">Portfolio<span class="m-acc-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span></button>
       <div class="m-acc-sub" id="mPortfolioSub"><div class="m-acc-sub-inner">
@@ -245,7 +251,7 @@
 </div>
 
 <section class="hero">
-  <div class="hero-img"><img src="Galleries/NAVYA HOTEL/2.webp" alt="Navya Hotel"/></div>
+  <div class="hero-img"><img src="Galleries/NAVYA HOTEL interior/2.webp" alt="Navya Hotel"/></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Hospitality &middot; Hotel Interior Design</div>
@@ -277,7 +283,7 @@
 <div class="gallery" id="gallery">
   <div class="g-full rv" style="position:relative;">
     <div class="g-card" style="position:absolute;inset:0;" onclick="openLb(0)">
-      <img src="Galleries/NAVYA HOTEL/2.webp" alt="Navya Hotel Suite"/>
+      <img src="Galleries/NAVYA HOTEL interior/2.webp" alt="Navya Hotel Suite"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Signature Suite</span></div>
     </div>
@@ -285,12 +291,12 @@
 
   <div class="g-half rv" style="margin-top:4px;">
     <div class="g-card ar-43" onclick="openLb(1)">
-      <img src="Galleries/NAVYA HOTEL/3.webp" alt="Navya Lounge"/>
+      <img src="Galleries/NAVYA HOTEL interior/3.webp" alt="Navya Lounge"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Lounge &amp; Lobby</span></div>
     </div>
     <div class="g-card ar-43" onclick="openLb(2)">
-      <img src="Galleries/NAVYA HOTEL/5.webp" alt="Navya Room"/>
+      <img src="Galleries/NAVYA HOTEL interior/5.webp" alt="Navya Room"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Premium Room</span></div>
     </div>
@@ -298,12 +304,12 @@
 
   <div class="g-feature rv" style="margin-top:4px;">
     <div class="g-card ar-32" onclick="openLb(3)">
-      <img src="Galleries/NAVYA HOTEL/8.webp" alt="Navya Dining"/>
+      <img src="Galleries/NAVYA HOTEL interior/8.webp" alt="Navya Dining"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Dining Atmosphere</span></div>
     </div>
     <div class="g-card ar-32" onclick="openLb(4)">
-      <img src="Galleries/NAVYA HOTEL/9.webp" alt="Navya Detail"/>
+      <img src="Galleries/NAVYA HOTEL interior/9.webp" alt="Navya Detail"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Material Detail</span></div>
     </div>
@@ -311,7 +317,7 @@
 
   <div class="g-full rv" style="margin-top:4px;aspect-ratio:16/7;position:relative;">
     <div class="g-card" style="position:absolute;inset:0;" onclick="openLb(1)">
-      <img src="Galleries/NAVYA HOTEL/3.webp" alt="Navya Wide"/>
+      <img src="Galleries/NAVYA HOTEL interior/3.webp" alt="Navya Wide"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Lobby Vista</span></div>
     </div>
@@ -319,12 +325,12 @@
 
   <div class="g-feature-rev rv" style="margin-top:4px;">
     <div class="g-card ar-43" onclick="openLb(2)">
-      <img src="Galleries/NAVYA HOTEL/5.webp" alt="Navya Bedside"/>
+      <img src="Galleries/NAVYA HOTEL interior/5.webp" alt="Navya Bedside"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Bedside &amp; Finishes</span></div>
     </div>
     <div class="g-card ar-43" onclick="openLb(0)">
-      <img src="Galleries/NAVYA HOTEL/2.webp" alt="Navya Ambience"/>
+      <img src="Galleries/NAVYA HOTEL interior/2.webp" alt="Navya Ambience"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Ambience &amp; Lighting</span></div>
     </div>
@@ -390,11 +396,11 @@
   const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});},{threshold:0.05});
   document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
   const lbImages=[
-    {src:'Galleries/NAVYA HOTEL/2.webp',label:'Signature Suite'},
-    {src:'Galleries/NAVYA HOTEL/3.webp',label:'Lounge & Lobby'},
-    {src:'Galleries/NAVYA HOTEL/5.webp',label:'Premium Room'},
-    {src:'Galleries/NAVYA HOTEL/8.webp',label:'Dining Atmosphere'},
-    {src:'Galleries/NAVYA HOTEL/9.webp',label:'Material Detail'},
+    {src:'Galleries/NAVYA HOTEL interior/2.webp',label:'Signature Suite'},
+    {src:'Galleries/NAVYA HOTEL interior/3.webp',label:'Lounge & Lobby'},
+    {src:'Galleries/NAVYA HOTEL interior/5.webp',label:'Premium Room'},
+    {src:'Galleries/NAVYA HOTEL interior/8.webp',label:'Dining Atmosphere'},
+    {src:'Galleries/NAVYA HOTEL interior/9.webp',label:'Material Detail'},
   ];
   let lbCurrent=0;
   const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbCounter=document.getElementById('lbCounter');

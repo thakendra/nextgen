@@ -238,6 +238,9 @@
     <img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:32px;"/>
   </a>
   <ul class="nav-links">
+    <li><a href="architecture.html">Architecture</a></li>
+    <li><a href="interiors.html">Interiors</a></li>
+    <li><a href="dpr-landscaping.html">DPR &amp; Landscaping</a></li>
     <li>
       <button class="nav-dropdown-trigger">
         Portfolio
@@ -276,6 +279,9 @@
   <div class="m-menu-body">
     <nav class="m-menu-links">
       <ul>
+        <li><a href="architecture.html">Architecture</a></li>
+        <li><a href="interiors.html">Interiors</a></li>
+        <li><a href="dpr-landscaping.html">DPR &amp; Landscaping</a></li>
         <li>
           <button class="m-menu-acc-btn" id="mPortfolioBtn">
             Portfolio
@@ -318,7 +324,7 @@
 <!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-img">
-    <img src="Galleries/CHAPUR HOTEL/4.webp" alt="Chapur Hotel"/>
+    <img src="Galleries/CHAPUR HOTEL interior/14.webp" alt="Chapur Hotel"/>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -370,7 +376,7 @@
   <!-- 1. Full-bleed wide shot -->
   <div class="g-full rv" style="position:relative;">
     <div class="g-card" style="position:absolute;inset:0;" onclick="openLb(0)">
-      <img src="Galleries/CHAPUR HOTEL/14.webp" alt="Chapur Hotel Lobby"/>
+      <img src="Galleries/CHAPUR HOTEL interior/14.webp" alt="Chapur Hotel Lobby"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Lobby — Grand Entrance</span></div>
     </div>
@@ -379,12 +385,12 @@
   <!-- 2. Two halves -->
   <div class="g-half rv" style="margin-top:4px;">
     <div class="g-card ar-43" onclick="openLb(1)">
-      <img src="Galleries/CHAPUR HOTEL/4.webp" alt="Chapur Interior"/>
+      <img src="Galleries/CHAPUR HOTEL interior/14.webp" alt="Chapur Interior"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Interior Detail</span></div>
     </div>
     <div class="g-card ar-43" onclick="openLb(2)">
-      <img src="Galleries/CHAPUR HOTEL/24.webp" alt="Chapur Facade"/>
+      <img src="Galleries/CHAPUR HOTEL interior/24.webp" alt="Chapur Facade"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Facade &amp; Architecture</span></div>
     </div>
@@ -393,12 +399,12 @@
   <!-- 3. Feature: big left, smaller right -->
   <div class="g-feature rv" style="margin-top:4px;">
     <div class="g-card ar-32" onclick="openLb(3)">
-      <img src="Galleries/CHAPUR HOTEL/48.webp" alt="Chapur Suite"/>
+      <img src="Galleries/CHAPUR HOTEL interior/48.webp" alt="Chapur Suite"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Suite Interior</span></div>
     </div>
     <div class="g-card ar-32" onclick="openLb(0)">
-      <img src="Galleries/CHAPUR HOTEL/14.webp" alt="Chapur Lobby Detail"/>
+      <img src="Galleries/CHAPUR HOTEL interior/14.webp" alt="Chapur Lobby Detail"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Lobby Detail</span></div>
     </div>
@@ -407,7 +413,7 @@
   <!-- 4. Full bleed second -->
   <div class="g-full rv" style="margin-top:4px;aspect-ratio:16/7;position:relative;">
     <div class="g-card" style="position:absolute;inset:0;" onclick="openLb(2)">
-      <img src="Galleries/CHAPUR HOTEL/24.webp" alt="Chapur Architecture"/>
+      <img src="Galleries/CHAPUR HOTEL interior/24.webp" alt="Chapur Architecture"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Architectural Vision</span></div>
     </div>
@@ -416,12 +422,12 @@
   <!-- 5. Feature rev -->
   <div class="g-feature-rev rv" style="margin-top:4px;">
     <div class="g-card ar-43" onclick="openLb(3)">
-      <img src="Galleries/CHAPUR HOTEL/48.webp" alt="Chapur Room"/>
+      <img src="Galleries/CHAPUR HOTEL interior/48.webp" alt="Chapur Room"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Room &amp; Finishes</span></div>
     </div>
     <div class="g-card ar-43" onclick="openLb(1)">
-      <img src="Galleries/CHAPUR HOTEL/4.webp" alt="Chapur Ambience"/>
+      <img src="Galleries/CHAPUR HOTEL interior/14.webp" alt="Chapur Ambience"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Ambience &amp; Lighting</span></div>
     </div>
@@ -512,10 +518,10 @@
 
   // LIGHTBOX
   const lbImages=[
-    {src:'Galleries/CHAPUR HOTEL/14.webp',label:'Lobby — Grand Entrance'},
-    {src:'Galleries/CHAPUR HOTEL/4.webp', label:'Interior Detail'},
-    {src:'Galleries/CHAPUR HOTEL/24.webp',label:'Facade & Architecture'},
-    {src:'Galleries/CHAPUR HOTEL/48.webp',label:'Suite Interior'},
+    {src:'Galleries/CHAPUR HOTEL interior/14.webp',label:'Lobby — Grand Entrance'},
+    {src:'Galleries/CHAPUR HOTEL interior/14.webp', label:'Interior Detail'},
+    {src:'Galleries/CHAPUR HOTEL interior/24.webp',label:'Facade & Architecture'},
+    {src:'Galleries/CHAPUR HOTEL interior/48.webp',label:'Suite Interior'},
   ];
   let lbCurrent=0;
   const lb=document.getElementById('lb');
