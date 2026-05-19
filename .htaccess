@@ -1,0 +1,73 @@
+# NextGen Interiors — Clean URLs & SEO config
+# Apache mod_rewrite required (most shared hosting supports it by default)
+
+# Enable URL rewriting
+RewriteEngine On
+RewriteBase /
+
+# ─── 1. Force HTTPS (uncomment in production once SSL is installed) ───────
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ─── 2. Force non-www (or use www version — pick one for SEO) ────────────
+# RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+# RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# ─── 3. Redirect .html URLs to clean URLs (301 permanent — SEO best practice) ─
+# This prevents duplicate content. Search engines index the clean URL only.
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# ─── 4. Remove trailing slashes (canonical form: /page not /page/) ───────
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^(.+)/$
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# ─── 5. Internally rewrite extensionless URLs to .html files ─────────────
+# Visitor sees /hospitality, server serves hospitality.html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+# ─── 6. Custom 404 page (optional — uncomment if you create 404.html) ────
+# ErrorDocument 404 /404.html
+
+# ─── 7. Security headers ─────────────────────────────────────────────────
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ─── 8. GZIP compression (faster page load = better SEO) ────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# ─── 9. Browser caching (faster repeat visits = better SEO) ─────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 1 hour"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/webp "access plus 6 months"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType image/jpg "access plus 6 months"
+  ExpiresByType image/jpeg "access plus 6 months"
+  ExpiresByType image/svg+xml "access plus 6 months"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# ─── 10. Default index file ──────────────────────────────────────────────
+DirectoryIndex index.html
+
+# ─── 11. Prevent directory listing ───────────────────────────────────────
+Options -Indexes
+
+# ─── 12. Protect sensitive files ─────────────────────────────────────────
+<FilesMatch "^\.(htaccess|git|env)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
