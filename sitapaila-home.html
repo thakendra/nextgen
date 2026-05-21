@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sitapaila Home — NextGen Interiors &amp; Architects</title>
+<meta name="description" content="Sitapaila Home — private residence interior by NextGen Interiors, Sitapaila, Kathmandu."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="gallery-page.css">
+</head>
+<body>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:32px;"/></a>
+  <ul class="nav-links">
+    <li><a href="architecture.html">Architecture</a></li>
+    <li><a href="interiors.html">Interiors</a></li>
+    <li><a href="dpr-landscaping.html">DPR &amp; Landscaping</a></li>
+    <li>
+      <button class="nav-dropdown-trigger">Portfolio<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="nav-dropdown-wrap"><div class="nav-dropdown">
+        <a href="hospitality.html">Hospitality</a>
+        <a href="residential.html">Residential</a>
+        <a href="commercial.html">Commercial</a>
+        <a href="healthcare.html">Healthcare</a>
+        <a href="club-resort.html">Club or Resort</a>
+        <a href="education.html">Education</a>
+        <a href="workplace.html">Workplace</a>
+      </div></div>
+    </li>
+    <li><a href="blog.html">Journal</a></li>
+    <li><a href="/#contact">Contact</a></li>
+    <li><a href="careers.html">Careers</a></li>
+  </ul>
+  <a href="tel:+9779849151220" class="nav-cta">+977 9849151220</a>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="m-menu" id="mMenu">
+  <div class="m-menu-topbar">
+    <div style="height:30px;display:flex;align-items:center;"><img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:28px;"/></div>
+    <button class="nav-menu-btn open" id="mMenuClose" style="display:flex;"><span></span><span></span><span></span></button>
+  </div>
+  <div class="m-menu-body"><nav><ul class="m-menu-links">
+    <li><a href="architecture.html">Architecture</a></li>
+    <li><a href="interiors.html">Interiors</a></li>
+    <li><a href="dpr-landscaping.html">DPR &amp; Landscaping</a></li>
+    <li>
+      <button class="m-menu-acc-btn" id="mPortfolioBtn">Portfolio<span class="m-acc-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+      <div class="m-acc-sub" id="mPortfolioSub"><div class="m-acc-sub-inner">
+        <a href="hospitality.html">Hospitality</a>
+        <a href="residential.html">Residential</a>
+        <a href="commercial.html">Commercial</a>
+        <a href="healthcare.html">Healthcare</a>
+        <a href="club-resort.html">Club or Resort</a>
+        <a href="education.html">Education</a>
+        <a href="workplace.html">Workplace</a>
+      </div></div>
+    </li>
+    <li><a href="blog.html">Journal</a></li>
+    <li><a href="/#contact">Contact</a></li>
+    <li><a href="careers.html">Careers</a></li>
+  </ul></nav></div>
+  <div class="m-menu-footer">
+    <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--mist);">Head Office &mdash; Baluwatar, Kathmandu</div>
+    <a href="tel:+9779849151220" style="font-size:13px;color:rgba(245,242,237,0.6);">+977 9849151220</a>
+    <a href="mailto:info@nextgeninterior.com" style="font-size:13px;color:rgba(245,242,237,0.6);">info@nextgeninterior.com</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-img"><img id="heroImg" src="" alt="Sitapaila Home"/></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Residential &middot; Interior Design</div>
+    <h1 class="hero-h1">SITAPAILA<br><span>HOME</span></h1>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="meta-label">Location</span><span class="meta-val">Sitapaila, Kathmandu</span></div>
+      <div class="hero-meta-div"></div>
+      <div class="hero-meta-item"><span class="meta-label">Category</span><span class="meta-val">Interior Design</span></div>
+      <div class="hero-meta-div"></div>
+      <div class="hero-meta-item"><span class="meta-label">By</span><span class="meta-val">NextGen Interiors</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="gallery-intro">
+  <div>
+    <div class="s-tag">Project Showcase</div>
+    <h2 class="intro-h">A MULTI-FLOOR<br>FAMILY<br>RESIDENCE</h2>
+  </div>
+  <p class="intro-p">Sitapaila Home is one of NextGen&rsquo;s most photographed residential interiors &mdash; covering every floor, every shared room, and detail finishes throughout. Browse all photos in the full gallery.</p>
+</div>
+
+<div class="gallery-grid" id="gallery"></div>
+
+<div class="lb" id="lb" onclick="closeLbOnBg(event)">
+  <div class="lb-img-wrap">
+    <div class="lb-close" onclick="closeLb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+    <img id="lbImg" src="" alt=""/>
+  </div>
+  <button class="lb-prev" onclick="lbNav(-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <button class="lb-next" onclick="lbNav(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<div class="cta-strip">
+  <h2 class="cta-h">START YOUR<br><span>NEXT PROJECT</span></h2>
+  <p class="cta-p">From private homes to hospitality flagships &mdash; let&rsquo;s talk about your space.</p>
+  <div class="cta-btns">
+    <a href="tel:+9779849151220" class="btn-primary">Call Us Now</a>
+    <a href="residential.html" class="btn-outline">&larr; Back to Residential</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo"><img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:28px;"/></div>
+    <p class="footer-copy">&copy; 2025 NextGen Interiors &amp; Architects &middot; Baluwatar, Kathmandu</p>
+    <div class="footer-socials"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">LinkedIn</a></div>
+  </div>
+</footer>
+
+<div class="wa-bubble">
+  <a href="https://wa.me/9779849151220" class="wa-btn" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  </a>
+</div>
+
+<script src="gallery-page.js"></script>
+<script>
+initGallery('Galleries/SITAPAILA interior/',['4_compressed.png','5_compressed.png','6_compressed.png','8_compressed.png','9_compressed.png','10_compressed.png','11_compressed.png','12_compressed.png','13_compressed.png','14_compressed.png','15_compressed.png','17_compressed.png','18_compressed.png','32_compressed.png','33_compressed.png','34_compressed.png','35_compressed.png','38_compressed.png','39_compressed.png','40_compressed.png','42_compressed.png','43_compressed.png','47_compressed.png','48_compressed.png','49_compressed.png','51_compressed.png','52_compressed.png','53_compressed.png','54_compressed.png','55_compressed.png','58_compressed.png','59_compressed.png','63_compressed.png','64_compressed.png','65_compressed.png','68_compressed.png','69_compressed.png','70_compressed.png','71_compressed.png','75_compressed.png','76_compressed.png','77_compressed.png','78_compressed.png','80_compressed.png','81_compressed.png','82_compressed.png','83_compressed.png','84_compressed.png','87_compressed.png','90_compressed.png','91_compressed.png','92_compressed.png'],'Sitapaila Home');
+</script>
+</body>
+</html>

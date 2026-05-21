@@ -1,0 +1,835 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NextGen Interiors | Interior Design & Architecture — Kathmandu, Nepal</title>
+  <meta name="description" content="NextGen Interiors — Kathmandu's premier interior design, architecture & hotel design firm. 200+ projects across Nepal." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue-dark:  #1a3d6e;
+      --blue:       #2969a6;
+      --blue-mid:   #369fce;
+      --blue-light: #3e9fc9;
+      --ink:        #0d1520;
+      --offwhite:   #f5f2ed;
+      --white:      #faf8f5;
+      --mist:       #8a97aa;
+      --f-head: 'Bebas Neue', sans-serif;
+      --f-body: 'Poppins', sans-serif;
+      --ease:  cubic-bezier(0.16, 1, 0.3, 1);
+      --gap:   clamp(20px, 5vw, 80px);
+      --max:   1440px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--f-body); background: var(--ink); color: var(--offwhite); overflow-x: hidden; cursor: none; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .logo-img { display: block; width: auto !important; height: 100% !important; object-fit: contain !important; max-width: 100%; }
+    .loader-logo-img { display: block; width: clamp(160px, 22vw, 260px) !important; height: auto !important; object-fit: contain !important; }
+    a { text-decoration: none; color: inherit; }
+    button { border: none; background: none; cursor: none; font: inherit; }
+    ul { list-style: none; }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--ink); }
+    ::-webkit-scrollbar-thumb { background: var(--blue-mid); }
+
+    /* CURSOR */
+    .cursor-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue-mid); position: fixed; top: 0; left: 0; transform: translate(-50%,-50%); z-index: 9999; pointer-events: none; transition: width .2s, height .2s; mix-blend-mode: screen; }
+    .cursor-ring { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(62,159,201,0.35); position: fixed; top: 0; left: 0; transform: translate(-50%,-50%); z-index: 9998; pointer-events: none; transition: width .35s var(--ease), height .35s var(--ease), opacity .3s; }
+    body.c-hover .cursor-dot { width: 52px; height: 52px; opacity: 0.15; }
+    body.c-hover .cursor-ring { opacity: 0; }
+
+    /* LOADER */
+    .loader { position: fixed; inset: 0; z-index: 9000; background: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; transition: opacity .9s var(--ease), visibility .9s; }
+    .loader.out { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-logo-wrap { opacity: 0; animation: fadeIn .8s var(--ease) .3s forwards; }
+    .loader-line { width: 200px; height: 1px; background: rgba(255,255,255,0.08); position: relative; overflow: hidden; }
+    .loader-progress { position: absolute; inset-y: 0; left: 0; background: var(--blue-mid); width: 0; transition: width .05s linear; }
+    .loader-sub { font-family: var(--f-body); font-size: 10px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 24px var(--gap); display: flex; align-items: center; justify-content: space-between; transition: padding .4s var(--ease), background .4s; }
+    .nav.scrolled { background: rgba(13,21,32,0.94); backdrop-filter: blur(14px); padding: 14px var(--gap); }
+    .nav-logo { height: 36px; display: flex; align-items: center; overflow: visible; }
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+    .nav-links > li { position: relative; }
+    .nav-links a, .nav-links .nav-dropdown-trigger { font-family: var(--f-body); font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(245,242,237,0.45); transition: color .3s; position: relative; display: flex; align-items: center; gap: 5px; cursor: none; }
+    .nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:var(--blue-mid); transition: width .4s var(--ease); }
+    .nav-links a:hover { color: var(--offwhite); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-dropdown-trigger { background: none; border: none; padding: 0; }
+    .nav-dropdown-trigger:hover { color: var(--offwhite); }
+    .nav-dropdown-trigger svg { width: 10px; height: 10px; transition: transform .3s var(--ease); }
+    .nav-links > li:hover .nav-dropdown-trigger svg { transform: rotate(180deg); }
+    .nav-links > li:hover .nav-dropdown-trigger { color: var(--offwhite); }
+
+    /* DROPDOWN — with invisible bridge so cursor doesn't lose hover */
+    .nav-dropdown-wrap {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding-top: 14px; /* invisible bridge covers the gap */
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .28s var(--ease), visibility .28s;
+      z-index: 200;
+    }
+    .nav-links > li:hover .nav-dropdown-wrap {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+    .nav-dropdown {
+      background: rgba(8,14,24,0.98);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 2px solid var(--blue-mid);
+      min-width: 220px;
+      transform: translateY(6px);
+      transition: transform .28s var(--ease);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .nav-links > li:hover .nav-dropdown {
+      transform: translateY(0);
+    }
+    .nav-dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 22px;
+      font-family: var(--f-body);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.45);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: color .22s, background .22s, padding-left .22s;
+      white-space: nowrap;
+    }
+    .nav-dropdown a::before {
+      content: '';
+      width: 0;
+      height: 1px;
+      background: var(--blue-mid);
+      transition: width .3s var(--ease);
+      flex-shrink: 0;
+    }
+    .nav-dropdown a:last-child { border-bottom: none; }
+    .nav-dropdown a::after { display: none !important; }
+    .nav-dropdown a:hover { color: var(--blue-mid); background: rgba(54,159,206,0.05); padding-left: 28px; }
+    .nav-dropdown a:hover::before { width: 12px; }
+
+    .nav-cta { font-family: var(--f-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245,242,237,0.4); transition: color .3s; }
+    .nav-cta:hover { color: var(--blue-mid); }
+    .nav-menu-btn { display: none; flex-direction: column; gap: 6px; width: 26px; cursor: none; }
+    .nav-menu-btn span { display: block; width: 100%; height: 1px; background: var(--offwhite); transition: transform .4s var(--ease), opacity .3s; }
+    .nav-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-menu-btn.open span:nth-child(2) { opacity: 0; }
+    .nav-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* MOBILE MENU */
+    .m-menu {
+      position: fixed; inset: 0; z-index: 90;
+      background: #080f1c;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      opacity: 0; visibility: hidden;
+      transition: opacity .55s var(--ease), visibility .55s;
+      overflow-y: auto;
+    }
+    .m-menu.open { opacity: 1; visibility: visible; }
+
+    /* top bar inside mobile menu */
+    .m-menu-topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px var(--gap);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .m-menu-logo { height: 30px; display: flex; align-items: center; }
+
+    /* main links area */
+    .m-menu-body {
+      padding: 32px var(--gap) 24px;
+      display: flex; flex-direction: column;
+    }
+
+    /* big nav items */
+    .m-menu-links { margin-bottom: 0; }
+    .m-menu-links > li { border-bottom: 1px solid rgba(255,255,255,0.06); overflow: visible; }
+    .m-menu-links a,
+    .m-menu-links .m-menu-acc-btn {
+      font-family: var(--f-head);
+      font-size: clamp(36px,8vw,60px);
+      letter-spacing: 0.05em;
+      color: rgba(245,242,237,0.85);
+      display: flex; align-items: center; justify-content: space-between;
+      line-height: 1;
+      padding: 18px 0;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform .55s var(--ease), opacity .55s var(--ease), color .25s;
+      background: none; border: none; cursor: none;
+      text-align: left; width: 100%;
+    }
+    .m-menu.open .m-menu-links a,
+    .m-menu.open .m-menu-links .m-menu-acc-btn { transform: translateY(0); opacity: 1; }
+    .m-menu.open .m-menu-links li:nth-child(1) a,
+    .m-menu.open .m-menu-links li:nth-child(1) .m-menu-acc-btn { transition-delay: .07s; }
+    .m-menu.open .m-menu-links li:nth-child(2) a { transition-delay: .13s; }
+    .m-menu.open .m-menu-links li:nth-child(3) a { transition-delay: .19s; }
+    .m-menu-links a:hover,
+    .m-menu-acc-btn:hover,
+    .m-menu-acc-btn.active { color: var(--blue-mid); }
+
+    /* chevron in accordion button */
+    .m-acc-chevron {
+      width: 22px; height: 22px; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .35s var(--ease), border-color .3s, background .3s;
+    }
+    .m-acc-chevron svg { width: 12px; height: 12px; color: var(--mist); }
+    .m-menu-acc-btn.active .m-acc-chevron { transform: rotate(180deg); border-color: var(--blue-mid); background: rgba(54,159,206,0.1); }
+    .m-menu-acc-btn.active .m-acc-chevron svg { color: var(--blue-mid); }
+
+    /* Mobile accordion sub-links */
+    .m-acc-sub { max-height: 0; overflow: hidden; transition: max-height .45s var(--ease); }
+    .m-acc-sub.open { max-height: 500px; }
+    .m-acc-sub-inner { padding: 6px 0 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+    .m-acc-sub a {
+      font-family: var(--f-body) !important;
+      font-size: 11px !important;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.4) !important;
+      line-height: 1 !important;
+      padding: 12px 14px !important;
+      display: flex !important;
+      align-items: center;
+      gap: 8px;
+      transform: none !important;
+      opacity: 1 !important;
+      border: 1px solid rgba(255,255,255,0.05) !important;
+      transition: color .2s, border-color .2s, background .2s !important;
+    }
+    .m-acc-sub a::before { content:''; width: 5px; height: 1px; background: currentColor; flex-shrink: 0; }
+    .m-acc-sub a:hover { color: var(--blue-mid) !important; border-color: rgba(54,159,206,0.25) !important; background: rgba(54,159,206,0.05) !important; }
+
+    /* footer info area */
+    .m-menu-footer {
+      padding: 20px var(--gap) 32px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; flex-direction: column; gap: 16px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .5s var(--ease) .3s, transform .5s var(--ease) .3s;
+    }
+    .m-menu.open .m-menu-footer { opacity: 1; transform: translateY(0); }
+
+    /* service area badge */
+    .m-service-area {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .m-service-label {
+      font-family: var(--f-body); font-size: 9px; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase; color: var(--mist);
+    }
+    .m-service-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .m-service-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px;
+      border: 1px solid rgba(54,159,206,0.2);
+      font-family: var(--f-body); font-size: 9px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-mid);
+    }
+    .m-service-pill svg { width: 8px; height: 8px; }
+    .m-hq-row {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--f-body); font-size: 10px; font-weight: 400;
+      letter-spacing: 0.1em; color: rgba(245,242,237,0.35);
+    }
+    .m-hq-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--blue-mid); flex-shrink: 0; }
+
+    .m-contact-row {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .m-contact-row a {
+      font-family: var(--f-body); font-size: 12px; font-weight: 400;
+      color: rgba(245,242,237,0.5); letter-spacing: 0.06em;
+      transition: color .25s;
+      transform: none !important; opacity: 1 !important;
+    }
+    .m-contact-row a:hover { color: var(--blue-mid); }
+
+    /* HERO */
+    .hero { position: relative; height: 100svh; min-height: 600px; background: var(--ink); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .hero-bg { position: absolute; inset: 0; }
+    .hero-bg-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.6s ease; }
+    .hero-bg-slide.active { opacity: 1; }
+    .hero-bg-slide img { width:100%; height:100%; object-fit:cover; transform:scale(1.07); animation: kenBurns 15s ease-in-out infinite alternate; }
+    @keyframes kenBurns { from{transform:scale(1.07)} to{transform:scale(1.0) translate(-1%,1%)} }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(13,21,32,0.65) 0%, rgba(13,21,32,0.35) 35%, rgba(13,21,32,0.82) 100%); z-index: 1; }
+    .hero-center { position: relative; z-index: 2; text-align: center; display: flex; flex-direction: column; align-items: center; padding: 0 16px; }
+
+    .hero-tagline { font-family: var(--f-body); font-size: 11px; font-weight: 600; letter-spacing: 0.45em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 22px; opacity: 0; animation: fadeSlideUp .7s var(--ease) 0.5s forwards; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
+    .hero-title { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .hero-line { font-family: var(--f-head); font-size: clamp(44px, 8vw, 120px); line-height: 0.95; letter-spacing: 0.14em; color: var(--offwhite); display: flex; flex-wrap: nowrap; white-space: nowrap; gap: 0; text-shadow: 0 4px 40px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5); }
+    .hw { display: inline-block; white-space: nowrap; }
+    .hc { display: inline-block; opacity: 0; transform: translateY(16px) scale(0.95); filter: blur(6px); animation: charReveal 0.6s var(--ease) forwards; }
+    .hw-space { display: inline-block; width: 0.22em; }
+    @keyframes charReveal { to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); } }
+    .hero-sep { width: 0; height: 1px; background: linear-gradient(to right, transparent, var(--blue-mid), transparent); margin: 24px auto 0; animation: ruleGrow 0.9s var(--ease) 2.2s forwards; }
+    @keyframes ruleGrow { to { width: 260px; } }
+    .hero-sub { font-family: var(--f-body); font-size: 12px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(245,242,237,0.65); margin-top: 18px; opacity: 0; animation: fadeSlideUp .7s var(--ease) 2.5s forwards; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+    .hero-locations { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeSlideUp .7s var(--ease) 2.8s forwards; }
+    .hero-loc-badge { display: flex; align-items: center; gap: 5px; padding: 6px 14px; border: 1px solid rgba(54,159,206,0.3); background: rgba(13,21,32,0.45); backdrop-filter: blur(8px); font-family: var(--f-body); font-size: 9px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,242,237,0.6); }
+    .hero-loc-badge svg { width: 9px; height: 9px; color: var(--blue-mid); flex-shrink: 0; }
+    @keyframes fadeSlideUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+    .hero-scroll { position: absolute; bottom: clamp(28px,5vh,56px); left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0; animation: fadeIn .8s ease 3.1s forwards; }
+    .scroll-track { width: 1px; height: 52px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
+    .scroll-fill { position: absolute; top:-40%; left:0; right:0; height:40%; background: var(--blue-mid); animation: scrollDrop 2.2s ease-in-out infinite; }
+    @keyframes scrollDrop { 0%{top:-40%} 100%{top:110%} }
+    .scroll-word { font-family: var(--f-body); font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.28); }
+
+    /* MARQUEE */
+    .marquee-bar { background: rgba(255,255,255,0.025); padding: 13px 0; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .marquee-track { display: flex; gap: 48px; white-space: nowrap; width: max-content; animation: marquee 32s linear infinite; }
+    .marquee-track span { font-family: var(--f-body); font-size: 10px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+    .marquee-track .m-sep { color: var(--blue-mid); }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* REVEAL */
+    .rv { opacity:0; transform:translateY(30px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+    .rv.vis { opacity:1; transform:none; }
+    .rv.d1{transition-delay:.1s} .rv.d2{transition-delay:.2s} .rv.d3{transition-delay:.3s} .rv.d4{transition-delay:.4s}
+
+    /* SECTION */
+    .s { padding: clamp(60px,10vw,130px) 0; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gap); }
+    .s-tag { font-family: var(--f-body); font-size: 10px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blue-mid); display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .s-tag::before { content:''; width:18px; height:1px; background:var(--blue-mid); }
+
+    /* PORTFOLIO */
+    .portfolio { background: var(--ink); }
+    .port-cat-strip { padding: clamp(56px,8vw,100px) var(--gap) 0; max-width: var(--max); margin: 0 auto; }
+    .port-cat-label { font-family: var(--f-body); font-size: 10px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blue-mid); display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .port-cat-label::before { content:''; width:18px; height:1px; background:var(--blue-mid); }
+    .port-cat-h { font-family: var(--f-head); font-size: clamp(50px,6.5vw,90px); letter-spacing: 0.05em; color: var(--offwhite); line-height: 0.9; margin-bottom: clamp(20px,3vw,40px); }
+    .port-grid-micasa { display: grid; gap: 4px; }
+    .pmr-full { grid-template-columns: 1fr; }
+    .pmr-half { grid-template-columns: 1fr 1fr; }
+    .pmr-3    { grid-template-columns: 1fr 1fr 1fr; }
+    .pmr-big-small { grid-template-columns: 2fr 1fr; }
+    .pmr-small-big { grid-template-columns: 1fr 2fr; }
+    .pm-card { position: relative; overflow: hidden; display: block; cursor: none; background: #080f1c; }
+    .pm-tall   { aspect-ratio: 3/4; }
+    .pm-r43    { aspect-ratio: 5/6; }
+    .pm-std    { aspect-ratio: 1/1; }
+    .pm-r32    { aspect-ratio: 5/6; }
+    .pmr-small-big > .pm-card:first-child,
+    .pmr-big-small > .pm-card:last-child { aspect-ratio: unset; }
+    .pm-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.3s var(--ease); }
+    .pm-card:hover img { transform: scale(1.07); }
+    .pm-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,14,28,0.82) 0%, rgba(8,14,28,0.1) 45%, transparent 70%); z-index: 1; transition: background .5s; }
+    .pm-card:hover .pm-card-overlay { background: linear-gradient(to top, rgba(8,14,28,0.88) 0%, rgba(8,14,28,0.4) 55%, rgba(8,14,28,0.1) 100%); }
+    .pm-name { font-family: var(--f-head); font-size: clamp(20px, 3vw, 44px); letter-spacing: 0.07em; color: var(--offwhite); line-height: 1; text-shadow: 0 2px 24px rgba(0,0,0,0.6); position: absolute; z-index: 2; left: 0; right: 0; text-align: center; bottom: clamp(18px,3.5%,44px); transition: bottom .55s var(--ease), top .55s var(--ease), transform .55s var(--ease); }
+    .pm-card:hover .pm-name { bottom: 50%; transform: translateY(50%); }
+    .pm-loc { font-family: var(--f-body); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-mid); position: absolute; z-index: 2; left: 0; right: 0; text-align: center; bottom: clamp(10px,2%,24px); opacity: 0; transform: translateY(6px); transition: opacity .45s var(--ease) .08s, transform .45s var(--ease) .08s; }
+    .pm-card:hover .pm-loc { opacity: 1; transform: translateY(0); }
+    .pm-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--blue-mid); transform:scaleX(0); transform-origin:left; transition:transform .55s var(--ease); z-index:3; }
+    .pm-card:hover::after { transform:scaleX(1); }
+
+    /* CAREERS SECTION */
+    .careers { background: #060c16; }
+    .careers-inner { display: grid; grid-template-columns: 5fr 7fr; gap: 60px; align-items: start; }
+    .careers-left h2 { font-family: var(--f-head); font-size: clamp(46px,5vw,78px); letter-spacing: 0.05em; color: var(--offwhite); line-height: 0.92; margin-bottom: 18px; }
+    .careers-left h2 span { color: var(--blue-mid); }
+    .careers-left p { font-size: 13px; font-weight: 300; line-height: 1.85; color: var(--mist); max-width: 360px; margin-bottom: 32px; }
+    .careers-perks { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .careers-perk { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .perk-icon { width: 38px; height: 38px; flex-shrink: 0; border: 1px solid rgba(54,159,206,0.2); display: flex; align-items: center; justify-content: center; color: var(--blue-mid); }
+    .perk-icon svg { width: 16px; height: 16px; }
+    .perk-text strong { display: block; font-family: var(--f-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--offwhite); margin-bottom: 3px; }
+    .perk-text span { font-size: 11px; font-weight: 300; color: var(--mist); line-height: 1.6; }
+    .careers-cta { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border: 1px solid var(--blue-mid); font-family: var(--f-body); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue-mid); transition: background .3s, color .3s; }
+    .careers-cta:hover { background: var(--blue-mid); color: var(--ink); }
+    .careers-cta svg { width: 14px; height: 14px; }
+
+    /* Job listings */
+    .jobs-list { display: flex; flex-direction: column; gap: 2px; }
+    .job-card { background: rgba(255,255,255,0.025); padding: 28px 28px 28px 24px; border-left: 2px solid transparent; transition: border-color .3s, background .3s; cursor: none; position: relative; }
+    .job-card:hover { border-color: var(--blue-mid); background: rgba(54,159,206,0.04); }
+    .job-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
+    .job-title { font-family: var(--f-head); font-size: 22px; letter-spacing: 0.06em; color: var(--offwhite); }
+    .job-badge { font-family: var(--f-body); font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; padding: 5px 12px; border: 1px solid rgba(54,159,206,0.3); color: var(--blue-mid); flex-shrink: 0; }
+    .job-badge.fulltime { border-color: rgba(54,206,130,0.3); color: #36ce82; }
+    .job-badge.parttime { border-color: rgba(206,180,54,0.3); color: #ceb436; }
+    .job-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .job-meta-item { display: flex; align-items: center; gap: 5px; font-family: var(--f-body); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); }
+    .job-meta-item svg { width: 10px; height: 10px; }
+    .job-arrow { position: absolute; right: 24px; bottom: 28px; color: var(--blue-mid); opacity: 0; transform: translateX(-6px); transition: opacity .3s, transform .3s var(--ease); }
+    .job-card:hover .job-arrow { opacity: 1; transform: translateX(0); }
+    .job-arrow svg { width: 18px; height: 18px; }
+
+    /* CONTACT */
+    .contact { background: var(--ink); }
+    .contact-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 60px; align-items: start; }
+    .contact-head h2 { font-family: var(--f-head); font-size: clamp(46px,5vw,78px); letter-spacing: 0.05em; color: var(--offwhite); line-height: 0.92; margin-bottom: 18px; }
+    .contact-head h2 span { color: var(--blue-mid); }
+    .contact-head p { font-size: 13px; font-weight: 300; line-height: 1.85; color: var(--mist); max-width: 360px; margin-bottom: 32px; }
+    .contact-deets { display: flex; flex-direction: column; margin-bottom: 28px; }
+    .cd-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); text-decoration: none; transition: all .3s; }
+    .cd-item:hover .cd-icon { background: var(--blue-mid); border-color: var(--blue-mid); color: var(--offwhite); }
+    .cd-icon { width: 46px; height: 46px; flex-shrink: 0; border: 1px solid rgba(54,159,206,0.28); display: flex; align-items: center; justify-content: center; color: var(--blue-mid); transition: all .3s; }
+    .cd-icon svg { width: 20px; height: 20px; }
+    .cd-label { font-family: var(--f-body); font-size: 9px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mist); display: block; margin-bottom: 2px; }
+    .cd-val { font-size: 14px; font-weight: 400; color: var(--offwhite); }
+    .service-locations { margin-bottom: 28px; }
+    .service-locations-label { font-family: var(--f-body); font-size: 9px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mist); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .service-locations-label::before { content:''; width:14px; height:1px; background:var(--mist); }
+    .location-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .location-tag { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid rgba(54,159,206,0.22); font-family: var(--f-body); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-mid); transition: background .3s, border-color .3s; }
+    .location-tag:hover { background: rgba(54,159,206,0.08); border-color: rgba(54,159,206,0.45); }
+    .location-tag svg { width: 10px; height: 10px; }
+    .contact-socials { display: flex; gap: 9px; }
+    .contact-socials a { width: 46px; height: 46px; border: 1px solid rgba(255,255,255,0.09); display: flex; align-items: center; justify-content: center; color: var(--mist); transition: all .3s; }
+    .contact-socials a svg { width: 18px; height: 18px; }
+    .contact-socials a:hover { border-color: var(--blue-mid); color: var(--blue-mid); }
+    .contact-socials a.soc-wa:hover { border-color: rgba(37,211,102,0.5); color: #25d366; }
+    .map-wrap { border-top: 3px solid var(--blue-mid); overflow: hidden; position: relative; }
+    .map-wrap iframe { display: block; width: 100%; height: 440px; border: none; filter: invert(0.88) hue-rotate(180deg) saturate(0.8) brightness(0.9); }
+    .map-label { position: absolute; top: 16px; left: 16px; background: var(--blue); color: var(--offwhite); padding: 10px 16px; font-family: var(--f-body); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; z-index: 2; }
+
+    /* WHATSAPP */
+    .wa-bubble { position: fixed; bottom: 28px; right: 28px; z-index: 8000; }
+    .wa-tooltip { position: absolute; bottom: 70px; right: 0; background: var(--blue); color: var(--offwhite); padding: 9px 15px; white-space: nowrap; font-family: var(--f-body); font-size: 12px; font-weight: 500; pointer-events: none; opacity: 0; transform: translateY(8px); transition: opacity .3s, transform .3s var(--ease); }
+    .wa-tooltip::after { content:''; position:absolute; bottom:-6px; right:19px; width:12px; height:12px; background:var(--blue); transform:rotate(45deg); }
+    .wa-bubble:hover .wa-tooltip { opacity:1; transform:translateY(0); }
+    .wa-btn { width: 56px; height: 56px; border-radius: 50%; background: #25d366; box-shadow: 0 6px 28px rgba(37,211,102,0.38); display: flex; align-items: center; justify-content: center; cursor: none; transition: transform .3s var(--ease); animation: waPulse 2.8s ease-in-out infinite; }
+    @keyframes waPulse { 0%,100%{box-shadow:0 6px 28px rgba(37,211,102,0.38),0 0 0 0 rgba(37,211,102,0.32);} 50%{box-shadow:0 6px 28px rgba(37,211,102,0.38),0 0 0 16px rgba(37,211,102,0);} }
+    .wa-btn:hover { transform: scale(1.1); }
+    .wa-btn svg { width: 27px; height: 27px; }
+
+    /* FOOTER */
+    .footer { background: #040912; border-top: 1px solid rgba(255,255,255,0.04); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { height: 32px; display: flex; align-items: center; }
+    .footer-socials { display: flex; gap: 16px; align-items: center; }
+    .footer-socials a { width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: var(--mist); transition: color .3s, border-color .3s; }
+    .footer-socials a:hover { color: var(--blue-mid); border-color: rgba(54,159,206,0.4); }
+    .footer-copy { font-family: var(--f-body); font-size: 11px; color: var(--mist); letter-spacing: 0.06em; }
+
+    /* RESPONSIVE */
+    @media (max-width:1100px) {
+      .pmr-3 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width:900px) {
+      .contact-grid, .careers-inner { grid-template-columns: 1fr; }
+      .nav-links,.nav-cta { display: none; }
+      .nav-menu-btn { display: flex; }
+      .pmr-big-small,.pmr-small-big { grid-template-columns: 1fr; }
+    }
+    @media (max-width:700px) {
+      .pmr-half { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction:column; text-align:center; }
+      .wa-bubble { bottom:16px; right:16px; }
+      .hero-line { font-size: clamp(36px, 10.5vw, 56px); letter-spacing: 0.10em; }
+      .hero-title { gap: 2px; }
+    }
+    @media (max-width: 400px) {
+      .hero-line { font-size: 32px; letter-spacing: 0.08em; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <div class="loader" id="loader">
+    <div class="loader-logo-wrap">
+      <img src="logo/logo.png" class="loader-logo-img" alt="NextGen Interiors"/>
+    </div>
+    <div class="loader-line"><div class="loader-progress" id="loaderP"></div></div>
+    <div class="loader-sub">Loading Experience&hellip;</div>
+  </div>
+
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:36px;"/>
+    </a>
+    <ul class="nav-links">
+      <li><a href="architecture.html">Architecture</a></li>
+      <li><a href="interiors.html">Interiors</a></li>
+      <li><a href="dpr-landscaping.html">DPR &amp; Landscaping</a></li>
+      <!-- Portfolio dropdown -->
+      <li>
+        <button class="nav-dropdown-trigger">
+          Portfolio
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-wrap">
+          <div class="nav-dropdown">
+            <a href="hospitality.html">Hospitality</a>
+            <a href="residential.html">Residential</a>
+            <a href="commercial.html">Commercial</a>
+            <a href="healthcare.html">Healthcare</a>
+            <a href="club-resort.html">Club or Resort</a>
+            <a href="education.html">Education</a>
+            <a href="workplace.html">Workplace</a>
+          </div>
+        </div>
+      </li>
+      <li><a href="blog.html">Blogs</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="careers.html">Careers</a></li>
+    </ul>
+    <a href="tel:+9779849151220" class="nav-cta">+977 9849151220</a>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="m-menu" id="mMenu">
+    <!-- top bar -->
+    <div class="m-menu-topbar">
+      <div class="m-menu-logo">
+        <img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:28px;"/>
+      </div>
+      <button class="nav-menu-btn open" id="mMenuClose" aria-label="Close" style="display:flex;">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- main nav links -->
+    <div class="m-menu-body">
+      <nav class="m-menu-links">
+        <ul>
+          <li><a href="architecture.html">Architecture</a></li>
+          <li><a href="interiors.html">Interiors</a></li>
+          <li><a href="dpr-landscaping.html">DPR &amp; Landscaping</a></li>
+          <li>
+            <button class="m-menu-acc-btn" id="mPortfolioBtn">
+              Portfolio
+              <span class="m-acc-chevron">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+            <div class="m-acc-sub" id="mPortfolioSub">
+              <div class="m-acc-sub-inner">
+                <a href="hospitality.html">Hospitality</a>
+                <a href="residential.html">Residential</a>
+                <a href="commercial.html">Commercial</a>
+                <a href="healthcare.html">Healthcare</a>
+                <a href="club-resort.html">Club or Resort</a>
+                <a href="education.html">Education</a>
+                <a href="workplace.html">Workplace</a>
+              </div>
+            </div>
+          </li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="careers.html">Careers</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- footer info -->
+    <div class="m-menu-footer">
+      <div class="m-service-area">
+        <div class="m-service-label">Services</div>
+        <div class="m-service-row">
+          <span class="m-service-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            All Over Nepal
+          </span>
+        </div>
+        <div class="m-hq-row">
+          <span class="m-hq-dot"></span>
+          Head Office — Baluwatar, Kathmandu
+        </div>
+      </div>
+      <div class="m-contact-row">
+        <a href="tel:+9779849151220">+977 9849151220</a>
+        <a href="mailto:info@nextgeninterior.com">info@nextgeninterior.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-bg-slide active"><img src="Galleries/CHAPUR HOTEL interior/14.webp" alt="Chapur Hotel"/></div>
+      <div class="hero-bg-slide"><img src="Galleries/NAVYA HOTEL interior/2.webp" alt="Navya Hotel"/></div>
+      <div class="hero-bg-slide"><img src="Galleries/GAUTAM HOTEL interior/8.webp" alt="Gautam Hotel"/></div>
+      <div class="hero-bg-slide"><img src="Galleries/LEMON TREE architecture/1.webp" alt="Lemon Tree"/></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-center">
+      <div class="hero-tagline">Interior Design &amp; Architecture</div>
+      <div class="hero-title">
+        <div class="hero-line" id="heroLine1"></div>
+        <div class="hero-line" id="heroLine2"></div>
+      </div>
+      <div class="hero-sep"></div>
+      <div class="hero-sub">200+ Projects </div>
+      <div class="hero-locations">
+        <span class="hero-loc-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          All Over Nepal
+        </span>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-track"><div class="scroll-fill"></div></div>
+      <span class="scroll-word">Scroll</span>
+    </div>
+  </section>
+
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <span>Interior Design</span><span class="m-sep">&#10022;</span>
+      <span>Architecture</span><span class="m-sep">&#10022;</span>
+      <span>Hotel Design</span><span class="m-sep">&#10022;</span>
+      <span>Turnkey Projects</span><span class="m-sep">&#10022;</span>
+      <span>Residential</span><span class="m-sep">&#10022;</span>
+      <span>Commercial</span><span class="m-sep">&#10022;</span>
+      <span>Kathmandu</span><span class="m-sep">&#10022;</span>
+      <span>Pokhara</span><span class="m-sep">&#10022;</span>
+      <span>Chitwan</span><span class="m-sep">&#10022;</span>
+      <span>Landscaping</span><span class="m-sep">&#10022;</span>
+      <span>Interior Design</span><span class="m-sep">&#10022;</span>
+      <span>Architecture</span><span class="m-sep">&#10022;</span>
+      <span>Hotel Design</span><span class="m-sep">&#10022;</span>
+      <span>Turnkey Projects</span><span class="m-sep">&#10022;</span>
+      <span>Residential</span><span class="m-sep">&#10022;</span>
+      <span>Commercial</span><span class="m-sep">&#10022;</span>
+      <span>Kathmandu</span><span class="m-sep">&#10022;</span>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+    <div class="port-cat-strip rv" style="padding-top: clamp(40px,6vw,80px);">
+      <div class="port-cat-label">01</div>
+      <h2 class="port-cat-h">ARCHITECTURE</h2>
+    </div>
+    <div class="port-grid-micasa pmr-small-big rv">
+      <a href="sankhu-exterior.html" class="pm-card pm-r43"><img src="Galleries/sankhu Architecture/2.png" alt="Sankhu Residence"/><div class="pm-card-overlay"></div><span class="pm-name">SANKHU RESIDENCE</span><span class="pm-loc">&#128205; Sankhu, Kathmandu</span></a>
+      <a href="lilly-residence.html" class="pm-card pm-r43"><img src="Galleries/LILLY MAAM EXTERIOR/2.webp" alt="Lilly Villa"/><div class="pm-card-overlay"></div><span class="pm-name">LILLY VILLA</span><span class="pm-loc">&#128205; Kathmandu</span></a>
+    </div>
+    <div class="port-grid-micasa pmr-3 rv d1">
+      <a href="chitwan-home.html" class="pm-card pm-r32"><img src="Galleries/CHITWAN HOME EXTERIOR/2_compressed.png" alt="Chitwan Home Exterior"/><div class="pm-card-overlay"></div><span class="pm-name">CHITWAN HOME</span><span class="pm-loc">&#128205; Chitwan</span></a>
+      <a href="tokha-home.html" class="pm-card pm-r32"><img src="Galleries/TOKHA EXTERIOR/2_compressed.png" alt="Tokha Home Exterior"/><div class="pm-card-overlay"></div><span class="pm-name">TOKHA HOME</span><span class="pm-loc">&#128205; Tokha, Kathmandu</span></a>
+      <a href="renu-gurung-home.html" class="pm-card pm-r32"><img src="Galleries/RENU GURUNG BUDDHANILKHANTHA architecture/2_compressed_compressed.png" alt="Renu Gurung Architecture"/><div class="pm-card-overlay"></div><span class="pm-name">RENU GURUNG HOME</span><span class="pm-loc">&#128205; Buddhanilkantha</span></a>
+    </div>
+    <div class="port-grid-micasa pmr-3 rv d2">
+      <a href="lokhanthali-home.html" class="pm-card pm-r43"><img src="Galleries/LOKHANTHALI EXTERIOR/3_compressed.png" alt="Lokhanthali Exterior"/><div class="pm-card-overlay"></div><span class="pm-name">LOKHANTHALI HOME</span><span class="pm-loc">&#128205; Lokhanthali</span></a>
+      <a href="lemon-tree.html" class="pm-card pm-r43"><img src="Galleries/LEMON TREE architecture/4.webp" alt="Lemon Tree Architecture"/><div class="pm-card-overlay"></div><span class="pm-name">LEMON TREE</span><span class="pm-loc">&#128205; Kathmandu</span></a>
+      <a href="sankhu-exterior.html" class="pm-card pm-r43"><img src="Galleries/sankhu Architecture/6.png" alt="Sankhu Hilltop"/><div class="pm-card-overlay"></div><span class="pm-name">SANKHU HILLTOP</span><span class="pm-loc">&#128205; Sankhu</span></a>
+    </div>
+    <div style="padding-bottom: clamp(56px,8vw,96px);"></div>
+    <div class="port-cat-strip rv">
+      <div class="port-cat-label">02</div>
+      <h2 class="port-cat-h">INTERIOR DESIGN</h2>
+    </div>
+    <div class="port-grid-micasa pmr-half rv">
+      <a href="chapur-hotel.html" class="pm-card pm-tall"><img src="Galleries/CHAPUR HOTEL interior/14.webp" alt="Chapur Hotel"/><div class="pm-card-overlay"></div><span class="pm-name">CHAPUR HOTEL</span><span class="pm-loc">&#128205; Kathmandu</span></a>
+      <a href="navya-hotel.html" class="pm-card pm-tall"><img src="Galleries/NAVYA HOTEL interior/2.webp" alt="Navya Hotel"/><div class="pm-card-overlay"></div><span class="pm-name">NAVYA HOTEL</span><span class="pm-loc">&#128205; Kathmandu</span></a>
+    </div>
+    <div class="port-grid-micasa pmr-3 rv d1">
+      <a href="gautam-hotel.html" class="pm-card pm-r43"><img src="Galleries/GAUTAM HOTEL interior/3.webp" alt="Gautam Hotel"/><div class="pm-card-overlay"></div><span class="pm-name">GAUTAM HOTEL</span><span class="pm-loc">&#128205; Bardibas</span></a>
+      <a href="jayant-ji-home.html" class="pm-card pm-r43"><img src="Galleries/JAYANT JI HOME BALWATAR/10_compressed.png" alt="Jayant Ji Home Interior"/><div class="pm-card-overlay"></div><span class="pm-name">JAYANT JI HOME</span><span class="pm-loc">&#128205; Baluwatar</span></a>
+      <a href="bhattrai-home.html" class="pm-card pm-r43"><img src="Galleries/BHATTRAI HOME TOKHA interior/3_compressed.png" alt="Bhattrai Home Interior"/><div class="pm-card-overlay"></div><span class="pm-name">BHATTRAI HOME</span><span class="pm-loc">&#128205; Tokha</span></a>
+    </div>
+    <div class="port-grid-micasa pmr-big-small rv d2">
+      <a href="lokhanthali-home.html" class="pm-card pm-std"><img src="Galleries/LOKHANTHALI interior/10.webp" alt="Lokhanthali Interior"/><div class="pm-card-overlay"></div><span class="pm-name">LOKHANTHALI &mdash; INTERIOR</span><span class="pm-loc">&#128205; Kathmandu</span></a>
+      <a href="restro-office.html" class="pm-card pm-std"><img src="Galleries/RESTRO OFFICE ROOM/3.webp" alt="Restro Office"/><div class="pm-card-overlay"></div><span class="pm-name">RESTRO OFFICE</span><span class="pm-loc">&#128205; Kathmandu</span></a>
+    </div>
+    <div class="port-grid-micasa pmr-3 rv d3">
+      <a href="roshan-home.html" class="pm-card pm-r43"><img src="Galleries/ROSHAN HOME SATUNGAL interior/3_compressed.png" alt="Roshan Home"/><div class="pm-card-overlay"></div><span class="pm-name">ROSHAN HOME</span><span class="pm-loc">&#128205; Satungal</span></a>
+      <a href="sitapaila-home.html" class="pm-card pm-r43"><img src="Galleries/SITAPAILA interior/10_compressed.png" alt="Sitapaila Home"/><div class="pm-card-overlay"></div><span class="pm-name">SITAPAILA HOME</span><span class="pm-loc">&#128205; Sitapaila</span></a>
+      <a href="chunikhel-home.html" class="pm-card pm-r43"><img src="Galleries/CHUNIKHEL interior/10_compressed.png" alt="Chunikhel Home"/><div class="pm-card-overlay"></div><span class="pm-name">CHUNIKHEL HOME</span><span class="pm-loc">&#128205; Chunikhel</span></a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact s" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <div class="s-tag rv">Get In Touch</div>
+          <div class="contact-head rv">
+            <h2>START YOUR<br><span>PROJECT</span></h2>
+            <p>Whether it's your dream home, a boutique hotel, or a commercial space &mdash; we'd love to hear from you.</p>
+          </div>
+          <div class="contact-deets rv">
+            <a href="tel:+9779849151220" class="cd-item">
+              <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.84 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 17.92z"/></svg></div>
+              <div><span class="cd-label">Call Us</span><span class="cd-val">+977 9849151220</span></div>
+            </a>
+            <a href="mailto:info@nextgeninterior.com" class="cd-item">
+              <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+              <div><span class="cd-label">Email Us</span><span class="cd-val">info@nextgeninterior.com</span></div>
+            </a>
+            <div class="cd-item">
+              <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              <div><span class="cd-label">Head Office</span><span class="cd-val">Baluwatar, Kathmandu</span></div>
+            </div>
+          </div>
+          <div class="service-locations rv">
+            <div class="service-locations-label">We Serve</div>
+            <div class="location-tags">
+              <span class="location-tag" style="border-color:rgba(54,159,206,0.45);color:var(--blue-mid);background:rgba(54,159,206,0.06);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                All Over Nepal
+              </span>
+            </div>
+          </div>
+          <div class="contact-socials rv">
+            <a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://www.facebook.com/architectsandinteriorshouse" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@nextgeninteriors" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 0 0-1.95 1.95A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19c1.71.47 8.59.47 8.59.47s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.39z"/><polygon fill="currentColor" stroke="none" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/nextgen-interiors-architects-pvt-ltd/?originalSubdomain=np" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://wa.me/9779849151220" class="soc-wa" style="background:rgba(37,211,102,0.08);border-color:rgba(37,211,102,0.28);color:#25d366;" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="map-wrap rv d1">
+          <div class="map-label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            NextGen Interiors &amp; Architects
+          </div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56510.56567813358!2d85.29506209077144!3d27.720053990615902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19ae1ff33c11%3A0x6942936f55f67bf2!2sNextGen%20interiors%20and%20architects!5e0!3m2!1sen!2snp!4v1777571670970!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-logo"><img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:30px;"/></div>
+        <p class="footer-copy">&copy; 2025 NextGen Interiors &amp; Architects &middot; Baluwatar, Kathmandu, Nepal</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.facebook.com/architectsandinteriorshouse" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@nextgeninteriors" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 0 0-1.95 1.95A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19c1.71.47 8.59.47 8.59.47s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.39z"/><polygon fill="currentColor" stroke="none" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/nextgen-interiors-architects-pvt-ltd/?originalSubdomain=np" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="wa-bubble" id="waBubble" style="opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s;">
+    <div class="wa-tooltip">Chat with us on WhatsApp!</div>
+    <a href="https://wa.me/9779849151220?text=Hello%20NextGen%20Interiors%2C%20I%27d%20like%20to%20discuss%20a%20project." class="wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    </a>
+  </div>
+
+  <script>
+    // CURSOR
+    const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+    (function animRing(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+    document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('c-hover'));el.addEventListener('mouseleave',()=>document.body.classList.remove('c-hover'));});
+
+    // LOADER
+    const lp=document.getElementById('loaderP');let w=0;
+    const iv=setInterval(()=>{w+=Math.random()*16+5;if(w>=100){w=100;clearInterval(iv);setTimeout(()=>document.getElementById('loader').classList.add('out'),400);}lp.style.width=w+'%';},55);
+
+    // NAV SCROLL
+    window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60));
+
+    // MOBILE MENU
+    const btn=document.getElementById('menuBtn'),mm=document.getElementById('mMenu');
+    function openMenu(){btn.classList.add('open');mm.classList.add('open');document.body.style.overflow='hidden';}
+    function closeMenu(){btn.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}
+    btn.addEventListener('click',()=>mm.classList.contains('open')?closeMenu():openMenu());
+    document.getElementById('mMenuClose').addEventListener('click', closeMenu);
+    mm.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+
+    // Mobile portfolio accordion
+    const mPortfolioBtn = document.getElementById('mPortfolioBtn');
+    const mPortfolioSub = document.getElementById('mPortfolioSub');
+    mPortfolioBtn.addEventListener('click', () => {
+      const isOpen = mPortfolioSub.classList.contains('open');
+      mPortfolioSub.classList.toggle('open', !isOpen);
+      mPortfolioBtn.classList.toggle('active', !isOpen);
+    });
+
+    // REVEAL ON SCROLL
+    const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});},{threshold:0.06});
+    document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+
+    // HERO SLIDESHOW
+    const slides=document.querySelectorAll('.hero-bg-slide');let si=0;
+    setInterval(()=>{slides[si].classList.remove('active');si=(si+1)%slides.length;slides[si].classList.add('active');},5200);
+
+    // WHATSAPP BUBBLE
+    setTimeout(()=>{const wb=document.getElementById('waBubble');wb.style.opacity='1';wb.style.transform='translateY(0)';},2600);
+
+    // HERO CHAR-BY-CHAR BLUR REVEAL
+    (function buildHeroText() {
+      const lines = [
+        { el: document.getElementById('heroLine1'), words: ['CRAFTING', 'VISIONS,'], accentWord: -1 },
+        { el: document.getElementById('heroLine2'), words: ['BUILDING', 'DREAMS'],  accentWord: 1  }
+      ];
+      const BASE = 0.82;
+      const CHAR_STEP = 0.042;
+      const LINE_OFFSET = 0.10;
+      let idx = 0;
+      lines.forEach((line, li) => {
+        line.words.forEach((word, wi) => {
+          if (wi > 0) {
+            const sp = document.createElement('span');
+            sp.className = 'hw-space';
+            line.el.appendChild(sp);
+          }
+          const hw = document.createElement('span');
+          hw.className = 'hw';
+          if (wi === line.accentWord) hw.style.color = 'var(--blue-mid)';
+          Array.from(word).forEach(ch => {
+            const hc = document.createElement('span');
+            hc.className = 'hc';
+            hc.textContent = ch;
+            hc.style.animationDelay = (BASE + li * LINE_OFFSET + idx * CHAR_STEP).toFixed(3) + 's';
+            hw.appendChild(hc);
+            idx++;
+          });
+          line.el.appendChild(hw);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
