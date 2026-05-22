@@ -145,10 +145,10 @@
     /* PROJECT CARD */
     .proj-card {
       display: block; position: relative; overflow: hidden;
-      background: #080f1c; cursor: none; aspect-ratio: 4/3;
+      background: #080f1c; cursor: none; height:clamp(380px,62vh,720px);
       text-decoration: none;
     }
-    .proj-card.span2 { grid-column: span 2; aspect-ratio: 16/7; }
+    .proj-card.span2 { grid-column: span 2; height:clamp(380px,62vh,720px); }
 
     .proj-card img {
       position: absolute; inset: 0;
@@ -188,7 +188,7 @@
     .proj-card-num::before { content:''; width:16px; height:1px; background:var(--blue-mid); }
     .proj-card-name {
       font-family: var(--f-head);
-      font-size: clamp(22px, 3vw, 48px);
+      font-size:clamp(28px,3.6vw,54px);
       letter-spacing: 0.06em; color: var(--offwhite); line-height: 0.95;
       text-shadow: 0 2px 20px rgba(0,0,0,0.5);
     }
@@ -249,18 +249,14 @@
     .wa-btn svg { width:26px; height:26px; }
 
     /* RESPONSIVE */
-    @media (max-width: 1000px) {
-      .projects-grid { grid-template-columns: repeat(2, 1fr); }
-      .proj-card.span2 { grid-column: span 2; }
-    }
+    @media(max-width:1100px){.projects-grid{grid-template-columns:repeat(2,1fr);}.proj-card.span2{grid-column:span 2;}.proj-card,.proj-card.span2{height:clamp(340px,55vh,620px);}}
+    @media(max-width:900px){.proj-card,.proj-card.span2{height:clamp(300px,50vw,520px);}}
     @media (max-width: 900px) {
       .nav-links, .nav-cta { display: none; }
       .nav-menu-btn { display: flex; }
     }
-    @media (max-width: 580px) {
-      .projects-grid { grid-template-columns: 1fr; }
-      .proj-card.span2 { grid-column: span 1; aspect-ratio: 4/3; }
-    }
+    @media(max-width:700px){.projects-grid{grid-template-columns:1fr;}.proj-card.span2{grid-column:span 1;}.proj-card,.proj-card.span2{height:clamp(280px,68vw,460px);}.page-title{font-size:clamp(48px,12vw,90px);}}
+    @media(max-width:480px){.proj-card,.proj-card.span2{height:clamp(260px,75vw,420px);}.proj-card-name{font-size:clamp(24px,6vw,40px);}}
   </style>
 </head>
 <body>
@@ -360,7 +356,7 @@
 <!-- PAGE HEADER -->
 <div class="page-header">
   <div class="breadcrumb rv">
-    <a href="/">Home</a>
+    <a href="index.html">Home</a>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     <a href="#">Portfolio</a>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>

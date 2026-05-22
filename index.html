@@ -320,32 +320,31 @@
 
     /* PORTFOLIO */
     .portfolio { background: var(--ink); }
-    .port-cat-strip { padding: clamp(56px,8vw,100px) var(--gap) 0; max-width: var(--max); margin: 0 auto; }
-    .port-cat-label { font-family: var(--f-body); font-size: 10px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blue-mid); display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-    .port-cat-label::before { content:''; width:18px; height:1px; background:var(--blue-mid); }
-    .port-cat-h { font-family: var(--f-head); font-size: clamp(50px,6.5vw,90px); letter-spacing: 0.05em; color: var(--offwhite); line-height: 0.9; margin-bottom: clamp(20px,3vw,40px); }
-    .port-grid-micasa { display: grid; gap: 4px; }
+    .port-cat-strip { padding: clamp(48px,7vw,96px) var(--gap) 0; max-width: var(--max); margin: 0 auto; }
+    .port-cat-label { font-family: var(--f-body); font-size: 10px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blue-mid); display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .port-cat-label::before { content:''; width:24px; height:1px; background:var(--blue-mid); }
+    .port-cat-h { font-family: var(--f-head); font-size: clamp(64px,9.5vw,140px); letter-spacing: 0.03em; color: var(--offwhite); line-height: 0.86; margin-bottom: clamp(28px,4vw,56px); }
+    .port-grid-micasa { display: grid; gap: 3px; }
     .pmr-full { grid-template-columns: 1fr; }
     .pmr-half { grid-template-columns: 1fr 1fr; }
     .pmr-3    { grid-template-columns: 1fr 1fr 1fr; }
     .pmr-big-small { grid-template-columns: 2fr 1fr; }
     .pmr-small-big { grid-template-columns: 1fr 2fr; }
+    /* vh-based heights — fills screen like premium portfolio sites */
     .pm-card { position: relative; overflow: hidden; display: block; cursor: none; background: #080f1c; }
-    .pm-tall   { aspect-ratio: 3/4; }
-    .pm-r43    { aspect-ratio: 5/6; }
-    .pm-std    { aspect-ratio: 1/1; }
-    .pm-r32    { aspect-ratio: 5/6; }
-    .pmr-small-big > .pm-card:first-child,
-    .pmr-big-small > .pm-card:last-child { aspect-ratio: unset; }
-    .pm-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.3s var(--ease); }
-    .pm-card:hover img { transform: scale(1.07); }
-    .pm-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,14,28,0.82) 0%, rgba(8,14,28,0.1) 45%, transparent 70%); z-index: 1; transition: background .5s; }
-    .pm-card:hover .pm-card-overlay { background: linear-gradient(to top, rgba(8,14,28,0.88) 0%, rgba(8,14,28,0.4) 55%, rgba(8,14,28,0.1) 100%); }
-    .pm-name { font-family: var(--f-head); font-size: clamp(20px, 3vw, 44px); letter-spacing: 0.07em; color: var(--offwhite); line-height: 1; text-shadow: 0 2px 24px rgba(0,0,0,0.6); position: absolute; z-index: 2; left: 0; right: 0; text-align: center; bottom: clamp(18px,3.5%,44px); transition: bottom .55s var(--ease), top .55s var(--ease), transform .55s var(--ease); }
+    .pm-tall { height: clamp(380px, 78vh, 960px); }
+    .pm-r43  { height: clamp(320px, 62vh, 780px); }
+    .pm-std  { height: clamp(350px, 70vh, 860px); }
+    .pm-r32  { height: clamp(300px, 56vh, 700px); }
+    .pm-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.8s var(--ease); }
+    .pm-card:hover img { transform: scale(1.08); }
+    .pm-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,14,28,0.90) 0%, rgba(8,14,28,0.06) 48%, transparent 72%); z-index: 1; transition: background .7s; }
+    .pm-card:hover .pm-card-overlay { background: linear-gradient(to top, rgba(8,14,28,0.94) 0%, rgba(8,14,28,0.42) 52%, rgba(8,14,28,0.08) 100%); }
+    .pm-name { font-family: var(--f-head); font-size: clamp(24px, 3.4vw, 58px); letter-spacing: 0.08em; color: var(--offwhite); line-height: 1; text-shadow: 0 3px 36px rgba(0,0,0,0.75); position: absolute; z-index: 2; left: 0; right: 0; text-align: center; bottom: clamp(24px,4.5%,56px); transition: bottom .65s var(--ease), transform .65s var(--ease); }
     .pm-card:hover .pm-name { bottom: 50%; transform: translateY(50%); }
-    .pm-loc { font-family: var(--f-body); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-mid); position: absolute; z-index: 2; left: 0; right: 0; text-align: center; bottom: clamp(10px,2%,24px); opacity: 0; transform: translateY(6px); transition: opacity .45s var(--ease) .08s, transform .45s var(--ease) .08s; }
+    .pm-loc { font-family: var(--f-body); font-size: 11px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--blue-mid); position: absolute; z-index: 2; left: 0; right: 0; text-align: center; bottom: clamp(12px,2.5%,30px); opacity: 0; transform: translateY(10px); transition: opacity .5s var(--ease) .12s, transform .5s var(--ease) .12s; }
     .pm-card:hover .pm-loc { opacity: 1; transform: translateY(0); }
-    .pm-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--blue-mid); transform:scaleX(0); transform-origin:left; transition:transform .55s var(--ease); z-index:3; }
+    .pm-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background: linear-gradient(90deg, var(--blue-mid), var(--blue-light), var(--blue-mid)); transform:scaleX(0); transform-origin:left; transition:transform .65s var(--ease); z-index:3; }
     .pm-card:hover::after { transform:scaleX(1); }
 
     /* CAREERS SECTION */
@@ -388,9 +387,8 @@
     .contact-head p { font-size: 13px; font-weight: 300; line-height: 1.85; color: var(--mist); max-width: 360px; margin-bottom: 32px; }
     .contact-deets { display: flex; flex-direction: column; margin-bottom: 28px; }
     .cd-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); text-decoration: none; transition: all .3s; }
-    .cd-item:hover .cd-icon { background: var(--blue-mid); border-color: var(--blue-mid); color: var(--offwhite); }
-    .cd-icon { width: 46px; height: 46px; flex-shrink: 0; border: 1px solid rgba(54,159,206,0.28); display: flex; align-items: center; justify-content: center; color: var(--blue-mid); transition: all .3s; }
-    .cd-icon svg { width: 20px; height: 20px; }
+    .cd-item:hover .cd-icon { background: var(--blue-mid); border-color: var(--blue-mid); }
+    .cd-icon { width: 42px; height: 42px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.09); display: flex; align-items: center; justify-content: center; font-size: 17px; transition: all .3s; }
     .cd-label { font-family: var(--f-body); font-size: 9px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mist); display: block; margin-bottom: 2px; }
     .cd-val { font-size: 14px; font-weight: 400; color: var(--offwhite); }
     .service-locations { margin-bottom: 28px; }
@@ -400,11 +398,10 @@
     .location-tag { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid rgba(54,159,206,0.22); font-family: var(--f-body); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-mid); transition: background .3s, border-color .3s; }
     .location-tag:hover { background: rgba(54,159,206,0.08); border-color: rgba(54,159,206,0.45); }
     .location-tag svg { width: 10px; height: 10px; }
-    .contact-socials { display: flex; gap: 9px; }
-    .contact-socials a { width: 46px; height: 46px; border: 1px solid rgba(255,255,255,0.09); display: flex; align-items: center; justify-content: center; color: var(--mist); transition: all .3s; }
-    .contact-socials a svg { width: 18px; height: 18px; }
-    .contact-socials a:hover { border-color: var(--blue-mid); color: var(--blue-mid); }
-    .contact-socials a.soc-wa:hover { border-color: rgba(37,211,102,0.5); color: #25d366; }
+    .contact-socials { display: flex; gap: 10px; flex-wrap: wrap; }
+    .contact-socials a { width: 44px; height: 44px; border: 1px solid rgba(255,255,255,0.09); display: flex; align-items: center; justify-content: center; color: var(--mist); transition: all .3s; }
+    .contact-socials a:hover { border-color: var(--blue-mid); color: var(--blue-mid); background: rgba(54,159,206,0.07); }
+    .contact-socials a svg { flex-shrink: 0; }
     .map-wrap { border-top: 3px solid var(--blue-mid); overflow: hidden; position: relative; }
     .map-wrap iframe { display: block; width: 100%; height: 440px; border: none; filter: invert(0.88) hue-rotate(180deg) saturate(0.8) brightness(0.9); }
     .map-label { position: absolute; top: 16px; left: 16px; background: var(--blue); color: var(--offwhite); padding: 10px 16px; font-family: var(--f-body); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; z-index: 2; }
@@ -423,30 +420,56 @@
     .footer { background: #040912; border-top: 1px solid rgba(255,255,255,0.04); }
     .footer-inner { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; flex-wrap: wrap; gap: 16px; }
     .footer-logo { height: 32px; display: flex; align-items: center; }
-    .footer-socials { display: flex; gap: 16px; align-items: center; }
-    .footer-socials a { width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: var(--mist); transition: color .3s, border-color .3s; }
-    .footer-socials a:hover { color: var(--blue-mid); border-color: rgba(54,159,206,0.4); }
+    .footer-socials { display: flex; gap: 20px; }
+    .footer-socials a { font-family: var(--f-body); font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mist); transition: color .3s; }
+    .footer-socials a:hover { color: var(--blue-mid); }
     .footer-copy { font-family: var(--f-body); font-size: 11px; color: var(--mist); letter-spacing: 0.06em; }
 
     /* RESPONSIVE */
     @media (max-width:1100px) {
       .pmr-3 { grid-template-columns: 1fr 1fr; }
+      .pm-tall { height: clamp(320px, 62vh, 760px); }
+      .pm-std  { height: clamp(300px, 58vh, 680px); }
+      .pm-r43  { height: clamp(280px, 52vh, 620px); }
+      .pm-r32  { height: clamp(260px, 48vh, 580px); }
     }
     @media (max-width:900px) {
       .contact-grid, .careers-inner { grid-template-columns: 1fr; }
       .nav-links,.nav-cta { display: none; }
       .nav-menu-btn { display: flex; }
       .pmr-big-small,.pmr-small-big { grid-template-columns: 1fr; }
+      .pm-tall { height: clamp(280px, 55vw, 520px); }
+      .pm-std  { height: clamp(260px, 50vw, 480px); }
+      .pm-r43  { height: clamp(240px, 48vw, 460px); }
+      .pm-r32  { height: clamp(220px, 44vw, 420px); }
+      .port-cat-h { font-size: clamp(52px,11vw,100px); }
     }
     @media (max-width:700px) {
-      .pmr-half { grid-template-columns: 1fr; }
+      .pmr-half, .pmr-3 { grid-template-columns: 1fr; }
       .footer-inner { flex-direction:column; text-align:center; }
       .wa-bubble { bottom:16px; right:16px; }
       .hero-line { font-size: clamp(36px, 10.5vw, 56px); letter-spacing: 0.10em; }
       .hero-title { gap: 2px; }
+      .pm-tall { height: clamp(280px, 70vw, 480px); }
+      .pm-std  { height: clamp(260px, 65vw, 440px); }
+      .pm-r43  { height: clamp(240px, 60vw, 420px); }
+      .pm-r32  { height: clamp(220px, 56vw, 400px); }
+      .port-cat-h { font-size: clamp(44px,12vw,80px); }
+      .pm-name { font-size: clamp(22px, 6vw, 42px); }
+    }
+    @media (max-width: 480px) {
+      .pm-tall { height: clamp(240px, 65vw, 400px); }
+      .pm-std  { height: clamp(220px, 60vw, 370px); }
+      .pm-r43  { height: clamp(200px, 58vw, 350px); }
+      .pm-r32  { height: clamp(185px, 54vw, 320px); }
+      .port-grid-micasa { gap: 2px; }
     }
     @media (max-width: 400px) {
       .hero-line { font-size: 32px; letter-spacing: 0.08em; }
+      .pm-tall { height: 260px; }
+      .pm-std  { height: 240px; }
+      .pm-r43  { height: 220px; }
+      .pm-r32  { height: 200px; }
     }
   </style>
 </head>
@@ -464,7 +487,7 @@
   </div>
 
   <nav class="nav" id="nav">
-    <a href="index.html" class="nav-logo">
+    <a href="#" class="nav-logo">
       <img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:36px;"/>
     </a>
     <ul class="nav-links">
@@ -674,18 +697,9 @@
             <p>Whether it's your dream home, a boutique hotel, or a commercial space &mdash; we'd love to hear from you.</p>
           </div>
           <div class="contact-deets rv">
-            <a href="tel:+9779849151220" class="cd-item">
-              <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.84 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 17.92z"/></svg></div>
-              <div><span class="cd-label">Call Us</span><span class="cd-val">+977 9849151220</span></div>
-            </a>
-            <a href="mailto:info@nextgeninterior.com" class="cd-item">
-              <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-              <div><span class="cd-label">Email Us</span><span class="cd-val">info@nextgeninterior.com</span></div>
-            </a>
-            <div class="cd-item">
-              <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-              <div><span class="cd-label">Head Office</span><span class="cd-val">Baluwatar, Kathmandu</span></div>
-            </div>
+            <a href="tel:+9779849151220" class="cd-item"><div class="cd-icon">&#128222;</div><div><span class="cd-label">Call Us</span><span class="cd-val">+977 9849151220</span></div></a>
+            <a href="mailto:info@nextgeninterior.com" class="cd-item"><div class="cd-icon">&#9993;&#65039;</div><div><span class="cd-label">Email Us</span><span class="cd-val">info@nextgeninterior.com</span></div></a>
+            <div class="cd-item"><div class="cd-icon">&#128205;</div><div><span class="cd-label">Head Office</span><span class="cd-val">Baluwatar, Kathmandu</span></div></div>
           </div>
           <div class="service-locations rv">
             <div class="service-locations-label">We Serve</div>
@@ -697,20 +711,20 @@
             </div>
           </div>
           <div class="contact-socials rv">
-            <a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
             </a>
-            <a href="https://www.facebook.com/architectsandinteriorshouse" target="_blank" rel="noopener" aria-label="Facebook">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            <a href="https://www.facebook.com/architectsandinteriorshouse" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
             </a>
-            <a href="https://www.youtube.com/@nextgeninteriors" target="_blank" rel="noopener" aria-label="YouTube">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 0 0-1.95 1.95A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19c1.71.47 8.59.47 8.59.47s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.39z"/><polygon fill="currentColor" stroke="none" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+            <a href="https://www.linkedin.com/company/nextgen-interiors-architects-pvt-ltd/?originalSubdomain=np" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
             </a>
-            <a href="https://www.linkedin.com/company/nextgen-interiors-architects-pvt-ltd/?originalSubdomain=np" target="_blank" rel="noopener" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <a href="https://www.youtube.com/@nextgeninteriors" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
             </a>
-            <a href="https://wa.me/9779849151220" class="soc-wa" style="background:rgba(37,211,102,0.08);border-color:rgba(37,211,102,0.28);color:#25d366;" aria-label="WhatsApp">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            <a href="https://wa.me/9779849151220" target="_blank" rel="noopener" style="background:rgba(37,211,102,0.12);border-color:rgba(37,211,102,0.28);color:#25d366;" aria-label="WhatsApp" title="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
             </a>
           </div>
         </div>
@@ -731,18 +745,10 @@
         <div class="footer-logo"><img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:30px;"/></div>
         <p class="footer-copy">&copy; 2025 NextGen Interiors &amp; Architects &middot; Baluwatar, Kathmandu, Nepal</p>
         <div class="footer-socials">
-          <a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-          <a href="https://www.facebook.com/architectsandinteriorshouse" target="_blank" rel="noopener" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-          <a href="https://www.youtube.com/@nextgeninteriors" target="_blank" rel="noopener" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 0 0-1.95 1.95A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19c1.71.47 8.59.47 8.59.47s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.39z"/><polygon fill="currentColor" stroke="none" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/company/nextgen-interiors-architects-pvt-ltd/?originalSubdomain=np" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
+          <a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/architectsandinteriorshouse" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.linkedin.com/company/nextgen-interiors-architects-pvt-ltd/?originalSubdomain=np" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.youtube.com/@nextgeninteriors" target="_blank" rel="noopener">YouTube</a>
         </div>
       </div>
     </div>

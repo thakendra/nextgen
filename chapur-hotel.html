@@ -140,7 +140,7 @@
 
     /* ── GALLERY ── */
     .gallery{background:var(--ink);}
-    .g-full{width:100%;aspect-ratio:21/9;overflow:hidden;position:relative;}
+    .g-full{width:100%;height:clamp(360px,68vh,820px);overflow:hidden;position:relative;}
     .g-half{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
     .g-feature{display:grid;grid-template-columns:2fr 1fr;gap:4px;}
     .g-feature-rev{display:grid;grid-template-columns:1fr 2fr;gap:4px;}
@@ -155,7 +155,7 @@
     .g-card-label span{font-family:var(--f-body);font-size:10px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--blue-mid);}
     .g-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--blue-mid);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);z-index:3;}
     .g-card:hover::after{transform:scaleX(1);}
-    .ar-wide{aspect-ratio:16/9;} .ar-43{aspect-ratio:4/3;} .ar-32{aspect-ratio:3/2;} .ar-sq{aspect-ratio:1/1;}
+    .ar-wide{height:clamp(360px,58vh,720px);}.ar-43{height:clamp(380px,64vh,780px);}.ar-32{height:clamp(360px,60vh,740px);}.ar-sq{height:clamp(400px,68vh,820px);}
 
     /* ── LIGHTBOX ── */
     .lb{position:fixed;inset:0;z-index:9500;background:rgba(8,12,20,0.97);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;}
@@ -221,7 +221,7 @@
     }
     @media(max-width:600px){
       .g-half,.g-trio{grid-template-columns:1fr;}
-      .g-full{aspect-ratio:16/10;}
+      .g-full{height:clamp(320px,55vh,640px);}
       .hero-meta-div{display:none;}
       .wa-bubble{bottom:16px;right:16px;}
     }
@@ -411,7 +411,7 @@
   </div>
 
   <!-- 4. Full bleed second -->
-  <div class="g-full rv" style="margin-top:4px;aspect-ratio:16/7;position:relative;">
+  <div class="g-full rv" style="margin-top:4px;height:clamp(380px,62vh,720px);position:relative;">
     <div class="g-card" style="position:absolute;inset:0;" onclick="openLb(2)">
       <img src="Galleries/CHAPUR HOTEL interior/24.webp" alt="Chapur Architecture"/>
       <div class="g-card-overlay"></div>
