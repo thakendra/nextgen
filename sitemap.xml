@@ -4,187 +4,248 @@
   <!-- Homepage -->
   <url>
     <loc>https://nextgeninterior.com/</loc>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Main service pages -->
   <url>
     <loc>https://nextgeninterior.com/architecture</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/interiors</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/dpr-landscaping</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- Portfolio category pages -->
   <url>
     <loc>https://nextgeninterior.com/hospitality</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/residential</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/commercial</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/workplace</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/club-resort</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/healthcare</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/education</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Hospitality project pages -->
   <url>
     <loc>https://nextgeninterior.com/chapur-hotel</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/navya-hotel</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/gautam-hotel</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/lemon-tree</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Residential project pages -->
   <url>
     <loc>https://nextgeninterior.com/sankhu-exterior</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/lilly-residence</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/bhattrai-home</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/renu-gurung-home</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/chitwan-home</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/chunikhel-home</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/jayant-ji-home</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/jorpati-home</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/lokhanthali-home</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/rajan-rai-home</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/ramkot-home</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/roshan-home</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/sitapaila-home</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/tokha-home</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Commercial project page -->
   <url>
     <loc>https://nextgeninterior.com/restro-office</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Other pages -->
   <url>
     <loc>https://nextgeninterior.com/blog</loc>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/careers</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <!-- Blog articles -->
   <url>
     <loc>https://nextgeninterior.com/blogs/sample-blog-1</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://nextgeninterior.com/blogs/sample-blog-2</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+
+
+  <url>
+    <loc>https://nextgeninterior.com/blogs/home-interior-designers-in-kathmandu</loc>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://nextgeninterior.com/blogs/house-design-kathmandu</loc>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://nextgeninterior.com/blogs/architect-in-kathmandu</loc>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://nextgeninterior.com/blogs/modern-home-design-nepal</loc>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://nextgeninterior.com/blogs/luxury-residence-design-nepal</loc>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://nextgeninterior.com/blogs/farmhouse-design-nepal</loc>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://nextgeninterior.com/blogs/best-plywood-in-nepal</loc>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://nextgeninterior.com/blogs/best-tiles-for-home-nepal</loc>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://nextgeninterior.com/blogs/double-height-ceiling-design</loc>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://nextgeninterior.com/blogs/best-home-design-company-in-kathmandu</loc>
+    <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
 </urlset>

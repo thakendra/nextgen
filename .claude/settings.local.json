@@ -3,7 +3,20 @@
     "allow": [
       "Bash(Get-ChildItem \"D:\\\\nextgen\\\\Galleries\" -Directory)",
       "Bash(Select-Object Name)",
-      "Bash(Sort-Object Name)"
+      "Bash(Sort-Object Name)",
+      "Bash(node -e ' *)",
+      "Bash(awk '/<head>/,/<\\\\/head>/' index.html)",
+      "Bash(grep -noiE 'class=\"[a-z-]*\\(hero|title|head|tagline\\)[a-z-]*\"|<h[1-6][^>]*>[^<]{0,60}' __TRACKED_VAR__.html)",
+      "Bash(sed -n '200,230p' architecture.html)",
+      "Bash(sed -n '357,385p' hospitality.html)",
+      "Bash(grep -rhoiE '\\(\\\\+977[0-9 -]{6,}|[0-9]{2,3}-?[0-9]{6,7}\\)|[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,}|kathmandu[^<]{0,40}|instagram\\\\.com/[^\"]+|facebook\\\\.com/[^\"]+' index.html)",
+      "Bash(node seo-inject.js)",
+      "Bash(node seo-breadcrumbs.js)",
+      "Bash(node -e \"const fs=require\\('fs'\\),p=require\\('path'\\);let files=fs.readdirSync\\('.'\\).filter\\(f=>f.endsWith\\('.html'\\)\\);fs.readdirSync\\('blogs'\\).forEach\\(f=>files.push\\(p.join\\('blogs',f\\)\\)\\);let ok=0,bad=0;for\\(const f of files\\){const h=fs.readFileSync\\(f,'utf8'\\);const ms=[...h.matchAll\\(/<script type=\\\\\"application\\\\/ld\\\\+json\\\\\">\\([\\\\s\\\\S]*?\\)<\\\\/script>/g\\)];for\\(const m of ms\\){try{JSON.parse\\(m[1]\\);ok++}catch\\(e\\){bad++;console.log\\('BAD',f,e.message\\)}}}console.log\\('valid blocks:',ok,'bad:',bad\\)\")",
+      "Bash(node -e \"const fs=require\\('fs'\\);const s=fs.readFileSync\\('sitemap.xml','utf8'\\);const locs=\\(s.match\\(/<loc>/g\\)||[]\\).length,lm=\\(s.match\\(/<lastmod>/g\\)||[]\\).length;console.log\\('locs:',locs,'lastmod:',lm, locs===lm?'OK':'MISMATCH'\\);\")",
+      "Bash(sed -n '5,11p' sitemap.xml)",
+      "Bash(cd /d D:\\\\nextgen)",
+      "Bash(node generate-blogs.js)"
     ]
   }
 }
