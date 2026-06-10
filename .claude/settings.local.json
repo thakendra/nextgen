@@ -16,7 +16,14 @@
       "Bash(node -e \"const fs=require\\('fs'\\);const s=fs.readFileSync\\('sitemap.xml','utf8'\\);const locs=\\(s.match\\(/<loc>/g\\)||[]\\).length,lm=\\(s.match\\(/<lastmod>/g\\)||[]\\).length;console.log\\('locs:',locs,'lastmod:',lm, locs===lm?'OK':'MISMATCH'\\);\")",
       "Bash(sed -n '5,11p' sitemap.xml)",
       "Bash(cd /d D:\\\\nextgen)",
-      "Bash(node generate-blogs.js)"
+      "Bash(node generate-blogs.js)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "mcp__Claude_in_Chrome__list_connected_browsers",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(cd D:/ && ls)",
+      "Bash(xargs sed -i 's|/logo/logo\\\\.png|/logo/favicon.png|g')"
     ]
   }
 }
