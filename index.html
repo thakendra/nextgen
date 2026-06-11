@@ -450,6 +450,23 @@
     .footer-socials a:hover { color: var(--blue-mid); }
     .footer-copy { font-family: var(--f-body); font-size: 11px; color: var(--mist); letter-spacing: 0.06em; }
 
+    /* ── PARTNERS STRIP ── */
+    .partners-section { background: #040912; padding: 72px 0 64px; border-top: 1px solid rgba(255,255,255,0.05); }
+    .partners-eyebrow { text-align: center; font-family: var(--f-body); font-size: 11px; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 10px; }
+    .partners-title { text-align: center; font-family: var(--f-head); font-size: clamp(24px,2.8vw,38px); font-weight: 300; color: #fff; letter-spacing: -0.01em; margin-bottom: 48px; }
+    .partners-title em { font-style: italic; color: var(--blue-mid); }
+    .logo-marquee { overflow: hidden; position: relative; }
+    .logo-marquee::before,.logo-marquee::after { content:''; position:absolute; top:0; bottom:0; width:100px; z-index:2; pointer-events:none; }
+    .logo-marquee::before { left:0; background:linear-gradient(to right,#040912,transparent); }
+    .logo-marquee::after  { right:0; background:linear-gradient(to left,#040912,transparent); }
+    .logo-track { display:flex; align-items:center; gap:20px; width:max-content; animation:logoScroll 36s linear infinite; padding:8px 0; }
+    .logo-track:hover { animation-play-state:paused; }
+    .logo-item { flex-shrink:0; height:64px; display:flex; align-items:center; justify-content:center; padding:10px 22px; border:1px solid rgba(255,255,255,0.07); border-radius:8px; background:rgba(255,255,255,0.03); transition:background .3s,border-color .3s,transform .25s; }
+    .logo-item:hover { background:rgba(255,255,255,0.08); border-color:rgba(54,159,206,0.35); transform:translateY(-2px); }
+    .logo-item img { height:36px; width:auto; max-width:120px; object-fit:contain; filter:grayscale(100%) brightness(2) opacity(0.5); transition:filter .35s; display:block; }
+    .logo-item:hover img { filter:grayscale(0%) brightness(1) opacity(1); }
+    @keyframes logoScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
     /* RESPONSIVE */
     @media (max-width:1100px) {
       .pmr-3 { grid-template-columns: 1fr 1fr; }
@@ -804,6 +821,47 @@
           </div>
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56510.56567813358!2d85.29506209077144!3d27.720053990615902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19ae1ff33c11%3A0x6942936f55f67bf2!2sNextGen%20interiors%20and%20architects!5e0!3m2!1sen!2snp!4v1777571670970!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNER BRANDS -->
+  <section class="partners-section" id="partners">
+    <div class="wrap">
+      <div class="partners-eyebrow rv">Trusted Partner Brands</div>
+      <h2 class="partners-title rv">We Build With The <em>Best</em></h2>
+    </div>
+    <div class="logo-marquee">
+      <div class="logo-track">
+        <div class="logo-item"><img src="public/Hettich.png" alt="Hettich" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Surya%20ply.png" alt="Surya Ply" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Kohler.jpg" alt="Kohler" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Merino%20Laminates.webp" alt="Merino Laminates" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Advance%20Laminates.png" alt="Advance Laminates" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Sagun%20Ply.jpg" alt="Sagun Ply" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Hafele.png" alt="Häfele" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Favicol.png" alt="Pidilite (Fevicol)" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Greenlam.png" alt="Greenlam Industries" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Action%20tesa.png" alt="Action TESA" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Roco.png" alt="Roca" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Kajaria-Ceramics.webp" alt="Kajaria Ceramics" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Nitco.png" alt="NITCO" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Laminam.webp" alt="Laminam" loading="lazy"/></div>
+        <!-- duplicate for seamless loop -->
+        <div class="logo-item"><img src="public/Hettich.png" alt="Hettich" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Surya%20ply.png" alt="Surya Ply" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Kohler.jpg" alt="Kohler" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Merino%20Laminates.webp" alt="Merino Laminates" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Advance%20Laminates.png" alt="Advance Laminates" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Sagun%20Ply.jpg" alt="Sagun Ply" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Hafele.png" alt="Häfele" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Favicol.png" alt="Pidilite (Fevicol)" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Greenlam.png" alt="Greenlam Industries" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Action%20tesa.png" alt="Action TESA" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Roco.png" alt="Roca" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Kajaria-Ceramics.webp" alt="Kajaria Ceramics" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Nitco.png" alt="NITCO" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Laminam.webp" alt="Laminam" loading="lazy"/></div>
       </div>
     </div>
   </section>
