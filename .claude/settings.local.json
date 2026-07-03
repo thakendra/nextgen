@@ -23,7 +23,10 @@
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
       "Bash(cd D:/ && ls)",
-      "Bash(xargs sed -i 's|/logo/logo\\\\.png|/logo/favicon.png|g')"
+      "Bash(xargs sed -i 's|/logo/logo\\\\.png|/logo/favicon.png|g')",
+      "WebFetch(domain:nextgeninterior.com)",
+      "Bash(python \"C:/Users/LOQ/AppData/Local/Temp/claude/D--nextgen/4bf33912-fb6c-414d-8cf5-e6a82cf11a21/scratchpad/seo_optimize.py\")",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }
