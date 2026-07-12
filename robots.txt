@@ -1,12 +1,10 @@
-# NextGen Interiors — robots.txt
+# NextGen Interiors - robots.txt
 # Allows all search engines to crawl the entire site
 
 User-agent: *
 Allow: /
 
-# Block crawling of git folder
 Disallow: /.git/
 Disallow: /.htaccess
 
-# Sitemap location
 Sitemap: https://nextgeninterior.com/sitemap.xml
