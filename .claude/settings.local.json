@@ -34,7 +34,8 @@
       "Bash(python \"C:/Users/LOQ/AppData/Local/Temp/claude/D--nextgen/4bf33912-fb6c-414d-8cf5-e6a82cf11a21/scratchpad/audit_fix.py\")",
       "Bash(awk 'NR>=369 && /<!-- |<footer|<script/ {print NR\": \"$0}' blog.html)",
       "Bash(python \"C:/Users/LOQ/AppData/Local/Temp/claude/D--nextgen/4bf33912-fb6c-414d-8cf5-e6a82cf11a21/scratchpad/fix_deadlinks.py\")",
-      "Bash(python \"C:/Users/LOQ/AppData/Local/Temp/claude/D--nextgen/4bf33912-fb6c-414d-8cf5-e6a82cf11a21/scratchpad/clean_links.py\")"
+      "Bash(python \"C:/Users/LOQ/AppData/Local/Temp/claude/D--nextgen/4bf33912-fb6c-414d-8cf5-e6a82cf11a21/scratchpad/clean_links.py\")",
+      "Bash(grep -rl \"google-site-verification\" *.html)"
     ]
   }
 }
