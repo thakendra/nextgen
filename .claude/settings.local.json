@@ -36,7 +36,10 @@
       "Bash(python \"C:/Users/LOQ/AppData/Local/Temp/claude/D--nextgen/4bf33912-fb6c-414d-8cf5-e6a82cf11a21/scratchpad/fix_deadlinks.py\")",
       "Bash(python \"C:/Users/LOQ/AppData/Local/Temp/claude/D--nextgen/4bf33912-fb6c-414d-8cf5-e6a82cf11a21/scratchpad/clean_links.py\")",
       "Bash(grep -rl \"google-site-verification\" *.html)",
-      "Bash(python \"C:/Users/LOQ/AppData/Local/Temp/claude/D--nextgen/4bf33912-fb6c-414d-8cf5-e6a82cf11a21/scratchpad/fix_emails_titles.py\")"
+      "Bash(python \"C:/Users/LOQ/AppData/Local/Temp/claude/D--nextgen/4bf33912-fb6c-414d-8cf5-e6a82cf11a21/scratchpad/fix_emails_titles.py\")",
+      "Bash(python -u -X utf8 -c ' *)",
+      "Bash(npm run *)",
+      "Bash(gh auth *)"
     ]
   }
 }
