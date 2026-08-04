@@ -156,10 +156,101 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- Commercial project page -->
+  <!-- Commercial / Salon / Retail project pages (NEW) -->
   <url>
     <loc>https://nextgeninterior.com/restro-office</loc>
     <lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextgeninterior.com/arthashree-ventures</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextgeninterior.com/gumba-maharajgunj</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextgeninterior.com/kl-tower-skincare</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextgeninterior.com/munneys-salon</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextgeninterior.com/photobooth-civil-mall</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Hospitality project pages (NEW) -->
+  <url>
+    <loc>https://nextgeninterior.com/mulpani-gautam-hotel</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextgeninterior.com/maya-cafe</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextgeninterior.com/sitapaila-banquet</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Residential interior project pages (NEW) -->
+  <url>
+    <loc>https://nextgeninterior.com/bharatpur-residence</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextgeninterior.com/naran-lama-home</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextgeninterior.com/nayaparti-home</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Architecture / Exterior project pages (NEW) -->
+  <url>
+    <loc>https://nextgeninterior.com/balkot-home</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextgeninterior.com/bhanu-panta-home</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextgeninterior.com/buddhanilkhantha-exterior</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextgeninterior.com/dang-home</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextgeninterior.com/surkhet-banquet</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nextgeninterior.com/thulo-bharang-banquet</loc>
+    <lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
