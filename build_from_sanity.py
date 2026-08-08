@@ -1,0 +1,291 @@
+import os
+import json
+import urllib.request
+import urllib.parse
+
+PROJECT_ID = "gpyk0ky0"
+DATASET = "production"
+
+# Template for Dedicated Client Page (Exact match to Bhattrai Home style)
+PAGE_TEMPLATE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon.png" />
+  <link rel="shortcut icon" href="/logo/favicon.png" />
+  <link rel="apple-touch-icon" href="/logo/favicon.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>{title} — NextGen Interiors &amp; Architects</title>
+<meta name="description" content="{desc}" />
+  <link rel="canonical" href="https://nextgeninterior.com/{slug}" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="author" content="NextGen Interiors" />
+  <meta name="theme-color" content="#0d1520" />
+  <meta name="geo.region" content="NP" />
+  <meta name="geo.placename" content="Kathmandu, Nepal" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="NextGen Interiors" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="{title} — NextGen Interiors &amp; Architects" />
+  <meta property="og:description" content="{desc}" />
+  <meta property="og:url" content="https://nextgeninterior.com/{slug}" />
+  <meta property="og:image" content="{hero_image}" />
+  <meta property="og:image:alt" content="{title} — NextGen Interiors &amp; Architects" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{title} — NextGen Interiors &amp; Architects" />
+  <meta name="twitter:description" content="{desc}" />
+  <meta name="twitter:image" content="{hero_image}" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="gallery-page.css">
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@graph": [
+      {{
+        "@type": "CreativeWork",
+        "@id": "https://nextgeninterior.com/{slug}#work",
+        "headline": "{title} — NextGen Interiors &amp; Architects",
+        "description": "{desc}",
+        "url": "https://nextgeninterior.com/{slug}",
+        "author": {{
+          "@type": "Organization",
+          "name": "NextGen Interiors & Architects",
+          "url": "https://nextgeninterior.com"
+        }},
+        "publisher": {{
+          "@type": "Organization",
+          "name": "NextGen Interiors",
+          "logo": {{
+            "@type": "ImageObject",
+            "url": "https://nextgeninterior.com/logo/favicon.png"
+          }}
+        }}
+      }},
+      {{
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nextgeninterior.com/" }},
+          {{ "@type": "ListItem", "position": 2, "name": "{category_name}", "item": "https://nextgeninterior.com/{category_slug}" }},
+          {{ "@type": "ListItem", "position": 3, "name": "{title}", "item": "https://nextgeninterior.com/{slug}" }}
+        ]
+      }}
+    ]
+  }}
+  </script>
+</head>
+<body>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav class="nav">
+  <a href="/" class="nav-logo"><img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:32px;"/></a>
+  <ul class="nav-links">
+    <li><a href="architecture">Architecture</a></li>
+    <li><a href="interiors">Interiors</a></li>
+    <li><a href="dpr-landscaping">DPR &amp; Landscaping</a></li>
+    <li>
+      <button class="nav-dropdown-trigger">Portfolio<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="nav-dropdown-wrap"><div class="nav-dropdown">
+        <a href="hospitality">Hospitality</a>
+        <a href="residential">Residential</a>
+        <a href="commercial">Commercial</a>
+        <a href="healthcare">Healthcare</a>
+        <a href="club-resort">Club or Resort</a>
+        <a href="education">Education</a>
+        <a href="workplace">Workplace</a>
+      </div></div>
+    </li>
+    <li><a href="blog">Journal</a></li>
+    <li><a href="/#contact">Contact</a></li>
+    <li><a href="careers">Careers</a></li>
+  </ul>
+  <a href="tel:+9779849151220" class="nav-cta">+977 9849151220</a>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="m-menu" id="mMenu">
+  <div class="m-menu-topbar">
+    <div style="height:30px;display:flex;align-items:center;"><img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:28px;"/></div>
+    <button class="nav-menu-btn open" id="mMenuClose" style="display:flex;"><span></span><span></span><span></span></button>
+  </div>
+  <div class="m-menu-body"><nav><ul class="m-menu-links">
+    <li><a href="architecture">Architecture</a></li>
+    <li><a href="interiors">Interiors</a></li>
+    <li><a href="dpr-landscaping">DPR &amp; Landscaping</a></li>
+    <li>
+      <button class="m-menu-acc-btn" id="mPortfolioBtn">Portfolio<span class="m-acc-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+      <div class="m-acc-sub" id="mPortfolioSub"><div class="m-acc-sub-inner">
+        <a href="hospitality">Hospitality</a>
+        <a href="residential">Residential</a>
+        <a href="commercial">Commercial</a>
+        <a href="healthcare">Healthcare</a>
+        <a href="club-resort">Club or Resort</a>
+        <a href="education">Education</a>
+        <a href="workplace">Workplace</a>
+      </div></div>
+    </li>
+    <li><a href="blog">Journal</a></li>
+    <li><a href="/#contact">Contact</a></li>
+    <li><a href="careers">Careers</a></li>
+  </ul></nav></div>
+  <div class="m-menu-footer">
+    <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--mist);">Head Office &mdash; Baluwatar, Kathmandu</div>
+    <a href="tel:+9779849151220" style="font-size:13px;color:rgba(245,242,237,0.6);">+977 9849151220</a>
+    <!--email_off--><a href="mailto:info@nextgeninterior.com" style="font-size:13px;color:rgba(245,242,237,0.6);">info@nextgeninterior.com</a><!--/email_off-->
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-img"><img id="heroImg" src="{hero_image}" alt="{title}"/></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">{eyebrow}</div>
+    <h1 class="hero-h1">{h1_formatted}</h1>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="meta-label">Location</span><span class="meta-val">{location}</span></div>
+      <div class="hero-meta-div"></div>
+      <div class="hero-meta-item"><span class="meta-label">Category</span><span class="meta-val">{category_name}</span></div>
+      <div class="hero-meta-div"></div>
+      <div class="hero-meta-item"><span class="meta-label">By</span><span class="meta-val">NextGen Interiors</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="gallery-intro">
+  <div>
+    <div class="s-tag">Project Showcase</div>
+    <h2 class="intro-h">{intro_heading}</h2>
+  </div>
+  <p class="intro-p">{intro_text}</p>
+</div>
+
+<div class="gallery-grid" id="gallery"></div>
+
+<div class="lb" id="lb" onclick="closeLbOnBg(event)">
+  <div class="lb-img-wrap">
+    <div class="lb-close" onclick="closeLb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+    <img id="lbImg" src="" alt=""/>
+  </div>
+  <button class="lb-prev" onclick="lbNav(-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <button class="lb-next" onclick="lbNav(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<div class="cta-strip">
+  <h2 class="cta-h">START YOUR<br><span>NEXT PROJECT</span></h2>
+  <p class="cta-p">From private homes to hospitality flagships &mdash; let&rsquo;s talk about your space.</p>
+  <div class="cta-btns">
+    <a href="tel:+9779849151220" class="btn-primary">Call Us Now</a>
+    <a href="{category_slug}" class="btn-outline">&larr; Back to {category_name}</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo"><img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:28px;"/></div>
+    <p class="footer-copy">&copy; 2025 NextGen Interiors &amp; Architects &middot; Baluwatar, Kathmandu</p>
+    <div class="footer-socials"><a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/architectsandinteriorshouse" target="_blank" rel="noopener">Facebook</a><a href="https://www.linkedin.com/company/nextgen-interiors-architects-pvt-ltd/?originalSubdomain=np" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.youtube.com/@nextgeninteriors" target="_blank" rel="noopener">YouTube</a></div>
+  </div>
+</footer>
+
+<div class="wa-bubble">
+  <a href="https://wa.me/9779849151220?text=Hello%20NextGen%2C%20I%27d%20like%20to%20discuss%20a%20project." class="wa-btn" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  </a>
+</div>
+
+<script src="gallery-page.js"></script>
+<script>
+// Load photos directly into the exact same grid and lightbox
+const photos = {photos_json};
+initGallery('', photos, '{title}');
+</script>
+</body>
+</html>"""
+
+def fetch_sanity_data():
+    query = """*[_type == "project"]{
+        title,
+        "slug": slug.current,
+        eyebrow,
+        location,
+        intro_heading,
+        intro_text,
+        description,
+        "category_title": category->title,
+        "category_slug": category->slug.current,
+        "thumbnail": thumbnail.asset->url,
+        "gallery": galleryImages[].asset->url
+    }"""
+    
+    url = f"https://{PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/{DATASET}?query={urllib.parse.quote(query)}"
+    
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    with urllib.request.urlopen(req) as res:
+        data = json.loads(res.read().decode())
+        return data.get('result', [])
+
+def build():
+    projects = fetch_sanity_data()
+    print(f"Fetched {len(projects)} projects from Sanity.")
+    
+    base_dir = r"D:\nextgen"
+    
+    for p in projects:
+        slug = p.get('slug')
+        if not slug:
+            continue
+            
+        title = p.get('title', 'Project')
+        eyebrow = p.get('eyebrow') or f"{p.get('category_title', 'Interior')} · Dedicated Client"
+        location = p.get('location') or 'Kathmandu, Nepal'
+        intro_heading = p.get('intro_heading') or f"A REFINED {title.upper()}"
+        intro_text = p.get('intro_text') or f"{title} is a dedicated project by NextGen Interiors."
+        desc = p.get('description') or f"{title} — interior architecture and bespoke spaces by NextGen Interiors, {location}."
+        cat_name = p.get('category_title') or 'Interiors'
+        cat_slug = p.get('category_slug') or 'interiors'
+        
+        # Format H1 (split last word for blue accent span)
+        parts = title.split()
+        if len(parts) > 1:
+            h1_formatted = " ".join(parts[:-1]) + f"<br><span>{parts[-1]}</span>"
+        else:
+            h1_formatted = f"{title}<br><span>PROJECT</span>"
+            
+        gallery = p.get('gallery') or []
+        thumbnail = p.get('thumbnail') or (gallery[0] if gallery else '')
+        
+        # If no gallery images yet, include the thumbnail as first photo
+        if not gallery and thumbnail:
+            gallery = [thumbnail]
+            
+        hero_image = thumbnail
+        
+        html = PAGE_TEMPLATE.format(
+            title=title,
+            slug=slug,
+            desc=desc,
+            hero_image=hero_image,
+            eyebrow=eyebrow,
+            h1_formatted=h1_formatted,
+            location=location,
+            category_name=cat_name,
+            category_slug=cat_slug,
+            intro_heading=intro_heading,
+            intro_text=intro_text,
+            photos_json=json.dumps(gallery)
+        )
+        
+        filepath = os.path.join(base_dir, f"{slug}.html")
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(html)
+            
+        print(f"Generated page: {slug}.html")
+
+if __name__ == '__main__':
+    build()

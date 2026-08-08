@@ -1,0 +1,9 @@
+{"_id":"cat-interiors","_type":"category","title":"Interiors","slug":{"_type":"slug","current":"interiors"},"description":"Full interior design projects across Nepal"}
+{"_id":"cat-architecture","_type":"category","title":"Architecture & Exterior","slug":{"_type":"slug","current":"architecture"},"description":"Architectural design, massing and exterior facade projects"}
+{"_id":"cat-residential","_type":"category","title":"Residential","slug":{"_type":"slug","current":"residential"},"description":"Private residences, luxury homes, and villas"}
+{"_id":"cat-commercial","_type":"category","title":"Commercial","slug":{"_type":"slug","current":"commercial"},"description":"Offices, retail stores, salons, and brand venues"}
+{"_id":"cat-hospitality","_type":"category","title":"Hospitality","slug":{"_type":"slug","current":"hospitality"},"description":"Hotels, cafes, restaurants, and banquet halls"}
+{"_id":"cat-healthcare","_type":"category","title":"Healthcare","slug":{"_type":"slug","current":"healthcare"},"description":"Clinics, wellness centers, and hospital spaces"}
+{"_id":"cat-education","_type":"category","title":"Education","slug":{"_type":"slug","current":"education"},"description":"Schools, institutions, and training centers"}
+{"_id":"cat-workplace","_type":"category","title":"Workplace","slug":{"_type":"slug","current":"workplace"},"description":"Corporate headquarters, collaborative workspaces"}
+{"_id":"cat-club-resort","_type":"category","title":"Club or Resort","slug":{"_type":"slug","current":"club-resort"},"description":"Resort master planning and recreational clubs"}

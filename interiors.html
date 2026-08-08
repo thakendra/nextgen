@@ -613,5 +613,6 @@
   const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});},{threshold:0.04});
   document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 </script>
+<script src="sanity-integration.js"></script>
 </body>
 </html>
