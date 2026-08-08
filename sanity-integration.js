@@ -2,33 +2,8 @@ const PROJECT_ID = 'gpyk0ky0';
 const DATASET = 'production';
 
 async function fetchSanityProjects() {
-  const path = window.location.pathname.toLowerCase();
-  
-  let pageName = 'interiors';
-  if (path.includes('architecture')) pageName = 'architecture';
-  else if (path.includes('residential')) pageName = 'residential';
-  else if (path.includes('commercial')) pageName = 'commercial';
-  else if (path.includes('hospitality')) pageName = 'hospitality';
-  else if (path.includes('healthcare')) pageName = 'healthcare';
-  else if (path.includes('education')) pageName = 'education';
-  else if (path.includes('workplace')) pageName = 'workplace';
-  else if (path.includes('club-resort')) pageName = 'club-resort';
-  else if (path.includes('dpr-landscaping')) pageName = 'dpr-landscaping';
-
-  let filter = '*[_type == "project"]';
-  
-  if (pageName === 'interiors') {
-    // Show projects marked as interiors OR any interior subcategories
-    filter = '*[_type == "project" && (mainCategory == "interiors" || subCategory in ["residential","commercial","hospitality","healthcare","education","workplace","club-resort"])]';
-  } else if (pageName === 'architecture') {
-    // Show projects marked as architecture
-    filter = '*[_type == "project" && (mainCategory == "architecture" || subCategory in ["dpr-landscaping"])]';
-  } else {
-    // Subcategory page (e.g. residential, commercial, hospitality)
-    filter = `*[_type == "project" && (subCategory == "${pageName}" || mainCategory == "${pageName}")]`;
-  }
-
-  const query = encodeURIComponent(`${filter} | order(_createdAt desc) {
+  // Query all projects with resolved thumbnail url
+  const query = encodeURIComponent(`*[_type == "project"] | order(_createdAt desc) {
     title, 
     "slug": slug.current, 
     location,
@@ -43,9 +18,10 @@ async function fetchSanityProjects() {
   try {
     const response = await fetch(url);
     const data = await response.json();
+    console.log('[Sanity] Fetched projects:', data.result);
     return data.result || [];
   } catch (error) {
-    console.error('Error fetching from Sanity:', error);
+    console.error('[Sanity] Error fetching:', error);
     return [];
   }
 }
@@ -54,19 +30,59 @@ async function renderCategoryGrid() {
   const grid = document.querySelector('.projects-grid');
   if (!grid) return;
   
-  const projects = await fetchSanityProjects();
-  if (!projects || projects.length === 0) return;
+  const path = window.location.pathname.toLowerCase();
+  const allProjects = await fetchSanityProjects();
+  if (!allProjects || allProjects.length === 0) return;
   
+  // Filter projects for the current page
+  const filtered = allProjects.filter(p => {
+    if (!p.thumbnailUrl) return false;
+    
+    const main = (p.mainCategory || '').toLowerCase();
+    const sub = (p.subCategory || '').toLowerCase();
+    
+    if (path.includes('architecture')) {
+      return main === 'architecture' || sub.includes('architecture') || sub === 'dpr-landscaping';
+    }
+    if (path.includes('residential')) {
+      return sub === 'residential';
+    }
+    if (path.includes('commercial')) {
+      return sub === 'commercial';
+    }
+    if (path.includes('hospitality')) {
+      return sub === 'hospitality';
+    }
+    if (path.includes('healthcare')) {
+      return sub === 'healthcare';
+    }
+    if (path.includes('education')) {
+      return sub === 'education';
+    }
+    if (path.includes('workplace')) {
+      return sub === 'workplace';
+    }
+    if (path.includes('club-resort')) {
+      return sub === 'club-resort';
+    }
+    if (path.includes('interiors') || path === '/' || path.endsWith('/index.html')) {
+      // Show all interior projects or any project with an interior subcategory
+      return main === 'interiors' || ['residential','commercial','hospitality','healthcare','education','workplace','club-resort'].includes(sub) || !main;
+    }
+    return true;
+  });
+
+  console.log('[Sanity] Filtered for this page (' + path + '):', filtered);
+
   // Prepend each project to the top of the grid
-  [...projects].reverse().forEach((proj, idx) => {
-    if (!proj.thumbnailUrl) return;
-    
+  filtered.reverse().forEach((proj, idx) => {
     const a = document.createElement('a');
-    // Clicking the thumbnail opens the dedicated client page
-    a.href = `${proj.slug}`; 
-    a.className = `proj-card rv vis`;
+    // Ensure slug is used
+    const linkSlug = proj.slug || proj.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    a.href = linkSlug;
+    a.className = 'proj-card rv vis';
     
-    const catLabel = proj.eyebrow || (proj.subCategory ? proj.subCategory.toUpperCase() : (proj.mainCategory || 'PROJECT').toUpperCase());
+    const catLabel = proj.eyebrow || (proj.subCategory ? proj.subCategory.toUpperCase() : 'INTERIOR');
     
     a.innerHTML = `
       <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}"/>
