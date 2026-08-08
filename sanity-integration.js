@@ -1,40 +1,41 @@
 const PROJECT_ID = 'gpyk0ky0';
 const DATASET = 'production';
 
-async function fetchSanityProjectsForCurrentCategory() {
-  // Determine current category from the URL
-  // e.g. /interiors.html or /architecture.html or /hospitality.html
+async function fetchSanityProjects() {
   const path = window.location.pathname.toLowerCase();
-  let categorySlug = '';
   
-  if (path.includes('interiors')) categorySlug = 'interiors';
-  else if (path.includes('architecture')) categorySlug = 'architecture';
-  else if (path.includes('residential')) categorySlug = 'residential';
-  else if (path.includes('commercial')) categorySlug = 'commercial';
-  else if (path.includes('hospitality')) categorySlug = 'hospitality';
-  else if (path.includes('healthcare')) categorySlug = 'healthcare';
-  else if (path.includes('education')) categorySlug = 'education';
-  else if (path.includes('workplace')) categorySlug = 'workplace';
-  else if (path.includes('club-resort')) categorySlug = 'club-resort';
+  let pageName = 'interiors';
+  if (path.includes('architecture')) pageName = 'architecture';
+  else if (path.includes('residential')) pageName = 'residential';
+  else if (path.includes('commercial')) pageName = 'commercial';
+  else if (path.includes('hospitality')) pageName = 'hospitality';
+  else if (path.includes('healthcare')) pageName = 'healthcare';
+  else if (path.includes('education')) pageName = 'education';
+  else if (path.includes('workplace')) pageName = 'workplace';
+  else if (path.includes('club-resort')) pageName = 'club-resort';
+  else if (path.includes('dpr-landscaping')) pageName = 'dpr-landscaping';
 
   let filter = '*[_type == "project"]';
-  if (categorySlug) {
-    // If on a specific category page, only fetch projects matching that category
-    // or fetch all if it's general interiors
-    if (categorySlug === 'interiors') {
-      filter = '*[_type == "project"]';
-    } else {
-      filter = `*[_type == "project" && category->slug.current == "${categorySlug}"]`;
-    }
+  
+  if (pageName === 'interiors') {
+    // Show projects marked as interiors OR any interior subcategories
+    filter = '*[_type == "project" && (mainCategory == "interiors" || subCategory in ["residential","commercial","hospitality","healthcare","education","workplace","club-resort"])]';
+  } else if (pageName === 'architecture') {
+    // Show projects marked as architecture
+    filter = '*[_type == "project" && (mainCategory == "architecture" || subCategory in ["dpr-landscaping"])]';
+  } else {
+    // Subcategory page (e.g. residential, commercial, hospitality)
+    filter = `*[_type == "project" && (subCategory == "${pageName}" || mainCategory == "${pageName}")]`;
   }
 
   const query = encodeURIComponent(`${filter} | order(_createdAt desc) {
     title, 
     "slug": slug.current, 
     location,
-    "thumbnailUrl": thumbnail.asset->url, 
-    "categoryName": category->title,
-    "categorySlug": category->slug.current
+    eyebrow,
+    mainCategory,
+    subCategory,
+    "thumbnailUrl": thumbnail.asset->url
   }`);
   
   const url = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${query}`;
@@ -53,20 +54,24 @@ async function renderCategoryGrid() {
   const grid = document.querySelector('.projects-grid');
   if (!grid) return;
   
-  const projects = await fetchSanityProjectsForCurrentCategory();
+  const projects = await fetchSanityProjects();
   if (!projects || projects.length === 0) return;
   
-  // Prepend each project so it appears in the grid, matching the exact old style
+  // Prepend each project to the top of the grid
   [...projects].reverse().forEach((proj, idx) => {
+    if (!proj.thumbnailUrl) return;
+    
     const a = document.createElement('a');
-    // Clicking the thumbnail opens the dedicated client page!
+    // Clicking the thumbnail opens the dedicated client page
     a.href = `${proj.slug}`; 
     a.className = `proj-card rv vis`;
+    
+    const catLabel = proj.eyebrow || (proj.subCategory ? proj.subCategory.toUpperCase() : (proj.mainCategory || 'PROJECT').toUpperCase());
     
     a.innerHTML = `
       <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}"/>
       <div class="proj-card-overlay"></div>
-      <div class="proj-card-cat">${proj.categoryName || 'Project'}</div>
+      <div class="proj-card-cat">${catLabel}</div>
       <div class="proj-card-info">
         <div class="proj-card-num">${String(idx + 1).padStart(2, '0')}</div>
         <div class="proj-card-name">${proj.title}</div>

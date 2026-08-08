@@ -6,7 +6,6 @@ import urllib.parse
 PROJECT_ID = "gpyk0ky0"
 DATASET = "production"
 
-# Template for Dedicated Client Page (Exact match to Bhattrai Home style)
 PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -212,13 +211,13 @@ def fetch_sanity_data():
     query = """*[_type == "project"]{
         title,
         "slug": slug.current,
+        mainCategory,
+        subCategory,
         eyebrow,
         location,
         intro_heading,
         intro_text,
         description,
-        "category_title": category->title,
-        "category_slug": category->slug.current,
         "thumbnail": thumbnail.asset->url,
         "gallery": galleryImages[].asset->url
     }"""
@@ -242,13 +241,16 @@ def build():
             continue
             
         title = p.get('title', 'Project')
-        eyebrow = p.get('eyebrow') or f"{p.get('category_title', 'Interior')} · Dedicated Client"
+        sub = p.get('subCategory') or 'residential'
+        main_cat = p.get('mainCategory') or 'interiors'
+        
+        eyebrow = p.get('eyebrow') or f"{sub.capitalize()} · Project"
         location = p.get('location') or 'Kathmandu, Nepal'
         intro_heading = p.get('intro_heading') or f"A REFINED {title.upper()}"
         intro_text = p.get('intro_text') or f"{title} is a dedicated project by NextGen Interiors."
         desc = p.get('description') or f"{title} — interior architecture and bespoke spaces by NextGen Interiors, {location}."
-        cat_name = p.get('category_title') or 'Interiors'
-        cat_slug = p.get('category_slug') or 'interiors'
+        cat_name = sub.capitalize()
+        cat_slug = sub
         
         # Format H1 (split last word for blue accent span)
         parts = title.split()
@@ -264,7 +266,7 @@ def build():
         if not gallery and thumbnail:
             gallery = [thumbnail]
             
-        hero_image = thumbnail
+        hero_image = thumbnail or ''
         
         html = PAGE_TEMPLATE.format(
             title=title,
