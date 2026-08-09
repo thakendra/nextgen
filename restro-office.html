@@ -22,13 +22,13 @@
   <meta property="og:title" content="Restro Office — NextGen Interiors &amp; Architects" />
   <meta property="og:description" content="Restro Office commercial fit-out by NextGen Interiors & Architects, Kathmandu, Nepal." />
   <meta property="og:url" content="https://nextgeninterior.com/restro-office" />
-  <meta property="og:image" content="" />
+  <meta property="og:image" content="https://cdn.sanity.io/images/gpyk0ky0/production/037cb689806ebafb8e04576773e64b9f5e83daee-2000x1414.webp" />
   <meta property="og:image:alt" content="Restro Office — NextGen Interiors &amp; Architects" />
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Restro Office — NextGen Interiors &amp; Architects" />
   <meta name="twitter:description" content="Restro Office commercial fit-out by NextGen Interiors & Architects, Kathmandu, Nepal." />
-  <meta name="twitter:image" content="" />
+  <meta name="twitter:image" content="https://cdn.sanity.io/images/gpyk0ky0/production/037cb689806ebafb8e04576773e64b9f5e83daee-2000x1414.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
@@ -297,7 +297,7 @@
 </div>
 
 <section class="hero">
-  <div class="hero-img"><img src="" alt="Restro Office"/></div>
+  <div class="hero-img"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/037cb689806ebafb8e04576773e64b9f5e83daee-2000x1414.webp" alt="Restro Office"/></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Commercial · Office Fit-Out</div>
@@ -321,13 +321,33 @@
     <h2 class="s-intro-h rv">WHERE WORK FEELS LIKE HOSPITALITY</h2>
     <div class="s-intro-body rv d1">
       <p>Restro Office is a commercial fit-out where NextGen blurred the line between workplace and lounge. The brief: a space that energises a creative team during peak hours and welcomes clients warmly the rest of the time.</p>
-      <p>Mixed seating zones, warm wood, soft acoustics, and lighting tuned for both screens and conversation. Less corporate, more atelier — without sacrificing the function a working office demands.</p>
+      <p>Mixed seating zones, warm wood, soft acoustics, and lighting tuned for both screens and conversation. Less corporate, more atelier â€” without sacrificing the function a working office demands.</p>
     </div>
   </div>
 </div>
 
 <div class="gallery" id="gallery">
   
+  <div class="g-full rv" style="position:relative;">
+    <div class="g-card" style="position:absolute;inset:0;" onclick="openLb(0)">
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/037cb689806ebafb8e04576773e64b9f5e83daee-2000x1414.webp" alt="Showcase Hero 1"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>Featured Space</span></div>
+    </div>
+  </div>
+
+  <div class="g-half rv" style="margin-top:4px;">
+    <div class="g-card ar-43" onclick="openLb(1)">
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/e6365c29038692d14da583854be75e37c8785db6-2000x1414.webp" alt="Showcase 2"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>Architectural Perspective</span></div>
+    </div>
+    <div class="g-card ar-43" onclick="openLb(2)">
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/c172bc0b13c6e5da492002df258a6883038104b3-2000x1414.webp" alt="Showcase 3"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>Spatial Detailing</span></div>
+    </div>
+  </div>
 </div>
 
 <div class="lb" id="lb" onclick="closeLbOnBg(event)">
@@ -372,7 +392,7 @@
   const menuBtn=document.getElementById('menuBtn'),mMenu=document.getElementById('mMenu');
   function openMenu(){menuBtn.classList.add('open');mMenu.classList.add('open');document.body.style.overflow='hidden';}
   function closeMenu(){menuBtn.classList.remove('open');mMenu.classList.remove('open');document.body.style.overflow='';}
-  menuBtn.addEventListener('click',()=>mMenu.classList.contains('open')?closeMenu():openMenu());
+  menuBtn.addEventListener('click',()=>{mMenu.classList.contains('open')?closeMenu():openMenu();});
   document.getElementById('mMenuClose').addEventListener('click',closeMenu);
   mMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
   const mPBtn=document.getElementById('mPortfolioBtn'),mPSub=document.getElementById('mPortfolioSub');
@@ -380,14 +400,14 @@
   const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});},{threshold:0.04});
   document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
-  const LB_PHOTOS = [];
+  const LB_PHOTOS = ["https://cdn.sanity.io/images/gpyk0ky0/production/037cb689806ebafb8e04576773e64b9f5e83daee-2000x1414.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/e6365c29038692d14da583854be75e37c8785db6-2000x1414.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/c172bc0b13c6e5da492002df258a6883038104b3-2000x1414.webp"];
   let lbCurrent = 0;
   const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCounter = document.getElementById('lbCounter');
   function openLb(idx){lbCurrent = idx; updateLb(); lb.classList.add('open'); document.body.style.overflow='hidden';}
   function closeLb(){lb.classList.remove('open'); document.body.style.overflow='';}
   function closeLbOnBg(e){if(e.target === lb) closeLb();}
-  function lbNav(dir){lbCurrent = (lbCurrent + dir + LB_PHOTOS.length) % LB_PHOTOS.length; updateLb();}
-  function updateLb(){lbImg.src = LB_PHOTOS[lbCurrent]; lbCounter.textContent = (lbCurrent + 1) + ' / ' + LB_PHOTOS.length;}
+  function lbNav(dir){if(!LB_PHOTOS.length) return; lbCurrent = (lbCurrent + dir + LB_PHOTOS.length) % LB_PHOTOS.length; updateLb();}
+  function updateLb(){if(!LB_PHOTOS.length) return; lbImg.src = LB_PHOTOS[lbCurrent]; lbCounter.textContent = (lbCurrent + 1) + ' / ' + LB_PHOTOS.length;}
   document.addEventListener('keydown', e => {
     if(!lb.classList.contains('open')) return;
     if(e.key === 'Escape') closeLb();

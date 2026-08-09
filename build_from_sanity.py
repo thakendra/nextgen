@@ -6,7 +6,6 @@ import urllib.parse
 PROJECT_ID = "gpyk0ky0"
 DATASET = "production"
 
-# Exact HTML Template matching Sankhu Residence (sankhu-exterior.html)
 PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -380,7 +379,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   const menuBtn=document.getElementById('menuBtn'),mMenu=document.getElementById('mMenu');
   function openMenu(){{menuBtn.classList.add('open');mMenu.classList.add('open');document.body.style.overflow='hidden';}}
   function closeMenu(){{menuBtn.classList.remove('open');mMenu.classList.remove('open');document.body.style.overflow='';}}
-  menuBtn.addEventListener('click',()=>mMenu.classList.contains('open')?closeMenu():openMenu());
+  menuBtn.addEventListener('click',()=>{{mMenu.classList.contains('open')?closeMenu():openMenu();}});
   document.getElementById('mMenuClose').addEventListener('click',closeMenu);
   mMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
   const mPBtn=document.getElementById('mPortfolioBtn'),mPSub=document.getElementById('mPortfolioSub');
@@ -394,8 +393,8 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   function openLb(idx){{lbCurrent = idx; updateLb(); lb.classList.add('open'); document.body.style.overflow='hidden';}}
   function closeLb(){{lb.classList.remove('open'); document.body.style.overflow='';}}
   function closeLbOnBg(e){{if(e.target === lb) closeLb();}}
-  function lbNav(dir){{lbCurrent = (lbCurrent + dir + LB_PHOTOS.length) % LB_PHOTOS.length; updateLb();}}
-  function updateLb(){{lbImg.src = LB_PHOTOS[lbCurrent]; lbCounter.textContent = (lbCurrent + 1) + ' / ' + LB_PHOTOS.length;}}
+  function lbNav(dir){{if(!LB_PHOTOS.length) return; lbCurrent = (lbCurrent + dir + LB_PHOTOS.length) % LB_PHOTOS.length; updateLb();}}
+  function updateLb(){{if(!LB_PHOTOS.length) return; lbImg.src = LB_PHOTOS[lbCurrent]; lbCounter.textContent = (lbCurrent + 1) + ' / ' + LB_PHOTOS.length;}}
   document.addEventListener('keydown', e => {{
     if(!lb.classList.contains('open')) return;
     if(e.key === 'Escape') closeLb();
@@ -407,7 +406,6 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 </html>"""
 
 def build_showcase_layout(gallery):
-    # Generates Sankhu Residence style dynamic multi-layout blocks
     if not gallery:
         return ""
         
@@ -415,7 +413,7 @@ def build_showcase_layout(gallery):
     total = len(gallery)
     i = 0
     
-    # 1. First image is always a Grand Full-Width Showcase
+    # 1. First image: Full-width hero showcase
     if i < total:
         html_parts.append(f"""
   <div class="g-full rv" style="position:relative;">
@@ -550,8 +548,8 @@ def fetch_sanity_data():
         intro_heading,
         intro_text,
         description,
-        "thumbnail": thumbnail.asset->url,
-        "gallery": galleryImages[].asset->url
+        "thumbnail": coalesce(thumbnail.asset->url, thumbnail.asset.asset->url, galleryImages[0].asset.asset->url, galleryImages[0].asset->url),
+        "gallery": coalesce(galleryImages[].asset.asset->url, galleryImages[].asset->url)
     }"""
     
     url = f"https://{PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/{DATASET}?query={urllib.parse.quote(query)}"
@@ -595,13 +593,16 @@ def build():
         else:
             h1_formatted = f"{title}<br><span>PROJECT</span>"
             
-        gallery = p.get('gallery') or []
-        thumbnail = p.get('thumbnail') or (gallery[0] if gallery else '')
-        
-        if not gallery and thumbnail:
+        raw_gallery = p.get('gallery') or []
+        gallery = [img for img in raw_gallery if img and str(img) != 'None']
+        thumbnail = p.get('thumbnail')
+        if not thumbnail and gallery:
+            thumbnail = gallery[0]
+            
+        if not gallery and thumbnail and str(thumbnail) != 'None':
             gallery = [thumbnail]
             
-        hero_image = thumbnail or ''
+        hero_image = thumbnail if (thumbnail and str(thumbnail) != 'None') else (gallery[0] if gallery else '')
         showcase_html = build_showcase_layout(gallery)
         
         html = PAGE_TEMPLATE.format(
@@ -624,7 +625,7 @@ def build():
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(html)
             
-        print(f"Generated Sankhu-Style Showcase Page: {slug}.html")
+        print(f"Generated Sankhu-Style Showcase Page: {slug}.html ({len(gallery)} images)")
 
 if __name__ == '__main__':
     build()

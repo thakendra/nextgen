@@ -2,7 +2,6 @@ const PROJECT_ID = 'gpyk0ky0';
 const DATASET = 'production';
 
 async function fetchSanityProjects() {
-  // Query projects with thumbnail and metadata
   const query = encodeURIComponent(`*[_type == "project"] | order(_createdAt desc) {
     title, 
     "slug": slug.current, 
@@ -10,7 +9,7 @@ async function fetchSanityProjects() {
     eyebrow,
     mainCategory,
     subCategory,
-    "thumbnailUrl": thumbnail.asset->url
+    "thumbnailUrl": coalesce(thumbnail.asset->url, thumbnail.asset.asset->url, galleryImages[0].asset.asset->url, galleryImages[0].asset->url)
   }`);
   
   const url = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${query}`;
@@ -35,7 +34,7 @@ async function renderCategoryGrid() {
   
   // Clean filtering logic matching main and subcategories
   const filtered = allProjects.filter(p => {
-    if (!p.thumbnailUrl) return false;
+    if (!p.thumbnailUrl || p.thumbnailUrl === 'None') return false;
     
     const main = (p.mainCategory || '').toLowerCase();
     const sub = (p.subCategory || '').toLowerCase();
@@ -81,7 +80,6 @@ async function renderCategoryGrid() {
     const linkSlug = proj.slug || proj.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
     a.href = linkSlug;
     
-    // First card gets span2 for dynamic rhythm matching architecture.html
     const isFirst = idx === (filtered.length - 1);
     a.className = `proj-card rv vis ${isFirst ? 'span2' : ''}`;
     
