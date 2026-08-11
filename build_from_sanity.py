@@ -261,7 +261,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
         <a href="workplace">Workplace</a>
       </div></div>
     </li>
-    <li><a href="blog">Journal</a></li>
+    <li><a href="blog">Blog</a></li>
     <li><a href="/#contact">Contact</a></li>
     <li><a href="careers">Careers</a></li>
   </ul>
@@ -290,7 +290,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
         <a href="workplace">Workplace</a>
       </div></div>
     </li>
-    <li><a href="blog">Journal</a></li>
+    <li><a href="blog">Blog</a></li>
     <li><a href="/#contact">Contact</a></li>
     <li><a href="careers">Careers</a></li>
   </ul></nav></div>
