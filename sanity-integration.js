@@ -121,46 +121,48 @@ async function renderHomePageFeatured() {
   const allProjects = await fetchSanityProjects();
   if (!allProjects || allProjects.length === 0) return;
 
+  // Strict Admin Control: Only show projects where "Show this project on Home Page" is turned ON
   const featured = allProjects.filter(p => p.featuredOnHome === true && p.thumbnailUrl && p.thumbnailUrl !== 'None');
   
-  const pool = featured.length > 0 ? featured : allProjects;
-  const archProjects = pool.filter(p => (p.mainCategory || '').toLowerCase() === 'architecture');
-  const interiorProjects = pool.filter(p => (p.mainCategory || '').toLowerCase() !== 'architecture');
+  const archProjects = featured.filter(p => (p.mainCategory || '').toLowerCase() === 'architecture');
+  const interiorProjects = featured.filter(p => (p.mainCategory || '').toLowerCase() !== 'architecture');
 
   if (archContainer) {
     archContainer.innerHTML = '';
-    const listToRender = archProjects.length > 0 ? archProjects : allProjects.slice(0, 3);
-    listToRender.forEach(proj => {
-      if (!proj.thumbnailUrl) return;
-      const a = document.createElement('a');
-      a.href = proj.slug || '#';
-      a.className = 'pm-card pm-r43';
-      a.innerHTML = `
-        <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}"/>
-        <div class="pm-card-overlay"></div>
-        <span class="pm-name">${proj.title.toUpperCase()}</span>
-        <span class="pm-loc">&#128205; ${proj.location || 'Kathmandu, Nepal'}</span>
-      `;
-      archContainer.appendChild(a);
-    });
+    if (archProjects.length > 0) {
+      archProjects.forEach(proj => {
+        if (!proj.thumbnailUrl) return;
+        const a = document.createElement('a');
+        a.href = proj.slug || '#';
+        a.className = 'pm-card pm-r43';
+        a.innerHTML = `
+          <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}"/>
+          <div class="pm-card-overlay"></div>
+          <span class="pm-name">${proj.title.toUpperCase()}</span>
+          <span class="pm-loc">&#128205; ${proj.location || 'Kathmandu, Nepal'}</span>
+        `;
+        archContainer.appendChild(a);
+      });
+    }
   }
 
   if (interiorContainer) {
     interiorContainer.innerHTML = '';
-    const listToRender = interiorProjects.length > 0 ? interiorProjects : allProjects.slice(0, 4);
-    listToRender.forEach(proj => {
-      if (!proj.thumbnailUrl) return;
-      const a = document.createElement('a');
-      a.href = proj.slug || '#';
-      a.className = 'pm-card pm-tall';
-      a.innerHTML = `
-        <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}"/>
-        <div class="pm-card-overlay"></div>
-        <span class="pm-name">${proj.title.toUpperCase()}</span>
-        <span class="pm-loc">&#128205; ${proj.location || 'Kathmandu, Nepal'}</span>
-      `;
-      interiorContainer.appendChild(a);
-    });
+    if (interiorProjects.length > 0) {
+      interiorProjects.forEach(proj => {
+        if (!proj.thumbnailUrl) return;
+        const a = document.createElement('a');
+        a.href = proj.slug || '#';
+        a.className = 'pm-card pm-tall';
+        a.innerHTML = `
+          <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}"/>
+          <div class="pm-card-overlay"></div>
+          <span class="pm-name">${proj.title.toUpperCase()}</span>
+          <span class="pm-loc">&#128205; ${proj.location || 'Kathmandu, Nepal'}</span>
+        `;
+        interiorContainer.appendChild(a);
+      });
+    }
   }
 }
 

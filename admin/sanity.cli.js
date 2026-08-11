@@ -5,6 +5,7 @@ export default defineCliConfig({
     projectId: 'gpyk0ky0',
     dataset: 'production'
   },
+  studioHost: 'nextgen-interiors',
   deployment: {
     /**
      * Enable auto-updates for studios.

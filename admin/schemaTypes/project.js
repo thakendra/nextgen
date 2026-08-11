@@ -55,10 +55,10 @@ export const project = {
     },
     {
       name: 'featuredOnHome',
-      title: '🌟 Show on Home Page (Featured Showcase)',
+      title: '🏠 Show this project on Home Page?',
       type: 'boolean',
-      description: 'Turn ON (Check) to display this project directly on the Home Page (nextgeninterior.com) portfolio section.',
       initialValue: false,
+      description: '✅ Turn ON (Checked) to feature this project on the Home Page (nextgeninterior.com) showcase grid. ❌ Turn OFF to hide it from the Home Page (it will still appear in its respective category page).',
     },
     {
       name: 'thumbnail',
