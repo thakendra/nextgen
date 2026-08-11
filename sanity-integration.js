@@ -73,15 +73,21 @@ async function renderCategoryGrid() {
     return true;
   });
 
-  if (filtered.length === 0) return;
+  if (filtered.length === 0) {
+    const pageCount = document.querySelector('.page-count');
+    if (pageCount) pageCount.textContent = '00';
+    return;
+  }
 
-  // Insert cards at the top of the grid with exact settlement
-  filtered.reverse().forEach((proj, idx) => {
+  // Clear static old fallback and render pure live Sanity projects
+  grid.innerHTML = '';
+
+  filtered.forEach((proj, idx) => {
     const a = document.createElement('a');
     const linkSlug = proj.slug || proj.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
     a.href = linkSlug;
     
-    const isFirst = idx === (filtered.length - 1);
+    const isFirst = idx === 0;
     a.className = `proj-card rv vis ${isFirst ? 'span2' : ''}`;
     
     const catLabel = proj.eyebrow || (proj.subCategory ? proj.subCategory.toUpperCase() : 'PROJECT');
@@ -97,17 +103,13 @@ async function renderCategoryGrid() {
       </div>
     `;
     
-    grid.prepend(a);
+    grid.appendChild(a);
   });
   
-  // Re-index all cards in the grid sequentially so numbering stays 01, 02, 03...
-  const allCards = grid.querySelectorAll('.proj-card');
-  allCards.forEach((card, index) => {
-    const numEl = card.querySelector('.proj-card-num');
-    if (numEl) {
-      numEl.textContent = String(index + 1).padStart(2, '0');
-    }
-  });
+  const pageCount = document.querySelector('.page-count');
+  if (pageCount) {
+    pageCount.textContent = String(filtered.length).padStart(2, '0');
+  }
 }
 
 async function renderHomePageFeatured() {
@@ -117,38 +119,41 @@ async function renderHomePageFeatured() {
 
   const allProjects = await fetchSanityProjects();
   const featured = allProjects.filter(p => p.featuredOnHome === true && p.thumbnailUrl && p.thumbnailUrl !== 'None');
-  if (featured.length === 0) return;
-
-  const archProjects = featured.filter(p => (p.mainCategory || '').toLowerCase() === 'architecture');
-  const interiorProjects = featured.filter(p => (p.mainCategory || '').toLowerCase() !== 'architecture');
+  
+  const archProjects = (featured.length > 0 ? featured : allProjects).filter(p => (p.mainCategory || '').toLowerCase() === 'architecture');
+  const interiorProjects = (featured.length > 0 ? featured : allProjects).filter(p => (p.mainCategory || '').toLowerCase() !== 'architecture');
 
   if (archContainer && archProjects.length > 0) {
+    archContainer.innerHTML = '';
     archProjects.forEach(proj => {
+      if (!proj.thumbnailUrl) return;
       const a = document.createElement('a');
       a.href = proj.slug || '#';
       a.className = 'pm-card pm-r43';
       a.innerHTML = `
-        <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}" loading="lazy"/>
+        <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}"/>
         <div class="pm-card-overlay"></div>
         <span class="pm-name">${proj.title.toUpperCase()}</span>
         <span class="pm-loc">&#128205; ${proj.location || 'Kathmandu, Nepal'}</span>
       `;
-      archContainer.prepend(a);
+      archContainer.appendChild(a);
     });
   }
 
   if (interiorContainer && interiorProjects.length > 0) {
+    interiorContainer.innerHTML = '';
     interiorProjects.forEach(proj => {
+      if (!proj.thumbnailUrl) return;
       const a = document.createElement('a');
       a.href = proj.slug || '#';
       a.className = 'pm-card pm-tall';
       a.innerHTML = `
-        <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}" loading="lazy"/>
+        <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}"/>
         <div class="pm-card-overlay"></div>
         <span class="pm-name">${proj.title.toUpperCase()}</span>
         <span class="pm-loc">&#128205; ${proj.location || 'Kathmandu, Nepal'}</span>
       `;
-      interiorContainer.prepend(a);
+      interiorContainer.appendChild(a);
     });
   }
 }
