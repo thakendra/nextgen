@@ -1,9 +1,11 @@
 import os
 import json
+import re
 import urllib.request
 import urllib.parse
 
 from common_tail import COMMON_TAIL, TAIL_MARKER
+from copy_clean import clean_text, expand_description
 
 PROJECT_ID = "gpyk0ky0"
 DATASET = "production"
@@ -546,22 +548,32 @@ def build():
         if not slug:
             continue
             
-        title = p.get('title', 'Project')
+        # Everything below runs through clean_text: some CMS copy was pasted
+        # with a broken encoding and carries mojibake plus doubled spaces.
+        title = clean_text(p.get('title')) or 'Project'
         sub = p.get('subCategory') or 'residential'
         main_cat = p.get('mainCategory') or 'interiors'
-        
-        eyebrow = p.get('eyebrow') or f"{sub.capitalize()} &middot; NextGen Showcase"
-        location = p.get('location') or 'Kathmandu, Nepal'
-        intro_heading = p.get('intro_heading') or f"A REFINED<br>{title.upper()}"
-        
-        raw_text = p.get('intro_text') or f"{title} is a bespoke project designed by NextGen Interiors, delivering warm layered spaces, curated materials, and timeless architectural form."
+
+        eyebrow = clean_text(p.get('eyebrow')) or f"{sub.capitalize()} &middot; NextGen Showcase"
+        location = clean_location(p.get('location'))
+        intro_heading = clean_text(p.get('intro_heading')) or f"A REFINED<br>{title.upper()}"
+
+        raw_text = clean_text(p.get('intro_text')) or f"{title} is a bespoke project designed by NextGen Interiors, delivering warm layered spaces, curated materials, and timeless architectural form."
         paragraphs = [f"<p>{line.strip()}</p>" for line in raw_text.split('\n') if line.strip()]
         intro_paragraphs = "\n      ".join(paragraphs) if paragraphs else f"<p>{raw_text}</p>"
-        
-        desc = p.get('description') or f"{title} — interior architecture and bespoke spaces by NextGen Interiors, {location}."
+
+        desc = expand_description(
+            p.get('description') or f"{title} — interior architecture and bespoke spaces by NextGen Interiors, {location}.",
+            title=title, location=location, main_cat=main_cat, sub_cat=sub,
+        )
         cat_name = sub.capitalize()
         cat_slug = sub
-        
+
+        # desc and title land inside content="..." attributes, so a bare & from
+        # copy like "NextGen Interiors & Architects" would be invalid markup.
+        desc = esc_attr(desc)
+        title = esc_attr(title)
+
         # Split last word for blue accent in H1
         parts = title.split()
         if len(parts) > 1:
@@ -612,9 +624,18 @@ def build():
     # Generate updated dynamic sitemap.xml
     generate_sitemap(projects, base_dir)
 
+def esc_attr(text):
+    """Escape for use inside a double-quoted HTML attribute. Safe on text that
+    is already escaped — an existing &amp; is left as-is, not double-escaped."""
+    if not text:
+        return text
+    out = re.sub(r'&(?!(?:[a-zA-Z][a-zA-Z0-9]{1,31}|#\d{1,7}|#[xX][0-9a-fA-F]{1,6});)', '&amp;', text)
+    return out.replace('"', '&quot;')
+
 def clean_location(loc):
     """Normalise CMS location strings: 'Naikap,kathmandu' / 'PANIPOKHARI , KATHMANDU'
     all collapse to 'Naikap, Kathmandu'. Guards against inconsistent data entry."""
+    loc = clean_text(loc)
     if not loc:
         return 'Kathmandu, Nepal'
     parts = [seg.strip() for seg in str(loc).split(',') if seg.strip()]
@@ -623,7 +644,7 @@ def clean_location(loc):
 
 def category_tag(p):
     """Readable category label for a card, e.g. 'Architecture · Hotel Exterior'."""
-    eyebrow = (p.get('eyebrow') or '').strip()
+    eyebrow = clean_text(p.get('eyebrow')) or ''
     if eyebrow:
         return eyebrow
     main = (p.get('mainCategory') or '').strip()
@@ -713,11 +734,11 @@ def update_homepage_and_categories(projects, base_dir):
         interior_list = feat_interior if feat_interior else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() != 'architecture' and p.get('thumbnail')]
 
         # Build Architecture Rows with balanced 2/3 column layout (no elongated single cards)
-        p_arch = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': p.get('title', '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in arch_list]
+        p_arch = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': (clean_text(p.get('title')) or '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in arch_list]
         arch_rows = build_micasa_section_rows(p_arch, is_interior=False)
 
         # Build Interior Rows with balanced 2/3 column layout (no elongated single cards)
-        p_int = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': p.get('title', '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in interior_list]
+        p_int = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': (clean_text(p.get('title')) or '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in interior_list]
         interior_rows = build_micasa_section_rows(p_int, is_interior=True)
 
         full_arch_html = '\n'.join(arch_rows)
@@ -783,7 +804,7 @@ def update_homepage_and_categories(projects, base_dir):
         cards = []
         for idx, p in enumerate(cat_projs):
             slug = (p.get('slug') or '').strip().replace(' ', '-')
-            title = p.get('title', '').upper()
+            title = (clean_text(p.get('title')) or '').upper()
             loc = clean_location(p.get('location'))
             thumb = p.get('thumbnail')
             eyebrow = category_tag(p)

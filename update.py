@@ -10,7 +10,7 @@ print("[*] NEXTGEN 1-COMMAND AUTO-SYNC & PUBLISH SYSTEM")
 print("==================================================")
 
 # Step 1: Auto-publish any uncommitted drafts from Sanity Dashboard
-print("\n[Step 1/4] Auto-publishing all drafts in Sanity Dashboard...")
+print("\n[Step 1/5] Auto-publishing all drafts in Sanity Dashboard...")
 try:
     p1 = subprocess.run(
         ["npx", "sanity", "exec", "publish_all_drafts.js", "--with-user-token"],
@@ -29,7 +29,7 @@ except Exception as e:
     print("Draft note:", e)
 
 # Step 2: Build all project showcase pages and category grids
-print("\n[Step 2/4] Generating all Showcase HTML pages...")
+print("\n[Step 2/5] Generating all Showcase HTML pages...")
 try:
     p2 = subprocess.run(
         [sys.executable, "build_from_sanity.py"],
@@ -47,7 +47,7 @@ except Exception as e:
     print("Error in build:", e)
 
 # Step 3: Synchronize to Hostinger Server
-print("\n[Step 3/4] Uploading all files to Hostinger Live Server...")
+print("\n[Step 3/5] Uploading all files to Hostinger Live Server...")
 try:
     p3 = subprocess.run(
         [sys.executable, "sync_to_hostinger.py"],
@@ -64,8 +64,24 @@ try:
 except Exception as e:
     print("Error in sync:", e)
 
-# Step 4: Commit & push to GitHub
-print("\n[Step 4/4] Committing and pushing to GitHub repository...")
+# Step 4: Tell search engines what changed (runs after the sync, so the pages
+# and the ownership key file are already live when the crawler comes looking)
+print("\n[Step 4/5] Notifying search engines via IndexNow...")
+try:
+    p4 = subprocess.run(
+        [sys.executable, "ping_indexnow.py"],
+        cwd=BASE_DIR,
+        capture_output=True,
+        text=True,
+        encoding='utf-8',
+        errors='ignore'
+    )
+    print((p4.stdout or "IndexNow step finished.").strip())
+except Exception as e:
+    print("IndexNow note:", e)
+
+# Step 5: Commit & push to GitHub
+print("\n[Step 5/5] Committing and pushing to GitHub repository...")
 try:
     subprocess.run(["git", "add", "-A"], cwd=BASE_DIR, shell=True)
     subprocess.run(["git", "commit", "-m", "chore: auto-sync from update.py"], cwd=BASE_DIR, shell=True)
