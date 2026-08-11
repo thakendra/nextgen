@@ -548,8 +548,8 @@ def fetch_sanity_data():
         intro_heading,
         intro_text,
         description,
-        "thumbnail": coalesce(thumbnail.asset->url, thumbnail.asset.asset->url, galleryImages[0].asset.asset->url, galleryImages[0].asset->url),
-        "gallery": coalesce(galleryImages[].asset.asset->url, galleryImages[].asset->url)
+        "thumbnail": coalesce(thumbnail.asset->url, thumbnail.asset.asset->url, galleryImages[0].asset->url, galleryImages[0].asset.asset->url),
+        "gallery": galleryImages[]{ "url": coalesce(asset->url, asset.asset->url) }.url
     }"""
     
     url = f"https://{PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/{DATASET}?query={urllib.parse.quote(query)}"
