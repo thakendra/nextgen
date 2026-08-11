@@ -28,6 +28,13 @@ async function fetchSanityProjects() {
 async function renderCategoryGrid() {
   const grid = document.querySelector('.projects-grid');
   if (!grid) return;
+
+  // Category pages are pre-rendered by build_from_sanity.py — skip to avoid duplicates
+  if (grid.querySelectorAll('.proj-card').length > 0) {
+    const pageCount = document.querySelector('.page-count');
+    if (pageCount) pageCount.textContent = String(grid.querySelectorAll('.proj-card').length).padStart(2, '0');
+    return;
+  }
   
   const path = window.location.pathname.toLowerCase();
   const allProjects = await fetchSanityProjects();
@@ -140,9 +147,11 @@ async function renderHomePageFeatured() {
       const a = document.createElement('a');
       a.href = proj.slug || '#';
       a.className = 'pm-card pm-r43';
+      const catTag = proj.eyebrow || (proj.subCategory ? proj.subCategory.replace(/-/g, ' ') : '');
       a.innerHTML = `
         <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}" loading="lazy"/>
         <div class="pm-card-overlay"></div>
+        ${catTag ? `<span class="pm-cat">${catTag}</span>` : ''}
         <span class="pm-name">${proj.title.toUpperCase()}</span>
         <span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>${proj.location || 'Kathmandu, Nepal'}</span>
       `;
@@ -157,9 +166,11 @@ async function renderHomePageFeatured() {
       const a = document.createElement('a');
       a.href = proj.slug || '#';
       a.className = 'pm-card pm-tall';
+      const catTag = proj.eyebrow || (proj.subCategory ? proj.subCategory.replace(/-/g, ' ') : '');
       a.innerHTML = `
         <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}" loading="lazy"/>
         <div class="pm-card-overlay"></div>
+        ${catTag ? `<span class="pm-cat">${catTag}</span>` : ''}
         <span class="pm-name">${proj.title.toUpperCase()}</span>
         <span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>${proj.location || 'Kathmandu, Nepal'}</span>
       `;

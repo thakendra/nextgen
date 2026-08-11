@@ -633,10 +633,43 @@ def build():
     # Generate updated dynamic sitemap.xml
     generate_sitemap(projects, base_dir)
 
+def clean_location(loc):
+    """Normalise CMS location strings: 'Naikap,kathmandu' / 'PANIPOKHARI , KATHMANDU'
+    all collapse to 'Naikap, Kathmandu'. Guards against inconsistent data entry."""
+    if not loc:
+        return 'Kathmandu, Nepal'
+    parts = [seg.strip() for seg in str(loc).split(',') if seg.strip()]
+    parts = [seg if seg.isupper() and len(seg) <= 3 else seg.title() for seg in parts]
+    return ', '.join(parts) or 'Kathmandu, Nepal'
+
+def category_tag(p):
+    """Readable category label for a card, e.g. 'Architecture · Hotel Exterior'."""
+    eyebrow = (p.get('eyebrow') or '').strip()
+    if eyebrow:
+        return eyebrow
+    main = (p.get('mainCategory') or '').strip()
+    sub = (p.get('subCategory') or '').strip().replace('-', ' ')
+    label = ' &middot; '.join([s.title() for s in (main, sub) if s])
+    return label or 'Project'
+
+PIN_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>'
+
+def pm_card(p, h_class):
+    """One homepage portfolio card. Carries a category tag so visitors can read
+    what kind of project it is without opening it (same as the category grids)."""
+    cat = p.get('cat') or ''
+    cat_html = f'<span class="pm-cat">{cat}</span>' if cat else ''
+    return (f'      <a href="{p["slug"]}" class="pm-card {h_class}">'
+            f'<img src="{p["thumb"]}?w=1200&amp;auto=format" alt="{p["title"]}" loading="lazy"/>'
+            f'<div class="pm-card-overlay"></div>'
+            f'{cat_html}'
+            f'<span class="pm-name">{p["title"]}</span>'
+            f'<span class="pm-loc">{PIN_SVG}{p["loc"]}</span></a>')
+
 def build_micasa_section_rows(project_items, is_interior=False):
     if not project_items:
         return []
-    
+
     n = len(project_items)
     # Determine row sizes so every row has 2 or 3 items (never an elongated single card)
     if n == 1:
@@ -669,23 +702,17 @@ def build_micasa_section_rows(project_items, is_interior=False):
                 pmr = "pmr-half"
                 h_class = "pm-r43"
 
-            cards_html = '\n'.join([
-                f'      <a href="{p["slug"]}" class="pm-card {h_class}"><img src="{p["thumb"]}?w=1200&amp;auto=format" alt="{p["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{p["title"]}</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>{p["loc"]}</span></a>'
-                for p in chunk
-            ])
+            cards_html = '\n'.join([pm_card(p, h_class) for p in chunk])
             rows_html.append(f'    <div class="port-grid-micasa {pmr} rv vis {delay_class}">\n{cards_html}\n    </div>')
 
         elif size == 3:
             h_class = "pm-r32" if (not is_interior and r_idx == 1) else "pm-r43"
-            cards_html = '\n'.join([
-                f'      <a href="{p["slug"]}" class="pm-card {h_class}"><img src="{p["thumb"]}?w=1200&amp;auto=format" alt="{p["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{p["title"]}</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>{p["loc"]}</span></a>'
-                for p in chunk
-            ])
+            cards_html = '\n'.join([pm_card(p, h_class) for p in chunk])
             rows_html.append(f'    <div class="port-grid-micasa pmr-3 rv vis {delay_class}">\n{cards_html}\n    </div>')
 
         elif size == 1:
             h_class = "pm-r43"
-            cards_html = f'      <a href="{chunk[0]["slug"]}" class="pm-card {h_class}"><img src="{chunk[0]["thumb"]}?w=1200&amp;auto=format" alt="{chunk[0]["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{chunk[0]["title"]}</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>{chunk[0]["loc"]}</span></a>'
+            cards_html = pm_card(chunk[0], h_class)
             rows_html.append(f'    <div class="port-grid-micasa pmr-full rv vis {delay_class}">\n{cards_html}\n    </div>')
 
     return rows_html
@@ -707,43 +734,53 @@ def update_homepage_and_categories(projects, base_dir):
         interior_list = feat_interior if feat_interior else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() != 'architecture' and p.get('thumbnail')]
 
         # Build Architecture Rows with balanced 2/3 column layout (no elongated single cards)
-        p_arch = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': p.get('title', '').upper(), 'loc': p.get('location') or 'Kathmandu, Nepal', 'thumb': p.get('thumbnail')} for p in arch_list]
+        p_arch = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': p.get('title', '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in arch_list]
         arch_rows = build_micasa_section_rows(p_arch, is_interior=False)
 
         # Build Interior Rows with balanced 2/3 column layout (no elongated single cards)
-        p_int = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': p.get('title', '').upper(), 'loc': p.get('location') or 'Kathmandu, Nepal', 'thumb': p.get('thumbnail')} for p in interior_list]
+        p_int = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': p.get('title', '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in interior_list]
         interior_rows = build_micasa_section_rows(p_int, is_interior=True)
 
         full_arch_html = '\n'.join(arch_rows)
         full_interior_html = '\n'.join(interior_rows)
 
+        total_shown = len(p_arch) + len(p_int)
         full_portfolio_section = f'''  <!-- PORTFOLIO / FEATURED PROJECTS -->
   <section class="portfolio" id="portfolio">
     <div class="port-cat-strip rv vis" style="padding-top: clamp(40px,6vw,80px);">
       <div class="port-cat-label">01</div>
       <h2 class="port-cat-h">ARCHITECTURE</h2>
+      <p class="port-cat-note">200+ projects delivered across Nepal &mdash; {total_shown} selected below. <a href="architecture">See all architecture work</a>.</p>
     </div>
 {full_arch_html}
-    
+
     <div style="padding-bottom: clamp(56px,8vw,96px);"></div>
     <div class="port-cat-strip rv vis">
       <div class="port-cat-label">02</div>
       <h2 class="port-cat-h">INTERIOR DESIGN</h2>
+      <p class="port-cat-note">Residential, workplace, hospitality and retail interiors &mdash; concept to handover. <a href="interiors">See all interior work</a>.</p>
     </div>
 {full_interior_html}
   </section>'''
 
         import re
-        index_html = re.sub(
-            r'<!-- PORTFOLIO[^-]*-->[\s\S]*?</section>',
-            full_portfolio_section.replace('\\', '\\\\'),
+        # Anchor on the <section> itself, not the marker comment — the comment has
+        # been lost before, which silently froze the homepage grid. The optional
+        # prefix swallows a stale comment so we never end up with two of them.
+        # A lambda replacement keeps backslashes/& in the HTML literal.
+        index_html, n_sub = re.subn(
+            r'(?:[ \t]*<!-- PORTFOLIO[^>]*-->\s*)?<section class="portfolio" id="portfolio">[\s\S]*?</section>',
+            lambda m: full_portfolio_section,
             index_html,
             count=1
         )
 
-        with open(index_path, "w", encoding="utf-8") as f:
-            f.write(index_html)
-        print(f"Pre-rendered index.html with Micasa layout ({len(arch_rows)} Architecture rows, {len(interior_rows)} Interior rows).")
+        if not n_sub:
+            print("WARNING: portfolio section not found in index.html — homepage grid NOT updated.")
+        else:
+            with open(index_path, "w", encoding="utf-8") as f:
+                f.write(index_html)
+            print(f"Pre-rendered index.html with Micasa layout ({len(arch_rows)} Architecture rows, {len(interior_rows)} Interior rows).")
 
     # 2. Update Category Pages
     cat_configs = {
@@ -771,9 +808,9 @@ def update_homepage_and_categories(projects, base_dir):
         for idx, p in enumerate(cat_projs):
             slug = (p.get('slug') or '').strip().replace(' ', '-')
             title = p.get('title', '').upper()
-            loc = p.get('location') or 'Kathmandu, Nepal'
+            loc = clean_location(p.get('location'))
             thumb = p.get('thumbnail')
-            eyebrow = p.get('eyebrow') or (p.get('subCategory', '').upper() if p.get('subCategory') else 'PROJECT')
+            eyebrow = category_tag(p)
             is_span2 = 'span2' if idx == 0 else ''
             num = str(idx + 1).zfill(2)
             cards.append(f'''    <a href="{slug}" class="proj-card rv vis {is_span2}">

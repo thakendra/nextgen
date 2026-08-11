@@ -40,7 +40,14 @@
       "Bash(python -u -X utf8 -c ' *)",
       "Bash(npm run *)",
       "Bash(gh auth *)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(echo \"--- exit $? ---\")",
+      "Bash(python -X utf8 -c ' *)",
+      "Bash(python -X utf8 build_from_sanity.py)",
+      "Bash(grep -o '<p class=\"port-cat-note\">.\\\\{0,90\\\\}' index.html)",
+      "Bash(git diff *)",
+      "Bash(grep -oE '\\(SURKHET|PANIPOKHARI|Naikap|MAHARAJGUNJ|Kathmandu|Karnali\\)[^<]{0,25}')",
+      "Bash(node -e \"const fs=require\\('fs'\\);const h=fs.readFileSync\\('index.html','utf8'\\);const ms=[...h.matchAll\\(/<script type=\\\\\"application\\\\/ld\\\\+json\\\\\">\\([\\\\s\\\\S]*?\\)<\\\\/script>/g\\)];let ok=0;for\\(const m of ms\\){try{JSON.parse\\(m[1]\\);ok++}catch\\(e\\){console.log\\('BAD',e.message\\)}}console.log\\('valid JSON-LD blocks:',ok\\);console.log\\('schema desc:',JSON.parse\\(ms[0][1]\\)['@graph'][0].description\\)\")"
     ]
   }
 }
