@@ -51,7 +51,9 @@
       "Bash(python -X utf8 \"C:/Users/LOQ/AppData/Local/Temp/claude/D--nextgen/5ad7bd8e-257d-485f-bdd4-a66f967cbca8/scratchpad/nav_cta.py\")",
       "Bash(python -X utf8 inject_common_tail.py)",
       "Bash(python -X utf8 -)",
-      "Bash(python -X utf8 update.py)"
+      "Bash(python -X utf8 update.py)",
+      "Bash(python -X utf8 sync_to_hostinger.py)",
+      "Bash(git commit -q -m ' *)"
     ]
   }
 }

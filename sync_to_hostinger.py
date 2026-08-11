@@ -42,11 +42,31 @@ for html_file in glob.glob(os.path.join(LOCAL_DIR, "*.html")):
     if base not in FILES_TO_SYNC:
         FILES_TO_SYNC.append(base)
 
+# ...and in the blogs/ subfolder, which the root glob above never reaches.
+for html_file in glob.glob(os.path.join(LOCAL_DIR, "blogs", "*.html")):
+    rel = posixpath.join("blogs", os.path.basename(html_file))
+    if rel not in FILES_TO_SYNC:
+        FILES_TO_SYNC.append(rel)
+
+
+def ensure_remote_dir(remote_path):
+    """mkdir -p for the remote parent directory."""
+    parent = posixpath.dirname(remote_path)
+    if parent in ("", "/", REMOTE_DIR):
+        return
+    try:
+        sftp.stat(parent)
+    except IOError:
+        ensure_remote_dir(parent)
+        sftp.mkdir(parent)
+
+
 for filename in FILES_TO_SYNC:
-    local_path = os.path.join(LOCAL_DIR, filename)
+    local_path = os.path.join(LOCAL_DIR, filename.replace("/", os.sep))
     if os.path.exists(local_path):
         remote_path = posixpath.join(REMOTE_DIR, filename)
         try:
+            ensure_remote_dir(remote_path)
             sftp.put(local_path, remote_path)
             print(f"Uploaded: {filename}")
         except Exception as e:
