@@ -30,7 +30,9 @@ FILES_TO_SYNC = [
     "club-resort.html",
     "dpr-landscaping.html",
     "gallery-page.js",
-    "gallery-page.css"
+    "gallery-page.css",
+    "sitemap.xml",
+    "robots.txt"
 ]
 
 # Find all HTML files in the root directory

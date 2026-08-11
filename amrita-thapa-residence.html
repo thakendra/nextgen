@@ -329,7 +329,7 @@
   
   <div class="g-full rv" style="position:relative;">
     <div class="g-card" style="position:absolute;inset:0;" onclick="openLb(0)">
-      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/c7509835607d1d4e495704f810f759984bcdef13-1000x707.webp" alt="Showcase Hero 1"/>
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/35dac655c3dbde98282240f30b860c8839a34a43-1000x707.webp" alt="Showcase Hero 1"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Featured Space</span></div>
     </div>
@@ -337,27 +337,22 @@
 
   <div class="g-half rv" style="margin-top:4px;">
     <div class="g-card ar-43" onclick="openLb(1)">
-      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/35dac655c3dbde98282240f30b860c8839a34a43-1000x707.webp" alt="Showcase 2"/>
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/6860c80c8e678812f0b0a371613a132503866e60-1000x707.webp" alt="Showcase 2"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Architectural Perspective</span></div>
     </div>
     <div class="g-card ar-43" onclick="openLb(2)">
-      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/6860c80c8e678812f0b0a371613a132503866e60-1000x707.webp" alt="Showcase 3"/>
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/20108656af6fbd83f556955a0300b7ddc923c886-1000x707.webp" alt="Showcase 3"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Spatial Detailing</span></div>
     </div>
   </div>
 
-  <div class="g-feature rv" style="margin-top:4px;">
-    <div class="g-card ar-32" onclick="openLb(3)">
-      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/20108656af6fbd83f556955a0300b7ddc923c886-1000x707.webp" alt="Showcase 4"/>
+  <div class="g-full rv" style="margin-top:4px;height:clamp(380px,62vh,720px);position:relative;">
+    <div class="g-card" style="position:absolute;inset:0;" onclick="openLb(3)">
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/06bbe2d3bd7d51cbe4551d9cc8ddb70c1221665b-1000x707.webp" alt="Showcase 4"/>
       <div class="g-card-overlay"></div>
-      <div class="g-card-label"><span>Design Focal Point</span></div>
-    </div>
-    <div class="g-card ar-32" onclick="openLb(4)">
-      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/06bbe2d3bd7d51cbe4551d9cc8ddb70c1221665b-1000x707.webp" alt="Showcase 5"/>
-      <div class="g-card-overlay"></div>
-      <div class="g-card-label"><span>Material Accent</span></div>
+      <div class="g-card-label"><span>Panoramic Perspective</span></div>
     </div>
   </div>
 </div>
@@ -412,7 +407,7 @@
   const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});},{threshold:0.04});
   document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
-  const LB_PHOTOS = ["https://cdn.sanity.io/images/gpyk0ky0/production/c7509835607d1d4e495704f810f759984bcdef13-1000x707.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/35dac655c3dbde98282240f30b860c8839a34a43-1000x707.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/6860c80c8e678812f0b0a371613a132503866e60-1000x707.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/20108656af6fbd83f556955a0300b7ddc923c886-1000x707.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/06bbe2d3bd7d51cbe4551d9cc8ddb70c1221665b-1000x707.webp"];
+  const LB_PHOTOS = ["https://cdn.sanity.io/images/gpyk0ky0/production/35dac655c3dbde98282240f30b860c8839a34a43-1000x707.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/6860c80c8e678812f0b0a371613a132503866e60-1000x707.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/20108656af6fbd83f556955a0300b7ddc923c886-1000x707.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/06bbe2d3bd7d51cbe4551d9cc8ddb70c1221665b-1000x707.webp"];
   let lbCurrent = 0;
   const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCounter = document.getElementById('lbCounter');
   function openLb(idx){lbCurrent = idx; updateLb(); lb.classList.add('open'); document.body.style.overflow='hidden';}

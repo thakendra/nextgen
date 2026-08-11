@@ -627,5 +627,59 @@ def build():
             
         print(f"Generated Sankhu-Style Showcase Page: {slug}.html ({len(gallery)} images)")
 
+    # Generate updated dynamic sitemap.xml
+    generate_sitemap(projects, base_dir)
+
+def generate_sitemap(projects, base_dir):
+    from datetime import datetime
+    today = datetime.now().strftime('%Y-%m-%d')
+    
+    static_pages = [
+        ('/', '1.0', 'weekly'),
+        ('/architecture', '0.9', 'weekly'),
+        ('/interiors', '0.9', 'weekly'),
+        ('/dpr-landscaping', '0.9', 'monthly'),
+        ('/residential', '0.8', 'weekly'),
+        ('/commercial', '0.8', 'weekly'),
+        ('/hospitality', '0.8', 'weekly'),
+        ('/workplace', '0.7', 'monthly'),
+        ('/club-resort', '0.7', 'monthly'),
+        ('/healthcare', '0.7', 'monthly'),
+        ('/education', '0.7', 'monthly'),
+        ('/blog', '0.8', 'weekly'),
+        ('/careers', '0.5', 'monthly'),
+        ('/hotel-interior-design-nepal', '0.8', 'monthly'),
+        ('/hotel-resort-architecture-nepal', '0.8', 'monthly'),
+        ('/hotel-resort-designer-nepal', '0.8', 'monthly'),
+    ]
+    
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    
+    for path, prio, freq in static_pages:
+        lines.append(f"""  <url>
+    <loc>https://nextgeninterior.com{path}</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>{freq}</changefreq>
+    <priority>{prio}</priority>
+  </url>""")
+        
+    for p in projects:
+        slug = p.get('slug')
+        if not slug or slug == 'chapur-hotel':
+            continue
+        slug_clean = slug.strip().replace(' ', '-')
+        lines.append(f"""  <url>
+    <loc>https://nextgeninterior.com/{slug_clean}</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>""")
+        
+    lines.append('</urlset>')
+    sitemap_path = os.path.join(base_dir, 'sitemap.xml')
+    with open(sitemap_path, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(lines))
+    print(f"Generated comprehensive dynamic sitemap.xml with {len(static_pages) + len(projects)} URLs.")
+
 if __name__ == '__main__':
     build()
