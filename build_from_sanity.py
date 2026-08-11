@@ -633,6 +633,63 @@ def build():
     # Generate updated dynamic sitemap.xml
     generate_sitemap(projects, base_dir)
 
+def build_micasa_section_rows(project_items, is_interior=False):
+    if not project_items:
+        return []
+    
+    n = len(project_items)
+    # Determine row sizes so every row has 2 or 3 items (never an elongated single card)
+    if n == 1:
+        row_sizes = [1]
+    elif n % 3 == 0:
+        row_sizes = [3] * (n // 3)
+    elif n % 3 == 2:
+        row_sizes = [2] + [3] * (n // 3)
+    else: # n % 3 == 1 (e.g. 4 -> [2, 2], 7 -> [2, 2, 3], 10 -> [2, 2, 3, 3])
+        row_sizes = [2, 2] + [3] * ((n - 4) // 3)
+
+    rows_html = []
+    cursor = 0
+    two_row_count = 0
+
+    for r_idx, size in enumerate(row_sizes):
+        chunk = project_items[cursor : cursor + size]
+        cursor += size
+        delay_class = f"d{min(r_idx, 3)}" if r_idx > 0 else ""
+
+        if size == 2:
+            two_row_count += 1
+            if two_row_count % 3 == 1:
+                pmr = "pmr-half" if (is_interior and r_idx == 0) else "pmr-small-big"
+                h_class = "pm-tall" if (is_interior and r_idx == 0) else "pm-r43"
+            elif two_row_count % 3 == 2:
+                pmr = "pmr-big-small"
+                h_class = "pm-std"
+            else:
+                pmr = "pmr-half"
+                h_class = "pm-r43"
+
+            cards_html = '\n'.join([
+                f'      <a href="{p["slug"]}" class="pm-card {h_class}"><img src="{p["thumb"]}?w=1200&amp;auto=format" alt="{p["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{p["title"]}</span><span class="pm-loc">&#128205; {p["loc"]}</span></a>'
+                for p in chunk
+            ])
+            rows_html.append(f'    <div class="port-grid-micasa {pmr} rv vis {delay_class}">\n{cards_html}\n    </div>')
+
+        elif size == 3:
+            h_class = "pm-r32" if (not is_interior and r_idx == 1) else "pm-r43"
+            cards_html = '\n'.join([
+                f'      <a href="{p["slug"]}" class="pm-card {h_class}"><img src="{p["thumb"]}?w=1200&amp;auto=format" alt="{p["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{p["title"]}</span><span class="pm-loc">&#128205; {p["loc"]}</span></a>'
+                for p in chunk
+            ])
+            rows_html.append(f'    <div class="port-grid-micasa pmr-3 rv vis {delay_class}">\n{cards_html}\n    </div>')
+
+        elif size == 1:
+            h_class = "pm-r43"
+            cards_html = f'      <a href="{chunk[0]["slug"]}" class="pm-card {h_class}"><img src="{chunk[0]["thumb"]}?w=1200&amp;auto=format" alt="{chunk[0]["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{chunk[0]["title"]}</span><span class="pm-loc">&#128205; {chunk[0]["loc"]}</span></a>'
+            rows_html.append(f'    <div class="port-grid-micasa pmr-full rv vis {delay_class}">\n{cards_html}\n    </div>')
+
+    return rows_html
+
 def update_homepage_and_categories(projects, base_dir):
     # 1. Update index.html Home Page with original Micasa editorial layout
     index_path = os.path.join(base_dir, "index.html")
@@ -649,98 +706,13 @@ def update_homepage_and_categories(projects, base_dir):
         arch_list = feat_arch if feat_arch else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() == 'architecture' and p.get('thumbnail')]
         interior_list = feat_interior if feat_interior else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() != 'architecture' and p.get('thumbnail')]
 
-        # Build Architecture Rows
-        arch_rows = []
+        # Build Architecture Rows with balanced 2/3 column layout (no elongated single cards)
         p_arch = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': p.get('title', '').upper(), 'loc': p.get('location') or 'Kathmandu, Nepal', 'thumb': p.get('thumbnail')} for p in arch_list]
-        
-        if len(p_arch) >= 2:
-            r1 = p_arch[:2]
-            p_arch = p_arch[2:]
-            c_html = f'''    <div class="port-grid-micasa pmr-small-big rv vis">
-      <a href="{r1[0]['slug']}" class="pm-card pm-r43"><img src="{r1[0]['thumb']}?w=1200&amp;auto=format" alt="{r1[0]['title']}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{r1[0]['title']}</span><span class="pm-loc">&#128205; {r1[0]['loc']}</span></a>
-      <a href="{r1[1]['slug']}" class="pm-card pm-r43"><img src="{r1[1]['thumb']}?w=1200&amp;auto=format" alt="{r1[1]['title']}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{r1[1]['title']}</span><span class="pm-loc">&#128205; {r1[1]['loc']}</span></a>
-    </div>'''
-            arch_rows.append(c_html)
-        elif len(p_arch) == 1:
-            r1 = p_arch[0]
-            p_arch = []
-            c_html = f'''    <div class="port-grid-micasa pmr-full rv vis">
-      <a href="{r1['slug']}" class="pm-card pm-r43"><img src="{r1['thumb']}?w=1200&amp;auto=format" alt="{r1['title']}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{r1['title']}</span><span class="pm-loc">&#128205; {r1['loc']}</span></a>
-    </div>'''
-            arch_rows.append(c_html)
+        arch_rows = build_micasa_section_rows(p_arch, is_interior=False)
 
-        if len(p_arch) >= 3:
-            r2 = p_arch[:3]
-            p_arch = p_arch[3:]
-            cards_str = '\n'.join([f'      <a href="{item["slug"]}" class="pm-card pm-r32"><img src="{item["thumb"]}?w=1200&amp;auto=format" alt="{item["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{item["title"]}</span><span class="pm-loc">&#128205; {item["loc"]}</span></a>' for item in r2])
-            arch_rows.append(f'''    <div class="port-grid-micasa pmr-3 rv vis d1">
-{cards_str}
-    </div>''')
-        elif len(p_arch) > 0:
-            pmr_c = "pmr-half" if len(p_arch) == 2 else "pmr-full"
-            cards_str = '\n'.join([f'      <a href="{item["slug"]}" class="pm-card pm-r32"><img src="{item["thumb"]}?w=1200&amp;auto=format" alt="{item["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{item["title"]}</span><span class="pm-loc">&#128205; {item["loc"]}</span></a>' for item in p_arch])
-            p_arch = []
-            arch_rows.append(f'''    <div class="port-grid-micasa {pmr_c} rv vis d1">
-{cards_str}
-    </div>''')
-
-        if len(p_arch) > 0:
-            pmr_c = "pmr-3" if len(p_arch) >= 3 else ("pmr-half" if len(p_arch) == 2 else "pmr-full")
-            cards_str = '\n'.join([f'      <a href="{item["slug"]}" class="pm-card pm-r43"><img src="{item["thumb"]}?w=1200&amp;auto=format" alt="{item["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{item["title"]}</span><span class="pm-loc">&#128205; {item["loc"]}</span></a>' for item in p_arch[:3]])
-            arch_rows.append(f'''    <div class="port-grid-micasa {pmr_c} rv vis d2">
-{cards_str}
-    </div>''')
-
-        # Build Interior Rows
-        interior_rows = []
+        # Build Interior Rows with balanced 2/3 column layout (no elongated single cards)
         p_int = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': p.get('title', '').upper(), 'loc': p.get('location') or 'Kathmandu, Nepal', 'thumb': p.get('thumbnail')} for p in interior_list]
-
-        if len(p_int) >= 2:
-            r1 = p_int[:2]
-            p_int = p_int[2:]
-            c_html = f'''    <div class="port-grid-micasa pmr-half rv vis">
-      <a href="{r1[0]['slug']}" class="pm-card pm-tall"><img src="{r1[0]['thumb']}?w=1200&amp;auto=format" alt="{r1[0]['title']}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{r1[0]['title']}</span><span class="pm-loc">&#128205; {r1[0]['loc']}</span></a>
-      <a href="{r1[1]['slug']}" class="pm-card pm-tall"><img src="{r1[1]['thumb']}?w=1200&amp;auto=format" alt="{r1[1]['title']}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{r1[1]['title']}</span><span class="pm-loc">&#128205; {r1[1]['loc']}</span></a>
-    </div>'''
-            interior_rows.append(c_html)
-        elif len(p_int) == 1:
-            r1 = p_int[0]
-            p_int = []
-            c_html = f'''    <div class="port-grid-micasa pmr-full rv vis">
-      <a href="{r1['slug']}" class="pm-card pm-tall"><img src="{r1['thumb']}?w=1200&amp;auto=format" alt="{r1['title']}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{r1['title']}</span><span class="pm-loc">&#128205; {r1['loc']}</span></a>
-    </div>'''
-            interior_rows.append(c_html)
-
-        if len(p_int) >= 3:
-            r2 = p_int[:3]
-            p_int = p_int[3:]
-            cards_str = '\n'.join([f'      <a href="{item["slug"]}" class="pm-card pm-r43"><img src="{item["thumb"]}?w=1200&amp;auto=format" alt="{item["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{item["title"]}</span><span class="pm-loc">&#128205; {item["loc"]}</span></a>' for item in r2])
-            interior_rows.append(f'''    <div class="port-grid-micasa pmr-3 rv vis d1">
-{cards_str}
-    </div>''')
-        elif len(p_int) > 0:
-            pmr_c = "pmr-half" if len(p_int) == 2 else "pmr-full"
-            cards_str = '\n'.join([f'      <a href="{item["slug"]}" class="pm-card pm-r43"><img src="{item["thumb"]}?w=1200&amp;auto=format" alt="{item["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{item["title"]}</span><span class="pm-loc">&#128205; {item["loc"]}</span></a>' for item in p_int])
-            p_int = []
-            interior_rows.append(f'''    <div class="port-grid-micasa {pmr_c} rv vis d1">
-{cards_str}
-    </div>''')
-
-        if len(p_int) >= 2:
-            r3 = p_int[:2]
-            p_int = p_int[2:]
-            c_html = f'''    <div class="port-grid-micasa pmr-big-small rv vis d2">
-      <a href="{r3[0]['slug']}" class="pm-card pm-std"><img src="{r3[0]['thumb']}?w=1200&amp;auto=format" alt="{r3[0]['title']}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{r3[0]['title']}</span><span class="pm-loc">&#128205; {r3[0]['loc']}</span></a>
-      <a href="{r3[1]['slug']}" class="pm-card pm-std"><img src="{r3[1]['thumb']}?w=1200&amp;auto=format" alt="{r3[1]['title']}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{r3[1]['title']}</span><span class="pm-loc">&#128205; {r3[1]['loc']}</span></a>
-    </div>'''
-            interior_rows.append(c_html)
-
-        if len(p_int) > 0:
-            pmr_c = "pmr-3" if len(p_int) >= 3 else ("pmr-half" if len(p_int) == 2 else "pmr-full")
-            cards_str = '\n'.join([f'      <a href="{item["slug"]}" class="pm-card pm-r43"><img src="{item["thumb"]}?w=1200&amp;auto=format" alt="{item["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{item["title"]}</span><span class="pm-loc">&#128205; {item["loc"]}</span></a>' for item in p_int[:3]])
-            interior_rows.append(f'''    <div class="port-grid-micasa {pmr_c} rv vis d3">
-{cards_str}
-    </div>''')
+        interior_rows = build_micasa_section_rows(p_int, is_interior=True)
 
         full_arch_html = '\n'.join(arch_rows)
         full_interior_html = '\n'.join(interior_rows)
