@@ -9,6 +9,7 @@ async function fetchSanityProjects() {
     eyebrow,
     mainCategory,
     subCategory,
+    featuredOnHome,
     "thumbnailUrl": coalesce(thumbnail.asset->url, thumbnail.asset.asset->url, galleryImages[0].asset.asset->url, galleryImages[0].asset->url)
   }`);
   
@@ -74,7 +75,7 @@ async function renderCategoryGrid() {
 
   if (filtered.length === 0) return;
 
-  // Insert cards at the top of the grid with exact architecture.html settlement
+  // Insert cards at the top of the grid with exact settlement
   filtered.reverse().forEach((proj, idx) => {
     const a = document.createElement('a');
     const linkSlug = proj.slug || proj.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -109,4 +110,50 @@ async function renderCategoryGrid() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', renderCategoryGrid);
+async function renderHomePageFeatured() {
+  const archContainer = document.getElementById('homeArchGrid');
+  const interiorContainer = document.getElementById('homeInteriorGrid');
+  if (!archContainer && !interiorContainer) return;
+
+  const allProjects = await fetchSanityProjects();
+  const featured = allProjects.filter(p => p.featuredOnHome === true && p.thumbnailUrl && p.thumbnailUrl !== 'None');
+  if (featured.length === 0) return;
+
+  const archProjects = featured.filter(p => (p.mainCategory || '').toLowerCase() === 'architecture');
+  const interiorProjects = featured.filter(p => (p.mainCategory || '').toLowerCase() !== 'architecture');
+
+  if (archContainer && archProjects.length > 0) {
+    archProjects.forEach(proj => {
+      const a = document.createElement('a');
+      a.href = proj.slug || '#';
+      a.className = 'pm-card pm-r43';
+      a.innerHTML = `
+        <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}" loading="lazy"/>
+        <div class="pm-card-overlay"></div>
+        <span class="pm-name">${proj.title.toUpperCase()}</span>
+        <span class="pm-loc">&#128205; ${proj.location || 'Kathmandu, Nepal'}</span>
+      `;
+      archContainer.prepend(a);
+    });
+  }
+
+  if (interiorContainer && interiorProjects.length > 0) {
+    interiorProjects.forEach(proj => {
+      const a = document.createElement('a');
+      a.href = proj.slug || '#';
+      a.className = 'pm-card pm-tall';
+      a.innerHTML = `
+        <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}" loading="lazy"/>
+        <div class="pm-card-overlay"></div>
+        <span class="pm-name">${proj.title.toUpperCase()}</span>
+        <span class="pm-loc">&#128205; ${proj.location || 'Kathmandu, Nepal'}</span>
+      `;
+      interiorContainer.prepend(a);
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderCategoryGrid();
+  renderHomePageFeatured();
+});

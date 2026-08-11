@@ -54,6 +54,13 @@ export const project = {
       description: 'Select the specific sub-category (will show on both Main and Subcategory pages).',
     },
     {
+      name: 'featuredOnHome',
+      title: '🌟 Show on Home Page (Featured Showcase)',
+      type: 'boolean',
+      description: 'Turn ON (Check) to display this project directly on the Home Page (nextgeninterior.com) portfolio section.',
+      initialValue: false,
+    },
+    {
       name: 'thumbnail',
       title: 'Thumbnail Image (Listing Cover)',
       type: 'image',
