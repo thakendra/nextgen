@@ -670,7 +670,7 @@ def build_micasa_section_rows(project_items, is_interior=False):
                 h_class = "pm-r43"
 
             cards_html = '\n'.join([
-                f'      <a href="{p["slug"]}" class="pm-card {h_class}"><img src="{p["thumb"]}?w=1200&amp;auto=format" alt="{p["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{p["title"]}</span><span class="pm-loc">&#128205; {p["loc"]}</span></a>'
+                f'      <a href="{p["slug"]}" class="pm-card {h_class}"><img src="{p["thumb"]}?w=1200&amp;auto=format" alt="{p["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{p["title"]}</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>{p["loc"]}</span></a>'
                 for p in chunk
             ])
             rows_html.append(f'    <div class="port-grid-micasa {pmr} rv vis {delay_class}">\n{cards_html}\n    </div>')
@@ -678,14 +678,14 @@ def build_micasa_section_rows(project_items, is_interior=False):
         elif size == 3:
             h_class = "pm-r32" if (not is_interior and r_idx == 1) else "pm-r43"
             cards_html = '\n'.join([
-                f'      <a href="{p["slug"]}" class="pm-card {h_class}"><img src="{p["thumb"]}?w=1200&amp;auto=format" alt="{p["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{p["title"]}</span><span class="pm-loc">&#128205; {p["loc"]}</span></a>'
+                f'      <a href="{p["slug"]}" class="pm-card {h_class}"><img src="{p["thumb"]}?w=1200&amp;auto=format" alt="{p["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{p["title"]}</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>{p["loc"]}</span></a>'
                 for p in chunk
             ])
             rows_html.append(f'    <div class="port-grid-micasa pmr-3 rv vis {delay_class}">\n{cards_html}\n    </div>')
 
         elif size == 1:
             h_class = "pm-r43"
-            cards_html = f'      <a href="{chunk[0]["slug"]}" class="pm-card {h_class}"><img src="{chunk[0]["thumb"]}?w=1200&amp;auto=format" alt="{chunk[0]["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{chunk[0]["title"]}</span><span class="pm-loc">&#128205; {chunk[0]["loc"]}</span></a>'
+            cards_html = f'      <a href="{chunk[0]["slug"]}" class="pm-card {h_class}"><img src="{chunk[0]["thumb"]}?w=1200&amp;auto=format" alt="{chunk[0]["title"]}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{chunk[0]["title"]}</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>{chunk[0]["loc"]}</span></a>'
             rows_html.append(f'    <div class="port-grid-micasa pmr-full rv vis {delay_class}">\n{cards_html}\n    </div>')
 
     return rows_html

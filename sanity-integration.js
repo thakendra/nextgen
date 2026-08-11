@@ -113,6 +113,8 @@ async function renderCategoryGrid() {
 }
 
 async function renderHomePageFeatured() {
+  // Home page is pre-rendered by build_from_sanity.py — skip to avoid duplicates
+  if (document.querySelectorAll('.pm-card').length > 0) return;
   const archContainer = document.getElementById('homeArchGrid');
   const interiorContainer = document.getElementById('homeInteriorGrid');
   if (!archContainer && !interiorContainer) return;
@@ -142,7 +144,7 @@ async function renderHomePageFeatured() {
         <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}" loading="lazy"/>
         <div class="pm-card-overlay"></div>
         <span class="pm-name">${proj.title.toUpperCase()}</span>
-        <span class="pm-loc">&#128205; ${proj.location || 'Kathmandu, Nepal'}</span>
+        <span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>${proj.location || 'Kathmandu, Nepal'}</span>
       `;
       archContainer.appendChild(a);
     });
@@ -159,7 +161,7 @@ async function renderHomePageFeatured() {
         <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}" loading="lazy"/>
         <div class="pm-card-overlay"></div>
         <span class="pm-name">${proj.title.toUpperCase()}</span>
-        <span class="pm-loc">&#128205; ${proj.location || 'Kathmandu, Nepal'}</span>
+        <span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>${proj.location || 'Kathmandu, Nepal'}</span>
       `;
       interiorContainer.appendChild(a);
     });

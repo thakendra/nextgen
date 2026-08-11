@@ -23,16 +23,16 @@
   <meta property="og:title" content="Interior Design Kathmandu — NextGen Interiors & Architects" />
   <meta property="og:description" content="NextGen — a top interior design company in Kathmandu. Home interior designers, house design, office & hotel interiors. 200+ projects across Nepal." />
   <meta property="og:url" content="https://nextgeninterior.com/" />
-  <meta property="og:image" content="https://nextgeninterior.com/Galleries/LILLY%20MAAM%20EXTERIOR/2.webp" />
-  <meta property="og:image:alt" content="Interior Design Kathmandu — NextGen Interiors & Architects" />
+  <meta property="og:image" content="https://cdn.sanity.io/images/gpyk0ky0/production/539e0d3b4ff72f15ec7ef48e88a06cf420af9b02-1913x1336.webp?w=1200&auto=format" />
+  <meta property="og:image:alt" content="NextGen Interiors &amp; Architects — Interior Design and Architecture, Nepal" />
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Interior Design Kathmandu — NextGen Interiors & Architects" />
   <meta name="twitter:description" content="NextGen — a top interior design company in Kathmandu. Home interior designers, house design, office & hotel interiors. 200+ projects across Nepal." />
-  <meta name="twitter:image" content="https://nextgeninterior.com/Galleries/LILLY%20MAAM%20EXTERIOR/2.webp" />
+  <meta name="twitter:image" content="https://cdn.sanity.io/images/gpyk0ky0/production/539e0d3b4ff72f15ec7ef48e88a06cf420af9b02-1913x1336.webp?w=1200&auto=format" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
   <style>
     :root {
       --blue-dark:  #1a3d6e;
@@ -44,6 +44,7 @@
       --white:      #faf8f5;
       --mist:       #8a97aa;
       --f-head: 'Bebas Neue', sans-serif;
+      --f-serif: 'Instrument Serif', Georgia, serif;
       --f-body: 'Poppins', sans-serif;
       --ease:  cubic-bezier(0.16, 1, 0.3, 1);
       --gap:   clamp(20px, 5vw, 80px);
@@ -54,7 +55,7 @@
     body { font-family: var(--f-body); background: var(--ink); color: var(--offwhite); overflow-x: hidden; cursor: none; }
     img { display: block; width: 100%; height: 100%; object-fit: cover; }
     .logo-img { display: block; width: auto !important; height: 100% !important; object-fit: contain !important; max-width: 100%; }
-    .loader-logo-img { display: block; width: clamp(160px, 22vw, 260px) !important; height: auto !important; object-fit: contain !important; }
+
     a { text-decoration: none; color: inherit; }
     button { border: none; background: none; cursor: none; font: inherit; }
     ul { list-style: none; }
@@ -68,13 +69,6 @@
     body.c-hover .cursor-dot { width: 52px; height: 52px; opacity: 0.15; }
     body.c-hover .cursor-ring { opacity: 0; }
 
-    /* LOADER */
-    .loader { position: fixed; inset: 0; z-index: 9000; background: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; transition: opacity .9s var(--ease), visibility .9s; }
-    .loader.out { opacity: 0; visibility: hidden; pointer-events: none; }
-    .loader-logo-wrap { opacity: 0; animation: fadeIn .8s var(--ease) .3s forwards; }
-    .loader-line { width: 200px; height: 1px; background: rgba(255,255,255,0.08); position: relative; overflow: hidden; }
-    .loader-progress { position: absolute; inset-y: 0; left: 0; background: var(--blue-mid); width: 0; transition: width .05s linear; }
-    .loader-sub { font-family: var(--f-body); font-size: 10px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
     @keyframes fadeIn { to { opacity: 1; } }
 
     /* NAV */
@@ -307,7 +301,7 @@
 
     .hero-tagline { font-family: var(--f-body); font-size: 11px; font-weight: 600; letter-spacing: 0.45em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 22px; opacity: 0; animation: fadeSlideUp .7s var(--ease) 0.5s forwards; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
     .hero-title { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-    .hero-line { font-family: var(--f-head); font-size: clamp(44px, 8vw, 120px); line-height: 0.95; letter-spacing: 0.14em; color: var(--offwhite); display: flex; flex-wrap: nowrap; white-space: nowrap; gap: 0; text-shadow: 0 4px 40px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5); }
+    .hero-line { font-family: var(--f-serif); font-size: clamp(44px, 8vw, 120px); line-height: 0.95; letter-spacing: 0.02em; color: var(--offwhite); display: flex; flex-wrap: nowrap; white-space: nowrap; gap: 0; text-shadow: 0 4px 40px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5); }
     .hw { display: inline-block; white-space: nowrap; }
     .hc { display: inline-block; opacity: 0; transform: translateY(16px) scale(0.95); filter: blur(6px); animation: charReveal 0.6s var(--ease) forwards; }
     .hw-space { display: inline-block; width: 0.22em; }
@@ -325,12 +319,12 @@
     @keyframes scrollDrop { 0%{top:-40%} 100%{top:110%} }
     .scroll-word { font-family: var(--f-body); font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.28); }
 
-    /* MARQUEE */
-    .marquee-bar { background: rgba(255,255,255,0.025); padding: 13px 0; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); }
-    .marquee-track { display: flex; gap: 48px; white-space: nowrap; width: max-content; animation: marquee 32s linear infinite; }
-    .marquee-track span { font-family: var(--f-body); font-size: 10px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
-    .marquee-track .m-sep { color: var(--blue-mid); }
-    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    /* STATS STRIP */
+    .stats-strip { background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); padding: 28px var(--gap); display: flex; justify-content: center; gap: clamp(32px,6vw,96px); flex-wrap: wrap; }
+    .stat-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .stat-num { font-family: var(--f-head); font-size: clamp(32px,4.5vw,58px); letter-spacing: 0.06em; color: var(--offwhite); line-height: 1; }
+    .stat-num span { color: var(--blue-mid); }
+    .stat-label { font-family: var(--f-body); font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mist); }
 
     /* REVEAL */
     .rv { opacity:0; transform:translateY(30px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
@@ -350,16 +344,10 @@
     .port-cat-label::before { content:''; width:24px; height:1px; background:var(--blue-mid); }
     .port-cat-h { font-family: var(--f-head); font-size: clamp(64px,9.5vw,140px); letter-spacing: 0.03em; color: var(--offwhite); line-height: 0.86; margin-bottom: clamp(28px,4vw,56px); }
     .port-grid-micasa { display: grid; gap: 3px; }
-    .pmr-full { grid-template-columns: 1fr; }
-    .pmr-half { grid-template-columns: 1fr 1fr; }
     .pmr-3    { grid-template-columns: 1fr 1fr 1fr; }
-    .pmr-big-small { grid-template-columns: 2fr 1fr; }
-    .pmr-small-big { grid-template-columns: 1fr 2fr; }
-    /* vh-based heights — fills screen like premium portfolio sites */
+    
     .pm-card { position: relative; overflow: hidden; display: block; cursor: none; background: #080f1c; }
-    .pm-tall { height: clamp(380px, 78vh, 960px); }
     .pm-r43  { height: clamp(320px, 62vh, 780px); }
-    .pm-std  { height: clamp(350px, 70vh, 860px); }
     .pm-r32  { height: clamp(300px, 56vh, 700px); }
     .pm-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.8s var(--ease); }
     .pm-card:hover img { transform: scale(1.08); }
@@ -367,42 +355,11 @@
     .pm-card:hover .pm-card-overlay { background: linear-gradient(to top, rgba(8,14,28,0.94) 0%, rgba(8,14,28,0.42) 52%, rgba(8,14,28,0.08) 100%); }
     .pm-name { font-family: var(--f-head); font-size: clamp(24px, 3.4vw, 58px); letter-spacing: 0.08em; color: var(--offwhite); line-height: 1; text-shadow: 0 3px 36px rgba(0,0,0,0.75); position: absolute; z-index: 2; left: 0; right: 0; text-align: center; bottom: clamp(24px,4.5%,56px); transition: bottom .65s var(--ease), transform .65s var(--ease); }
     .pm-card:hover .pm-name { bottom: 50%; transform: translateY(50%); }
-    .pm-loc { font-family: var(--f-body); font-size: 11px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--blue-mid); position: absolute; z-index: 2; left: 0; right: 0; text-align: center; bottom: clamp(12px,2.5%,30px); opacity: 0; transform: translateY(10px); transition: opacity .5s var(--ease) .12s, transform .5s var(--ease) .12s; }
+    .pm-loc { font-family: var(--f-body); font-size: 11px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--blue-mid); position: absolute; z-index: 2; left: 0; right: 0; text-align: center; bottom: clamp(12px,2.5%,30px); opacity: 0; transform: translateY(10px); transition: opacity .5s var(--ease) .12s, transform .5s var(--ease) .12s; display: flex; align-items: center; justify-content: center; gap: 5px; }
+    .pm-loc svg { width: 10px; height: 10px; }
     .pm-card:hover .pm-loc { opacity: 1; transform: translateY(0); }
     .pm-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background: linear-gradient(90deg, var(--blue-mid), var(--blue-light), var(--blue-mid)); transform:scaleX(0); transform-origin:left; transition:transform .65s var(--ease); z-index:3; }
     .pm-card:hover::after { transform:scaleX(1); }
-
-    /* CAREERS SECTION */
-    .careers { background: #060c16; }
-    .careers-inner { display: grid; grid-template-columns: 5fr 7fr; gap: 60px; align-items: start; }
-    .careers-left h2 { font-family: var(--f-head); font-size: clamp(46px,5vw,78px); letter-spacing: 0.05em; color: var(--offwhite); line-height: 0.92; margin-bottom: 18px; }
-    .careers-left h2 span { color: var(--blue-mid); }
-    .careers-left p { font-size: 13px; font-weight: 300; line-height: 1.85; color: var(--mist); max-width: 360px; margin-bottom: 32px; }
-    .careers-perks { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
-    .careers-perk { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .perk-icon { width: 38px; height: 38px; flex-shrink: 0; border: 1px solid rgba(54,159,206,0.2); display: flex; align-items: center; justify-content: center; color: var(--blue-mid); }
-    .perk-icon svg { width: 16px; height: 16px; }
-    .perk-text strong { display: block; font-family: var(--f-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--offwhite); margin-bottom: 3px; }
-    .perk-text span { font-size: 11px; font-weight: 300; color: var(--mist); line-height: 1.6; }
-    .careers-cta { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border: 1px solid var(--blue-mid); font-family: var(--f-body); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue-mid); transition: background .3s, color .3s; }
-    .careers-cta:hover { background: var(--blue-mid); color: var(--ink); }
-    .careers-cta svg { width: 14px; height: 14px; }
-
-    /* Job listings */
-    .jobs-list { display: flex; flex-direction: column; gap: 2px; }
-    .job-card { background: rgba(255,255,255,0.025); padding: 28px 28px 28px 24px; border-left: 2px solid transparent; transition: border-color .3s, background .3s; cursor: none; position: relative; }
-    .job-card:hover { border-color: var(--blue-mid); background: rgba(54,159,206,0.04); }
-    .job-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
-    .job-title { font-family: var(--f-head); font-size: 22px; letter-spacing: 0.06em; color: var(--offwhite); }
-    .job-badge { font-family: var(--f-body); font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; padding: 5px 12px; border: 1px solid rgba(54,159,206,0.3); color: var(--blue-mid); flex-shrink: 0; }
-    .job-badge.fulltime { border-color: rgba(54,206,130,0.3); color: #36ce82; }
-    .job-badge.parttime { border-color: rgba(206,180,54,0.3); color: #ceb436; }
-    .job-meta { display: flex; gap: 16px; flex-wrap: wrap; }
-    .job-meta-item { display: flex; align-items: center; gap: 5px; font-family: var(--f-body); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); }
-    .job-meta-item svg { width: 10px; height: 10px; }
-    .job-arrow { position: absolute; right: 24px; bottom: 28px; color: var(--blue-mid); opacity: 0; transform: translateX(-6px); transition: opacity .3s, transform .3s var(--ease); }
-    .job-card:hover .job-arrow { opacity: 1; transform: translateX(0); }
-    .job-arrow svg { width: 18px; height: 18px; }
 
     /* CONTACT */
     .contact { background: var(--ink); }
@@ -437,7 +394,7 @@
     .wa-tooltip::after { content:''; position:absolute; bottom:-6px; right:19px; width:12px; height:12px; background:var(--blue); transform:rotate(45deg); }
     .wa-bubble:hover .wa-tooltip { opacity:1; transform:translateY(0); }
     .wa-btn { width: 56px; height: 56px; border-radius: 50%; background: #25d366; box-shadow: 0 6px 28px rgba(37,211,102,0.38); display: flex; align-items: center; justify-content: center; cursor: none; transition: transform .3s var(--ease); animation: waPulse 2.8s ease-in-out infinite; }
-    @keyframes waPulse { 0%,100%{box-shadow:0 6px 28px rgba(37,211,102,0.38),0 0 0 0 rgba(37,211,102,0.32);} 50%{box-shadow:0 6px 28px rgba(37,211,102,0.38),0 0 0 16px rgba(37,211,102,0);} }
+    @keyframes waPulse { 0%,100%{box-shadow:0 6px 28px rgba(37,211,102,0.38),0 0 0 0 rgba(37,211,102,0.32);} 50%{box-shadow:0 6px 28px rgba(37,211,102,0.38),0 0 0 16px rgba(37,211,102,0.0);} }
     .wa-btn:hover { transform: scale(1.1); }
     .wa-btn svg { width: 27px; height: 27px; }
 
@@ -450,7 +407,7 @@
     .footer-socials a:hover { color: var(--blue-mid); }
     .footer-copy { font-family: var(--f-body); font-size: 11px; color: var(--mist); letter-spacing: 0.06em; }
 
-    /* ── PARTNERS STRIP ── */
+    /* PARTNERS STRIP */
     .partners-section { background: #040912; padding: 72px 0 64px; border-top: 1px solid rgba(255,255,255,0.05); }
     .partners-eyebrow { text-align: center; font-family: var(--f-body); font-size: 11px; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 10px; }
     .partners-title { text-align: center; font-family: var(--f-head); font-size: clamp(24px,2.8vw,38px); font-weight: 300; color: #fff; letter-spacing: -0.01em; margin-bottom: 48px; }
@@ -466,49 +423,38 @@
     .logo-item img { height:38px; width:auto; max-width:130px; object-fit:contain; filter:none; display:block; }
     @keyframes logoScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-    /* RESPONSIVE */
     @media (max-width:1100px) {
       .pmr-3 { grid-template-columns: 1fr 1fr; }
-      .pm-tall { height: clamp(320px, 62vh, 760px); }
-      .pm-std  { height: clamp(300px, 58vh, 680px); }
       .pm-r43  { height: clamp(280px, 52vh, 620px); }
       .pm-r32  { height: clamp(260px, 48vh, 580px); }
     }
     @media (max-width:900px) {
-      .contact-grid, .careers-inner { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
       .nav-links,.nav-cta { display: none; }
       .nav-menu-btn { display: flex; }
-      .pmr-big-small,.pmr-small-big { grid-template-columns: 1fr; }
-      .pm-tall { height: clamp(280px, 55vw, 520px); }
-      .pm-std  { height: clamp(260px, 50vw, 480px); }
       .pm-r43  { height: clamp(240px, 48vw, 460px); }
       .pm-r32  { height: clamp(220px, 44vw, 420px); }
       .port-cat-h { font-size: clamp(52px,11vw,100px); }
     }
     @media (max-width:700px) {
-      .pmr-half, .pmr-3 { grid-template-columns: 1fr; }
+      .pmr-3 { grid-template-columns: 1fr; }
       .footer-inner { flex-direction:column; text-align:center; }
       .wa-bubble { bottom:16px; right:16px; }
-      .hero-line { font-size: clamp(36px, 10.5vw, 56px); letter-spacing: 0.10em; }
+      .hero-line { font-size: clamp(36px, 10.5vw, 56px); letter-spacing: 0.06em; }
       .hero-title { gap: 2px; }
-      .pm-tall { height: clamp(280px, 70vw, 480px); }
-      .pm-std  { height: clamp(260px, 65vw, 440px); }
       .pm-r43  { height: clamp(240px, 60vw, 420px); }
       .pm-r32  { height: clamp(220px, 56vw, 400px); }
       .port-cat-h { font-size: clamp(44px,12vw,80px); }
       .pm-name { font-size: clamp(22px, 6vw, 42px); }
+      .stats-strip { gap: 24px 48px; padding: 22px var(--gap); }
     }
     @media (max-width: 480px) {
-      .pm-tall { height: clamp(240px, 65vw, 400px); }
-      .pm-std  { height: clamp(220px, 60vw, 370px); }
       .pm-r43  { height: clamp(200px, 58vw, 350px); }
       .pm-r32  { height: clamp(185px, 54vw, 320px); }
       .port-grid-micasa { gap: 2px; }
     }
     @media (max-width: 400px) {
-      .hero-line { font-size: 32px; letter-spacing: 0.08em; }
-      .pm-tall { height: 260px; }
-      .pm-std  { height: 240px; }
+      .hero-line { font-size: 30px; letter-spacing: 0.04em; }
       .pm-r43  { height: 220px; }
       .pm-r32  { height: 200px; }
     }
@@ -559,14 +505,6 @@
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <div class="loader" id="loader">
-    <div class="loader-logo-wrap">
-      <img src="logo/logo.png" class="loader-logo-img" alt="NextGen Interiors"/>
-    </div>
-    <div class="loader-line"><div class="loader-progress" id="loaderP"></div></div>
-    <div class="loader-sub">Loading Experience&hellip;</div>
-  </div>
-
   <nav class="nav" id="nav">
     <a href="#" class="nav-logo">
       <img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:36px;"/>
@@ -575,7 +513,6 @@
       <li><a href="architecture">Architecture</a></li>
       <li><a href="interiors">Interiors</a></li>
       <li><a href="dpr-landscaping">DPR &amp; Landscaping</a></li>
-      <!-- Portfolio dropdown -->
       <li>
         <button class="nav-dropdown-trigger">
           Portfolio
@@ -603,9 +540,7 @@
     </button>
   </nav>
 
-  <!-- MOBILE MENU -->
   <div class="m-menu" id="mMenu">
-    <!-- top bar -->
     <div class="m-menu-topbar">
       <div class="m-menu-logo">
         <img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:28px;"/>
@@ -614,8 +549,6 @@
         <span></span><span></span><span></span>
       </button>
     </div>
-
-    <!-- main nav links -->
     <div class="m-menu-body">
       <nav class="m-menu-links">
         <ul>
@@ -647,8 +580,6 @@
         </ul>
       </nav>
     </div>
-
-    <!-- footer info -->
     <div class="m-menu-footer">
       <div class="m-service-area">
         <div class="m-service-label">Services</div>
@@ -665,37 +596,40 @@
       </div>
       <div class="m-contact-row">
         <a href="tel:+9779849151220">+977 9849151220</a>
-        <!--email_off--><a href="mailto:info@nextgeninterior.com">info@nextgeninterior.com</a><!--/email_off-->
+        <a href="mailto:info@nextgeninterior.com">info@nextgeninterior.com</a>
       </div>
     </div>
   </div>
 
-  <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero-bg">
-      <div class="hero-bg-slide active"><img src="Galleries/LILLY MAAM EXTERIOR/2.webp" alt="Lilly Villa Architecture"/></div>
-      <div class="hero-bg-slide"><img src="Galleries/LOKHANTHALI interior/10.webp" alt="Lokhanthali Interior"/></div>
+      <div class="hero-bg-slide active"><img src="Galleries/LILLY MAAM EXTERIOR/2.webp" alt="Lilly Villa Architecture, Nepal"/></div>
+      <div class="hero-bg-slide"><img src="Galleries/LOKHANTHALI interior/10.webp" alt="Lokhanthali Residence Interior"/></div>
       <div class="hero-bg-slide"><img src="Galleries/sankhu Architecture/2.png" alt="Sankhu Residence Architecture"/></div>
-      <div class="hero-bg-slide"><img src="Galleries/NEW PHOTOS/MAYA CAFE kathmandu nepal/jpeg-optimizer_2.png" alt="Maya Cafe Kathmandu"/></div>
+      <div class="hero-bg-slide"><img src="Galleries/NEW PHOTOS/MAYA CAFE kathmandu nepal/jpeg-optimizer_2.png" alt="Maya Cafe Interior, Kathmandu"/></div>
       <div class="hero-bg-slide"><img src="Galleries/CHITWAN HOME EXTERIOR/2_compressed.png" alt="Chitwan Home Architecture"/></div>
-      <div class="hero-bg-slide"><img src="Galleries/NAVYA HOTEL interior/2.webp" alt="Navya Hotel Interior"/></div>
-      <div class="hero-bg-slide"><img src="Galleries/TOKHA EXTERIOR/2_compressed.png" alt="Tokha Home Architecture"/></div>
-      <div class="hero-bg-slide"><img src="Galleries/LEMON TREE architecture/1.webp" alt="Lemon Tree Architecture"/></div>
+      <div class="hero-bg-slide"><img src="Galleries/NAVYA HOTEL interior/2.webp" alt="Navya Hotel Interior Design"/></div>
+      <div class="hero-bg-slide"><img src="Galleries/TOKHA EXTERIOR/2_compressed.png" alt="Tokha Home Exterior Design"/></div>
+      <div class="hero-bg-slide"><img src="Galleries/LEMON TREE architecture/1.webp" alt="Lemon Tree Architecture Nepal"/></div>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-center">
-      <h1 class="hero-tagline">Interior Design &amp; Architecture</h1>
+      <p class="hero-tagline">NextGen Interiors &amp; Architects &mdash; Nepal</p>
       <div class="hero-title">
         <div class="hero-line" id="heroLine1"></div>
         <div class="hero-line" id="heroLine2"></div>
       </div>
       <div class="hero-sep"></div>
-      <div class="hero-sub">200+ Projects </div>
+      <div class="hero-sub">Turnkey interiors &amp; architecture &mdash; concept to handover</div>
       <div class="hero-locations">
-        <span class="hero-loc-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          All Over Nepal
-        </span>
+        <a href="#portfolio" class="hero-loc-badge" style="cursor:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          View Our Work
+        </a>
+        <a href="#contact" class="hero-loc-badge" style="cursor:none;background:rgba(41,105,166,0.85);border-color:rgba(41,105,166,0.6);color:var(--offwhite);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Start a Project
+        </a>
       </div>
     </div>
     <div class="hero-scroll">
@@ -704,43 +638,39 @@
     </div>
   </section>
 
-  <div class="marquee-bar">
-    <div class="marquee-track">
-      <span>Interior Design</span><span class="m-sep">&#10022;</span>
-      <span>Architecture</span><span class="m-sep">&#10022;</span>
-      <span>Hotel Design</span><span class="m-sep">&#10022;</span>
-      <span>Turnkey Projects</span><span class="m-sep">&#10022;</span>
-      <span>Residential</span><span class="m-sep">&#10022;</span>
-      <span>Commercial</span><span class="m-sep">&#10022;</span>
-      <span>Kathmandu</span><span class="m-sep">&#10022;</span>
-      <span>Pokhara</span><span class="m-sep">&#10022;</span>
-      <span>Chitwan</span><span class="m-sep">&#10022;</span>
-      <span>Landscaping</span><span class="m-sep">&#10022;</span>
-      <span>Interior Design</span><span class="m-sep">&#10022;</span>
-      <span>Architecture</span><span class="m-sep">&#10022;</span>
-      <span>Hotel Design</span><span class="m-sep">&#10022;</span>
-      <span>Turnkey Projects</span><span class="m-sep">&#10022;</span>
-      <span>Residential</span><span class="m-sep">&#10022;</span>
-      <span>Commercial</span><span class="m-sep">&#10022;</span>
-      <span>Kathmandu</span><span class="m-sep">&#10022;</span>
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-num">200<span>+</span></div>
+      <div class="stat-label">Projects Completed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">12<span>+</span></div>
+      <div class="stat-label">Years of Excellence</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Cities Across Nepal</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-label">Turnkey Delivery</div>
     </div>
   </div>
 
-            <!-- PORTFOLIO / FEATURED PROJECTS -->
   <section class="portfolio" id="portfolio">
     <div class="port-cat-strip rv vis" style="padding-top: clamp(40px,6vw,80px);">
       <div class="port-cat-label">01</div>
       <h2 class="port-cat-h">ARCHITECTURE</h2>
     </div>
-    <div class="port-grid-micasa pmr-3 rv vis ">
-      <a href="surkhet-hotel-exterior" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/e48f03d32ce6b180dde66cc9875044f4426f0a04-1000x653.webp?w=1200&amp;auto=format" alt="SURKHET, HOTEL EXTERIOR" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">SURKHET, HOTEL EXTERIOR</span><span class="pm-loc">&#128205; SURKHET, KARNALI,NEPAL</span></a>
-      <a href="kawality-banquet-hall" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/007e5286efc60b1fd49b93c48b7e286c91088c4e-1000x707.webp?w=1200&amp;auto=format" alt="KAWALITY BANQUET HALL" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">KAWALITY BANQUET HALL</span><span class="pm-loc">&#128205; KAVRASTHALI, NEPAL, KATHMANDU</span></a>
-      <a href="surkhet-banquet-hall" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/2ecb5463d6f3c69527b6489a3c2e077e0aebc654-1000x707.webp?w=1200&amp;auto=format" alt="SURKHET BANQUET HALL " loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">SURKHET BANQUET HALL </span><span class="pm-loc">&#128205; SURKHET, KARNALI,NEPAL</span></a>
+    <div class="port-grid-micasa pmr-3 rv vis">
+      <a href="surkhet-hotel-exterior" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/e48f03d32ce6b180dde66cc9875044f4426f0a04-1000x653.webp?w=1200&amp;auto=format" alt="Surkhet Hotel Exterior" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">SURKHET HOTEL EXTERIOR</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Surkhet, Karnali</span></a>
+      <a href="kawality-banquet-hall" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/007e5286efc60b1fd49b93c48b7e286c91088c4e-1000x707.webp?w=1200&amp;auto=format" alt="Kwality Banquet Hall" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">KWALITY BANQUET HALL</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Kavrasthali, Kathmandu</span></a>
+      <a href="surkhet-banquet-hall" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/2ecb5463d6f3c69527b6489a3c2e077e0aebc654-1000x707.webp?w=1200&amp;auto=format" alt="Surkhet Banquet Hall" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">SURKHET BANQUET HALL</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Surkhet, Karnali</span></a>
     </div>
     <div class="port-grid-micasa pmr-3 rv vis d1">
-      <a href="kwality-palace-banquet" class="pm-card pm-r32"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/36e36b53a530059937010781edbc26217eb3af02-1000x704.webp?w=1200&amp;auto=format" alt="KWALITY PALACE BANQUET" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">KWALITY PALACE BANQUET</span><span class="pm-loc">&#128205; THULO BHARANG, KATHMANDU NEPAL</span></a>
-      <a href="amrita-thapa-residence" class="pm-card pm-r32"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/6860c80c8e678812f0b0a371613a132503866e60-1000x707.webp?w=1200&amp;auto=format" alt="AMRITA THAPA RESIDENCE" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">AMRITA THAPA RESIDENCE</span><span class="pm-loc">&#128205; Naikap,kathmandu</span></a>
-      <a href="naran-lama-home-exterior" class="pm-card pm-r32"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/c2f4e5991f869faa3ee4472dc9a0f8c3696a1a3c-951x668.webp?w=1200&amp;auto=format" alt="NARAN LAMA HOME EXTERIOR" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">NARAN LAMA HOME EXTERIOR</span><span class="pm-loc">&#128205; TARKESWOR, KATHMANDU NEPAL</span></a>
+      <a href="kwality-palace-banquet" class="pm-card pm-r32"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/36e36b53a530059937010781edbc26217eb3af02-1000x704.webp?w=1200&amp;auto=format" alt="Kwality Palace Banquet" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">KWALITY PALACE BANQUET</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Thulo Bharang, Kathmandu</span></a>
+      <a href="amrita-thapa-residence" class="pm-card pm-r32"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/6860c80c8e678812f0b0a371613a132503866e60-1000x707.webp?w=1200&amp;auto=format" alt="Amrita Thapa Residence" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">AMRITA THAPA RESIDENCE</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Naikap, Kathmandu</span></a>
+      <a href="naran-lama-home-exterior" class="pm-card pm-r32"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/c2f4e5991f869faa3ee4472dc9a0f8c3696a1a3c-951x668.webp?w=1200&amp;auto=format" alt="Naran Lama Home Exterior" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">NARAN LAMA HOME</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Tarkeshwor, Kathmandu</span></a>
     </div>
     
     <div style="padding-bottom: clamp(56px,8vw,96px);"></div>
@@ -749,18 +679,17 @@
       <h2 class="port-cat-h">INTERIOR DESIGN</h2>
     </div>
     <div class="port-grid-micasa pmr-3 rv vis ">
-      <a href="kavrasthali-home" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/539e0d3b4ff72f15ec7ef48e88a06cf420af9b02-1913x1336.webp?w=1200&amp;auto=format" alt="KAVRASTHALI HOME" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">KAVRASTHALI HOME</span><span class="pm-loc">&#128205; Kavrasthali, Kathmandu , Nepal</span></a>
-      <a href="best-and-fast-travels" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/c4cc22b416990f72ecf1479be102a8ddc3f53587-2000x1414.webp?w=1200&amp;auto=format" alt="BEST & FAST TRAVELS" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">BEST & FAST TRAVELS</span><span class="pm-loc">&#128205; MAHARAJGUNJ, KATHMANDU ,NEPAL</span></a>
-      <a href="the-luxuary-air-b-and-b" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/a64961ef34f6242411af8633d147564a9504455d-1000x707.webp?w=1200&amp;auto=format" alt="THE LUXUARY AIR B&B " loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">THE LUXUARY AIR B&B </span><span class="pm-loc">&#128205; BALWATAR, KATHMANDU, NEPAL</span></a>
+      <a href="kavrasthali-home" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/539e0d3b4ff72f15ec7ef48e88a06cf420af9b02-1913x1336.webp?w=1200&amp;auto=format" alt="Kavrasthali Home Interior" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">KAVRASTHALI HOME</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Kavrasthali, Kathmandu</span></a>
+      <a href="best-and-fast-travels" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/c4cc22b416990f72ecf1479be102a8ddc3f53587-2000x1414.webp?w=1200&amp;auto=format" alt="Best &amp; Fast Travels Office Interior" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">BEST &amp; FAST TRAVELS</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Maharajgunj, Kathmandu</span></a>
+      <a href="the-luxuary-air-b-and-b" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/a64961ef34f6242411af8633d147564a9504455d-1000x707.webp?w=1200&amp;auto=format" alt="The Luxury Air B&B Interior" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">THE LUXURY AIR B&B</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Baluwatar, Kathmandu</span></a>
     </div>
     <div class="port-grid-micasa pmr-3 rv vis d1">
-      <a href="lokanthali-residence" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/fd69dddb4dec0c085f7ba5deca9fadd2eb5f26f2-1000x695.webp?w=1200&amp;auto=format" alt="LOKANTHALI RESIDENCE" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">LOKANTHALI RESIDENCE</span><span class="pm-loc">&#128205; LOKANTHALI, KATHMANDU</span></a>
-      <a href="panipokhari-office-interior-design" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/309f30d586bd343397a19194a1e955f93c3c8bd4-1000x707.webp?w=1200&amp;auto=format" alt="PANIPOKHARI OFFICE " loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">PANIPOKHARI OFFICE </span><span class="pm-loc">&#128205; PANIPOKHARI , KATHMANDU</span></a>
-      <a href="gumba-library" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/607f1d21a01772a498991ebfe23c66e4be9c07b9-1000x707.webp?w=1200&amp;auto=format" alt="GUMBA LIBRARY" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">GUMBA LIBRARY</span><span class="pm-loc">&#128205; MAHARAJGUNJ ,KATHMANDU, NEPAL</span></a>
+      <a href="lokanthali-residence" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/fd69dddb4dec0c085f7ba5deca9fadd2eb5f26f2-1000x695.webp?w=1200&amp;auto=format" alt="Lokanthali Residence Interior" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">LOKANTHALI RESIDENCE</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Lokanthali, Kathmandu</span></a>
+      <a href="panipokhari-office-interior-design" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/309f30d586bd343397a19194a1e955f93c3c8bd4-1000x707.webp?w=1200&amp;auto=format" alt="Panipokhari Office Interior" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">PANIPOKHARI OFFICE</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Panipokhari, Kathmandu</span></a>
+      <a href="gumba-library" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/607f1d21a01772a498991ebfe23c66e4be9c07b9-1000x707.webp?w=1200&amp;auto=format" alt="Gumba Library Interior" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">GUMBA LIBRARY</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Maharajgunj, Kathmandu</span></a>
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section class="contact s" id="contact">
     <div class="wrap">
       <div class="contact-grid">
@@ -884,9 +813,7 @@
     (function animRing(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
     document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('c-hover'));el.addEventListener('mouseleave',()=>document.body.classList.remove('c-hover'));});
 
-    // LOADER
-    const lp=document.getElementById('loaderP');let w=0;
-    const iv=setInterval(()=>{w+=Math.random()*16+5;if(w>=100){w=100;clearInterval(iv);setTimeout(()=>document.getElementById('loader').classList.add('out'),400);}lp.style.width=w+'%';},55);
+
 
     // NAV SCROLL
     window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60));
@@ -922,8 +849,8 @@
     // HERO CHAR-BY-CHAR BLUR REVEAL
     (function buildHeroText() {
       const lines = [
-        { el: document.getElementById('heroLine1'), words: ['CRAFTING', 'VISIONS,'], accentWord: -1 },
-        { el: document.getElementById('heroLine2'), words: ['BUILDING', 'DREAMS'],  accentWord: 1  }
+        { el: document.getElementById('heroLine1'), words: ['SPACES', 'NEPAL'], accentWord: 1 },
+        { el: document.getElementById('heroLine2'), words: ["HASN'T", 'SEEN'],  accentWord: -1  }
       ];
       const BASE = 0.82;
       const CHAR_STEP = 0.042;
