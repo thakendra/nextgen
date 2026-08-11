@@ -121,48 +121,46 @@ async function renderHomePageFeatured() {
   const allProjects = await fetchSanityProjects();
   if (!allProjects || allProjects.length === 0) return;
 
-  // Strict Admin Control: Only show projects where "Show this project on Home Page" is turned ON
-  const featured = allProjects.filter(p => p.featuredOnHome === true && p.thumbnailUrl && p.thumbnailUrl !== 'None');
-  
-  const archProjects = featured.filter(p => (p.mainCategory || '').toLowerCase() === 'architecture');
-  const interiorProjects = featured.filter(p => (p.mainCategory || '').toLowerCase() !== 'architecture');
+  // Check if admin has explicitly featured any projects
+  const featuredArch = allProjects.filter(p => p.featuredOnHome === true && (p.mainCategory || '').toLowerCase() === 'architecture' && p.thumbnailUrl);
+  const featuredInterior = allProjects.filter(p => p.featuredOnHome === true && (p.mainCategory || '').toLowerCase() !== 'architecture' && p.thumbnailUrl);
+
+  // If specific projects are featured, show them; otherwise fallback to latest so it is NEVER blank
+  const archList = featuredArch.length > 0 ? featuredArch : allProjects.filter(p => (p.mainCategory || '').toLowerCase() === 'architecture' && p.thumbnailUrl).slice(0, 4);
+  const interiorList = featuredInterior.length > 0 ? featuredInterior : allProjects.filter(p => (p.mainCategory || '').toLowerCase() !== 'architecture' && p.thumbnailUrl).slice(0, 4);
 
   if (archContainer) {
     archContainer.innerHTML = '';
-    if (archProjects.length > 0) {
-      archProjects.forEach(proj => {
-        if (!proj.thumbnailUrl) return;
-        const a = document.createElement('a');
-        a.href = proj.slug || '#';
-        a.className = 'pm-card pm-r43';
-        a.innerHTML = `
-          <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}"/>
-          <div class="pm-card-overlay"></div>
-          <span class="pm-name">${proj.title.toUpperCase()}</span>
-          <span class="pm-loc">&#128205; ${proj.location || 'Kathmandu, Nepal'}</span>
-        `;
-        archContainer.appendChild(a);
-      });
-    }
+    archList.forEach((proj, idx) => {
+      if (!proj.thumbnailUrl) return;
+      const a = document.createElement('a');
+      a.href = proj.slug || '#';
+      a.className = 'pm-card pm-r43';
+      a.innerHTML = `
+        <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}" loading="lazy"/>
+        <div class="pm-card-overlay"></div>
+        <span class="pm-name">${proj.title.toUpperCase()}</span>
+        <span class="pm-loc">&#128205; ${proj.location || 'Kathmandu, Nepal'}</span>
+      `;
+      archContainer.appendChild(a);
+    });
   }
 
   if (interiorContainer) {
     interiorContainer.innerHTML = '';
-    if (interiorProjects.length > 0) {
-      interiorProjects.forEach(proj => {
-        if (!proj.thumbnailUrl) return;
-        const a = document.createElement('a');
-        a.href = proj.slug || '#';
-        a.className = 'pm-card pm-tall';
-        a.innerHTML = `
-          <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}"/>
-          <div class="pm-card-overlay"></div>
-          <span class="pm-name">${proj.title.toUpperCase()}</span>
-          <span class="pm-loc">&#128205; ${proj.location || 'Kathmandu, Nepal'}</span>
-        `;
-        interiorContainer.appendChild(a);
-      });
-    }
+    interiorList.forEach((proj, idx) => {
+      if (!proj.thumbnailUrl) return;
+      const a = document.createElement('a');
+      a.href = proj.slug || '#';
+      a.className = 'pm-card pm-tall';
+      a.innerHTML = `
+        <img src="${proj.thumbnailUrl}?w=1200&auto=format" alt="${proj.title}" loading="lazy"/>
+        <div class="pm-card-overlay"></div>
+        <span class="pm-name">${proj.title.toUpperCase()}</span>
+        <span class="pm-loc">&#128205; ${proj.location || 'Kathmandu, Nepal'}</span>
+      `;
+      interiorContainer.appendChild(a);
+    });
   }
 }
 
