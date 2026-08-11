@@ -815,13 +815,16 @@ def update_homepage_and_categories(projects, base_dir):
       </div>
     </a>''')
 
-        grid_html = '\n' + '\n'.join(cards) + '\n  ' if cards else '\n    <div style="grid-column: 1 / -1; padding: 60px 0; text-align: center; color: var(--mist); font-size: 14px; letter-spacing: 0.05em;">New showcase projects added in the Sanity Dashboard will appear here automatically.</div>\n  '
+        grid_html = '\n' + '\n'.join(cards) + '\n' if cards else '\n    <div style="grid-column: 1 / -1; padding: 60px 0; text-align: center; color: var(--mist); font-size: 14px; letter-spacing: 0.05em;">New showcase projects added in the Sanity Dashboard will appear here automatically.</div>\n'
+
+        wrap_html = f'''<div class="projects-wrap">\n  <div class="projects-grid">{grid_html}  </div>\n</div>'''
 
         import re
         content = re.sub(
-            r'(<div class="projects-grid"[^>]*>)[\s\S]*?(</div>\s*</div>)',
-            r'\1' + grid_html.replace('\\', '\\\\') + r'\2',
-            content
+            r'<div class="projects-wrap">[\s\S]*?(?=(?:<!--\s*SEO|<section class="seo|<footer|<div class="footer))',
+            wrap_html + '\n\n',
+            content,
+            count=1
         )
         content = re.sub(
             r'(<div class="page-count[^"]*"[^>]*>)[^<]*(</div>)',

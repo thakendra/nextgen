@@ -391,6 +391,55 @@
       <div class="g-card-label"><span>Craftsmanship</span></div>
     </div>
   </div>
+
+  <div class="g-trio rv" style="margin-top:4px;">
+    <div class="g-card ar-sq" onclick="openLb(10)">
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/5c007a521872dd2780478a244d6461d8b6a94e00-1925x1351.webp" alt="Showcase 11"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>Detail Approach</span></div>
+    </div>
+    <div class="g-card ar-sq" onclick="openLb(11)">
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/1ef8b2e75078ce7f223194f54f00538e47deb6bc-1920x1347.webp" alt="Showcase 12"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>Joinery &amp; Texture</span></div>
+    </div>
+    <div class="g-card ar-sq" onclick="openLb(12)">
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/28f7d25360011b26a2ea7ad87d3acd4efafff157-1911x1341.webp" alt="Showcase 13"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>Craftsmanship</span></div>
+    </div>
+  </div>
+
+  <div class="g-trio rv" style="margin-top:4px;">
+    <div class="g-card ar-sq" onclick="openLb(13)">
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/0bf88cb5c67f699b176e05a9cf4a37c14058cb9c-1927x1329.webp" alt="Showcase 14"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>Detail Approach</span></div>
+    </div>
+    <div class="g-card ar-sq" onclick="openLb(14)">
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/e824d9da09d9cb8b052a8689cba9d7b061b48218-1918x1336.webp" alt="Showcase 15"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>Joinery &amp; Texture</span></div>
+    </div>
+    <div class="g-card ar-sq" onclick="openLb(15)">
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/486c932a66b1a68a3b786c45104dd6ac9a3c8ec5-1927x1337.webp" alt="Showcase 16"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>Craftsmanship</span></div>
+    </div>
+  </div>
+
+  <div class="g-half rv" style="margin-top:4px;">
+    <div class="g-card ar-43" onclick="openLb(16)">
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/8447a3d2d4179b469269b10ea962ce0f5808c4ed-1906x1349.webp" alt="Showcase 17"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>Detail Accent</span></div>
+    </div>
+    <div class="g-card ar-43" onclick="openLb(17)">
+      <img src="https://cdn.sanity.io/images/gpyk0ky0/production/355c4ef43d2320e764cf083360f00211df2e1788-1923x1338.webp" alt="Showcase 18"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>Complete View</span></div>
+    </div>
+  </div>
 </div>
 
 <div class="lb" id="lb" onclick="closeLbOnBg(event)">
@@ -443,7 +492,7 @@
   const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});},{threshold:0.04});
   document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
-  const LB_PHOTOS = ["https://cdn.sanity.io/images/gpyk0ky0/production/451b0aef19f32d590d4a802ada274a0687733654-1917x1339.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/c645dc489493ec96c7dadfe19555a398fd360137-1917x1332.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/b88be4e4ba0a46a0eabd2952a5681c0ec837e779-1920x1330.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/05eb3e6501d28195a34dc238aa4e3b4ad2f01ca3-2000x1414.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/30c5bebc9e7e533791f3caffe7c550a5d8138cb2-1924x1342.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/d7bb48caa7017edfa7dd55c8762ee90612a7ce7d-1927x1331.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/539e0d3b4ff72f15ec7ef48e88a06cf420af9b02-1913x1336.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/efff0af95261303bdb54411217136bb6a6f0bf31-1918x1340.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/dc53bbf0e58725438efa50e4b1c1c4c24615c977-1919x1336.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/e7888d21d8ac28b9f9d37ffe8ae09b638502c676-1921x1346.webp"];
+  const LB_PHOTOS = ["https://cdn.sanity.io/images/gpyk0ky0/production/451b0aef19f32d590d4a802ada274a0687733654-1917x1339.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/c645dc489493ec96c7dadfe19555a398fd360137-1917x1332.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/b88be4e4ba0a46a0eabd2952a5681c0ec837e779-1920x1330.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/05eb3e6501d28195a34dc238aa4e3b4ad2f01ca3-2000x1414.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/30c5bebc9e7e533791f3caffe7c550a5d8138cb2-1924x1342.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/d7bb48caa7017edfa7dd55c8762ee90612a7ce7d-1927x1331.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/539e0d3b4ff72f15ec7ef48e88a06cf420af9b02-1913x1336.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/efff0af95261303bdb54411217136bb6a6f0bf31-1918x1340.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/dc53bbf0e58725438efa50e4b1c1c4c24615c977-1919x1336.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/e7888d21d8ac28b9f9d37ffe8ae09b638502c676-1921x1346.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/5c007a521872dd2780478a244d6461d8b6a94e00-1925x1351.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/1ef8b2e75078ce7f223194f54f00538e47deb6bc-1920x1347.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/28f7d25360011b26a2ea7ad87d3acd4efafff157-1911x1341.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/0bf88cb5c67f699b176e05a9cf4a37c14058cb9c-1927x1329.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/e824d9da09d9cb8b052a8689cba9d7b061b48218-1918x1336.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/486c932a66b1a68a3b786c45104dd6ac9a3c8ec5-1927x1337.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/8447a3d2d4179b469269b10ea962ce0f5808c4ed-1906x1349.webp", "https://cdn.sanity.io/images/gpyk0ky0/production/355c4ef43d2320e764cf083360f00211df2e1788-1923x1338.webp"];
   let lbCurrent = 0;
   const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCounter = document.getElementById('lbCounter');
   function openLb(idx){lbCurrent = idx; updateLb(); lb.classList.add('open'); document.body.style.overflow='hidden';}
