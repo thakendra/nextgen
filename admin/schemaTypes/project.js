@@ -22,10 +22,17 @@ export const project = {
     },
     {
       name: 'featuredOnHome',
-      title: '🌟 Show this project on Home Page?',
-      type: 'boolean',
-      initialValue: false,
-      description: '✅ Turn ON to feature this project on the Home Page (nextgeninterior.com) showcase grid. ❌ Turn OFF to hide from Home Page.',
+      title: '🌟 Do you want to show this project on Home Page?',
+      type: 'string',
+      options: {
+        list: [
+          { title: '✅ YES — Show on Home Page', value: 'yes' },
+          { title: '❌ NO — Hide from Home Page', value: 'no' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'yes',
+      description: 'Select YES to feature this project on the Home Page (nextgeninterior.com) showcase. Select NO to only show in its category.',
     },
     {
       name: 'mainCategory',

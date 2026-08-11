@@ -121,13 +121,16 @@ async function renderHomePageFeatured() {
   const allProjects = await fetchSanityProjects();
   if (!allProjects || allProjects.length === 0) return;
 
-  // Check if admin has explicitly featured any projects
-  const featuredArch = allProjects.filter(p => p.featuredOnHome === true && (p.mainCategory || '').toLowerCase() === 'architecture' && p.thumbnailUrl);
-  const featuredInterior = allProjects.filter(p => p.featuredOnHome === true && (p.mainCategory || '').toLowerCase() !== 'architecture' && p.thumbnailUrl);
+  // Support both YES/NO radio selection and legacy booleans
+  const isFeatured = p => (p.featuredOnHome === 'yes' || p.featuredOnHome === true) && p.thumbnailUrl && p.thumbnailUrl !== 'None';
+  const isExcluded = p => (p.featuredOnHome === 'no' || p.featuredOnHome === false);
 
-  // If specific projects are featured, show them; otherwise fallback to latest so it is NEVER blank
-  const archList = featuredArch.length > 0 ? featuredArch : allProjects.filter(p => (p.mainCategory || '').toLowerCase() === 'architecture' && p.thumbnailUrl).slice(0, 4);
-  const interiorList = featuredInterior.length > 0 ? featuredInterior : allProjects.filter(p => (p.mainCategory || '').toLowerCase() !== 'architecture' && p.thumbnailUrl).slice(0, 4);
+  const featuredArch = allProjects.filter(p => isFeatured(p) && (p.mainCategory || '').toLowerCase() === 'architecture');
+  const featuredInterior = allProjects.filter(p => isFeatured(p) && (p.mainCategory || '').toLowerCase() !== 'architecture');
+
+  // If specific projects are chosen with YES, show them; otherwise show active projects that are not excluded with NO
+  const archList = featuredArch.length > 0 ? featuredArch : allProjects.filter(p => !isExcluded(p) && (p.mainCategory || '').toLowerCase() === 'architecture' && p.thumbnailUrl).slice(0, 4);
+  const interiorList = featuredInterior.length > 0 ? featuredInterior : allProjects.filter(p => !isExcluded(p) && (p.mainCategory || '').toLowerCase() !== 'architecture' && p.thumbnailUrl).slice(0, 4);
 
   if (archContainer) {
     archContainer.innerHTML = '';
