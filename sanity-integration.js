@@ -31,7 +31,6 @@ async function renderCategoryGrid() {
   
   const path = window.location.pathname.toLowerCase();
   const allProjects = await fetchSanityProjects();
-  if (!allProjects || allProjects.length === 0) return;
   
   // Clean filtering logic matching main and subcategories
   const filtered = allProjects.filter(p => {
@@ -73,14 +72,15 @@ async function renderCategoryGrid() {
     return true;
   });
 
+  // Clear static old fallback
+  grid.innerHTML = '';
+
   if (filtered.length === 0) {
     const pageCount = document.querySelector('.page-count');
     if (pageCount) pageCount.textContent = '00';
+    grid.innerHTML = `<div style="grid-column: 1 / -1; padding: 60px 0; text-align: center; color: var(--mist); font-size: 14px; letter-spacing: 0.05em;">New showcase projects added in the Sanity Dashboard will appear here automatically.</div>`;
     return;
   }
-
-  // Clear static old fallback and render pure live Sanity projects
-  grid.innerHTML = '';
 
   filtered.forEach((proj, idx) => {
     const a = document.createElement('a');
@@ -100,6 +100,7 @@ async function renderCategoryGrid() {
         <div class="proj-card-num">${String(idx + 1).padStart(2, '0')}</div>
         <div class="proj-card-name">${proj.title.toUpperCase()}</div>
         <div class="proj-card-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>${proj.location || 'Kathmandu, Nepal'}</div>
+        <div class="proj-card-cta">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
       </div>
     `;
     
@@ -118,14 +119,18 @@ async function renderHomePageFeatured() {
   if (!archContainer && !interiorContainer) return;
 
   const allProjects = await fetchSanityProjects();
+  if (!allProjects || allProjects.length === 0) return;
+
   const featured = allProjects.filter(p => p.featuredOnHome === true && p.thumbnailUrl && p.thumbnailUrl !== 'None');
   
-  const archProjects = (featured.length > 0 ? featured : allProjects).filter(p => (p.mainCategory || '').toLowerCase() === 'architecture');
-  const interiorProjects = (featured.length > 0 ? featured : allProjects).filter(p => (p.mainCategory || '').toLowerCase() !== 'architecture');
+  const pool = featured.length > 0 ? featured : allProjects;
+  const archProjects = pool.filter(p => (p.mainCategory || '').toLowerCase() === 'architecture');
+  const interiorProjects = pool.filter(p => (p.mainCategory || '').toLowerCase() !== 'architecture');
 
-  if (archContainer && archProjects.length > 0) {
+  if (archContainer) {
     archContainer.innerHTML = '';
-    archProjects.forEach(proj => {
+    const listToRender = archProjects.length > 0 ? archProjects : allProjects.slice(0, 3);
+    listToRender.forEach(proj => {
       if (!proj.thumbnailUrl) return;
       const a = document.createElement('a');
       a.href = proj.slug || '#';
@@ -140,9 +145,10 @@ async function renderHomePageFeatured() {
     });
   }
 
-  if (interiorContainer && interiorProjects.length > 0) {
+  if (interiorContainer) {
     interiorContainer.innerHTML = '';
-    interiorProjects.forEach(proj => {
+    const listToRender = interiorProjects.length > 0 ? interiorProjects : allProjects.slice(0, 4);
+    listToRender.forEach(proj => {
       if (!proj.thumbnailUrl) return;
       const a = document.createElement('a');
       a.href = proj.slug || '#';
