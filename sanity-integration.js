@@ -30,11 +30,7 @@ async function renderCategoryGrid() {
   if (!grid) return;
 
   // Category pages are pre-rendered by build_from_sanity.py — skip to avoid duplicates
-  if (grid.querySelectorAll('.proj-card').length > 0) {
-    const pageCount = document.querySelector('.page-count');
-    if (pageCount) pageCount.textContent = String(grid.querySelectorAll('.proj-card').length).padStart(2, '0');
-    return;
-  }
+  if (grid.querySelectorAll('.proj-card').length > 0) return;
   
   const path = window.location.pathname.toLowerCase();
   const allProjects = await fetchSanityProjects();
@@ -83,8 +79,6 @@ async function renderCategoryGrid() {
   grid.innerHTML = '';
 
   if (filtered.length === 0) {
-    const pageCount = document.querySelector('.page-count');
-    if (pageCount) pageCount.textContent = '00';
     grid.innerHTML = `<div style="grid-column: 1 / -1; padding: 60px 0; text-align: center; color: var(--mist); font-size: 14px; letter-spacing: 0.05em;">New showcase projects added in the Sanity Dashboard will appear here automatically.</div>`;
     return;
   }
@@ -112,11 +106,6 @@ async function renderCategoryGrid() {
     
     grid.appendChild(a);
   });
-  
-  const pageCount = document.querySelector('.page-count');
-  if (pageCount) {
-    pageCount.textContent = String(filtered.length).padStart(2, '0');
-  }
 }
 
 async function renderHomePageFeatured() {

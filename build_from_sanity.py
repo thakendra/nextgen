@@ -814,11 +814,6 @@ def update_homepage_and_categories(projects, base_dir):
             content,
             count=1
         )
-        content = re.sub(
-            r'(<div class="page-count[^"]*"[^>]*>)[^<]*(</div>)',
-            r'\g<1>' + str(len(cat_projs)).zfill(2) + r'\2',
-            content
-        )
         with open(fpath, "w", encoding="utf-8") as f:
             f.write(content)
         print(f"Pre-rendered {fname} with {len(cat_projs)} projects.")

@@ -53,7 +53,8 @@
       "Bash(python -X utf8 -)",
       "Bash(python -X utf8 update.py)",
       "Bash(python -X utf8 sync_to_hostinger.py)",
-      "Bash(git commit -q -m ' *)"
+      "Bash(git commit -q -m ' *)",
+      "Bash(node --check sanity-integration.js)"
     ]
   }
 }
