@@ -62,14 +62,7 @@ export const project = {
         hotspot: true,
         accept: 'image/webp',
       },
-      validation: (Rule) =>
-        Rule.required().custom((value) => {
-          if (!value?.asset?._ref) return true;
-          if (!value.asset._ref.endsWith('-webp')) {
-            return 'Only WebP (.webp) format is allowed for high performance.';
-          }
-          return true;
-        }),
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'eyebrow',
@@ -98,25 +91,15 @@ export const project = {
     },
     {
       name: 'galleryImages',
-      title: 'Inner Gallery Showcase Photos (Max 10, WebP only, <500KB)',
-      description: 'Upload between 1 and 10 high-resolution WebP images. You can select multiple images at once (Ctrl+Click) or drag & drop up to 10 files directly into this box!',
+      title: 'Inner Gallery Showcase Photos (Max 10, WebP recommended)',
+      description: 'Upload between 1 and 10 high-resolution images. You can select multiple images at once (Ctrl+Click) or drag & drop up to 10 files directly into this box!',
       type: 'array',
       options: {
         layout: 'grid',
       },
       validation: (Rule) =>
         Rule.max(10)
-          .error('Maximum 10 inner gallery photos allowed for optimal loading speed.')
-          .custom((images) => {
-            if (!images || !Array.isArray(images)) return true;
-            for (let i = 0; i < images.length; i++) {
-              const img = images[i];
-              if (img?.asset?._ref && !img.asset._ref.endsWith('-webp')) {
-                return `Image #${i + 1} must be in WebP (.webp) format.`;
-              }
-            }
-            return true;
-          }),
+          .error('Maximum 10 inner gallery photos allowed for optimal loading speed.'),
       of: [
         {
           type: 'image',
