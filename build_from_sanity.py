@@ -627,8 +627,122 @@ def build():
             
         print(f"Generated Sankhu-Style Showcase Page: {slug}.html ({len(gallery)} images)")
 
+    # Pre-render Homepage & Category grids directly into HTML
+    update_homepage_and_categories(projects, base_dir)
+
     # Generate updated dynamic sitemap.xml
     generate_sitemap(projects, base_dir)
+
+def update_homepage_and_categories(projects, base_dir):
+    # 1. Update index.html Home Page
+    index_path = os.path.join(base_dir, "index.html")
+    if os.path.exists(index_path):
+        with open(index_path, "r", encoding="utf-8") as f:
+            index_html = f.read()
+
+        is_feat = lambda p: p.get('featuredOnHome') in [True, 'yes'] and p.get('thumbnail')
+        is_excl = lambda p: p.get('featuredOnHome') in [False, 'no']
+
+        feat_arch = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() == 'architecture']
+        feat_interior = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() != 'architecture']
+
+        arch_list = feat_arch if feat_arch else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() == 'architecture' and p.get('thumbnail')][:4]
+        interior_list = feat_interior if feat_interior else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() != 'architecture' and p.get('thumbnail')][:4]
+
+        arch_cards = []
+        for p in arch_list:
+            slug = (p.get('slug') or '').strip().replace(' ', '-')
+            title = p.get('title', '').upper()
+            loc = p.get('location') or 'Kathmandu, Nepal'
+            thumb = p.get('thumbnail')
+            arch_cards.append(f'      <a href="{slug}" class="pm-card pm-r43"><img src="{thumb}?w=1200&amp;auto=format" alt="{title}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{title}</span><span class="pm-loc">&#128205; {loc}</span></a>')
+
+        interior_cards = []
+        for p in interior_list:
+            slug = (p.get('slug') or '').strip().replace(' ', '-')
+            title = p.get('title', '').upper()
+            loc = p.get('location') or 'Kathmandu, Nepal'
+            thumb = p.get('thumbnail')
+            interior_cards.append(f'      <a href="{slug}" class="pm-card pm-tall"><img src="{thumb}?w=1200&amp;auto=format" alt="{title}" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-name">{title}</span><span class="pm-loc">&#128205; {loc}</span></a>')
+
+        import re
+        arch_html = '\n' + '\n'.join(arch_cards) + '\n    '
+        interior_html = '\n' + '\n'.join(interior_cards) + '\n    '
+
+        index_html = re.sub(
+            r'(<div class="port-grid-micasa[^"]*" id="homeArchGrid"[^>]*>)[^<]*(?:<[^/][\s\S]*?)?(</div>)',
+            r'\1' + arch_html.replace('\\', '\\\\') + r'\2',
+            index_html
+        )
+        index_html = re.sub(
+            r'(<div class="port-grid-micasa[^"]*" id="homeInteriorGrid"[^>]*>)[^<]*(?:<[^/][\s\S]*?)?(</div>)',
+            r'\1' + interior_html.replace('\\', '\\\\') + r'\2',
+            index_html
+        )
+
+        with open(index_path, "w", encoding="utf-8") as f:
+            f.write(index_html)
+        print(f"Pre-rendered index.html with {len(arch_list)} Architecture and {len(interior_list)} Interior featured projects.")
+
+    # 2. Update Category Pages
+    cat_configs = {
+        "architecture.html": lambda p: (p.get('mainCategory') or '').lower() == 'architecture' or (p.get('subCategory') or '').lower() == 'dpr-landscaping',
+        "interiors.html": lambda p: (p.get('mainCategory') or '').lower() == 'interiors' or (p.get('mainCategory') or '').lower() != 'architecture',
+        "residential.html": lambda p: (p.get('subCategory') or '').lower() == 'residential',
+        "commercial.html": lambda p: (p.get('subCategory') or '').lower() == 'commercial',
+        "hospitality.html": lambda p: (p.get('subCategory') or '').lower() == 'hospitality',
+        "healthcare.html": lambda p: (p.get('subCategory') or '').lower() == 'healthcare',
+        "education.html": lambda p: (p.get('subCategory') or '').lower() == 'education',
+        "workplace.html": lambda p: (p.get('subCategory') or '').lower() == 'workplace',
+        "club-resort.html": lambda p: (p.get('subCategory') or '').lower() == 'club-resort',
+        "dpr-landscaping.html": lambda p: (p.get('subCategory') or '').lower() == 'dpr-landscaping',
+    }
+
+    for fname, filter_fn in cat_configs.items():
+        fpath = os.path.join(base_dir, fname)
+        if not os.path.exists(fpath):
+            continue
+        with open(fpath, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        cat_projs = [p for p in projects if filter_fn(p) and p.get('thumbnail')]
+        cards = []
+        for idx, p in enumerate(cat_projs):
+            slug = (p.get('slug') or '').strip().replace(' ', '-')
+            title = p.get('title', '').upper()
+            loc = p.get('location') or 'Kathmandu, Nepal'
+            thumb = p.get('thumbnail')
+            eyebrow = p.get('eyebrow') or (p.get('subCategory', '').upper() if p.get('subCategory') else 'PROJECT')
+            is_span2 = 'span2' if idx == 0 else ''
+            num = str(idx + 1).zfill(2)
+            cards.append(f'''    <a href="{slug}" class="proj-card rv vis {is_span2}">
+      <img src="{thumb}?w=1200&amp;auto=format" alt="{title}" loading="lazy"/>
+      <div class="proj-card-overlay"></div>
+      <div class="proj-card-cat">{eyebrow}</div>
+      <div class="proj-card-info">
+        <div class="proj-card-num">{num}</div>
+        <div class="proj-card-name">{title}</div>
+        <div class="proj-card-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>{loc}</div>
+        <div class="proj-card-cta">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+    </a>''')
+
+        grid_html = '\n' + '\n'.join(cards) + '\n  ' if cards else '\n    <div style="grid-column: 1 / -1; padding: 60px 0; text-align: center; color: var(--mist); font-size: 14px; letter-spacing: 0.05em;">New showcase projects added in the Sanity Dashboard will appear here automatically.</div>\n  '
+
+        import re
+        content = re.sub(
+            r'(<div class="projects-grid"[^>]*>)[\s\S]*?(</div>\s*</div>)',
+            r'\1' + grid_html.replace('\\', '\\\\') + r'\2',
+            content
+        )
+        content = re.sub(
+            r'(<div class="page-count[^"]*"[^>]*>)[^<]*(</div>)',
+            r'\g<1>' + str(len(cat_projs)).zfill(2) + r'\2',
+            content
+        )
+        with open(fpath, "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"Pre-rendered {fname} with {len(cat_projs)} projects.")
 
 def generate_sitemap(projects, base_dir):
     from datetime import datetime
