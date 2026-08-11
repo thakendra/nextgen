@@ -21,6 +21,13 @@ export const project = {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'featuredOnHome',
+      title: '🌟 Show this project on Home Page?',
+      type: 'boolean',
+      initialValue: false,
+      description: '✅ Turn ON to feature this project on the Home Page (nextgeninterior.com) showcase grid. ❌ Turn OFF to hide from Home Page.',
+    },
+    {
       name: 'mainCategory',
       title: '1. Main Category',
       type: 'string',
@@ -52,13 +59,6 @@ export const project = {
       },
       validation: (Rule) => Rule.required(),
       description: 'Select the specific sub-category (will show on both Main and Subcategory pages).',
-    },
-    {
-      name: 'featuredOnHome',
-      title: '🏠 Show this project on Home Page?',
-      type: 'boolean',
-      initialValue: false,
-      description: '✅ Turn ON (Checked) to feature this project on the Home Page (nextgeninterior.com) showcase grid. ❌ Turn OFF to hide it from the Home Page (it will still appear in its respective category page).',
     },
     {
       name: 'thumbnail',
