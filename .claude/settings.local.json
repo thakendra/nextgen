@@ -47,7 +47,11 @@
       "Bash(grep -o '<p class=\"port-cat-note\">.\\\\{0,90\\\\}' index.html)",
       "Bash(git diff *)",
       "Bash(grep -oE '\\(SURKHET|PANIPOKHARI|Naikap|MAHARAJGUNJ|Kathmandu|Karnali\\)[^<]{0,25}')",
-      "Bash(node -e \"const fs=require\\('fs'\\);const h=fs.readFileSync\\('index.html','utf8'\\);const ms=[...h.matchAll\\(/<script type=\\\\\"application\\\\/ld\\\\+json\\\\\">\\([\\\\s\\\\S]*?\\)<\\\\/script>/g\\)];let ok=0;for\\(const m of ms\\){try{JSON.parse\\(m[1]\\);ok++}catch\\(e\\){console.log\\('BAD',e.message\\)}}console.log\\('valid JSON-LD blocks:',ok\\);console.log\\('schema desc:',JSON.parse\\(ms[0][1]\\)['@graph'][0].description\\)\")"
+      "Bash(node -e \"const fs=require\\('fs'\\);const h=fs.readFileSync\\('index.html','utf8'\\);const ms=[...h.matchAll\\(/<script type=\\\\\"application\\\\/ld\\\\+json\\\\\">\\([\\\\s\\\\S]*?\\)<\\\\/script>/g\\)];let ok=0;for\\(const m of ms\\){try{JSON.parse\\(m[1]\\);ok++}catch\\(e\\){console.log\\('BAD',e.message\\)}}console.log\\('valid JSON-LD blocks:',ok\\);console.log\\('schema desc:',JSON.parse\\(ms[0][1]\\)['@graph'][0].description\\)\")",
+      "Bash(python -X utf8 \"C:/Users/LOQ/AppData/Local/Temp/claude/D--nextgen/5ad7bd8e-257d-485f-bdd4-a66f967cbca8/scratchpad/nav_cta.py\")",
+      "Bash(python -X utf8 inject_common_tail.py)",
+      "Bash(python -X utf8 -)",
+      "Bash(python -X utf8 update.py)"
     ]
   }
 }

@@ -3,6 +3,8 @@ import json
 import urllib.request
 import urllib.parse
 
+from common_tail import COMMON_TAIL, TAIL_MARKER
+
 PROJECT_ID = "gpyk0ky0"
 DATASET = "production"
 
@@ -80,8 +82,11 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .nav-dropdown a:hover{{color:var(--blue-mid);background:rgba(54,159,206,0.05);padding-left:28px;}}
     .nav-dropdown a:hover::before{{width:12px;}}
     .nav-dropdown a.active{{color:var(--blue-mid);}}
-    .nav-cta{{font-family:var(--f-body);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(245,242,237,0.4);transition:color .3s;}}
-    .nav-cta:hover{{color:var(--blue-mid);}}
+    .nav-cta{{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--offwhite);padding:9px 18px;border:1px solid rgba(54,159,206,0.5);background:rgba(54,159,206,0.1);white-space:nowrap;transition:background .35s var(--ease),border-color .35s var(--ease),color .35s var(--ease),box-shadow .35s var(--ease),transform .35s var(--ease);}}
+    .nav-cta svg{{width:13px;height:13px;flex-shrink:0;color:var(--blue-mid);transition:color .35s,transform .45s var(--ease);}}
+    .nav-cta:hover{{background:var(--blue-mid);border-color:var(--blue-mid);color:var(--ink);box-shadow:0 6px 22px rgba(54,159,206,0.32);transform:translateY(-1px);}}
+    .nav-cta:hover svg{{color:var(--ink);transform:rotate(-14deg) scale(1.12);}}
+    .nav-cta:active{{transform:translateY(0);box-shadow:0 2px 10px rgba(54,159,206,0.22);}}
     .nav-menu-btn{{display:none;flex-direction:column;gap:6px;width:26px;cursor:none;}}
     .nav-menu-btn span{{display:block;width:100%;height:1px;background:var(--offwhite);transition:transform .4s var(--ease),opacity .3s;}}
     .nav-menu-btn.open span:nth-child(1){{transform:translateY(7px) rotate(45deg);}}
@@ -241,6 +246,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     ]
   }}
   </script>
+  <link rel="stylesheet" href="/site-common.css" />
 </head>
 <body>
 <div class="cursor-dot" id="cursorDot"></div>
@@ -268,7 +274,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     <li><a href="/#contact">Contact</a></li>
     <li><a href="careers">Careers</a></li>
   </ul>
-  <a href="tel:+9779849151220" class="nav-cta">+977 9849151220</a>
+  <a href="tel:+9779849151220" class="nav-cta" aria-label="Call NextGen Interiors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.09 4.18 2 2 0 0 1 4.08 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+977 9849151220</span></a>
   <button class="nav-menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
@@ -356,19 +362,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   </div>
 </div>
 
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-logo"><img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:28px;"/></div>
-    <p class="footer-copy">&copy; 2025 NextGen Interiors &amp; Architects &middot; Baluwatar, Kathmandu</p>
-    <div class="footer-socials"><a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/architectsandinteriorshouse" target="_blank" rel="noopener">Facebook</a><a href="https://www.linkedin.com/company/nextgen-interiors-architects-pvt-ltd/?originalSubdomain=np" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.youtube.com/@nextgeninteriors" target="_blank" rel="noopener">YouTube</a></div>
-  </div>
-</footer>
-
-<div class="wa-bubble">
-  <a href="https://wa.me/9779849151220?text=Hello%20NextGen%2C%20I%27d%20like%20to%20discuss%20a%20project." class="wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-  </a>
-</div>
+<!--COMMON_TAIL-->
 
 <script>
   const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
@@ -620,7 +614,10 @@ def build():
             showcase_html=showcase_html,
             photos_json=json.dumps(gallery)
         )
-        
+
+        # Swapped in after .format() so the tail's braces never reach str.format().
+        html = html.replace(TAIL_MARKER, COMMON_TAIL)
+
         filepath = os.path.join(base_dir, f"{slug}.html")
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(html)
@@ -744,21 +741,18 @@ def update_homepage_and_categories(projects, base_dir):
         full_arch_html = '\n'.join(arch_rows)
         full_interior_html = '\n'.join(interior_rows)
 
-        total_shown = len(p_arch) + len(p_int)
+        # Both section headings use the same top padding so the rhythm between
+        # Architecture and Interior Design is identical.
+        strip_pad = 'style="padding-top: clamp(40px,6vw,80px);"'
         full_portfolio_section = f'''  <!-- PORTFOLIO / FEATURED PROJECTS -->
   <section class="portfolio" id="portfolio">
-    <div class="port-cat-strip rv vis" style="padding-top: clamp(40px,6vw,80px);">
-      <div class="port-cat-label">01</div>
+    <div class="port-cat-strip rv vis" {strip_pad}>
       <h2 class="port-cat-h">ARCHITECTURE</h2>
-      <p class="port-cat-note">200+ projects delivered across Nepal &mdash; {total_shown} selected below. <a href="architecture">See all architecture work</a>.</p>
     </div>
 {full_arch_html}
 
-    <div style="padding-bottom: clamp(56px,8vw,96px);"></div>
-    <div class="port-cat-strip rv vis">
-      <div class="port-cat-label">02</div>
+    <div class="port-cat-strip rv vis" {strip_pad}>
       <h2 class="port-cat-h">INTERIOR DESIGN</h2>
-      <p class="port-cat-note">Residential, workplace, hospitality and retail interiors &mdash; concept to handover. <a href="interiors">See all interior work</a>.</p>
     </div>
 {full_interior_html}
   </section>'''
@@ -830,7 +824,10 @@ def update_homepage_and_categories(projects, base_dir):
 
         import re
         content = re.sub(
-            r'<div class="projects-wrap">[\s\S]*?(?=(?:<!--\s*SEO|<section class="seo|<footer|<div class="footer))',
+            # The shared tail must be listed first: it sits between the grid and
+            # the footer, so matching on <footer alone would swallow it whole on
+            # any page that has no SEO copy block.
+            r'<div class="projects-wrap">[\s\S]*?(?=(?:<!--\s*=====\s*COMMON TAIL|<!--\s*SEO|<section class="seo|<footer|<div class="footer))',
             wrap_html + '\n\n',
             content,
             count=1

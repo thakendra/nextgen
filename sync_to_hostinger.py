@@ -19,6 +19,7 @@ print("Connected to Hostinger!")
 # Base files to always sync
 FILES_TO_SYNC = [
     "sanity-integration.js",
+    "site-common.css",
     "interiors.html",
     "residential.html",
     "architecture.html",
