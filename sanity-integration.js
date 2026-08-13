@@ -1,6 +1,15 @@
 const PROJECT_ID = 'gpyk0ky0';
 const DATASET = 'production';
 
+const RUNNING_CATEGORIES = ['ongoing-projects', 'running-projects', 'ongoing', 'running'];
+
+// Running / ongoing projects live only in the Running Projects section of the
+// home page — never in a category listing. Mirrors is_running() in build_from_sanity.py.
+const isRunningProject = p =>
+  RUNNING_CATEGORIES.includes((p.mainCategory || '').toLowerCase()) ||
+  p.projectStatus === 'running' ||
+  p.featuredOnHome === 'running';
+
 async function fetchSanityProjects() {
   const query = encodeURIComponent(`*[_type == "project"] | order(_createdAt desc) {
     title, 
@@ -10,6 +19,7 @@ async function fetchSanityProjects() {
     mainCategory,
     subCategory,
     featuredOnHome,
+    projectStatus,
     "thumbnailUrl": coalesce(thumbnail.asset->url, thumbnail.asset.asset->url, galleryImages[0].asset.asset->url, galleryImages[0].asset->url)
   }`);
   
@@ -38,7 +48,8 @@ async function renderCategoryGrid() {
   // Clean filtering logic matching main and subcategories
   const filtered = allProjects.filter(p => {
     if (!p.thumbnailUrl || p.thumbnailUrl === 'None') return false;
-    
+    if (isRunningProject(p)) return false;
+
     const main = (p.mainCategory || '').toLowerCase();
     const sub = (p.subCategory || '').toLowerCase();
     
@@ -119,8 +130,8 @@ async function renderHomePageFeatured() {
   if (!allProjects || allProjects.length === 0) return;
 
   // Support both YES/NO radio selection and legacy booleans
-  const isFeatured = p => (p.featuredOnHome === 'yes' || p.featuredOnHome === true) && p.thumbnailUrl && p.thumbnailUrl !== 'None';
-  const isExcluded = p => (p.featuredOnHome === 'no' || p.featuredOnHome === false);
+  const isFeatured = p => (p.featuredOnHome === 'yes' || p.featuredOnHome === true) && p.thumbnailUrl && p.thumbnailUrl !== 'None' && !isRunningProject(p);
+  const isExcluded = p => (p.featuredOnHome === 'no' || p.featuredOnHome === false) || isRunningProject(p);
 
   const featuredArch = allProjects.filter(p => isFeatured(p) && (p.mainCategory || '').toLowerCase() === 'architecture');
   const featuredInterior = allProjects.filter(p => isFeatured(p) && (p.mainCategory || '').toLowerCase() !== 'architecture');

@@ -3,6 +3,8 @@ import json
 import urllib.request
 import urllib.parse
 
+from copy_clean import clean_text
+
 PROJECT_ID = "gpyk0ky0"
 DATASET = "production"
 
@@ -543,6 +545,8 @@ def fetch_sanity_data():
         "slug": slug.current,
         mainCategory,
         subCategory,
+        featuredOnHome,
+        projectStatus,
         eyebrow,
         location,
         intro_heading,
@@ -652,6 +656,25 @@ def category_tag(p):
     label = ' &middot; '.join([s.title() for s in (main, sub) if s])
     return label or 'Project'
 
+RUNNING_CATEGORIES = {'ongoing-projects', 'running-projects', 'ongoing', 'running'}
+
+def is_running(p):
+    """True when the dashboard marks a project as running / ongoing — either via
+    the Home Page radio, the Project Status radio, or an 'Ongoing Project' main
+    category. A running project belongs to the Running Projects section on the
+    home page and nowhere else: not in the Architecture / Interior grids above
+    it, and not in the category listing pages."""
+    return ((p.get('mainCategory') or '').lower() in RUNNING_CATEGORIES
+            or p.get('projectStatus') == 'running'
+            or p.get('featuredOnHome') == 'running')
+
+def is_hidden_from_home(p):
+    """Only an explicit '❌ NO' hides a project from the home page. The legacy
+    boolean False is deliberately ignored — featuredOnHome used to be a checkbox
+    with initialValue false, so those values are stale defaults rather than a
+    choice, and honouring them would silently empty most of the home grids."""
+    return p.get('featuredOnHome') == 'no'
+
 PIN_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>'
 
 def pm_card(p, h_class):
@@ -724,16 +747,13 @@ def update_homepage_and_categories(projects, base_dir):
         with open(index_path, "r", encoding="utf-8") as f:
             index_html = f.read()
 
-        is_running = lambda p: ((p.get('mainCategory') or '').lower() in ['ongoing-projects', 'running-projects', 'ongoing', 'running'] or p.get('projectStatus') == 'running' or p.get('featuredOnHome') == 'running') and p.get('thumbnail')
-        is_feat = lambda p: p.get('featuredOnHome') in [True, 'yes'] and p.get('thumbnail') and not is_running(p)
-        is_excl = lambda p: p.get('featuredOnHome') in [False, 'no']
+        # Running projects are pulled out first, so they can never also appear in
+        # the Architecture / Interior grids above the Running Projects section.
+        on_home = lambda p: p.get('thumbnail') and not is_hidden_from_home(p) and not is_running(p)
 
-        feat_arch = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() == 'architecture']
-        feat_interior = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() in ['interiors', 'interior']]
-        running_list = [p for p in projects if is_running(p)]
-
-        arch_list = feat_arch if feat_arch else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() == 'architecture' and p.get('thumbnail')]
-        interior_list = feat_interior if feat_interior else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() not in ['architecture', 'ongoing-projects', 'running-projects'] and p.get('thumbnail')]
+        arch_list = [p for p in projects if on_home(p) and (p.get('mainCategory') or '').lower() == 'architecture']
+        interior_list = [p for p in projects if on_home(p) and (p.get('mainCategory') or '').lower() != 'architecture']
+        running_list = [p for p in projects if is_running(p) and p.get('thumbnail')]
 
         # Build Architecture Rows
         p_arch = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': (clean_text(p.get('title')) or '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in arch_list]
@@ -749,7 +769,7 @@ def update_homepage_and_categories(projects, base_dir):
         # Build Running / Ongoing Projects Section conditionally (blank if no projects added yet in Sanity dashboard!)
         running_section_html = ""
         if running_list:
-            p_run = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': (clean_text(p.get('title')) or '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': '🚧 ONGOING · ' + category_tag(p)} for p in running_list]
+            p_run = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': (clean_text(p.get('title')) or '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': 'Ongoing &middot; ' + category_tag(p)} for p in running_list]
             running_rows = build_micasa_section_rows(p_run, is_interior=False)
             full_running_html = '\n'.join(running_rows)
             running_section_html = f'''
@@ -792,7 +812,7 @@ def update_homepage_and_categories(projects, base_dir):
         else:
             with open(index_path, "w", encoding="utf-8") as f:
                 f.write(index_html)
-            print(f"Pre-rendered index.html with Micasa layout ({len(arch_rows)} Architecture rows, {len(interior_rows)} Interior rows).")
+            print(f"Pre-rendered index.html with Micasa layout ({len(arch_rows)} Architecture rows, {len(interior_rows)} Interior rows, {len(running_list)} Running projects).")
 
     # 2. Update Category Pages
     cat_configs = {
@@ -815,7 +835,8 @@ def update_homepage_and_categories(projects, base_dir):
         with open(fpath, "r", encoding="utf-8") as f:
             content = f.read()
 
-        cat_projs = [p for p in projects if filter_fn(p) and p.get('thumbnail')]
+        # Running projects are home-page-only — they stay out of every listing page.
+        cat_projs = [p for p in projects if filter_fn(p) and p.get('thumbnail') and not is_running(p)]
         cards = []
         for idx, p in enumerate(cat_projs):
             slug = (p.get('slug') or '').strip().replace(' ', '-')
