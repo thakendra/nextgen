@@ -154,7 +154,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .g-feature-rev{display:grid;grid-template-columns:1fr 2fr;gap:4px;}
     .g-trio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;}
     .g-card{position:relative;overflow:hidden;background:#080f1c;cursor:none;display:block;}
-    .g-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease);}
+    .g-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:transform 1.4s var(--ease);}
     .g-card:hover img{{transform:scale(1.06);}}
     .g-card-overlay{{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,14,28,0.75) 0%,transparent 55%);z-index:1;opacity:0;transition:opacity .5s;}}
     .g-card:hover .g-card-overlay{{opacity:1;}}
