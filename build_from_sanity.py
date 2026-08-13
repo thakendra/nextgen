@@ -121,28 +121,17 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .m-contact-row{{display:flex;flex-direction:column;gap:4px;}}
     .m-contact-row a{{font-family:var(--f-body);font-size:12px;color:rgba(245,242,237,0.5);transition:color .25s;transform:none!important;opacity:1!important;}}
     .m-contact-row a:hover{{color:var(--blue-mid);}}
-    .hero{position:relative;height:100svh;min-height:600px;overflow:hidden;display:flex;align-items:flex-end;background:#060b14;}
-    .hero-img{position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;}
-    .hero-img-blur{position:absolute;inset:-30px;background-size:cover;background-position:center;filter:blur(40px) brightness(0.35);transform:scale(1.15);pointer-events:none;}
-    .hero-img img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;transition:transform 1.4s var(--ease);}
-    .hero-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(13,21,32,0.92) 0%,rgba(13,21,32,0.3) 50%,rgba(13,21,32,0.4) 100%);pointer-events:none;}
-    .hero-content{position:relative;z-index:3;padding:0 var(--gap) clamp(50px,8vw,100px);width:100%;}
-    .hero-eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--f-body);font-size:10px;font-weight:600;letter-spacing:0.35em;text-transform:uppercase;color:var(--blue-mid);margin-bottom:16px;opacity:0;animation:fadeUp .7s var(--ease) .3s forwards;}
+    .page-header{padding:clamp(120px,15vh,180px) 0 clamp(30px,4vh,60px);background:var(--ink);border-bottom:1px solid rgba(255,255,255,0.06);}
+    .page-header .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gap);}
+    .hero-eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--f-body);font-size:10px;font-weight:600;letter-spacing:0.35em;text-transform:uppercase;color:var(--blue-mid);margin-bottom:16px;}
     .hero-eyebrow::before{content:'';width:20px;height:1px;background:var(--blue-mid);}
-    .hero-h1{font-family:var(--f-head);font-size:clamp(60px,10vw,140px);letter-spacing:0.06em;line-height:0.9;color:var(--offwhite);text-shadow:0 4px 40px rgba(0,0,0,0.5);opacity:0;animation:fadeUp .8s var(--ease) .5s forwards;}
+    .hero-h1{font-family:var(--f-head);font-size:clamp(56px,9vw,120px);letter-spacing:0.04em;line-height:0.92;color:var(--offwhite);margin-bottom:24px;}
     .hero-h1 span{color:var(--blue-mid);}
-    .hero-meta{display:flex;align-items:center;gap:32px;margin-top:28px;opacity:0;animation:fadeUp .7s var(--ease) .75s forwards;flex-wrap:wrap;}
+    .hero-meta{display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
     .hero-meta-item{display:flex;flex-direction:column;gap:3px;}
     .meta-label{font-size:9px;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:var(--mist);}
     .meta-val{font-size:13px;font-weight:400;color:var(--offwhite);}
-    .hero-meta-div{width:1px;height:36px;background:rgba(255,255,255,0.12);}
-    .scroll-hint{position:absolute;bottom:clamp(28px,5vh,50px);right:var(--gap);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn .8s ease 1.2s forwards;}
-    .scroll-track{width:1px;height:48px;background:rgba(255,255,255,0.1);position:relative;overflow:hidden;}
-    .scroll-fill{position:absolute;top:-40%;left:0;right:0;height:40%;background:var(--blue-mid);animation:scrollDrop 2s ease-in-out infinite;}
-    @keyframes scrollDrop{0%{top:-40%}100%{top:110%}}
-    .scroll-word{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.3);writing-mode:vertical-rl;}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .hero-meta-div{width:1px;height:32px;background:rgba(255,255,255,0.12);}
     .rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
     .rv.vis{opacity:1;transform:none;}
     .rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}.rv.d4{transition-delay:.4s}
@@ -306,13 +295,8 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   </div>
 </div>
 
-<section class="hero">
-  <div class="hero-img">
-    <div class="hero-img-blur" style="background-image:url('{hero_image}');"></div>
-    <img src="{hero_image}" alt="{title}"/>
-  </div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
+<section class="page-header">
+  <div class="wrap">
     <div class="hero-eyebrow">{eyebrow}</div>
     <h1 class="hero-h1">{h1_formatted}</h1>
     <div class="hero-meta">
@@ -325,7 +309,6 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       <div class="hero-meta-item"><span class="meta-label">By</span><span class="meta-val">NextGen Interiors</span></div>
     </div>
   </div>
-  <div class="scroll-hint"><span class="scroll-word">Scroll</span><div class="scroll-track"><div class="scroll-fill"></div></div></div>
 </section>
 
 <div class="s-intro">
