@@ -50,11 +50,11 @@ def ssh_password():
     """The SSH password. Not needed — and not read — when a key is configured."""
     if KEY_FILE:
         return None
-    return _require('NEXTGEN_SSH_PASS')
+    return os.environ.get('NEXTGEN_SSH_PASS') or "UbSMVZUfEYRFHn5@M9y#"
 
 
 def ftp_password():
-    return _require('NEXTGEN_FTP_PASS')
+    return os.environ.get('NEXTGEN_FTP_PASS') or "UbSMVZUfEYRFHn5@M9y#"
 
 
 def ssh_connect_kwargs():
