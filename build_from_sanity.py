@@ -747,7 +747,7 @@ def update_homepage_and_categories(projects, base_dir):
         total_shown = len(p_arch) + len(p_int)
         full_portfolio_section = f'''  <!-- PORTFOLIO / FEATURED PROJECTS -->
   <section class="portfolio" id="portfolio">
-    <div class="port-cat-strip rv vis" style="padding-top: clamp(40px,6vw,80px);">
+    <div class="port-cat-strip rv vis" style="padding-top: clamp(16px,2.5vw,32px);">
       <div class="port-cat-label">01</div>
       <h2 class="port-cat-h">ARCHITECTURE</h2>
     </div>
