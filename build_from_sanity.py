@@ -1,11 +1,7 @@
 import os
 import json
-import re
 import urllib.request
 import urllib.parse
-
-from common_tail import COMMON_TAIL, TAIL_MARKER
-from copy_clean import clean_text, expand_description
 
 PROJECT_ID = "gpyk0ky0"
 DATASET = "production"
@@ -84,11 +80,8 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .nav-dropdown a:hover{{color:var(--blue-mid);background:rgba(54,159,206,0.05);padding-left:28px;}}
     .nav-dropdown a:hover::before{{width:12px;}}
     .nav-dropdown a.active{{color:var(--blue-mid);}}
-    .nav-cta{{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-body);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--offwhite);padding:9px 18px;border:1px solid rgba(54,159,206,0.5);background:rgba(54,159,206,0.1);white-space:nowrap;transition:background .35s var(--ease),border-color .35s var(--ease),color .35s var(--ease),box-shadow .35s var(--ease),transform .35s var(--ease);}}
-    .nav-cta svg{{width:13px;height:13px;flex-shrink:0;color:var(--blue-mid);transition:color .35s,transform .45s var(--ease);}}
-    .nav-cta:hover{{background:var(--blue-mid);border-color:var(--blue-mid);color:var(--ink);box-shadow:0 6px 22px rgba(54,159,206,0.32);transform:translateY(-1px);}}
-    .nav-cta:hover svg{{color:var(--ink);transform:rotate(-14deg) scale(1.12);}}
-    .nav-cta:active{{transform:translateY(0);box-shadow:0 2px 10px rgba(54,159,206,0.22);}}
+    .nav-cta{{font-family:var(--f-body);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(245,242,237,0.4);transition:color .3s;}}
+    .nav-cta:hover{{color:var(--blue-mid);}}
     .nav-menu-btn{{display:none;flex-direction:column;gap:6px;width:26px;cursor:none;}}
     .nav-menu-btn span{{display:block;width:100%;height:1px;background:var(--offwhite);transition:transform .4s var(--ease),opacity .3s;}}
     .nav-menu-btn.open span:nth-child(1){{transform:translateY(7px) rotate(45deg);}}
@@ -187,6 +180,15 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .lb-prev svg,.lb-next svg{{width:22px;height:22px;}}
     .lb-counter{{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);font-family:var(--f-body);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);z-index:9501;}}
     
+    .cta-strip{{padding:clamp(60px,8vw,110px) var(--gap);text-align:center;max-width:var(--max);margin:0 auto;}}
+    .cta-h{{font-family:var(--f-head);font-size:clamp(44px,5vw,76px);letter-spacing:0.05em;color:var(--offwhite);margin-bottom:20px;}}
+    .cta-h span{{color:var(--blue-mid);}}
+    .cta-p{{font-size:13px;font-weight:300;color:var(--mist);max-width:440px;margin:0 auto 36px;line-height:1.85;}}
+    .cta-btns{{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}}
+    .btn-primary{{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:var(--blue-mid);color:#fff;font-family:var(--f-body);font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;transition:background .3s;cursor:none;}}
+    .btn-primary:hover{{background:var(--blue);}}
+    .btn-outline{{display:inline-flex;align-items:center;gap:10px;padding:15px 36px;border:1px solid rgba(255,255,255,0.15);color:var(--offwhite);font-family:var(--f-body);font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;transition:border-color .3s,color .3s;cursor:none;}}
+    .btn-outline:hover{{border-color:var(--blue-mid);color:var(--blue-mid);}}
     .footer{{background:#040912;border-top:1px solid rgba(255,255,255,0.04);}}
     .footer-inner{{display:flex;justify-content:space-between;align-items:center;padding:22px var(--gap);flex-wrap:wrap;gap:14px;max-width:var(--max);margin:0 auto;}}
     .footer-logo{{height:28px;display:flex;align-items:center;}}
@@ -239,7 +241,6 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     ]
   }}
   </script>
-  <link rel="stylesheet" href="/site-common.css" />
 </head>
 <body>
 <div class="cursor-dot" id="cursorDot"></div>
@@ -263,11 +264,11 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
         <a href="workplace">Workplace</a>
       </div></div>
     </li>
-    <li><a href="blog">Blog</a></li>
+    <li><a href="blog">Journal</a></li>
     <li><a href="/#contact">Contact</a></li>
     <li><a href="careers">Careers</a></li>
   </ul>
-  <a href="tel:+9779849151220" class="nav-cta" aria-label="Call NextGen Interiors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.09 4.18 2 2 0 0 1 4.08 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+977 9849151220</span></a>
+  <a href="tel:+9779849151220" class="nav-cta">+977 9849151220</a>
   <button class="nav-menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
@@ -292,7 +293,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
         <a href="workplace">Workplace</a>
       </div></div>
     </li>
-    <li><a href="blog">Blog</a></li>
+    <li><a href="blog">Journal</a></li>
     <li><a href="/#contact">Contact</a></li>
     <li><a href="careers">Careers</a></li>
   </ul></nav></div>
@@ -346,7 +347,28 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <div class="lb-counter" id="lbCounter"></div>
 </div>
 
-<!--COMMON_TAIL-->
+<div class="cta-strip">
+  <h2 class="cta-h">START YOUR<br><span>NEXT PROJECT</span></h2>
+  <p class="cta-p">From private homes to hospitality flagships &mdash; let&rsquo;s talk about your space.</p>
+  <div class="cta-btns">
+    <a href="tel:+9779849151220" class="btn-primary">Call Us Now</a>
+    <a href="{category_slug}" class="btn-outline">&larr; Back to {category_name}</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo"><img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:28px;"/></div>
+    <p class="footer-copy">&copy; 2025 NextGen Interiors &amp; Architects &middot; Baluwatar, Kathmandu</p>
+    <div class="footer-socials"><a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/architectsandinteriorshouse" target="_blank" rel="noopener">Facebook</a><a href="https://www.linkedin.com/company/nextgen-interiors-architects-pvt-ltd/?originalSubdomain=np" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.youtube.com/@nextgeninteriors" target="_blank" rel="noopener">YouTube</a></div>
+  </div>
+</footer>
+
+<div class="wa-bubble">
+  <a href="https://wa.me/9779849151220?text=Hello%20NextGen%2C%20I%27d%20like%20to%20discuss%20a%20project." class="wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  </a>
+</div>
 
 <script>
   const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
@@ -521,8 +543,6 @@ def fetch_sanity_data():
         "slug": slug.current,
         mainCategory,
         subCategory,
-        featuredOnHome,
-        projectStatus,
         eyebrow,
         location,
         intro_heading,
@@ -550,32 +570,22 @@ def build():
         if not slug:
             continue
             
-        # Everything below runs through clean_text: some CMS copy was pasted
-        # with a broken encoding and carries mojibake plus doubled spaces.
-        title = clean_text(p.get('title')) or 'Project'
+        title = p.get('title', 'Project')
         sub = p.get('subCategory') or 'residential'
         main_cat = p.get('mainCategory') or 'interiors'
-
-        eyebrow = clean_text(p.get('eyebrow')) or f"{sub.capitalize()} &middot; NextGen Showcase"
-        location = clean_location(p.get('location'))
-        intro_heading = clean_text(p.get('intro_heading')) or f"A REFINED<br>{title.upper()}"
-
-        raw_text = clean_text(p.get('intro_text')) or f"{title} is a bespoke project designed by NextGen Interiors, delivering warm layered spaces, curated materials, and timeless architectural form."
+        
+        eyebrow = p.get('eyebrow') or f"{sub.capitalize()} &middot; NextGen Showcase"
+        location = p.get('location') or 'Kathmandu, Nepal'
+        intro_heading = p.get('intro_heading') or f"A REFINED<br>{title.upper()}"
+        
+        raw_text = p.get('intro_text') or f"{title} is a bespoke project designed by NextGen Interiors, delivering warm layered spaces, curated materials, and timeless architectural form."
         paragraphs = [f"<p>{line.strip()}</p>" for line in raw_text.split('\n') if line.strip()]
         intro_paragraphs = "\n      ".join(paragraphs) if paragraphs else f"<p>{raw_text}</p>"
-
-        desc = expand_description(
-            p.get('description') or f"{title} — interior architecture and bespoke spaces by NextGen Interiors, {location}.",
-            title=title, location=location, main_cat=main_cat, sub_cat=sub,
-        )
+        
+        desc = p.get('description') or f"{title} — interior architecture and bespoke spaces by NextGen Interiors, {location}."
         cat_name = sub.capitalize()
         cat_slug = sub
-
-        # desc and title land inside content="..." attributes, so a bare & from
-        # copy like "NextGen Interiors & Architects" would be invalid markup.
-        desc = esc_attr(desc)
-        title = esc_attr(title)
-
+        
         # Split last word for blue accent in H1
         parts = title.split()
         if len(parts) > 1:
@@ -610,10 +620,7 @@ def build():
             showcase_html=showcase_html,
             photos_json=json.dumps(gallery)
         )
-
-        # Swapped in after .format() so the tail's braces never reach str.format().
-        html = html.replace(TAIL_MARKER, COMMON_TAIL)
-
+        
         filepath = os.path.join(base_dir, f"{slug}.html")
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(html)
@@ -626,18 +633,9 @@ def build():
     # Generate updated dynamic sitemap.xml
     generate_sitemap(projects, base_dir)
 
-def esc_attr(text):
-    """Escape for use inside a double-quoted HTML attribute. Safe on text that
-    is already escaped — an existing &amp; is left as-is, not double-escaped."""
-    if not text:
-        return text
-    out = re.sub(r'&(?!(?:[a-zA-Z][a-zA-Z0-9]{1,31}|#\d{1,7}|#[xX][0-9a-fA-F]{1,6});)', '&amp;', text)
-    return out.replace('"', '&quot;')
-
 def clean_location(loc):
     """Normalise CMS location strings: 'Naikap,kathmandu' / 'PANIPOKHARI , KATHMANDU'
     all collapse to 'Naikap, Kathmandu'. Guards against inconsistent data entry."""
-    loc = clean_text(loc)
     if not loc:
         return 'Kathmandu, Nepal'
     parts = [seg.strip() for seg in str(loc).split(',') if seg.strip()]
@@ -646,7 +644,7 @@ def clean_location(loc):
 
 def category_tag(p):
     """Readable category label for a card, e.g. 'Architecture · Hotel Exterior'."""
-    eyebrow = clean_text(p.get('eyebrow')) or ''
+    eyebrow = (p.get('eyebrow') or '').strip()
     if eyebrow:
         return eyebrow
     main = (p.get('mainCategory') or '').strip()
@@ -726,54 +724,43 @@ def update_homepage_and_categories(projects, base_dir):
         with open(index_path, "r", encoding="utf-8") as f:
             index_html = f.read()
 
-        is_running = lambda p: ((p.get('mainCategory') or '').lower() in ['running-projects', 'running', 'ongoing'] or p.get('projectStatus') == 'running' or p.get('featuredOnHome') == 'running') and p.get('thumbnail')
-        is_feat = lambda p: p.get('featuredOnHome') in [True, 'yes'] and p.get('thumbnail') and not is_running(p)
+        is_feat = lambda p: p.get('featuredOnHome') in [True, 'yes'] and p.get('thumbnail')
         is_excl = lambda p: p.get('featuredOnHome') in [False, 'no']
 
         feat_arch = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() == 'architecture']
-        feat_interior = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() in ['interiors', 'interior']]
-        running_list = [p for p in projects if is_running(p)]
+        feat_interior = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() != 'architecture']
 
         arch_list = feat_arch if feat_arch else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() == 'architecture' and p.get('thumbnail')]
         interior_list = feat_interior if feat_interior else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() != 'architecture' and p.get('thumbnail')]
 
-        # If no explicit running projects marked in Sanity, show active ongoing ones
-        if not running_list:
-            running_list = [p for p in projects if p.get('thumbnail') and not is_excl(p)][:3]
-
-        # Build Architecture Rows
-        p_arch = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': (clean_text(p.get('title')) or '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in arch_list]
+        # Build Architecture Rows with balanced 2/3 column layout (no elongated single cards)
+        p_arch = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': p.get('title', '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in arch_list]
         arch_rows = build_micasa_section_rows(p_arch, is_interior=False)
 
-        # Build Interior Rows
-        p_int = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': (clean_text(p.get('title')) or '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in interior_list]
+        # Build Interior Rows with balanced 2/3 column layout (no elongated single cards)
+        p_int = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': p.get('title', '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in interior_list]
         interior_rows = build_micasa_section_rows(p_int, is_interior=True)
-
-        # Build Running Projects Rows
-        p_run = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': (clean_text(p.get('title')) or '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': '🚧 ONGOING · ' + category_tag(p)} for p in running_list]
-        running_rows = build_micasa_section_rows(p_run, is_interior=False)
 
         full_arch_html = '\n'.join(arch_rows)
         full_interior_html = '\n'.join(interior_rows)
-        full_running_html = '\n'.join(running_rows)
 
-        strip_pad = 'style="padding-top: clamp(40px,6vw,80px);"'
+        total_shown = len(p_arch) + len(p_int)
         full_portfolio_section = f'''  <!-- PORTFOLIO / FEATURED PROJECTS -->
   <section class="portfolio" id="portfolio">
-    <div class="port-cat-strip rv vis" {strip_pad}>
+    <div class="port-cat-strip rv vis" style="padding-top: clamp(40px,6vw,80px);">
+      <div class="port-cat-label">01</div>
       <h2 class="port-cat-h">ARCHITECTURE</h2>
+      <p class="port-cat-note">200+ projects delivered across Nepal &mdash; {total_shown} selected below. <a href="architecture">See all architecture work</a>.</p>
     </div>
 {full_arch_html}
 
-    <div class="port-cat-strip rv vis" {strip_pad}>
+    <div style="padding-bottom: clamp(56px,8vw,96px);"></div>
+    <div class="port-cat-strip rv vis">
+      <div class="port-cat-label">02</div>
       <h2 class="port-cat-h">INTERIOR DESIGN</h2>
+      <p class="port-cat-note">Residential, workplace, hospitality and retail interiors &mdash; concept to handover. <a href="interiors">See all interior work</a>.</p>
     </div>
 {full_interior_html}
-
-    <div class="port-cat-strip rv vis" {strip_pad}>
-      <h2 class="port-cat-h">RUNNING PROJECTS</h2>
-    </div>
-{full_running_html}
   </section>'''
 
         import re
@@ -820,7 +807,7 @@ def update_homepage_and_categories(projects, base_dir):
         cards = []
         for idx, p in enumerate(cat_projs):
             slug = (p.get('slug') or '').strip().replace(' ', '-')
-            title = (clean_text(p.get('title')) or '').upper()
+            title = p.get('title', '').upper()
             loc = clean_location(p.get('location'))
             thumb = p.get('thumbnail')
             eyebrow = category_tag(p)
@@ -843,13 +830,15 @@ def update_homepage_and_categories(projects, base_dir):
 
         import re
         content = re.sub(
-            # The shared tail must be listed first: it sits between the grid and
-            # the footer, so matching on <footer alone would swallow it whole on
-            # any page that has no SEO copy block.
-            r'<div class="projects-wrap">[\s\S]*?(?=(?:<!--\s*=====\s*COMMON TAIL|<!--\s*SEO|<section class="seo|<footer|<div class="footer))',
+            r'<div class="projects-wrap">[\s\S]*?(?=(?:<!--\s*SEO|<section class="seo|<footer|<div class="footer))',
             wrap_html + '\n\n',
             content,
             count=1
+        )
+        content = re.sub(
+            r'(<div class="page-count[^"]*"[^>]*>)[^<]*(</div>)',
+            r'\g<1>' + str(len(cat_projs)).zfill(2) + r'\2',
+            content
         )
         with open(fpath, "w", encoding="utf-8") as f:
             f.write(content)
