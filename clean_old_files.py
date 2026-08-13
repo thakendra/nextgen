@@ -1,6 +1,8 @@
 import os
 import paramiko
 
+import server_config
+
 old_files = [
     'arthashree-ventures.html', 'balkot-home.html', 'bhanu-panta-home.html',
     'bharatpur-residence.html', 'bhattrai-home.html', 'buddhanilkhantha-exterior.html',
@@ -28,7 +30,7 @@ for f in old_files:
 try:
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect('srv1046530.hstgr.cloud', 22, 'root', 'UbSMVZUfEYRFHn5@M9y#', timeout=15)
+    ssh.connect(**server_config.ssh_connect_kwargs())
     for f in old_files:
         ssh.exec_command(f'rm -f "/var/www/nextgen/{f}"')
     ssh.close()

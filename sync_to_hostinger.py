@@ -3,15 +3,14 @@ import os
 import posixpath
 import glob
 
-HOST = "srv1046530.hstgr.cloud"
-USER = "root"
-PASS = "UbSMVZUfEYRFHn5@M9y#"
+import server_config
+
 REMOTE_DIR = "/var/www/nextgen"
 LOCAL_DIR = r"D:\nextgen"
 
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-client.connect(HOST, username=USER, password=PASS, timeout=15)
+client.connect(**server_config.ssh_connect_kwargs())
 
 sftp = client.open_sftp()
 print("Connected to Hostinger!")

@@ -1,0 +1,24 @@
+# Secrets — deploy credentials come from environment variables (see server_config.py).
+# Never commit these.
+.env
+.env.*
+*.local
+secrets.json
+*.pem
+*.key
+id_rsa
+id_ed25519
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Node
+node_modules/
+admin/node_modules/
+admin/dist/
+
+# OS / editor noise
+Thumbs.db
+desktop.ini
+.DS_Store

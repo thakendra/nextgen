@@ -2,9 +2,11 @@ import ftplib
 import os
 import ssl
 
-FTP_HOST = "srv1046530.hstgr.cloud"
-FTP_USER = "u324089851" # Usually the username on hostinger or we check environment/logs
-FTP_PASS = "UbSMVZUfEYRFHn5@M9y#"
+import server_config
+
+FTP_HOST = server_config.FTP_HOST
+FTP_USER = server_config.FTP_USER  # Hostinger account username
+FTP_PASS = server_config.ftp_password()
 
 # We will check if we can upload modified files
 def upload_file(ftp, local_path, remote_path):

@@ -64,7 +64,9 @@
       "Bash(curl -s -o /dev/null -w \"status=%{http_code} size=%{size_download}\\\\n\" \"http://localhost:5500/best-and-fast-travels.html\")",
       "Bash(curl -s \"http://localhost:5500/best-and-fast-travels\")",
       "Bash(python build_from_sanity.py)",
-      "Bash(python update.py)"
+      "Bash(python update.py)",
+      "Bash(git rev-list *)",
+      "Bash(NEXTGEN_SSH_KEY=/tmp/fake_key python -c ' *)"
     ]
   }
 }
