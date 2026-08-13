@@ -19,37 +19,12 @@ export default defineConfig({
             S.listItem()
               .title('📂 All Projects / Showcase')
               .child(S.documentTypeList('project').title('All Projects')),
-            // Its own upload / update area, same fields and same flow as any
-            // other project. "Create new" here pre-fills the DPR category, and
-            // these documents render on dpr-landscaping.html only.
             S.listItem()
               .title('🌿 DPR & Landscaping Projects')
               .child(
                 S.documentTypeList('project')
                   .title('DPR & Landscaping Projects')
                   .filter('_type == "project" && (mainCategory == "dpr-landscaping" || subCategory == "dpr-landscaping")')
-                  .initialValueTemplates([S.initialValueTemplateItem('project-dpr')])
-              ),
-            S.listItem()
-              .title('🚧 Ongoing Projects (Running)')
-              .child(
-                S.documentList()
-                  .title('Ongoing / Running Projects')
-                  .filter('_type == "project" && (mainCategory == "ongoing-projects" || projectStatus == "running" || featuredOnHome == "running")')
-              ),
-            S.listItem()
-              .title('🏛️ Architecture Projects')
-              .child(
-                S.documentList()
-                  .title('Architecture Projects')
-                  .filter('_type == "project" && mainCategory == "architecture"')
-              ),
-            S.listItem()
-              .title('🛋️ Interior Design Projects')
-              .child(
-                S.documentList()
-                  .title('Interior Design Projects')
-                  .filter('_type == "project" && mainCategory == "interiors"')
               ),
           ]),
     }),
