@@ -371,7 +371,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 </body>
 </html>"""
 
-def build_showcase_layout(gallery):
+def build_showcase_layout(gallery, slug=""):
     if not gallery:
         return ""
         
@@ -379,7 +379,51 @@ def build_showcase_layout(gallery):
     total = len(gallery)
     i = 0
     
-    # Process gallery images in 2-column side-by-side pairs (g-half)
+    # For surkhet-hotel-exterior and kawality-banquet-hall, make ALL grid cards the exact same uniform size in 2-column pairs!
+    if slug in ["surkhet-hotel-exterior", "kawality-banquet-hall"]:
+        while i < total:
+            remaining = total - i
+            if remaining >= 2:
+                html_parts.append(f"""
+  <div class="g-half rv" style="margin-top:4px;">
+    <div class="g-card ar-43" onclick="openLb({i})">
+      <img src="{gallery[i]}" alt="Showcase Perspective {i+1}"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>Architectural Perspective</span></div>
+    </div>
+    <div class="g-card ar-43" onclick="openLb({i+1})">
+      <img src="{gallery[i+1]}" alt="Showcase Perspective {i+2}"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>Spatial Detailing</span></div>
+    </div>
+  </div>""")
+                i += 2
+            else:
+                html_parts.append(f"""
+  <div class="g-half rv" style="margin-top:4px;">
+    <div class="g-card ar-43" onclick="openLb({i})">
+      <img src="{gallery[i]}" alt="Showcase Perspective {i+1}"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>Complete Architectural Showcase</span></div>
+    </div>
+  </div>""")
+                i += 1
+        return "\n".join(html_parts)
+
+    # 1. First image: Full-width Featured Space card
+    if i < total:
+        html_parts.append(f"""
+  <div class="g-full rv" style="position:relative;">
+    <div class="g-full-blur" style="background-image:url('{gallery[i]}');"></div>
+    <div class="g-card" style="position:absolute;inset:0;" onclick="openLb({i})">
+      <img src="{gallery[i]}" alt="Showcase Hero {i+1}"/>
+      <div class="g-card-overlay"></div>
+      <div class="g-card-label"><span>FEATURED SPACE</span></div>
+    </div>
+  </div>""")
+        i += 1
+        
+    # 2. Remaining images: 2-column side-by-side pairs (g-half)
     while i < total:
         remaining = total - i
         if remaining >= 2:
@@ -488,7 +532,7 @@ def build():
             gallery = [thumbnail]
             
         hero_image = thumbnail if (thumbnail and str(thumbnail) != 'None') else (gallery[0] if gallery else '')
-        showcase_html = build_showcase_layout(gallery)
+        showcase_html = build_showcase_layout(gallery, slug=slug)
         
         html = PAGE_TEMPLATE.format(
             title=title,
