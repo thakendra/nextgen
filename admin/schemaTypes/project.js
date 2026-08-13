@@ -55,9 +55,9 @@ export const project = {
       type: 'string',
       options: {
         list: [
-          { title: 'Interiors', value: 'interiors' },
           { title: 'Architecture', value: 'architecture' },
-          { title: 'Running Projects', value: 'running-projects' },
+          { title: 'Interior Design', value: 'interiors' },
+          { title: 'Ongoing Project', value: 'ongoing-projects' },
         ],
         layout: 'radio',
       },

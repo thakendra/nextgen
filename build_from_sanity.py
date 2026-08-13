@@ -724,27 +724,42 @@ def update_homepage_and_categories(projects, base_dir):
         with open(index_path, "r", encoding="utf-8") as f:
             index_html = f.read()
 
-        is_feat = lambda p: p.get('featuredOnHome') in [True, 'yes'] and p.get('thumbnail')
+        is_running = lambda p: ((p.get('mainCategory') or '').lower() in ['ongoing-projects', 'running-projects', 'ongoing', 'running'] or p.get('projectStatus') == 'running' or p.get('featuredOnHome') == 'running') and p.get('thumbnail')
+        is_feat = lambda p: p.get('featuredOnHome') in [True, 'yes'] and p.get('thumbnail') and not is_running(p)
         is_excl = lambda p: p.get('featuredOnHome') in [False, 'no']
 
         feat_arch = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() == 'architecture']
-        feat_interior = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() != 'architecture']
+        feat_interior = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() in ['interiors', 'interior']]
+        running_list = [p for p in projects if is_running(p)]
 
         arch_list = feat_arch if feat_arch else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() == 'architecture' and p.get('thumbnail')]
-        interior_list = feat_interior if feat_interior else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() != 'architecture' and p.get('thumbnail')]
+        interior_list = feat_interior if feat_interior else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() not in ['architecture', 'ongoing-projects', 'running-projects'] and p.get('thumbnail')]
 
-        # Build Architecture Rows with balanced 2/3 column layout (no elongated single cards)
-        p_arch = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': p.get('title', '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in arch_list]
+        # Build Architecture Rows
+        p_arch = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': (clean_text(p.get('title')) or '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in arch_list]
         arch_rows = build_micasa_section_rows(p_arch, is_interior=False)
 
-        # Build Interior Rows with balanced 2/3 column layout (no elongated single cards)
-        p_int = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': p.get('title', '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in interior_list]
+        # Build Interior Rows
+        p_int = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': (clean_text(p.get('title')) or '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in interior_list]
         interior_rows = build_micasa_section_rows(p_int, is_interior=True)
 
         full_arch_html = '\n'.join(arch_rows)
         full_interior_html = '\n'.join(interior_rows)
 
-        total_shown = len(p_arch) + len(p_int)
+        # Build Running / Ongoing Projects Section conditionally (blank if no projects added yet in Sanity dashboard!)
+        running_section_html = ""
+        if running_list:
+            p_run = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': (clean_text(p.get('title')) or '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': '🚧 ONGOING · ' + category_tag(p)} for p in running_list]
+            running_rows = build_micasa_section_rows(p_run, is_interior=False)
+            full_running_html = '\n'.join(running_rows)
+            running_section_html = f'''
+
+    <div class="port-cat-strip rv vis" style="padding-top: clamp(24px,4vw,48px);">
+      <div class="port-cat-label">03</div>
+      <h2 class="port-cat-h">RUNNING PROJECTS</h2>
+    </div>
+{full_running_html}'''
+
         full_portfolio_section = f'''  <!-- PORTFOLIO / FEATURED PROJECTS -->
   <section class="portfolio" id="portfolio">
     <div class="port-cat-strip rv vis" style="padding-top: clamp(16px,2.5vw,32px);">
@@ -757,7 +772,7 @@ def update_homepage_and_categories(projects, base_dir):
       <div class="port-cat-label">02</div>
       <h2 class="port-cat-h">INTERIOR DESIGN</h2>
     </div>
-{full_interior_html}
+{full_interior_html}{running_section_html}
   </section>'''
 
         import re
