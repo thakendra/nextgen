@@ -57,6 +57,7 @@ export const project = {
         list: [
           { title: 'Interiors', value: 'interiors' },
           { title: 'Architecture', value: 'architecture' },
+          { title: 'Running Projects', value: 'running-projects' },
         ],
         layout: 'radio',
       },

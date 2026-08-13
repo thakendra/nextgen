@@ -726,12 +726,12 @@ def update_homepage_and_categories(projects, base_dir):
         with open(index_path, "r", encoding="utf-8") as f:
             index_html = f.read()
 
-        is_feat = lambda p: p.get('featuredOnHome') in [True, 'yes'] and p.get('thumbnail') and p.get('projectStatus') != 'running' and p.get('featuredOnHome') != 'running'
+        is_running = lambda p: ((p.get('mainCategory') or '').lower() in ['running-projects', 'running', 'ongoing'] or p.get('projectStatus') == 'running' or p.get('featuredOnHome') == 'running') and p.get('thumbnail')
+        is_feat = lambda p: p.get('featuredOnHome') in [True, 'yes'] and p.get('thumbnail') and not is_running(p)
         is_excl = lambda p: p.get('featuredOnHome') in [False, 'no']
-        is_running = lambda p: (p.get('projectStatus') == 'running' or p.get('featuredOnHome') == 'running') and p.get('thumbnail')
 
         feat_arch = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() == 'architecture']
-        feat_interior = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() != 'architecture']
+        feat_interior = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() in ['interiors', 'interior']]
         running_list = [p for p in projects if is_running(p)]
 
         arch_list = feat_arch if feat_arch else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() == 'architecture' and p.get('thumbnail')]
