@@ -163,7 +163,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .g-card-label span{{font-family:var(--f-body);font-size:10px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--blue-mid);}}
     .g-card::after{{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--blue-mid);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);z-index:3;}}
     .g-card:hover::after{{transform:scaleX(1);}}
-    .ar-wide{{height:clamp(400px,64vh,780px);}}.ar-43{{height:clamp(450px,74vh,860px);}}.ar-32{{height:clamp(420px,68vh,800px);}}.ar-sq{{height:clamp(420px,70vh,820px);}}
+    .ar-wide{{height:clamp(300px,50vh,540px);}}.ar-43{{height:clamp(300px,50vh,540px);}}.ar-32{{height:clamp(300px,50vh,540px);}}.ar-sq{{height:clamp(300px,50vh,540px);}}
     
     /* LIGHTBOX */
     .lb{{position:fixed;inset:0;z-index:9500;background:rgba(8,12,20,0.97);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;}}
