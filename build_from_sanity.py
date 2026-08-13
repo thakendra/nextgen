@@ -750,7 +750,6 @@ def update_homepage_and_categories(projects, base_dir):
     <div class="port-cat-strip rv vis" style="padding-top: clamp(40px,6vw,80px);">
       <div class="port-cat-label">01</div>
       <h2 class="port-cat-h">ARCHITECTURE</h2>
-      <p class="port-cat-note">200+ projects delivered across Nepal &mdash; {total_shown} selected below. <a href="architecture">See all architecture work</a>.</p>
     </div>
 {full_arch_html}
 
@@ -758,7 +757,6 @@ def update_homepage_and_categories(projects, base_dir):
     <div class="port-cat-strip rv vis">
       <div class="port-cat-label">02</div>
       <h2 class="port-cat-h">INTERIOR DESIGN</h2>
-      <p class="port-cat-note">Residential, workplace, hospitality and retail interiors &mdash; concept to handover. <a href="interiors">See all interior work</a>.</p>
     </div>
 {full_interior_html}
   </section>'''
