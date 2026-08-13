@@ -174,7 +174,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .g-card-label span{{font-family:var(--f-body);font-size:10px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--blue-mid);}}
     .g-card::after{{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--blue-mid);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);z-index:3;}}
     .g-card:hover::after{{transform:scaleX(1);}}
-    .ar-wide{{height:clamp(360px,58vh,720px);}}.ar-43{{height:clamp(380px,64vh,780px);}}.ar-32{{height:clamp(360px,60vh,740px);}}.ar-sq{{height:clamp(400px,68vh,820px);}}
+    .ar-wide{{height:clamp(400px,64vh,780px);}}.ar-43{{height:clamp(450px,74vh,860px);}}.ar-32{{height:clamp(420px,68vh,800px);}}.ar-sq{{height:clamp(420px,70vh,820px);}}
     
     /* LIGHTBOX */
     .lb{{position:fixed;inset:0;z-index:9500;background:rgba(8,12,20,0.97);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;}}
@@ -397,127 +397,31 @@ def build_showcase_layout(gallery):
     total = len(gallery)
     i = 0
     
-    # 1. First image: Full-width hero showcase
-    if i < total:
-        html_parts.append(f"""
-  <div class="g-full rv" style="position:relative;">
-    <div class="g-full-blur" style="background-image:url('{gallery[i]}');"></div>
-    <div class="g-card" style="position:absolute;inset:0;" onclick="openLb({i})">
-      <img src="{gallery[i]}" alt="Showcase Hero {i+1}"/>
-      <div class="g-card-overlay"></div>
-      <div class="g-card-label"><span>Featured Space</span></div>
-    </div>
-  </div>""")
-        i += 1
-        
-    # 2. Pair: Two large balanced images
-    if i + 1 < total:
-        html_parts.append(f"""
+    # Process gallery images in 2-column side-by-side pairs (g-half)
+    while i < total:
+        remaining = total - i
+        if remaining >= 2:
+            html_parts.append(f"""
   <div class="g-half rv" style="margin-top:4px;">
     <div class="g-card ar-43" onclick="openLb({i})">
-      <img src="{gallery[i]}" alt="Showcase {i+1}"/>
+      <img src="{gallery[i]}" alt="Showcase Perspective {i+1}"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Architectural Perspective</span></div>
     </div>
     <div class="g-card ar-43" onclick="openLb({i+1})">
-      <img src="{gallery[i+1]}" alt="Showcase {i+2}"/>
+      <img src="{gallery[i+1]}" alt="Showcase Perspective {i+2}"/>
       <div class="g-card-overlay"></div>
       <div class="g-card-label"><span>Spatial Detailing</span></div>
-    </div>
-  </div>""")
-        i += 2
-    elif i < total:
-        html_parts.append(f"""
-  <div class="g-full rv" style="margin-top:4px;position:relative;">
-    <div class="g-full-blur" style="background-image:url('{gallery[i]}');"></div>
-    <div class="g-card" style="position:absolute;inset:0;" onclick="openLb({i})">
-      <img src="{gallery[i]}" alt="Showcase {i+1}"/>
-      <div class="g-card-overlay"></div>
-      <div class="g-card-label"><span>Spatial Perspective</span></div>
-    </div>
-  </div>""")
-        i += 1
-        
-    # 3. Asymmetric 2:1 Focal Split
-    if i + 1 < total:
-        html_parts.append(f"""
-  <div class="g-feature rv" style="margin-top:4px;">
-    <div class="g-card ar-32" onclick="openLb({i})">
-      <img src="{gallery[i]}" alt="Showcase {i+1}"/>
-      <div class="g-card-overlay"></div>
-      <div class="g-card-label"><span>Design Focal Point</span></div>
-    </div>
-    <div class="g-card ar-32" onclick="openLb({i+1})">
-      <img src="{gallery[i+1]}" alt="Showcase {i+2}"/>
-      <div class="g-card-overlay"></div>
-      <div class="g-card-label"><span>Material Accent</span></div>
-    </div>
-  </div>""")
-        i += 2
-        
-    # 4. Asymmetric 1:2 Reverse Focal Split
-    if i + 1 < total:
-        html_parts.append(f"""
-  <div class="g-feature-rev rv" style="margin-top:4px;">
-    <div class="g-card ar-32" onclick="openLb({i})">
-      <img src="{gallery[i]}" alt="Showcase {i+1}"/>
-      <div class="g-card-overlay"></div>
-      <div class="g-card-label"><span>Atmosphere &amp; Light</span></div>
-    </div>
-    <div class="g-card ar-32" onclick="openLb({i+1})">
-      <img src="{gallery[i+1]}" alt="Showcase {i+2}"/>
-      <div class="g-card-overlay"></div>
-      <div class="g-card-label"><span>Living Environment</span></div>
-    </div>
-  </div>""")
-        i += 2
-        
-    # 5. Trio or remaining full-width
-    while i < total:
-        remaining = total - i
-        if remaining >= 3:
-            html_parts.append(f"""
-  <div class="g-trio rv" style="margin-top:4px;">
-    <div class="g-card ar-sq" onclick="openLb({i})">
-      <img src="{gallery[i]}" alt="Showcase {i+1}"/>
-      <div class="g-card-overlay"></div>
-      <div class="g-card-label"><span>Detail Approach</span></div>
-    </div>
-    <div class="g-card ar-sq" onclick="openLb({i+1})">
-      <img src="{gallery[i+1]}" alt="Showcase {i+2}"/>
-      <div class="g-card-overlay"></div>
-      <div class="g-card-label"><span>Joinery &amp; Texture</span></div>
-    </div>
-    <div class="g-card ar-sq" onclick="openLb({i+2})">
-      <img src="{gallery[i+2]}" alt="Showcase {i+3}"/>
-      <div class="g-card-overlay"></div>
-      <div class="g-card-label"><span>Craftsmanship</span></div>
-    </div>
-  </div>""")
-            i += 3
-        elif remaining == 2:
-            html_parts.append(f"""
-  <div class="g-half rv" style="margin-top:4px;">
-    <div class="g-card ar-43" onclick="openLb({i})">
-      <img src="{gallery[i]}" alt="Showcase {i+1}"/>
-      <div class="g-card-overlay"></div>
-      <div class="g-card-label"><span>Detail Accent</span></div>
-    </div>
-    <div class="g-card ar-43" onclick="openLb({i+1})">
-      <img src="{gallery[i+1]}" alt="Showcase {i+2}"/>
-      <div class="g-card-overlay"></div>
-      <div class="g-card-label"><span>Complete View</span></div>
     </div>
   </div>""")
             i += 2
         else:
             html_parts.append(f"""
-  <div class="g-full rv" style="margin-top:4px;height:clamp(420px,78vh,880px);position:relative;">
-    <div class="g-full-blur" style="background-image:url('{gallery[i]}');"></div>
-    <div class="g-card" style="position:absolute;inset:0;" onclick="openLb({i})">
-      <img src="{gallery[i]}" alt="Showcase {i+1}"/>
+  <div class="g-half rv" style="margin-top:4px;grid-template-columns:1fr;">
+    <div class="g-card ar-43" style="max-width:960px;margin:0 auto;width:100%;" onclick="openLb({i})">
+      <img src="{gallery[i]}" alt="Showcase Perspective {i+1}"/>
       <div class="g-card-overlay"></div>
-      <div class="g-card-label"><span>Panoramic Perspective</span></div>
+      <div class="g-card-label"><span>Complete Architectural Showcase</span></div>
     </div>
   </div>""")
             i += 1
