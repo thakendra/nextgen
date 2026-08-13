@@ -145,25 +145,24 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     
     /* SANKHU STYLE LARGE DYNAMIC SHOWCASE */
     .gallery{background:var(--ink);}
-    .g-full{width:100%;height:clamp(420px,78vh,880px);overflow:hidden;position:relative;background:#060b14;}
-    .g-full-blur{position:absolute;inset:-30px;background-size:cover;background-position:center;filter:blur(40px) brightness(0.35);transform:scale(1.15);pointer-events:none;z-index:0;}
+    .g-full{width:100%;height:clamp(360px,58vh,660px);overflow:hidden;position:relative;background:#060b14;border:1px solid rgba(255,255,255,0.05);}
+    .g-full-blur{position:absolute;inset:-30px;background-size:cover;background-position:center;filter:blur(35px) brightness(0.35);transform:scale(1.15);pointer-events:none;z-index:0;}
     .g-full .g-card{position:absolute;inset:0;z-index:1;background:transparent;}
-    .g-full .g-card img{object-fit:contain!important;}
+    .g-full .g-card img{object-fit:cover!important;object-position:center 20%!important;}
     .g-half{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
     .g-feature{display:grid;grid-template-columns:2fr 1fr;gap:4px;}
     .g-feature-rev{display:grid;grid-template-columns:1fr 2fr;gap:4px;}
     .g-trio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;}
-    .g-card{position:relative;overflow:hidden;background:#080f1c;cursor:none;display:block;}
-    .g-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:transform 1.4s var(--ease);}
-    .g-card:hover img{{transform:scale(1.06);}}
-    .g-card-overlay{{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,14,28,0.75) 0%,transparent 55%);z-index:1;opacity:0;transition:opacity .5s;}}
+    .g-card{position:relative;overflow:hidden;background:#060b14;cursor:none;display:block;}
+    .g-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform 1.4s var(--ease);}
+    .g-card:hover img{{transform:scale(1.04);}}
+    .g-card-overlay{{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,14,28,0.75) 0%,transparent 55%);z-index:1;opacity:0.8;transition:opacity .5s;}}
     .g-card:hover .g-card-overlay{{opacity:1;}}
-    .g-card-label{{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:20px 24px;transform:translateY(8px);opacity:0;transition:all .45s var(--ease);}}
-    .g-card:hover .g-card-label{{transform:translateY(0);opacity:1;}}
+    .g-card-label{{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:20px 24px;transform:translateY(0);opacity:1;transition:all .45s var(--ease);}}
     .g-card-label span{{font-family:var(--f-body);font-size:10px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--blue-mid);}}
     .g-card::after{{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--blue-mid);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);z-index:3;}}
     .g-card:hover::after{{transform:scaleX(1);}}
-    .ar-wide{{height:clamp(300px,50vh,540px);}}.ar-43{{height:clamp(300px,50vh,540px);}}.ar-32{{height:clamp(300px,50vh,540px);}}.ar-sq{{height:clamp(300px,50vh,540px);}}
+    .ar-wide{{height:clamp(340px,52vh,580px);}}.ar-43{{height:clamp(340px,52vh,580px);}}.ar-32{{height:clamp(340px,52vh,580px);}}.ar-sq{{height:clamp(340px,52vh,580px);}}
     
     /* LIGHTBOX */
     .lb{{position:fixed;inset:0;z-index:9500;background:rgba(8,12,20,0.97);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;}}
@@ -191,10 +190,10 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     @keyframes waPulse{{0%,100%{{box-shadow:0 6px 28px rgba(37,211,102,0.38),0 0 0 0 rgba(37,211,102,0.32);}}50%{{box-shadow:0 6px 28px rgba(37,211,102,0.38),0 0 0 14px rgba(37,211,102,0);}}}}
     .wa-btn:hover{{transform:scale(1.1);}}
     .wa-btn svg{{width:26px;height:26px;}}
-    @media(max-width:900px){{.nav-links,.nav-cta{{display:none;}}.nav-menu-btn{{display:flex;}}.s-intro-grid{{grid-template-columns:1fr;gap:24px;}}.g-feature,.g-feature-rev{{grid-template-columns:1fr;}}.g-trio{{grid-template-columns:1fr 1fr;}}}}
-    @media(max-width:1100px){{.ar-wide,.ar-43,.ar-32,.ar-sq{{height:clamp(320px,52vh,620px);}}}}
-    @media(max-width:700px){{.g-half,.g-trio{{grid-template-columns:1fr;}}.g-full{{height:clamp(280px,60vw,460px);}}.ar-wide,.ar-43,.ar-32,.ar-sq{{height:clamp(280px,68vw,460px);}}.hero-meta-div{{display:none;}}.wa-bubble{{bottom:16px;right:16px;}}}}
-    @media(max-width:480px){{.ar-wide,.ar-43,.ar-32,.ar-sq{{height:clamp(260px,75vw,420px);}}}}
+    @media(max-width:900px){{.nav-links,.nav-cta{{display:none;}}.nav-menu-btn{{display:flex;}}.s-intro-grid{{grid-template-columns:1fr;gap:24px;}}.g-half{{grid-template-columns:1fr;}}}}
+    @media(max-width:1100px){{.ar-wide,.ar-43,.ar-32,.ar-sq{{height:clamp(320px,50vh,540px);}}}}
+    @media(max-width:700px){{.g-full,.g-card,.ar-wide,.ar-43,.ar-32,.ar-sq{{height:clamp(280px,56vw,440px);}}.wa-bubble{{bottom:16px;right:16px;}}}}
+    @media(max-width:480px){{.g-full,.g-card,.ar-wide,.ar-43,.ar-32,.ar-sq{{height:clamp(260px,65vw,400px);}}}}
   </style>
   <script type="application/ld+json">
   {{
