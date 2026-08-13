@@ -753,8 +753,7 @@ def update_homepage_and_categories(projects, base_dir):
     </div>
 {full_arch_html}
 
-    <div style="padding-bottom: clamp(56px,8vw,96px);"></div>
-    <div class="port-cat-strip rv vis">
+    <div class="port-cat-strip rv vis" style="padding-top: clamp(24px,4vw,48px);">
       <div class="port-cat-label">02</div>
       <h2 class="port-cat-h">INTERIOR DESIGN</h2>
     </div>
