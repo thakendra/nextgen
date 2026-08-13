@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" href="/logo/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Interior Design Kathmandu — NextGen Interiors & Architects</title>
-  <meta name="description" content="Turnkey interior design, architecture &amp; DPR from Baluwatar, Kathmandu. Home, office, hotel &amp; banquet interiors — 200+ projects delivered across Nepal." />
+  <meta name="description" content="Turnkey interior design, architecture & DPR from Baluwatar, Kathmandu. Home, office, hotel & banquet interiors — 200+ projects delivered across Nepal." />
   <link rel="canonical" href="https://nextgeninterior.com/" />
   <meta name="google-site-verification" content="N3O_w9hvjUzuomfqrJNgeGXbtIVJ_5PcRNiGBkrPp94" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -21,14 +21,14 @@
   <meta property="og:site_name" content="NextGen Interiors" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Interior Design Kathmandu — NextGen Interiors & Architects" />
-  <meta property="og:description" content="Turnkey interior design, architecture &amp; DPR from Baluwatar, Kathmandu. Home, office, hotel &amp; banquet interiors — 200+ projects delivered across Nepal." />
+  <meta property="og:description" content="Turnkey interior design, architecture & DPR from Baluwatar, Kathmandu. Home, office, hotel & banquet interiors — 200+ projects delivered across Nepal." />
   <meta property="og:url" content="https://nextgeninterior.com/" />
   <meta property="og:image" content="https://cdn.sanity.io/images/gpyk0ky0/production/539e0d3b4ff72f15ec7ef48e88a06cf420af9b02-1913x1336.webp?w=1200&auto=format" />
   <meta property="og:image:alt" content="NextGen Interiors &amp; Architects — Interior Design and Architecture, Nepal" />
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Interior Design Kathmandu — NextGen Interiors & Architects" />
-  <meta name="twitter:description" content="Turnkey interior design, architecture &amp; DPR from Baluwatar, Kathmandu. Home, office, hotel &amp; banquet interiors — 200+ projects delivered across Nepal." />
+  <meta name="twitter:description" content="Turnkey interior design, architecture & DPR from Baluwatar, Kathmandu. Home, office, hotel & banquet interiors — 200+ projects delivered across Nepal." />
   <meta name="twitter:image" content="https://cdn.sanity.io/images/gpyk0ky0/production/539e0d3b4ff72f15ec7ef48e88a06cf420af9b02-1913x1336.webp?w=1200&auto=format" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,11 +146,8 @@
     .nav-dropdown a:hover { color: var(--blue-mid); background: rgba(54,159,206,0.05); padding-left: 28px; }
     .nav-dropdown a:hover::before { width: 12px; }
 
-    .nav-cta { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-body); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--offwhite); padding: 9px 18px; border: 1px solid rgba(54,159,206,0.5); background: rgba(54,159,206,0.1); white-space: nowrap; transition: background .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease), box-shadow .35s var(--ease), transform .35s var(--ease); }
-    .nav-cta svg { width: 13px; height: 13px; flex-shrink: 0; color: var(--blue-mid); transition: color .35s, transform .45s var(--ease); }
-    .nav-cta:hover { background: var(--blue-mid); border-color: var(--blue-mid); color: var(--ink); box-shadow: 0 6px 22px rgba(54,159,206,0.32); transform: translateY(-1px); }
-    .nav-cta:hover svg { color: var(--ink); transform: rotate(-14deg) scale(1.12); }
-    .nav-cta:active { transform: translateY(0); box-shadow: 0 2px 10px rgba(54,159,206,0.22); }
+    .nav-cta { font-family: var(--f-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245,242,237,0.4); transition: color .3s; }
+    .nav-cta:hover { color: var(--blue-mid); }
     .nav-menu-btn { display: none; flex-direction: column; gap: 6px; width: 26px; cursor: none; }
     .nav-menu-btn span { display: block; width: 100%; height: 1px; background: var(--offwhite); transition: transform .4s var(--ease), opacity .3s; }
     .nav-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -323,6 +320,11 @@
     .scroll-word { font-family: var(--f-body); font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.28); }
 
     /* STATS STRIP */
+    .stats-strip { background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); padding: 28px var(--gap); display: flex; justify-content: center; gap: clamp(32px,6vw,96px); flex-wrap: wrap; }
+    .stat-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .stat-num { font-family: var(--f-head); font-size: clamp(32px,4.5vw,58px); letter-spacing: 0.06em; color: var(--offwhite); line-height: 1; }
+    .stat-num span { color: var(--blue-mid); }
+    .stat-label { font-family: var(--f-body); font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mist); }
 
     /* REVEAL */
     .rv { opacity:0; transform:translateY(30px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
@@ -338,6 +340,8 @@
     /* PORTFOLIO */
     .portfolio { background: var(--ink); }
     .port-cat-strip { padding: clamp(48px,7vw,96px) var(--gap) 0; max-width: var(--max); margin: 0 auto; }
+    .port-cat-label { font-family: var(--f-body); font-size: 10px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blue-mid); display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .port-cat-label::before { content:''; width:24px; height:1px; background:var(--blue-mid); }
     .port-cat-h { font-family: var(--f-head); font-size: clamp(64px,9.5vw,140px); letter-spacing: 0.03em; color: var(--offwhite); line-height: 0.86; margin-bottom: clamp(28px,4vw,56px); }
     .port-grid-micasa { display: grid; gap: 3px; }
     .pmr-3    { grid-template-columns: 1fr 1fr 1fr; }
@@ -358,6 +362,9 @@
     .pm-card:hover::after { transform:scaleX(1); }
     .pm-cat { position: absolute; z-index: 2; top: 18px; left: 18px; font-family: var(--f-body); font-size: 9.5px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--offwhite); background: rgba(8,14,28,0.55); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.14); padding: 6px 11px; transition: background .4s, border-color .4s, color .4s; }
     .pm-card:hover .pm-cat { background: rgba(54,159,206,0.85); border-color: rgba(54,159,206,0.9); color: var(--white); }
+    .port-cat-note { font-family: var(--f-body); font-size: 12.5px; font-weight: 300; line-height: 1.75; color: var(--mist); max-width: 620px; margin-top: 14px; }
+    .port-cat-note a { color: var(--blue-mid); border-bottom: 1px solid rgba(54,159,206,0.35); transition: border-color .3s; }
+    .port-cat-note a:hover { border-color: var(--blue-mid); }
 
     /* CONTACT */
     .contact { background: var(--ink); }
@@ -444,6 +451,7 @@
       .pm-r32  { height: clamp(220px, 56vw, 400px); }
       .port-cat-h { font-size: clamp(44px,12vw,80px); }
       .pm-name { font-size: clamp(22px, 6vw, 42px); }
+      .stats-strip { gap: 24px 48px; padding: 22px var(--gap); }
       .pm-cat { top: 12px; left: 12px; font-size: 8.5px; padding: 5px 9px; letter-spacing: 0.16em; }
     }
     @media (max-width: 480px) {
@@ -497,7 +505,6 @@
     ]
   }
   </script>
-  <link rel="stylesheet" href="/site-common.css" />
 </head>
 <body>
 
@@ -529,11 +536,11 @@
           </div>
         </div>
       </li>
-      <li><a href="blog">Blog</a></li>
+      <li><a href="blog">Journal</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="careers">Careers</a></li>
     </ul>
-    <a href="tel:+9779849151220" class="nav-cta" aria-label="Call NextGen Interiors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.09 4.18 2 2 0 0 1 4.08 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+977 9849151220</span></a>
+    <a href="tel:+9779849151220" class="nav-cta">+977 9849151220</a>
     <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -573,7 +580,7 @@
               </div>
             </div>
           </li>
-          <li><a href="blog">Blog</a></li>
+          <li><a href="blog">Journal</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="careers">Careers</a></li>
         </ul>
@@ -637,128 +644,176 @@
     </div>
   </section>
 
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-num">200<span>+</span></div>
+      <div class="stat-label">Projects Completed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">12<span>+</span></div>
+      <div class="stat-label">Years of Excellence</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Cities Across Nepal</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-label">Turnkey Delivery</div>
+    </div>
+  </div>
+
   <!-- PORTFOLIO / FEATURED PROJECTS -->
   <section class="portfolio" id="portfolio">
     <div class="port-cat-strip rv vis" style="padding-top: clamp(40px,6vw,80px);">
+      <div class="port-cat-label">01</div>
       <h2 class="port-cat-h">ARCHITECTURE</h2>
-    </div>
-    <div class="port-grid-micasa pmr-small-big rv vis ">
-      <a href="kawality-banquet-hall" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/007e5286efc60b1fd49b93c48b7e286c91088c4e-1000x707.webp?w=1200&amp;auto=format" alt="KAWALITY BANQUET HALL" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">BANQUET HALL</span><span class="pm-name">KAWALITY BANQUET HALL</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Kavrasthali, Nepal, Kathmandu</span></a>
-      <a href="kwality-palace-banquet" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/36e36b53a530059937010781edbc26217eb3af02-1000x704.webp?w=1200&amp;auto=format" alt="KWALITY PALACE BANQUET" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">BANQUET HALL</span><span class="pm-name">KWALITY PALACE BANQUET</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Thulo Bharang, Kathmandu Nepal</span></a>
-    </div>
-
-    <div class="port-cat-strip rv vis" style="padding-top: clamp(40px,6vw,80px);">
-      <h2 class="port-cat-h">INTERIOR DESIGN</h2>
-    </div>
-    <div class="port-grid-micasa pmr-half rv vis ">
-      <a href="gautam-hotel" class="pm-card pm-tall"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/28671991e76d981e256454cec9f1d6ff79c1e659-2000x1414.webp?w=1200&amp;auto=format" alt="GAUTAM HOTEL" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">BAR DESIGN</span><span class="pm-name">GAUTAM HOTEL</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Chapur, Nepal</span></a>
-      <a href="d-moksha-mustang-thakali" class="pm-card pm-tall"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/6742a513f27286db36842d997a7ec53e9b66fd3f-1864x1225.webp?w=1200&amp;auto=format" alt="D-MOKSHA MUSTANG THAKALI" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">THAKALI</span><span class="pm-name">D-MOKSHA MUSTANG THAKALI</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Ganyashor, Kathmandu, Nepal</span></a>
-    </div>
-    <div class="port-grid-micasa pmr-3 rv vis d1">
-      <a href="babarmahal-pharmacy" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/d6202cef0ac2c0522e2e2f61a3b5d0e8d1737f63-2000x1414.webp?w=1200&amp;auto=format" alt="BABARMAHAL PHARMACY" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">PHARMACY</span><span class="pm-name">BABARMAHAL PHARMACY</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Bhabarmahal, Kathmandu, Nepal</span></a>
-      <a href="best-and-fast-travels" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/c4cc22b416990f72ecf1479be102a8ddc3f53587-2000x1414.webp?w=1200&amp;auto=format" alt="BEST & FAST TRAVELS" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">OFFICE DESIGN</span><span class="pm-name">BEST & FAST TRAVELS</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Maharajgunj, Kathmandu, Nepal</span></a>
-      <a href="gumba-library" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/607f1d21a01772a498991ebfe23c66e4be9c07b9-1000x707.webp?w=1200&amp;auto=format" alt="GUMBA LIBRARY" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">LIBRARY DESIGN</span><span class="pm-name">GUMBA LIBRARY</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Maharajgunj, Kathmandu, Nepal</span></a>
-    </div>
-
-    <div class="port-cat-strip rv vis" style="padding-top: clamp(40px,6vw,80px);">
-      <h2 class="port-cat-h">RUNNING PROJECTS</h2>
+      <p class="port-cat-note">200+ projects delivered across Nepal &mdash; 22 selected below. <a href="architecture">See all architecture work</a>.</p>
     </div>
     <div class="port-grid-micasa pmr-3 rv vis ">
-      <a href="gautam-hotel" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/28671991e76d981e256454cec9f1d6ff79c1e659-2000x1414.webp?w=1200&amp;auto=format" alt="GAUTAM HOTEL" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">🚧 ONGOING · BAR DESIGN</span><span class="pm-name">GAUTAM HOTEL</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Chapur, Nepal</span></a>
-      <a href="d-moksha-mustang-thakali" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/6742a513f27286db36842d997a7ec53e9b66fd3f-1864x1225.webp?w=1200&amp;auto=format" alt="D-MOKSHA MUSTANG THAKALI" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">🚧 ONGOING · THAKALI</span><span class="pm-name">D-MOKSHA MUSTANG THAKALI</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Ganyashor, Kathmandu, Nepal</span></a>
-      <a href="babarmahal-pharmacy" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/d6202cef0ac2c0522e2e2f61a3b5d0e8d1737f63-2000x1414.webp?w=1200&amp;auto=format" alt="BABARMAHAL PHARMACY" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">🚧 ONGOING · PHARMACY</span><span class="pm-name">BABARMAHAL PHARMACY</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Bhabarmahal, Kathmandu, Nepal</span></a>
+      <a href="surkhet-hotel-exterior" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/e48f03d32ce6b180dde66cc9875044f4426f0a04-1000x653.webp?w=1200&amp;auto=format" alt="SURKHET, HOTEL EXTERIOR" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">Architecture · Hotel Exterior</span><span class="pm-name">SURKHET, HOTEL EXTERIOR</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Surkhet, Karnali, Nepal</span></a>
+      <a href="kawality-banquet-hall" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/007e5286efc60b1fd49b93c48b7e286c91088c4e-1000x707.webp?w=1200&amp;auto=format" alt="KAWALITY BANQUET HALL" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">BANQUET HALL</span><span class="pm-name">KAWALITY BANQUET HALL</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Kavrasthali, Nepal, Kathmandu</span></a>
+      <a href="surkhet-banquet-hall" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/2ecb5463d6f3c69527b6489a3c2e077e0aebc654-1000x707.webp?w=1200&amp;auto=format" alt="SURKHET BANQUET HALL " loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">BANQUET HALL</span><span class="pm-name">SURKHET BANQUET HALL </span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Surkhet, Karnali, Nepal</span></a>
+    </div>
+    <div class="port-grid-micasa pmr-3 rv vis d1">
+      <a href="kwality-palace-banquet" class="pm-card pm-r32"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/36e36b53a530059937010781edbc26217eb3af02-1000x704.webp?w=1200&amp;auto=format" alt="KWALITY PALACE BANQUET" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">BANQUET HALL</span><span class="pm-name">KWALITY PALACE BANQUET</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Thulo Bharang, Kathmandu Nepal</span></a>
+      <a href="amrita-thapa-residence" class="pm-card pm-r32"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/6860c80c8e678812f0b0a371613a132503866e60-1000x707.webp?w=1200&amp;auto=format" alt="AMRITA THAPA RESIDENCE" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">Architecture · Exterior</span><span class="pm-name">AMRITA THAPA RESIDENCE</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Naikap, Kathmandu</span></a>
+      <a href="naran-lama-home-exterior" class="pm-card pm-r32"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/c2f4e5991f869faa3ee4472dc9a0f8c3696a1a3c-951x668.webp?w=1200&amp;auto=format" alt="NARAN LAMA HOME EXTERIOR" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">Residential · Private Home</span><span class="pm-name">NARAN LAMA HOME EXTERIOR</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Tarkeswor, Kathmandu Nepal</span></a>
+    </div>
+
+    <div style="padding-bottom: clamp(56px,8vw,96px);"></div>
+    <div class="port-cat-strip rv vis">
+      <div class="port-cat-label">02</div>
+      <h2 class="port-cat-h">INTERIOR DESIGN</h2>
+      <p class="port-cat-note">Residential, workplace, hospitality and retail interiors &mdash; concept to handover. <a href="interiors">See all interior work</a>.</p>
+    </div>
+    <div class="port-grid-micasa pmr-half rv vis ">
+      <a href="gautam-hotel" class="pm-card pm-tall"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/28671991e76d981e256454cec9f1d6ff79c1e659-2000x1414.webp?w=1200&amp;auto=format" alt="GAUTAM HOTEL " loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">BAR DESIGN</span><span class="pm-name">GAUTAM HOTEL </span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Chapur, Nepal</span></a>
+      <a href="sandip-giri-home" class="pm-card pm-tall"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/67a8b475d5504352dcadc0c022c2b3e39c78e9bf-2000x1414.webp?w=1200&amp;auto=format" alt="SANDIP GIRI HOME" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">PRIVATE RESIDENCE</span><span class="pm-name">SANDIP GIRI HOME</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Sallaghari, Bhaktapur, Nepal</span></a>
+    </div>
+    <div class="port-grid-micasa pmr-big-small rv vis d1">
+      <a href="d-moksha-mustang-thakali" class="pm-card pm-std"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/6742a513f27286db36842d997a7ec53e9b66fd3f-1864x1225.webp?w=1200&amp;auto=format" alt="D-MOKSHA  MUSTANG THAKALI " loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">THAKALI</span><span class="pm-name">D-MOKSHA  MUSTANG THAKALI </span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Ganyashor, Kathmandu, Nepal</span></a>
+      <a href="panipokhari-bar" class="pm-card pm-std"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/6f6a65f46abfb115d46a7d7e2b369eb5d1491a3c-3840x2436.webp?w=1200&amp;auto=format" alt="PANIPOKHARI BAR" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">BAR DESING</span><span class="pm-name">PANIPOKHARI BAR</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Panipokhari, Kathmandu, Nepal</span></a>
+    </div>
+    <div class="port-grid-micasa pmr-3 rv vis d2">
+      <a href="skin-care-center" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/8f9734bfae6711442448d5fae2e1ae124dd563e7-1927x1325.webp?w=1200&amp;auto=format" alt="SKIN CARE CENTER" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">SKIN CARE CENTER</span><span class="pm-name">SKIN CARE CENTER</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Kl Tower, Bouddha, Kathmandu, Nepla</span></a>
+      <a href="babarmahal-pharmacy" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/d6202cef0ac2c0522e2e2f61a3b5d0e8d1737f63-2000x1414.webp?w=1200&amp;auto=format" alt="BABARMAHAL PHARMACY" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">PHARMACY</span><span class="pm-name">BABARMAHAL PHARMACY</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Bhabarmahal, Kathmandu, Nepal</span></a>
+      <a href="arihant-group-of-institution" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/34ece2b7fe736ff199e26c35b9017d2871690999-1912x1307.webp?w=1200&amp;auto=format" alt="ARIHANT GROUP OF INSTITUTION" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">COMMERICAL OFFICE</span><span class="pm-name">ARIHANT GROUP OF INSTITUTION</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Kalanki, Kathmandu</span></a>
+    </div>
+    <div class="port-grid-micasa pmr-3 rv vis d3">
+      <a href="glamour-artistry-beauty-studio" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/ec5d335661d636be726a136e19811c5cbca784a2-1834x1257.webp?w=1200&amp;auto=format" alt="GLAMOUR ARTISTRY BEAUTY STUDIO" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">BEAUTY SALON</span><span class="pm-name">GLAMOUR ARTISTRY BEAUTY STUDIO</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Naxal, Kathmandu, Nepal</span></a>
+      <a href="glow-room-unisex-salon" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/e37e42df3eecdb9bc6a96d6a8b6efec324f9b095-2000x1414.webp?w=1200&amp;auto=format" alt="GLOW ROOM UNISEX SALON" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">Unisex Salone</span><span class="pm-name">GLOW ROOM UNISEX SALON</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Naxal, Kathmandu</span></a>
+      <a href="vanimandal-office" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/982cba12c43037bf5c8d45d9baf81e37f06c01eb-1842x1277.webp?w=1200&amp;auto=format" alt="VANIMANDAL OFFICE " loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">Corporate Office</span><span class="pm-name">VANIMANDAL OFFICE </span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Vanimanda, Lalitpur, Nepal</span></a>
+    </div>
+    <div class="port-grid-micasa pmr-3 rv vis d3">
+      <a href="amit-bhagat-home" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/539e0d3b4ff72f15ec7ef48e88a06cf420af9b02-1913x1336.webp?w=1200&amp;auto=format" alt="AMIT BHAGAT HOME" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">Residence</span><span class="pm-name">AMIT BHAGAT HOME</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Kavrasthali, Kathmandu, Nepal</span></a>
+      <a href="best-and-fast-travels" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/c4cc22b416990f72ecf1479be102a8ddc3f53587-2000x1414.webp?w=1200&amp;auto=format" alt="BEST & FAST TRAVELS" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">OFFICE DESIGN</span><span class="pm-name">BEST & FAST TRAVELS</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Maharajgunj, Kathmandu, Nepal</span></a>
+      <a href="the-luxuary-air-b-and-b" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/a64961ef34f6242411af8633d147564a9504455d-1000x707.webp?w=1200&amp;auto=format" alt="THE LUXUARY AIR B&B " loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">AIR B&B</span><span class="pm-name">THE LUXUARY AIR B&B </span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Balwatar, Kathmandu, Nepal</span></a>
+    </div>
+    <div class="port-grid-micasa pmr-3 rv vis d3">
+      <a href="lokanthali-residence" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/fd69dddb4dec0c085f7ba5deca9fadd2eb5f26f2-1000x695.webp?w=1200&amp;auto=format" alt="LOKANTHALI RESIDENCE" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">RESIDENCE</span><span class="pm-name">LOKANTHALI RESIDENCE</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Lokanthali, Kathmandu</span></a>
+      <a href="panipokhari-office-interior-design" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/309f30d586bd343397a19194a1e955f93c3c8bd4-1000x707.webp?w=1200&amp;auto=format" alt="PANIPOKHARI OFFICE " loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">COMMERICAL OFFICE</span><span class="pm-name">PANIPOKHARI OFFICE </span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Panipokhari, Kathmandu</span></a>
+      <a href="gumba-library" class="pm-card pm-r43"><img src="https://cdn.sanity.io/images/gpyk0ky0/production/607f1d21a01772a498991ebfe23c66e4be9c07b9-1000x707.webp?w=1200&amp;auto=format" alt="GUMBA LIBRARY" loading="lazy"/><div class="pm-card-overlay"></div><span class="pm-cat">LIBRARY DESIGN</span><span class="pm-name">GUMBA LIBRARY</span><span class="pm-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Maharajgunj, Kathmandu, Nepal</span></a>
     </div>
   </section>
 
-      <!-- ===== COMMON TAIL (shared across all pages) ===== -->
-  <section class="contact sc-section" id="contact">
-    <div class="sc-wrap">
+  <section class="contact s" id="contact">
+    <div class="wrap">
       <div class="contact-grid">
         <div>
-          <div class="sc-tag rv">Get In Touch</div>
+          <div class="s-tag rv">Get In Touch</div>
           <div class="contact-head rv">
             <h2>START YOUR<br><span>PROJECT</span></h2>
-            <p>Whether it&rsquo;s your dream home, a boutique hotel, or a commercial space &mdash; send us the site details and what you have in mind. We typically share an indicative scope &amp; fee within 5 working days.</p>
+            <p>Whether it's your dream home, a boutique hotel, or a commercial space &mdash; send us the site details and what you have in mind. We typically share an indicative scope &amp; fee within 5 working days.</p>
           </div>
           <div class="contact-deets rv">
-            <a href="tel:+9779849151220" class="cd-item">
-              <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.09 4.18 2 2 0 0 1 4.08 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-              <div><span class="cd-label">Call Us</span><span class="cd-val">+977 9849151220</span></div>
-            </a>
-            <!--email_off--><a href="mailto:info@nextgeninterior.com" class="cd-item">
-              <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></div>
-              <div><span class="cd-label">Email Us</span><span class="cd-val">info@nextgeninterior.com</span></div>
-            </a><!--/email_off-->
-            <div class="cd-item">
-              <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
-              <div><span class="cd-label">Head Office</span><span class="cd-val">Baluwatar, Kathmandu</span></div>
-            </div>
+            <a href="tel:+9779849151220" class="cd-item"><div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.09 4.18 2 2 0 0 1 4.08 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><span class="cd-label">Call Us</span><span class="cd-val">+977 9849151220</span></div></a>
+            <!--email_off--><a href="mailto:info@nextgeninterior.com" class="cd-item"><div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></div><div><span class="cd-label">Email Us</span><span class="cd-val">info@nextgeninterior.com</span></div></a><!--/email_off-->
+            <div class="cd-item"><div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div><div><span class="cd-label">Head Office</span><span class="cd-val">Baluwatar, Kathmandu</span></div></div>
           </div>
           <div class="service-locations rv">
             <div class="service-locations-label">We Serve</div>
             <div class="location-tags">
-              <span class="location-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>All Over Nepal</span>
+              <span class="location-tag" style="border-color:rgba(54,159,206,0.45);color:var(--blue-mid);background:rgba(54,159,206,0.06);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                All Over Nepal
+              </span>
             </div>
           </div>
           <div class="contact-socials rv">
-            <a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-            <a href="https://www.facebook.com/architectsandinteriorshouse" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-            <a href="https://www.linkedin.com/company/nextgen-interiors-architects-pvt-ltd/?originalSubdomain=np" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-            <a href="https://www.youtube.com/@nextgeninteriors" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
-            <a href="https://wa.me/9779849151220" target="_blank" rel="noopener" style="background:rgba(37,211,102,0.12);border-color:rgba(37,211,102,0.28);color:#25d366;" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+            <a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://www.facebook.com/architectsandinteriorshouse" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/nextgen-interiors-architects-pvt-ltd/?originalSubdomain=np" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@nextgeninteriors" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+            </a>
+            <a href="https://wa.me/9779849151220" target="_blank" rel="noopener" style="background:rgba(37,211,102,0.12);border-color:rgba(37,211,102,0.28);color:#25d366;" aria-label="WhatsApp" title="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            </a>
           </div>
         </div>
         <div class="map-wrap rv d1">
-          <div class="map-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>NextGen Interiors &amp; Architects</div>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56510.56567813358!2d85.29506209077144!3d27.720053990615902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19ae1ff33c11%3A0x6942936f55f67bf2!2sNextGen%20interiors%20and%20architects!5e0!3m2!1sen!2snp!4v1777571670970!5m2!1sen!2snp" title="NextGen Interiors &amp; Architects on Google Maps" loading="lazy" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div class="map-label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            NextGen Interiors &amp; Architects
+          </div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56510.56567813358!2d85.29506209077144!3d27.720053990615902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19ae1ff33c11%3A0x6942936f55f67bf2!2sNextGen%20interiors%20and%20architects!5e0!3m2!1sen!2snp!4v1777571670970!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- PARTNER BRANDS -->
   <section class="partners-section" id="partners">
-    <div class="sc-wrap">
+    <div class="wrap">
       <div class="partners-eyebrow rv">Trusted Partner Brands</div>
       <h2 class="partners-title rv">We Build With The <em>Best</em></h2>
     </div>
     <div class="logo-marquee">
       <div class="logo-track">
-        <div class="logo-item"><img src="/public/Hettich.png" alt="Hettich" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Surya%20ply.png" alt="Surya Ply" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Kohler.jpg" alt="Kohler" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Merino%20Laminates.webp" alt="Merino Laminates" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Advance%20Laminates.png" alt="Advance Laminates" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Sagun%20Ply.jpg" alt="Sagun Ply" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Hafele.png" alt="Häfele" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Favicol.png" alt="Pidilite (Fevicol)" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Greenlam.png" alt="Greenlam Industries" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Action%20tesa.png" alt="Action TESA" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Roco.png" alt="Roca" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Kajaria-Ceramics.webp" alt="Kajaria Ceramics" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Nitco.png" alt="NITCO" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Laminam.webp" alt="Laminam" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Hettich.png" alt="Hettich" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Surya%20ply.png" alt="Surya Ply" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Kohler.jpg" alt="Kohler" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Merino%20Laminates.webp" alt="Merino Laminates" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Advance%20Laminates.png" alt="Advance Laminates" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Sagun%20Ply.jpg" alt="Sagun Ply" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Hafele.png" alt="Häfele" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Favicol.png" alt="Pidilite (Fevicol)" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Greenlam.png" alt="Greenlam Industries" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Action%20tesa.png" alt="Action TESA" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Roco.png" alt="Roca" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Kajaria-Ceramics.webp" alt="Kajaria Ceramics" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Nitco.png" alt="NITCO" loading="lazy"/></div>
-        <div class="logo-item"><img src="/public/Laminam.webp" alt="Laminam" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Hettich.png" alt="Hettich" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Surya%20ply.png" alt="Surya Ply" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Kohler.jpg" alt="Kohler" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Merino%20Laminates.webp" alt="Merino Laminates" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Advance%20Laminates.png" alt="Advance Laminates" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Sagun%20Ply.jpg" alt="Sagun Ply" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Hafele.png" alt="Häfele" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Favicol.png" alt="Pidilite (Fevicol)" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Greenlam.png" alt="Greenlam Industries" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Action%20tesa.png" alt="Action TESA" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Roco.png" alt="Roca" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Kajaria-Ceramics.webp" alt="Kajaria Ceramics" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Nitco.png" alt="NITCO" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Laminam.webp" alt="Laminam" loading="lazy"/></div>
+        <!-- duplicate for seamless loop -->
+        <div class="logo-item"><img src="public/Hettich.png" alt="Hettich" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Surya%20ply.png" alt="Surya Ply" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Kohler.jpg" alt="Kohler" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Merino%20Laminates.webp" alt="Merino Laminates" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Advance%20Laminates.png" alt="Advance Laminates" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Sagun%20Ply.jpg" alt="Sagun Ply" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Hafele.png" alt="Häfele" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Favicol.png" alt="Pidilite (Fevicol)" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Greenlam.png" alt="Greenlam Industries" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Action%20tesa.png" alt="Action TESA" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Roco.png" alt="Roca" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Kajaria-Ceramics.webp" alt="Kajaria Ceramics" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Nitco.png" alt="NITCO" loading="lazy"/></div>
+        <div class="logo-item"><img src="public/Laminam.webp" alt="Laminam" loading="lazy"/></div>
       </div>
     </div>
   </section>
 
   <footer class="footer">
-    <div class="sc-wrap">
+    <div class="wrap">
       <div class="footer-inner">
-        <div class="footer-logo"><img src="/logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:30px;"/></div>
+        <div class="footer-logo"><img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:30px;"/></div>
         <p class="footer-copy">&copy; 2025 NextGen Interiors &amp; Architects &middot; Baluwatar, Kathmandu, Nepal</p>
         <div class="footer-socials">
           <a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener">Instagram</a>
@@ -770,13 +825,14 @@
     </div>
   </footer>
 
-  <div class="wa-bubble">
+  <div class="wa-bubble" id="waBubble" style="opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s;">
     <div class="wa-tooltip">Chat with us on WhatsApp!</div>
-    <a href="https://wa.me/9779849151220?text=Hello%20NextGen%20Interiors%2C%20I%27d%20like%20to%20discuss%20a%20project." class="wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+    <a href="https://wa.me/9779849151220?text=Hello%20NextGen%20Interiors%2C%20I%27d%20like%20to%20discuss%20a%20project." class="wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    </a>
   </div>
-  <!-- ===== /COMMON TAIL ===== -->
 
-<script>
+  <script>
     // CURSOR
     const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
     let mx=0,my=0,rx=0,ry=0;
@@ -815,7 +871,7 @@
     setInterval(()=>{slides[si].classList.remove('active');si=(si+1)%slides.length;slides[si].classList.add('active');},5200);
 
     // WHATSAPP BUBBLE
-    setTimeout(()=>{const wb=document.getElementById('waBubble');if(wb){wb.style.opacity='1';wb.style.transform='translateY(0)';}},2600);
+    setTimeout(()=>{const wb=document.getElementById('waBubble');wb.style.opacity='1';wb.style.transform='translateY(0)';},2600);
 
     // HERO CHAR-BY-CHAR BLUR REVEAL
     (function buildHeroText() {
