@@ -521,6 +521,8 @@ def fetch_sanity_data():
         "slug": slug.current,
         mainCategory,
         subCategory,
+        featuredOnHome,
+        projectStatus,
         eyebrow,
         location,
         intro_heading,
@@ -724,28 +726,37 @@ def update_homepage_and_categories(projects, base_dir):
         with open(index_path, "r", encoding="utf-8") as f:
             index_html = f.read()
 
-        is_feat = lambda p: p.get('featuredOnHome') in [True, 'yes'] and p.get('thumbnail')
+        is_feat = lambda p: p.get('featuredOnHome') in [True, 'yes'] and p.get('thumbnail') and p.get('projectStatus') != 'running' and p.get('featuredOnHome') != 'running'
         is_excl = lambda p: p.get('featuredOnHome') in [False, 'no']
+        is_running = lambda p: (p.get('projectStatus') == 'running' or p.get('featuredOnHome') == 'running') and p.get('thumbnail')
 
         feat_arch = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() == 'architecture']
         feat_interior = [p for p in projects if is_feat(p) and (p.get('mainCategory') or '').lower() != 'architecture']
+        running_list = [p for p in projects if is_running(p)]
 
         arch_list = feat_arch if feat_arch else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() == 'architecture' and p.get('thumbnail')]
         interior_list = feat_interior if feat_interior else [p for p in projects if not is_excl(p) and (p.get('mainCategory') or '').lower() != 'architecture' and p.get('thumbnail')]
 
-        # Build Architecture Rows with balanced 2/3 column layout (no elongated single cards)
+        # If no explicit running projects marked in Sanity, show active ongoing ones
+        if not running_list:
+            running_list = [p for p in projects if p.get('thumbnail') and not is_excl(p)][:3]
+
+        # Build Architecture Rows
         p_arch = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': (clean_text(p.get('title')) or '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in arch_list]
         arch_rows = build_micasa_section_rows(p_arch, is_interior=False)
 
-        # Build Interior Rows with balanced 2/3 column layout (no elongated single cards)
+        # Build Interior Rows
         p_int = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': (clean_text(p.get('title')) or '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': category_tag(p)} for p in interior_list]
         interior_rows = build_micasa_section_rows(p_int, is_interior=True)
 
+        # Build Running Projects Rows
+        p_run = [{'slug': (p.get('slug') or '').strip().replace(' ', '-'), 'title': (clean_text(p.get('title')) or '').upper(), 'loc': clean_location(p.get('location')), 'thumb': p.get('thumbnail'), 'cat': '🚧 ONGOING · ' + category_tag(p)} for p in running_list]
+        running_rows = build_micasa_section_rows(p_run, is_interior=False)
+
         full_arch_html = '\n'.join(arch_rows)
         full_interior_html = '\n'.join(interior_rows)
+        full_running_html = '\n'.join(running_rows)
 
-        # Both section headings use the same top padding so the rhythm between
-        # Architecture and Interior Design is identical.
         strip_pad = 'style="padding-top: clamp(40px,6vw,80px);"'
         full_portfolio_section = f'''  <!-- PORTFOLIO / FEATURED PROJECTS -->
   <section class="portfolio" id="portfolio">
@@ -758,6 +769,11 @@ def update_homepage_and_categories(projects, base_dir):
       <h2 class="port-cat-h">INTERIOR DESIGN</h2>
     </div>
 {full_interior_html}
+
+    <div class="port-cat-strip rv vis" {strip_pad}>
+      <h2 class="port-cat-h">RUNNING PROJECTS</h2>
+    </div>
+{full_running_html}
   </section>'''
 
         import re

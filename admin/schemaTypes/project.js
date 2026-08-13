@@ -26,13 +26,28 @@ export const project = {
       type: 'string',
       options: {
         list: [
-          { title: '✅ YES — Show on Home Page', value: 'yes' },
-          { title: '❌ NO — Hide from Home Page', value: 'no' },
+          { title: '✅ YES — Show in Architecture / Interior Showcase', value: 'yes' },
+          { title: '🚧 RUNNING — Show in Running Projects Section', value: 'running' },
+          { title: '❌ NO — Hide from Home Page Showcase', value: 'no' },
         ],
         layout: 'radio',
       },
       initialValue: 'yes',
-      description: 'Select YES to feature this project on the Home Page (nextgeninterior.com) showcase. Select NO to only show in its category.',
+      description: 'Select YES for Architecture/Interior grid, RUNNING for Running Projects section, or NO to hide from Home Page.',
+    },
+    {
+      name: 'projectStatus',
+      title: '🏗️ Project Status (Completed vs Running/Ongoing)',
+      type: 'string',
+      options: {
+        list: [
+          { title: '✅ Completed Project', value: 'completed' },
+          { title: '🚧 Running / Ongoing Project (Under Construction)', value: 'running' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'completed',
+      description: 'Mark as "Running / Ongoing Project" to showcase in the Running Projects section on the Home Page.',
     },
     {
       name: 'mainCategory',
