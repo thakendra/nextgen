@@ -66,7 +66,11 @@
       "Bash(python build_from_sanity.py)",
       "Bash(python update.py)",
       "Bash(git rev-list *)",
-      "Bash(NEXTGEN_SSH_KEY=/tmp/fake_key python -c ' *)"
+      "Bash(NEXTGEN_SSH_KEY=/tmp/fake_key python -c ' *)",
+      "Bash(node --input-type=module -e ' *)",
+      "Bash(npx sanity *)",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('build_from_sanity.py',encoding='utf-8'\\).read\\(\\)\\); print\\('python OK'\\)\")",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('update.py',encoding='utf-8'\\).read\\(\\)\\); print\\('update.py OK'\\)\")"
     ]
   }
 }

@@ -658,6 +658,20 @@ def category_tag(p):
 
 RUNNING_CATEGORIES = {'ongoing-projects', 'running-projects', 'ongoing', 'running'}
 
+def main_category(p):
+    return (p.get('mainCategory') or '').lower()
+
+def sub_category(p):
+    return (p.get('subCategory') or '').lower()
+
+def is_dpr(p):
+    """DPR & Landscaping work. It is its own service line, managed from its own
+    section of the dashboard, and it surfaces on dpr-landscaping.html only —
+    never on the home page, in Architecture / Interiors, or in a sub-category
+    listing. The subCategory check keeps older documents working, which were
+    filed under Architecture with a 'dpr-landscaping' sub-category."""
+    return main_category(p) == 'dpr-landscaping' or sub_category(p) == 'dpr-landscaping'
+
 def is_running(p):
     """True when the dashboard marks a project as running / ongoing — either via
     the Home Page radio, the Project Status radio, or an 'Ongoing Project' main
@@ -749,10 +763,11 @@ def update_homepage_and_categories(projects, base_dir):
 
         # Running projects are pulled out first, so they can never also appear in
         # the Architecture / Interior grids above the Running Projects section.
-        on_home = lambda p: p.get('thumbnail') and not is_hidden_from_home(p) and not is_running(p)
+        on_home = lambda p: (p.get('thumbnail') and not is_hidden_from_home(p)
+                             and not is_running(p) and not is_dpr(p))
 
-        arch_list = [p for p in projects if on_home(p) and (p.get('mainCategory') or '').lower() == 'architecture']
-        interior_list = [p for p in projects if on_home(p) and (p.get('mainCategory') or '').lower() != 'architecture']
+        arch_list = [p for p in projects if on_home(p) and main_category(p) == 'architecture']
+        interior_list = [p for p in projects if on_home(p) and main_category(p) != 'architecture']
         running_list = [p for p in projects if is_running(p) and p.get('thumbnail')]
 
         # Build Architecture Rows
@@ -816,16 +831,16 @@ def update_homepage_and_categories(projects, base_dir):
 
     # 2. Update Category Pages
     cat_configs = {
-        "architecture.html": lambda p: (p.get('mainCategory') or '').lower() == 'architecture' or (p.get('subCategory') or '').lower() == 'dpr-landscaping',
-        "interiors.html": lambda p: (p.get('mainCategory') or '').lower() == 'interiors' or (p.get('mainCategory') or '').lower() != 'architecture',
-        "residential.html": lambda p: (p.get('subCategory') or '').lower() == 'residential',
-        "commercial.html": lambda p: (p.get('subCategory') or '').lower() == 'commercial',
-        "hospitality.html": lambda p: (p.get('subCategory') or '').lower() == 'hospitality',
-        "healthcare.html": lambda p: (p.get('subCategory') or '').lower() == 'healthcare',
-        "education.html": lambda p: (p.get('subCategory') or '').lower() == 'education',
-        "workplace.html": lambda p: (p.get('subCategory') or '').lower() == 'workplace',
-        "club-resort.html": lambda p: (p.get('subCategory') or '').lower() == 'club-resort',
-        "dpr-landscaping.html": lambda p: (p.get('subCategory') or '').lower() == 'dpr-landscaping',
+        "architecture.html": lambda p: main_category(p) == 'architecture',
+        "interiors.html": lambda p: main_category(p) != 'architecture',
+        "residential.html": lambda p: sub_category(p) == 'residential',
+        "commercial.html": lambda p: sub_category(p) == 'commercial',
+        "hospitality.html": lambda p: sub_category(p) == 'hospitality',
+        "healthcare.html": lambda p: sub_category(p) == 'healthcare',
+        "education.html": lambda p: sub_category(p) == 'education',
+        "workplace.html": lambda p: sub_category(p) == 'workplace',
+        "club-resort.html": lambda p: sub_category(p) == 'club-resort',
+        "dpr-landscaping.html": is_dpr,
     }
 
     for fname, filter_fn in cat_configs.items():
@@ -835,8 +850,14 @@ def update_homepage_and_categories(projects, base_dir):
         with open(fpath, "r", encoding="utf-8") as f:
             content = f.read()
 
-        # Running projects are home-page-only — they stay out of every listing page.
-        cat_projs = [p for p in projects if filter_fn(p) and p.get('thumbnail') and not is_running(p)]
+        # Two page-level invariants, enforced here rather than in each filter:
+        # running projects are home-page-only, and DPR work appears on the DPR
+        # page and nowhere else.
+        dpr_page = (fname == "dpr-landscaping.html")
+        cat_projs = [p for p in projects
+                     if filter_fn(p) and p.get('thumbnail')
+                     and not is_running(p)
+                     and is_dpr(p) == dpr_page]
         cards = []
         for idx, p in enumerate(cat_projs):
             slug = (p.get('slug') or '').strip().replace(' ', '-')
@@ -857,13 +878,24 @@ def update_homepage_and_categories(projects, base_dir):
       </div>
     </a>''')
 
-        grid_html = '\n' + '\n'.join(cards) + '\n' if cards else '\n    <div style="grid-column: 1 / -1; padding: 60px 0; text-align: center; color: var(--mist); font-size: 14px; letter-spacing: 0.05em;">New showcase projects added in the Sanity Dashboard will appear here automatically.</div>\n'
+        # Visitor-facing empty state — this renders on the live site, so it reads
+        # as a note to a client rather than a note to whoever runs the dashboard.
+        empty_html = ('\n    <div style="grid-column: 1 / -1; padding: 60px 0; text-align: center; '
+                      'color: var(--mist); font-size: 14px; letter-spacing: 0.05em;">'
+                      'Selected projects for this service line will be published here shortly.</div>\n')
+        grid_html = '\n' + '\n'.join(cards) + '\n' if cards else empty_html
 
         wrap_html = f'''<div class="projects-wrap">\n  <div class="projects-grid">{grid_html}  </div>\n</div>'''
 
         import re
+        # Stop at whatever comes after the grid on this page. Pages differ — most
+        # have an SEO block next, dpr-landscaping.html has the inquiry band — so
+        # every known follower is listed here. Miss one and the replacement eats
+        # the rest of the page down to the footer.
         content = re.sub(
-            r'<div class="projects-wrap">[\s\S]*?(?=(?:<!--\s*SEO|<section class="seo|<footer|<div class="footer))',
+            r'<div class="projects-wrap">[\s\S]*?'
+            r'(?=(?:<!--\s*SEO|<section class="seo|<div class="inquiry-band"'
+            r'|<!--\s*=+\s*COMMON TAIL|<section class="contact|<footer|<div class="footer))',
             wrap_html + '\n\n',
             content,
             count=1

@@ -5,6 +5,25 @@ import sys
 BASE_DIR = r"D:\nextgen"
 ADMIN_DIR = os.path.join(BASE_DIR, "admin")
 
+# Tracks steps that failed, so a broken deploy cannot look like a clean one.
+FAILURES = []
+
+
+def report(step, proc, ok_message):
+    """Print a step's real outcome. Anything a sub-script wrote to stderr, and
+    any non-zero exit, is surfaced here — a step that fails silently is worse
+    than one that fails loudly, because the site then sits at an old version
+    while the console says everything worked."""
+    if proc.stdout and proc.stdout.strip():
+        print(proc.stdout.strip())
+    elif proc.returncode == 0:
+        print(ok_message)
+    if proc.stderr and proc.stderr.strip():
+        print(proc.stderr.strip())
+    if proc.returncode != 0:
+        FAILURES.append(step)
+        print("[FAILED] {} exited with code {}.".format(step, proc.returncode))
+
 print("==================================================")
 print("[*] NEXTGEN 1-COMMAND AUTO-SYNC & PUBLISH SYSTEM")
 print("==================================================")
@@ -21,11 +40,9 @@ try:
         encoding='utf-8',
         errors='ignore'
     )
-    if p1.stdout:
-        print(p1.stdout.strip())
-    else:
-        print("All drafts processed.")
+    report("Step 1 (publish drafts)", p1, "All drafts processed.")
 except Exception as e:
+    FAILURES.append("Step 1 (publish drafts)")
     print("Draft note:", e)
 
 # Step 2: Build all project showcase pages and category grids
@@ -39,11 +56,9 @@ try:
         encoding='utf-8',
         errors='ignore'
     )
-    if p2.stdout:
-        print(p2.stdout.strip())
-    else:
-        print("Build completed.")
+    report("Step 2 (build pages)", p2, "Build completed.")
 except Exception as e:
+    FAILURES.append("Step 2 (build pages)")
     print("Error in build:", e)
 
 # Step 3: Synchronize to Hostinger Server
@@ -57,11 +72,9 @@ try:
         encoding='utf-8',
         errors='ignore'
     )
-    if p3.stdout:
-        print(p3.stdout.strip())
-    else:
-        print("Sync completed.")
+    report("Step 3 (upload to Hostinger)", p3, "Sync completed.")
 except Exception as e:
+    FAILURES.append("Step 3 (upload to Hostinger)")
     print("Error in sync:", e)
 
 # Step 4: Tell search engines what changed (runs after the sync, so the pages
@@ -76,8 +89,9 @@ try:
         encoding='utf-8',
         errors='ignore'
     )
-    print((p4.stdout or "IndexNow step finished.").strip())
+    report("Step 4 (IndexNow ping)", p4, "IndexNow step finished.")
 except Exception as e:
+    FAILURES.append("Step 4 (IndexNow ping)")
     print("IndexNow note:", e)
 
 # Step 5: Commit & push to GitHub
@@ -85,11 +99,22 @@ print("\n[Step 5/5] Committing and pushing to GitHub repository...")
 try:
     subprocess.run(["git", "add", "-A"], cwd=BASE_DIR, shell=True)
     subprocess.run(["git", "commit", "-m", "chore: auto-sync from update.py"], cwd=BASE_DIR, shell=True)
-    subprocess.run(["git", "push", "origin", "main"], cwd=BASE_DIR, shell=True)
-    print("GitHub synchronized successfully!")
+    push = subprocess.run(["git", "push", "origin", "main"], cwd=BASE_DIR, shell=True)
+    if push.returncode != 0:
+        FAILURES.append("Step 5 (git push)")
+        print("[FAILED] git push exited with code {}.".format(push.returncode))
+    else:
+        print("GitHub synchronized successfully!")
 except Exception as e:
+    FAILURES.append("Step 5 (git push)")
     print("Git sync note:", e)
 
 print("\n==================================================")
-print("[OK] COMPLETE! All 51 projects are live on https://nextgeninterior.com")
+if FAILURES:
+    # The upload is the step that decides whether the public site changed, so a
+    # failure there must never be reported as a completed deploy.
+    print("[INCOMPLETE] Finished with errors in: " + ", ".join(FAILURES))
+    print("The live site at https://nextgeninterior.com may still show the old version.")
+    sys.exit(1)
+print("[OK] COMPLETE! Everything is live on https://nextgeninterior.com")
 print("==================================================")

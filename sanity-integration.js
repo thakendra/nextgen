@@ -10,6 +10,12 @@ const isRunningProject = p =>
   p.projectStatus === 'running' ||
   p.featuredOnHome === 'running';
 
+// DPR & Landscaping is its own service line: it belongs on dpr-landscaping.html
+// and nowhere else. Mirrors is_dpr() in build_from_sanity.py.
+const isDprProject = p =>
+  (p.mainCategory || '').toLowerCase() === 'dpr-landscaping' ||
+  (p.subCategory || '').toLowerCase() === 'dpr-landscaping';
+
 async function fetchSanityProjects() {
   const query = encodeURIComponent(`*[_type == "project"] | order(_createdAt desc) {
     title, 
@@ -52,9 +58,13 @@ async function renderCategoryGrid() {
 
     const main = (p.mainCategory || '').toLowerCase();
     const sub = (p.subCategory || '').toLowerCase();
-    
+
+    // DPR first: its page takes only DPR work, and every other page takes none.
+    if (path.includes('dpr-landscaping')) return isDprProject(p);
+    if (isDprProject(p)) return false;
+
     if (path.includes('architecture')) {
-      return main === 'architecture' || sub === 'dpr-landscaping' || sub.includes('exterior');
+      return main === 'architecture' || sub.includes('exterior');
     }
     if (path.includes('residential')) {
       return sub === 'residential';
@@ -77,9 +87,6 @@ async function renderCategoryGrid() {
     if (path.includes('club-resort')) {
       return sub === 'club-resort';
     }
-    if (path.includes('dpr-landscaping')) {
-      return sub === 'dpr-landscaping';
-    }
     if (path.includes('interiors') || path === '/' || path.endsWith('/index.html')) {
       return main === 'interiors' || ['residential','commercial','hospitality','healthcare','education','workplace','club-resort'].includes(sub) || !main;
     }
@@ -90,7 +97,10 @@ async function renderCategoryGrid() {
   grid.innerHTML = '';
 
   if (filtered.length === 0) {
-    grid.innerHTML = `<div style="grid-column: 1 / -1; padding: 60px 0; text-align: center; color: var(--mist); font-size: 14px; letter-spacing: 0.05em;">New showcase projects added in the Sanity Dashboard will appear here automatically.</div>`;
+    // Same visitor-facing wording as the pre-rendered empty state in
+    // build_from_sanity.py — this text is public, so it reads as a note to a
+    // client rather than to whoever runs the dashboard.
+    grid.innerHTML = `<div style="grid-column: 1 / -1; padding: 60px 0; text-align: center; color: var(--mist); font-size: 14px; letter-spacing: 0.05em;">Selected projects for this service line will be published here shortly.</div>`;
     return;
   }
 
@@ -130,8 +140,8 @@ async function renderHomePageFeatured() {
   if (!allProjects || allProjects.length === 0) return;
 
   // Support both YES/NO radio selection and legacy booleans
-  const isFeatured = p => (p.featuredOnHome === 'yes' || p.featuredOnHome === true) && p.thumbnailUrl && p.thumbnailUrl !== 'None' && !isRunningProject(p);
-  const isExcluded = p => (p.featuredOnHome === 'no' || p.featuredOnHome === false) || isRunningProject(p);
+  const isFeatured = p => (p.featuredOnHome === 'yes' || p.featuredOnHome === true) && p.thumbnailUrl && p.thumbnailUrl !== 'None' && !isRunningProject(p) && !isDprProject(p);
+  const isExcluded = p => (p.featuredOnHome === 'no' || p.featuredOnHome === false) || isRunningProject(p) || isDprProject(p);
 
   const featuredArch = allProjects.filter(p => isFeatured(p) && (p.mainCategory || '').toLowerCase() === 'architecture');
   const featuredInterior = allProjects.filter(p => isFeatured(p) && (p.mainCategory || '').toLowerCase() !== 'architecture');

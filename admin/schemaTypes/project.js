@@ -57,12 +57,13 @@ export const project = {
         list: [
           { title: 'Architecture', value: 'architecture' },
           { title: 'Interior Design', value: 'interiors' },
+          { title: '🌿 DPR & Landscaping', value: 'dpr-landscaping' },
           { title: 'Ongoing Project', value: 'ongoing-projects' },
         ],
         layout: 'radio',
       },
       validation: (Rule) => Rule.required(),
-      description: 'Select whether this is an Interior or Architecture project.',
+      description: 'Select whether this is an Interior or Architecture project. DPR & Landscaping projects appear on the DPR & Landscaping page only — not on the Home Page or the other category pages.',
     },
     {
       name: 'subCategory',
