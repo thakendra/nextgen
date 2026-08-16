@@ -934,6 +934,9 @@ def generate_sitemap(projects, base_dir):
         ('/home-interior-residential-architecture-nepal', '0.8', 'monthly'),
         ('/locations/hotel-interior-design-surkhet', '0.8', 'monthly'),
         ('/locations/office-interior-design-lalitpur', '0.8', 'monthly'),
+        ('/locations/home-interior-design-bhaktapur', '0.8', 'monthly'),
+        ('/locations/home-interior-design-chitwan', '0.8', 'monthly'),
+        ('/locations/residential-architecture-dang', '0.8', 'monthly'),
     ]
     
     lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
