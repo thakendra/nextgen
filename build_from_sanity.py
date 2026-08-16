@@ -930,6 +930,7 @@ def generate_sitemap(projects, base_dir):
         ('/hotel-interior-design-nepal', '0.8', 'monthly'),
         ('/hotel-resort-architecture-nepal', '0.8', 'monthly'),
         ('/hotel-resort-designer-nepal', '0.8', 'monthly'),
+        ('/office-commercial-interior-design-nepal', '0.8', 'monthly'),
     ]
     
     lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
