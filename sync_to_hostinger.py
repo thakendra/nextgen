@@ -48,6 +48,12 @@ for html_file in glob.glob(os.path.join(LOCAL_DIR, "blogs", "*.html")):
     if rel not in FILES_TO_SYNC:
         FILES_TO_SYNC.append(rel)
 
+# ...and in the locations/ subfolder.
+for html_file in glob.glob(os.path.join(LOCAL_DIR, "locations", "*.html")):
+    rel = posixpath.join("locations", os.path.basename(html_file))
+    if rel not in FILES_TO_SYNC:
+        FILES_TO_SYNC.append(rel)
+
 
 def ensure_remote_dir(remote_path):
     """mkdir -p for the remote parent directory."""
