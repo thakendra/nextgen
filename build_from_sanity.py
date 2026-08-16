@@ -937,6 +937,7 @@ def generate_sitemap(projects, base_dir):
         ('/interior-architecture-design-construction-nepal', '0.8', 'monthly'),
         ('/best-construction-company-nepal', '0.8', 'monthly'),
         ('/farmhouse-designer-nepal', '0.8', 'monthly'),
+        ('/classical-home-designer-nepal', '0.8', 'monthly'),
         ('/locations/hotel-interior-design-surkhet', '0.8', 'monthly'),
         ('/locations/office-interior-design-lalitpur', '0.8', 'monthly'),
         ('/locations/home-interior-design-bhaktapur', '0.8', 'monthly'),
