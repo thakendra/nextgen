@@ -1,4 +1,6 @@
 import os
+import re
+import glob
 import json
 import urllib.request
 import urllib.parse
@@ -909,69 +911,127 @@ def update_homepage_and_categories(projects, base_dir):
             f.write(content)
         print(f"Pre-rendered {fname} with {len(cat_projs)} projects.")
 
+SITE = "https://nextgeninterior.com"
+
+# Crawl weight for the pages that deserve a considered value. Anything not
+# listed falls through to sitemap_meta() below, which is what lets a brand new
+# page appear in the sitemap without anyone editing this file.
+SITEMAP_PRIORITY = {
+    '/': ('1.0', 'weekly'),
+    '/architecture': ('0.9', 'weekly'),
+    '/interiors': ('0.9', 'weekly'),
+    '/dpr-landscaping': ('0.9', 'monthly'),
+    '/residential': ('0.8', 'weekly'),
+    '/commercial': ('0.8', 'weekly'),
+    '/hospitality': ('0.8', 'weekly'),
+    '/workplace': ('0.7', 'monthly'),
+    '/club-resort': ('0.7', 'monthly'),
+    '/healthcare': ('0.7', 'monthly'),
+    '/education': ('0.7', 'monthly'),
+    '/blog': ('0.8', 'weekly'),
+    '/careers': ('0.5', 'monthly'),
+}
+
+# Pages that exist but must never be advertised.
+SITEMAP_SKIP_SLUGS = {'chapur-hotel'}
+
+_CANONICAL_RE = re.compile(r'<link\s+rel="canonical"\s+href="([^"]+)"', re.I)
+_NOINDEX_RE = re.compile(r'<meta[^>]+name="robots"[^>]+content="[^"]*noindex', re.I)
+
+
+def page_url(rel_path):
+    """Public URL for a file path relative to the site root."""
+    rel = rel_path.replace(os.sep, '/')
+    if rel == 'index.html':
+        return SITE + '/'
+    return SITE + '/' + rel[:-len('.html')]
+
+
+def sitemap_meta(path, project_slugs):
+    """(priority, changefreq) for a URL path such as '/blogs/some-post'."""
+    if path in SITEMAP_PRIORITY:
+        return SITEMAP_PRIORITY[path]
+    if path.startswith('/blogs/'):
+        return ('0.7', 'monthly')
+    if path.startswith('/locations/'):
+        return ('0.8', 'monthly')
+    if path.lstrip('/') in project_slugs:
+        return ('0.7', 'monthly')
+    return ('0.8', 'monthly')
+
+
+def discover_pages(base_dir):
+    """Every page that should be in the sitemap, found by walking the site.
+
+    A page is included only when its own canonical points at itself. That single
+    rule keeps duplicates out without a maintained exclusion list: the eight SEO
+    landing pages that also sit under blogs/, and the five location pages that
+    also sit at the root, all canonicalise to one address, so only that address
+    is advertised. Pages marked noindex are skipped for the same reason.
+    """
+    patterns = ['*.html', os.path.join('blogs', '*.html'), os.path.join('locations', '*.html')]
+    found = []
+    for pattern in patterns:
+        for full in sorted(glob.glob(os.path.join(base_dir, pattern))):
+            rel = os.path.relpath(full, base_dir)
+            try:
+                with open(full, encoding='utf-8', errors='ignore') as f:
+                    head = f.read(8000)
+            except OSError:
+                continue
+            if _NOINDEX_RE.search(head):
+                continue
+            match = _CANONICAL_RE.search(head)
+            if not match:
+                print("  ! %s has no canonical tag — left out of the sitemap." % rel)
+                continue
+            own = page_url(rel)
+            if match.group(1).rstrip('/') != own.rstrip('/'):
+                continue  # duplicate; its canonical target is listed instead
+            found.append(own)
+    return found
+
+
 def generate_sitemap(projects, base_dir):
     from datetime import datetime
     today = datetime.now().strftime('%Y-%m-%d')
-    
-    static_pages = [
-        ('/', '1.0', 'weekly'),
-        ('/architecture', '0.9', 'weekly'),
-        ('/interiors', '0.9', 'weekly'),
-        ('/dpr-landscaping', '0.9', 'monthly'),
-        ('/residential', '0.8', 'weekly'),
-        ('/commercial', '0.8', 'weekly'),
-        ('/hospitality', '0.8', 'weekly'),
-        ('/workplace', '0.7', 'monthly'),
-        ('/club-resort', '0.7', 'monthly'),
-        ('/healthcare', '0.7', 'monthly'),
-        ('/education', '0.7', 'monthly'),
-        ('/blog', '0.8', 'weekly'),
-        ('/careers', '0.5', 'monthly'),
-        ('/hotel-interior-design-nepal', '0.8', 'monthly'),
-        ('/hotel-resort-architecture-nepal', '0.8', 'monthly'),
-        ('/hotel-resort-designer-nepal', '0.8', 'monthly'),
-        ('/office-commercial-interior-design-nepal', '0.8', 'monthly'),
-        ('/home-interior-residential-architecture-nepal', '0.8', 'monthly'),
-        ('/best-home-designer-nepal', '0.8', 'monthly'),
-        ('/banquet-designer-nepal', '0.8', 'monthly'),
-        ('/interior-architecture-design-construction-nepal', '0.8', 'monthly'),
-        ('/best-construction-company-nepal', '0.8', 'monthly'),
-        ('/farmhouse-designer-nepal', '0.8', 'monthly'),
-        ('/classical-home-designer-nepal', '0.8', 'monthly'),
-        ('/locations/hotel-interior-design-surkhet', '0.8', 'monthly'),
-        ('/locations/office-interior-design-lalitpur', '0.8', 'monthly'),
-        ('/locations/home-interior-design-bhaktapur', '0.8', 'monthly'),
-        ('/locations/home-interior-design-chitwan', '0.8', 'monthly'),
-        ('/locations/residential-architecture-dang', '0.8', 'monthly'),
-    ]
-    
-    lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    
-    for path, prio, freq in static_pages:
-        lines.append(f"""  <url>
-    <loc>https://nextgeninterior.com{path}</loc>
-    <lastmod>{today}</lastmod>
-    <changefreq>{freq}</changefreq>
-    <priority>{prio}</priority>
-  </url>""")
-        
-    for p in projects:
-        slug = p.get('slug')
-        if not slug or slug == 'chapur-hotel':
+
+    project_slugs = {(p.get('slug') or '').strip().replace(' ', '-')
+                     for p in projects if p.get('slug')}
+
+    urls = []
+    for url in discover_pages(base_dir):
+        path = '/' + url[len(SITE):].lstrip('/')
+        if path.lstrip('/') in SITEMAP_SKIP_SLUGS:
             continue
-        slug_clean = slug.strip().replace(' ', '-')
-        lines.append(f"""  <url>
-    <loc>https://nextgeninterior.com/{slug_clean}</loc>
-    <lastmod>{today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>""")
-        
+        urls.append((url, path))
+
+    # Home first, then everything else alphabetically, so diffs stay readable.
+    urls.sort(key=lambda item: (item[1] != '/', item[1]))
+
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for url, path in urls:
+        prio, freq = sitemap_meta(path, project_slugs)
+        lines.append("""  <url>
+    <loc>%s</loc>
+    <lastmod>%s</lastmod>
+    <changefreq>%s</changefreq>
+    <priority>%s</priority>
+  </url>""" % (url, today, freq, prio))
     lines.append('</urlset>')
-    sitemap_path = os.path.join(base_dir, 'sitemap.xml')
-    with open(sitemap_path, 'w', encoding='utf-8') as f:
+
+    with open(os.path.join(base_dir, 'sitemap.xml'), 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines))
-    print(f"Generated comprehensive dynamic sitemap.xml with {len(static_pages) + len(projects)} URLs.")
+
+    # A generated project page that never made it into the sitemap means the
+    # page is missing or its canonical is wrong — worth saying out loud.
+    listed = {path.lstrip('/') for _, path in urls}
+    orphans = sorted(s for s in project_slugs if s not in listed and s not in SITEMAP_SKIP_SLUGS)
+    if orphans:
+        print("  ! Project pages missing from sitemap: " + ', '.join(orphans))
+    print("Generated sitemap.xml with %d URLs (%d pages discovered on disk)." % (len(urls), len(urls)))
+
 
 if __name__ == '__main__':
     build()
