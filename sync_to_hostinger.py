@@ -54,6 +54,13 @@ for html_file in glob.glob(os.path.join(LOCAL_DIR, "locations", "*.html")):
     if rel not in FILES_TO_SYNC:
         FILES_TO_SYNC.append(rel)
 
+# ...and images in the images/ subfolder.
+for img_ext in ("*.jpg", "*.jpeg", "*.png", "*.webp"):
+    for img_file in glob.glob(os.path.join(LOCAL_DIR, "images", img_ext)):
+        rel = posixpath.join("images", os.path.basename(img_file))
+        if rel not in FILES_TO_SYNC:
+            FILES_TO_SYNC.append(rel)
+
 
 def ensure_remote_dir(remote_path):
     """mkdir -p for the remote parent directory."""
