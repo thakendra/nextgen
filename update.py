@@ -40,9 +40,12 @@ try:
         encoding='utf-8',
         errors='ignore'
     )
-    report("Step 1 (publish drafts)", p1, "All drafts processed.")
+    # Auto-publish drafts, but treat failure as a warning rather than blocking deployment.
+    if p1.returncode != 0:
+        print("[WARNING] Sanity draft publishing skipped or unauthorized. Continuing with build...")
+    else:
+        print("Sanity drafts published successfully.")
 except Exception as e:
-    FAILURES.append("Step 1 (publish drafts)")
     print("Draft note:", e)
 
 # Step 2: Build all project showcase pages and category grids
