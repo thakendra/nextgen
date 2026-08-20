@@ -588,7 +588,16 @@ def build():
         paragraphs = [f"<p>{line.strip()}</p>" for line in raw_text.split('\n') if line.strip()]
         intro_paragraphs = "\n      ".join(paragraphs) if paragraphs else f"<p>{raw_text}</p>"
         
-        desc = p.get('description') or f"{title} — interior architecture and bespoke spaces by NextGen Interiors, {location}."
+        desc_raw = p.get('description') or f"{title} — interior architecture and bespoke spaces by NextGen Interiors, {location}."
+        desc_clean = desc_raw.strip().rstrip('.')
+        if len(desc_clean) < 120:
+            suffix = " NextGen Interiors & Architects delivers premium design and construction in Nepal."
+            if len(desc_clean) + len(suffix) <= 165:
+                desc = desc_clean + "." + suffix
+            else:
+                desc = desc_clean + ". NextGen provides premium architecture and interiors in Nepal."
+        else:
+            desc = desc_clean + "."
         cat_name = sub.capitalize()
         cat_slug = sub
         

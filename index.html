@@ -7,8 +7,8 @@
   <link rel="shortcut icon" href="/logo/favicon.png" />
   <link rel="apple-touch-icon" href="/logo/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Architecture, Construction &amp; Interior Design in Kathmandu | NextGen</title>
-  <meta name="description" content="NextGen Interiors &amp; Architects is a full-service architecture, construction and interior design company in Kathmandu, Nepal. We design and build villas, farmhouses, resorts, hotels, banquet , homes and bungalows, delivering complete architectural, construction and interior solutions across Nepal." />
+  <title>Architecture, Construction &amp; Interiors Kathmandu | NextGen</title>
+  <meta name="description" content="NextGen Interiors &amp; Architects is a full-service architecture, construction and interior design company in Kathmandu, Nepal. Villas, hotels, offices &amp; homes." />
   <link rel="canonical" href="https://nextgeninterior.com/" />
   <meta name="google-site-verification" content="N3O_w9hvjUzuomfqrJNgeGXbtIVJ_5PcRNiGBkrPp94" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -20,15 +20,15 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="NextGen Interiors" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="Architecture, Construction &amp; Interior Design in Kathmandu | NextGen" />
-  <meta property="og:description" content="NextGen Interiors &amp; Architects is a full-service architecture, construction and interior design company in Kathmandu, Nepal. We design and build villas, farmhouses, resorts, hotels, banquet , homes and bungalows, delivering complete architectural, construction and interior solutions across Nepal." />
+  <meta property="og:title" content="Architecture, Construction &amp; Interiors Kathmandu | NextGen" />
+  <meta property="og:description" content="NextGen Interiors &amp; Architects is a full-service architecture, construction and interior design company in Kathmandu, Nepal. Villas, hotels, offices &amp; homes." />
   <meta property="og:url" content="https://nextgeninterior.com/" />
   <meta property="og:image" content="https://cdn.sanity.io/images/gpyk0ky0/production/539e0d3b4ff72f15ec7ef48e88a06cf420af9b02-1913x1336.webp?w=1200&amp;auto=format" />
   <meta property="og:image:alt" content="NextGen Interiors &amp; Architects — Interior Design and Architecture, Nepal" />
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Architecture, Construction &amp; Interior Design in Kathmandu | NextGen" />
-  <meta name="twitter:description" content="NextGen Interiors &amp; Architects is a full-service architecture, construction and interior design company in Kathmandu, Nepal. We design and build villas, farmhouses, resorts, hotels, banquet , homes and bungalows, delivering complete architectural, construction and interior solutions across Nepal." />
+  <meta name="twitter:title" content="Architecture, Construction &amp; Interiors Kathmandu | NextGen" />
+  <meta name="twitter:description" content="NextGen Interiors &amp; Architects is a full-service architecture, construction and interior design company in Kathmandu, Nepal. Villas, hotels, offices &amp; homes." />
   <meta name="twitter:image" content="https://cdn.sanity.io/images/gpyk0ky0/production/539e0d3b4ff72f15ec7ef48e88a06cf420af9b02-1913x1336.webp?w=1200&auto=format" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -637,10 +637,13 @@
     <div class="hero-overlay"></div>
     <div class="hero-center">
       <p class="hero-tagline">NextGen Interiors &amp; Architects &mdash; Nepal</p>
-      <div class="hero-title">
-        <div class="hero-line" id="heroLine1"></div>
-        <div class="hero-line" id="heroLine2"></div>
-      </div>
+      <!-- The page's h1. The words are in the markup so a crawler (and anyone
+           without JS) reads a real heading; buildHeroText() below clears them
+           and re-adds the same words split per character for the reveal. -->
+      <h1 class="hero-title">
+        <span class="hero-line" id="heroLine1">CRAFTING VISIONS,</span>
+        <span class="hero-line" id="heroLine2">BUILDING DREAMS</span>
+      </h1>
       <div class="hero-sep"></div>
       <div class="hero-sub">Turnkey interiors &amp; architecture &mdash; concept to handover</div>
       <div class="hero-locations">
@@ -880,6 +883,7 @@
       const LINE_OFFSET = 0.10;
       let idx = 0;
       lines.forEach((line, li) => {
+        line.el.textContent = '';   // drop the no-JS fallback text before animating
         line.words.forEach((word, wi) => {
           if (wi > 0) {
             const sp = document.createElement('span');

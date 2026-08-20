@@ -1,0 +1,761 @@
+{
+  "total_pages_audited": 70,
+  "duplicate_titles_count": 15,
+  "duplicate_descriptions_count": 15,
+  "results": [
+    {
+      "file": "amit-bhagat-home.html",
+      "title": "AMIT BHAGAT HOME \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 53,
+      "title_status": "OK",
+      "description": "Kavarasthai  Residence \u00e2\u20ac\u201d Private Home Interior Design By NextGen Interiors, Kathmandu Nepal",
+      "desc_len": 93,
+      "desc_status": "OK"
+    },
+    {
+      "file": "amrita-thapa-residence.html",
+      "title": "AMRITA THAPA RESIDENCE \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 59,
+      "title_status": "OK",
+      "description": "Amrita Thapa Residence - private residence interior design by NextGen Interiors & Architects , Naikap, Kathmandu.",
+      "desc_len": 113,
+      "desc_status": "OK"
+    },
+    {
+      "file": "architecture.html",
+      "title": "Best Architect in Kathmandu | NextGen Interiors & Architects",
+      "title_len": 60,
+      "title_status": "OK",
+      "description": "Looking for the best architect in Kathmandu? NextGen designs homes, commercial buildings &amp; resorts \u2014 200+ architecture projects across Nepal.",
+      "desc_len": 145,
+      "desc_status": "OK"
+    },
+    {
+      "file": "arihant-group-of-institution.html",
+      "title": "ARIHANT GROUP OF INSTITUTION \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 65,
+      "title_status": "OK",
+      "description": "Arihant Group Of Insititution Office Interior Design By NextGen Interiors & Architects , Kathmandu.",
+      "desc_len": 99,
+      "desc_status": "OK"
+    },
+    {
+      "file": "babarmahal-pharmacy.html",
+      "title": "BABARMAHAL PHARMACY \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 56,
+      "title_status": "OK",
+      "description": "Pharmacy Interior Design By NextGen Interiors & Architects , Kathmandu.",
+      "desc_len": 71,
+      "desc_status": "TOO SHORT"
+    },
+    {
+      "file": "banquet-designer-nepal.html",
+      "title": "Best Banquet Designer in Nepal | Banquet Hall Architecture &amp; Interior Design | NextGen",
+      "title_len": 90,
+      "title_status": "TOO LONG",
+      "description": "Looking for the best banquet designer in Nepal? NextGen Interiors &amp; Architects plans, designs &amp; delivers luxury banquet halls, event venues &amp; hospitality architecture across Nepal.",
+      "desc_len": 192,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "best-and-fast-travels.html",
+      "title": "BEST & FAST TRAVELS \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 56,
+      "title_status": "OK",
+      "description": "Best & fast travel Office Interior Design By NextGen Interiors & Architects , Kathmandu.",
+      "desc_len": 88,
+      "desc_status": "OK"
+    },
+    {
+      "file": "best-construction-company-nepal.html",
+      "title": "Best Construction Company in Nepal | Turnkey Building &amp; Interior Construction | NextGen",
+      "title_len": 91,
+      "title_status": "TOO LONG",
+      "description": "Looking for the best construction company in Nepal? NextGen Interiors &amp; Architects offers full turnkey construction, commercial &amp; home building, interior fit-outs &amp; DPR project management from Baluwatar, Kathmandu.",
+      "desc_len": 226,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "best-home-designer-nepal.html",
+      "title": "Best Home Designer in Nepal | Luxury Residential Architecture &amp; Interiors | NextGen",
+      "title_len": 87,
+      "title_status": "TOO LONG",
+      "description": "Looking for the best home designer in Nepal? Discover how NextGen Interiors &amp; Architects designs, builds &amp; turnkey-delivers luxury homes, modern residences, and villas across Kathmandu, Lalitpur, Bhaktapur, Chitwan &amp; Nepal.",
+      "desc_len": 235,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "blog.html",
+      "title": "Blog | NextGen Interiors \u2014 Kathmandu, Nepal",
+      "title_len": 43,
+      "title_status": "OK",
+      "description": "Insights, design trends, and client guides from NextGen Interiors &amp; Architects. Interior design \u2014 turnkey design from concept to handover.",
+      "desc_len": 142,
+      "desc_status": "OK"
+    },
+    {
+      "file": "blogs/affordable-international-style-house.html",
+      "title": "Affordable International Style House in Nepal | NextGen",
+      "title_len": 55,
+      "title_status": "OK",
+      "description": "Build an affordable international style house in Nepal \u2014 smart floor plans, the right materials and natural light create a luxurious modern home on any budget.",
+      "desc_len": 159,
+      "desc_status": "OK"
+    },
+    {
+      "file": "blogs/banquet-designer-nepal.html",
+      "title": "Best Banquet Designer in Nepal | Banquet Hall Architecture &amp; Interior Design | NextGen",
+      "title_len": 90,
+      "title_status": "TOO LONG",
+      "description": "Looking for the best banquet designer in Nepal? NextGen Interiors &amp; Architects plans, designs &amp; delivers luxury banquet halls, event venues &amp; hospitality architecture across Nepal.",
+      "desc_len": 192,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "blogs/best-construction-company-nepal.html",
+      "title": "Best Construction Company in Nepal | Turnkey Building &amp; Interior Construction | NextGen",
+      "title_len": 91,
+      "title_status": "TOO LONG",
+      "description": "Looking for the best construction company in Nepal? NextGen Interiors &amp; Architects offers full turnkey construction, commercial &amp; home building, interior fit-outs &amp; DPR project management from Baluwatar, Kathmandu.",
+      "desc_len": 226,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "blogs/best-home-designer-nepal.html",
+      "title": "Best Home Designer in Nepal | Luxury Residential Architecture &amp; Interiors | NextGen",
+      "title_len": 87,
+      "title_status": "TOO LONG",
+      "description": "Looking for the best home designer in Nepal? Discover how NextGen Interiors &amp; Architects designs, builds &amp; turnkey-delivers luxury homes, modern residences, and villas across Kathmandu, Lalitpur, Bhaktapur, Chitwan &amp; Nepal.",
+      "desc_len": 235,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "blogs/classical-home-designer-nepal.html",
+      "title": "Classical Home Designer in Nepal | Neoclassical Architecture, Interiors &amp; Construction | NextGen",
+      "title_len": 100,
+      "title_status": "TOO LONG",
+      "description": "Looking for a classical home designer in Nepal? NextGen Interiors &amp; Architects provides neoclassical home architecture, luxury classical interior design, turnkey construction &amp; DPR consulting.",
+      "desc_len": 200,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "blogs/farmhouse-designer-nepal.html",
+      "title": "Farmhouse Designer in Nepal | Luxury Farmhouse Architecture &amp; Landscaping | NextGen",
+      "title_len": 87,
+      "title_status": "TOO LONG",
+      "description": "Planning a luxury farmhouse in Nepal? Discover how NextGen Interiors &amp; Architects designs, plans &amp; builds eco-farmhouses, weekend retreats &amp; landscape architecture across Nepal.",
+      "desc_len": 189,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "blogs/home-interior-residential-architecture-nepal.html",
+      "title": "Home Interior Design &amp; Residential Architecture in Nepal | NextGen",
+      "title_len": 70,
+      "title_status": "TOO LONG",
+      "description": "Planning a home or villa in Nepal? See how NextGen Interiors &amp; Architects handles home interior design and residential architecture from Baluwatar, Kathmandu.",
+      "desc_len": 162,
+      "desc_status": "OK"
+    },
+    {
+      "file": "blogs/house-building-mistakes-to-avoid.html",
+      "title": "10 House Building Mistakes to Avoid | NextGen Interiors",
+      "title_len": 55,
+      "title_status": "OK",
+      "description": "Avoid these 10 expensive mistakes when building your dream house in Nepal \u2014 from skipping architectural plans to poor lighting, storage and cheap materials.",
+      "desc_len": 156,
+      "desc_status": "OK"
+    },
+    {
+      "file": "blogs/interior-architecture-design-construction-nepal.html",
+      "title": "Interior Architecture Design &amp; Construction in Nepal | NextGen",
+      "title_len": 66,
+      "title_status": "TOO LONG",
+      "description": "Leading interior architecture design and turnkey construction firm in Nepal. NextGen Interiors delivers end-to-end architecture, interior fit-outs, DPR costing &amp; construction supervision from Baluwatar, Kathmandu.",
+      "desc_len": 217,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "blogs/mustang-hotel-designer-nepal.html",
+      "title": "Mustang Hotel Designer | Hotel Architecture &amp; Interior Design in Upper Mustang",
+      "title_len": 82,
+      "title_status": "TOO LONG",
+      "description": "Looking for a hotel designer in Mustang? NextGen Interiors provides hotel architecture, interior design, resort planning, 3D visualization and turnkey design solutions for Mustang and Upper Mustang.",
+      "desc_len": 198,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "blogs/office-commercial-interior-design-nepal.html",
+      "title": "Office &amp; Commercial Interior Design in Nepal | NextGen Interiors",
+      "title_len": 68,
+      "title_status": "TOO LONG",
+      "description": "Planning an office fit-out in Kathmandu? See how NextGen Interiors &amp; Architects designs, renovates &amp; turnkey-delivers office and commercial interiors across Nepal.",
+      "desc_len": 171,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "blogs/shinta-mani-inspired-hotel-designer-nepal.html",
+      "title": "Shinta Mani Inspired Hotel Designer Nepal | NextGen Interiors",
+      "title_len": 61,
+      "title_status": "OK",
+      "description": "Looking for a luxury hotel designer in Nepal? NextGen Interiors provides hotel architecture, resort design, luxury interiors, 3D visualization and turnkey hospitality solutions.",
+      "desc_len": 177,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "careers.html",
+      "title": "Careers | NextGen Interiors &amp; Architects",
+      "title_len": 44,
+      "title_status": "OK",
+      "description": "Open positions at NextGen Interiors &amp; Architects \u2014 Senior Architect Designer and Senior Interior Designer roles in Kathmandu.",
+      "desc_len": 129,
+      "desc_status": "OK"
+    },
+    {
+      "file": "classical-home-designer-nepal.html",
+      "title": "Classical Home Designer in Nepal | Neoclassical Architecture, Interiors &amp; Construction | NextGen",
+      "title_len": 100,
+      "title_status": "TOO LONG",
+      "description": "Looking for a classical home designer in Nepal? NextGen Interiors &amp; Architects provides neoclassical home architecture, luxury classical interior design, turnkey construction &amp; DPR consulting.",
+      "desc_len": 200,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "club-resort.html",
+      "title": "Club &amp; Resort Portfolio | NextGen Interiors \u2014 Kathmandu, Nepal",
+      "title_len": 66,
+      "title_status": "TOO LONG",
+      "description": "NextGen Interiors club &amp; resort portfolio \u2014 leisure retreats, wellness resorts &amp; private clubs across Nepal. See photos, materials and design details.",
+      "desc_len": 158,
+      "desc_status": "OK"
+    },
+    {
+      "file": "commercial.html",
+      "title": "Commercial Building Designer in Kathmandu | NextGen",
+      "title_len": 51,
+      "title_status": "OK",
+      "description": "Commercial building designer in Kathmandu, Nepal. NextGen delivers turnkey office interiors, retail spaces, restaurants, cafes &amp; commercial projects.",
+      "desc_len": 153,
+      "desc_status": "OK"
+    },
+    {
+      "file": "d-moksha-mustang-thakali.html",
+      "title": "D-MOKSHA  MUSTANG THAKALI  \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 63,
+      "title_status": "OK",
+      "description": "D-Moksha Mustang Thakali  interior design by NextGen Interiors & Architects, Kathmandu, Nepal.",
+      "desc_len": 94,
+      "desc_status": "OK"
+    },
+    {
+      "file": "dpr-landscaping.html",
+      "title": "DPR &amp; Landscaping | NextGen Interiors &amp; Architects",
+      "title_len": 58,
+      "title_status": "OK",
+      "description": "Detailed Project Reports, master-planning &amp; landscape design services by NextGen Interiors &amp; Architects, Nepal. See photos, materials and design details.",
+      "desc_len": 161,
+      "desc_status": "OK"
+    },
+    {
+      "file": "education.html",
+      "title": "Education Portfolio | NextGen Interiors \u2014 Kathmandu, Nepal",
+      "title_len": 58,
+      "title_status": "OK",
+      "description": "NextGen Interiors education portfolio \u2014 schools, training institutes, libraries &amp; learning environments across Nepal. 200+ projects delivered across Nepal.",
+      "desc_len": 159,
+      "desc_status": "OK"
+    },
+    {
+      "file": "farmhouse-designer-nepal.html",
+      "title": "Farmhouse Designer in Nepal | Luxury Farmhouse Architecture &amp; Landscaping | NextGen",
+      "title_len": 87,
+      "title_status": "TOO LONG",
+      "description": "Planning a luxury farmhouse in Nepal? Discover how NextGen Interiors &amp; Architects designs, plans &amp; builds eco-farmhouses, weekend retreats &amp; landscape architecture across Nepal.",
+      "desc_len": 189,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "gautam-hotel.html",
+      "title": "GAUTAM HOTEL  \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 50,
+      "title_status": "OK",
+      "description": "Gautam Hotel Bar interior design by NextGen Interiors & Architects, Kathmandu, Nepal.",
+      "desc_len": 85,
+      "desc_status": "OK"
+    },
+    {
+      "file": "glamour-artistry-beauty-studio.html",
+      "title": "GLAMOUR ARTISTRY BEAUTY STUDIO \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 67,
+      "title_status": "TOO LONG",
+      "description": "Beauty Salon Studio Interior Design By NextGen Interiors & Architects , Kathmandu.",
+      "desc_len": 82,
+      "desc_status": "OK"
+    },
+    {
+      "file": "glow-room-unisex-salon.html",
+      "title": "Glow Room Unisex Salon \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 59,
+      "title_status": "OK",
+      "description": "Unisex Salon Interior Design By NextGen Interiors & Architects , Kathmandu.",
+      "desc_len": 75,
+      "desc_status": "TOO SHORT"
+    },
+    {
+      "file": "gumba-library.html",
+      "title": "GUMBA LIBRARY \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 50,
+      "title_status": "OK",
+      "description": "Gumba Library Interior By NextGen Interiors, Balkot, Kathmandu.",
+      "desc_len": 63,
+      "desc_status": "TOO SHORT"
+    },
+    {
+      "file": "healthcare.html",
+      "title": "Healthcare Portfolio | NextGen Interiors \u2014 Kathmandu, Nepal",
+      "title_len": 59,
+      "title_status": "OK",
+      "description": "NextGen Interiors healthcare portfolio \u2014 clinics, wellness centres &amp; consultation suites across Nepal. See photos, materials and design details.",
+      "desc_len": 148,
+      "desc_status": "OK"
+    },
+    {
+      "file": "home-interior-design-bhaktapur.html",
+      "title": "Home Interior Design in Bhaktapur | NextGen Interiors",
+      "title_len": 53,
+      "title_status": "OK",
+      "description": "Looking for top home interior design in Bhaktapur? NextGen Interiors &amp; Architects has delivered luxury home interiors including the Sandip Giri Home in Sallaghari, Bhaktapur.",
+      "desc_len": 178,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "home-interior-design-chitwan.html",
+      "title": "Home Interior Design in Chitwan &amp; Bharatpur | NextGen Interiors",
+      "title_len": 67,
+      "title_status": "TOO LONG",
+      "description": "Looking for top home interior design in Chitwan or Bharatpur? NextGen Interiors &amp; Architects delivers full-home interiors &amp; residential architecture in Chitwan.",
+      "desc_len": 168,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "home-interior-residential-architecture-nepal.html",
+      "title": "Home Interior Design &amp; Residential Architecture in Nepal | NextGen",
+      "title_len": 70,
+      "title_status": "TOO LONG",
+      "description": "Planning a home or villa in Nepal? See how NextGen Interiors &amp; Architects handles home interior design and residential architecture from Baluwatar, Kathmandu.",
+      "desc_len": 162,
+      "desc_status": "OK"
+    },
+    {
+      "file": "hospitality.html",
+      "title": "Hotel &amp; Resort Designer in Nepal | NextGen Interiors",
+      "title_len": 56,
+      "title_status": "OK",
+      "description": "NextGen Interiors is Nepal's premier hotel &amp; resort designer \u2014 hospitality interior design, restaurant design &amp; turnkey hotel architecture across Nepal.",
+      "desc_len": 160,
+      "desc_status": "OK"
+    },
+    {
+      "file": "hotel-interior-design-nepal.html",
+      "title": "Hotel Interior Design Nepal | Luxury Hospitality Design | NextGen",
+      "title_len": 65,
+      "title_status": "OK",
+      "description": "Professional hotel interior design in Nepal by NextGen Interiors. Luxury hotel interiors, boutique hotels, resorts, renovation &amp; turnkey design solutions.",
+      "desc_len": 158,
+      "desc_status": "OK"
+    },
+    {
+      "file": "hotel-interior-design-surkhet.html",
+      "title": "Hotel Interior Designer in Surkhet | NextGen Interiors",
+      "title_len": 54,
+      "title_status": "OK",
+      "description": "NextGen Interiors &amp; Architects has delivered hotel and banquet hall interior design in Surkhet, Karnali \u2014 turnkey hospitality projects built and handed over on-site.",
+      "desc_len": 169,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "hotel-resort-architecture-nepal.html",
+      "title": "Hotel &amp; Resort Architecture Nepal | Expert Architects | NextGen",
+      "title_len": 67,
+      "title_status": "TOO LONG",
+      "description": "Expert hotel &amp; resort architects in Nepal. NextGen Interiors provides hospitality architecture, resort master planning &amp; turnkey resort design solutions.",
+      "desc_len": 161,
+      "desc_status": "OK"
+    },
+    {
+      "file": "hotel-resort-designer-nepal.html",
+      "title": "Hotel &amp; Resort Designer in Nepal | Luxury Hospitality Design",
+      "title_len": 64,
+      "title_status": "OK",
+      "description": "Do you want to find a designer for a resort or hotel in Nepal? Explore unique designs for hotels and resorts that showcase hospitality from NextGen Interiors.",
+      "desc_len": 158,
+      "desc_status": "OK"
+    },
+    {
+      "file": "index.html",
+      "title": "Architecture, Construction &amp; Interiors Kathmandu | NextGen",
+      "title_len": 62,
+      "title_status": "OK",
+      "description": "NextGen Interiors &amp; Architects is a full-service architecture, construction and interior design company in Kathmandu, Nepal. Villas, hotels, offices &amp; homes.",
+      "desc_len": 165,
+      "desc_status": "OK"
+    },
+    {
+      "file": "interior-architecture-design-construction-nepal.html",
+      "title": "Interior Architecture Design &amp; Construction in Nepal | NextGen",
+      "title_len": 66,
+      "title_status": "TOO LONG",
+      "description": "Leading interior architecture design and turnkey construction firm in Nepal. NextGen Interiors delivers end-to-end architecture, interior fit-outs, DPR costing &amp; construction supervision from Baluwatar, Kathmandu.",
+      "desc_len": 217,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "interiors.html",
+      "title": "Home Interior Designers in Kathmandu | NextGen Interiors",
+      "title_len": 56,
+      "title_status": "OK",
+      "description": "Home interior designers in Kathmandu \u2014 NextGen delivers luxury home, office and commercial interior design with turnkey execution across Nepal.",
+      "desc_len": 143,
+      "desc_status": "OK"
+    },
+    {
+      "file": "kawality-banquet-hall.html",
+      "title": "KAWALITY BANQUET HALL \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 58,
+      "title_status": "OK",
+      "description": "Banquet Hall\u201d Classical exterior architecture by NextGen Interiors & Architects, Kavrasthali , Kathmandu.",
+      "desc_len": 105,
+      "desc_status": "OK"
+    },
+    {
+      "file": "kwality-palace-banquet.html",
+      "title": "KWALITY PALACE BANQUET \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 59,
+      "title_status": "OK",
+      "description": "Banquet Hall\u201d Classical exterior & interior architecture by NextGen Interiors, Thulo Bharang, Kathmandu.",
+      "desc_len": 104,
+      "desc_status": "OK"
+    },
+    {
+      "file": "locations/home-interior-design-bhaktapur.html",
+      "title": "Home Interior Design in Bhaktapur | NextGen Interiors",
+      "title_len": 53,
+      "title_status": "OK",
+      "description": "Looking for top home interior design in Bhaktapur? NextGen Interiors &amp; Architects has delivered luxury home interiors including the Sandip Giri Home in Sallaghari, Bhaktapur.",
+      "desc_len": 178,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "locations/home-interior-design-chitwan.html",
+      "title": "Home Interior Design in Chitwan &amp; Bharatpur | NextGen Interiors",
+      "title_len": 67,
+      "title_status": "TOO LONG",
+      "description": "Looking for top home interior design in Chitwan or Bharatpur? NextGen Interiors &amp; Architects delivers full-home interiors &amp; residential architecture in Chitwan.",
+      "desc_len": 168,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "locations/hotel-interior-design-surkhet.html",
+      "title": "Hotel Interior Designer in Surkhet | NextGen Interiors",
+      "title_len": 54,
+      "title_status": "OK",
+      "description": "NextGen Interiors &amp; Architects has delivered hotel and banquet hall interior design in Surkhet, Karnali \u2014 turnkey hospitality projects built and handed over on-site.",
+      "desc_len": 169,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "locations/office-interior-design-lalitpur.html",
+      "title": "Office Interior Design in Lalitpur | NextGen Interiors",
+      "title_len": 54,
+      "title_status": "OK",
+      "description": "Looking for office interior design in Lalitpur? NextGen Interiors &amp; Architects has delivered corporate office fit-outs including the Vanimandal Office, Lalitpur.",
+      "desc_len": 165,
+      "desc_status": "OK"
+    },
+    {
+      "file": "locations/residential-architecture-dang.html",
+      "title": "Residential Architecture &amp; Building Design in Dang | NextGen",
+      "title_len": 64,
+      "title_status": "OK",
+      "description": "NextGen Interiors &amp; Architects designs residential architecture and building exteriors in Dang, Nepal \u2014 featuring the Bhanu Panta Home and Dang Residence.",
+      "desc_len": 158,
+      "desc_status": "OK"
+    },
+    {
+      "file": "lokanthali-residence.html",
+      "title": "LOKANTHALI RESIDENCE \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 57,
+      "title_status": "OK",
+      "description": "Lokanthali Residence \u00e2\u20ac\u201d Private Home Interior Design By NextGen Interiors, Kathmandu Nepal",
+      "desc_len": 91,
+      "desc_status": "OK"
+    },
+    {
+      "file": "mustang-hotel-designer-nepal.html",
+      "title": "Mustang Hotel Designer | Hotel Architecture &amp; Interior Design in Upper Mustang",
+      "title_len": 82,
+      "title_status": "TOO LONG",
+      "description": "Looking for a hotel designer in Mustang? NextGen Interiors provides hotel architecture, interior design, resort planning, 3D visualization and turnkey design solutions for Mustang and Upper Mustang.",
+      "desc_len": 198,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "naran-lama-home-exterior.html",
+      "title": "NARAN LAMA HOME EXTERIOR \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 61,
+      "title_status": "OK",
+      "description": "Naran Lama Home  private residence exterior design by NextGen Interiors, Tarkeswor, Kathmandu.",
+      "desc_len": 94,
+      "desc_status": "OK"
+    },
+    {
+      "file": "office-commercial-interior-design-nepal.html",
+      "title": "Office &amp; Commercial Interior Design in Nepal | NextGen Interiors",
+      "title_len": 68,
+      "title_status": "TOO LONG",
+      "description": "Planning an office fit-out in Kathmandu? See how NextGen Interiors &amp; Architects designs, renovates &amp; turnkey-delivers office and commercial interiors across Nepal.",
+      "desc_len": 171,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "office-interior-design-lalitpur.html",
+      "title": "Office Interior Design in Lalitpur | NextGen Interiors",
+      "title_len": 54,
+      "title_status": "OK",
+      "description": "Looking for office interior design in Lalitpur? NextGen Interiors &amp; Architects has delivered corporate office fit-outs including the Vanimandal Office, Lalitpur.",
+      "desc_len": 165,
+      "desc_status": "OK"
+    },
+    {
+      "file": "panipokhari-bar.html",
+      "title": "PANIPOKHARI BAR \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 52,
+      "title_status": "OK",
+      "description": "Paipokhari Bar interior design by NextGen Interiors & Architects, Kathmandu, Nepal.",
+      "desc_len": 83,
+      "desc_status": "OK"
+    },
+    {
+      "file": "panipokhari-office-interior-design.html",
+      "title": "PANIPOKHARI OFFICE  \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 56,
+      "title_status": "OK",
+      "description": "Panipokhari  Office Interior Design By NextGen Interiors & Architects , Kathmandu.",
+      "desc_len": 82,
+      "desc_status": "OK"
+    },
+    {
+      "file": "residential-architecture-dang.html",
+      "title": "Residential Architecture &amp; Building Design in Dang | NextGen",
+      "title_len": 64,
+      "title_status": "OK",
+      "description": "NextGen Interiors &amp; Architects designs residential architecture and building exteriors in Dang, Nepal \u2014 featuring the Bhanu Panta Home and Dang Residence.",
+      "desc_len": 158,
+      "desc_status": "OK"
+    },
+    {
+      "file": "residential.html",
+      "title": "House &amp; Home Design in Kathmandu | NextGen Interiors",
+      "title_len": 56,
+      "title_status": "OK",
+      "description": "NextGen designs modern homes &amp; luxury residences in Kathmandu, Nepal. Full residential interior design, house design &amp; architecture from concept to turnkey.",
+      "desc_len": 164,
+      "desc_status": "OK"
+    },
+    {
+      "file": "sandip-giri-home.html",
+      "title": "SANDIP GIRI HOME \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 53,
+      "title_status": "OK",
+      "description": "Sallaghari Residence \u00e2\u20ac\u201d Private Home Interior Design By NextGen Interiors, Kathmandu Nepal",
+      "desc_len": 91,
+      "desc_status": "OK"
+    },
+    {
+      "file": "shinta-mani-inspired-hotel-designer-nepal.html",
+      "title": "Shinta Mani Inspired Hotel Designer Nepal | NextGen Interiors",
+      "title_len": 61,
+      "title_status": "OK",
+      "description": "Looking for a luxury hotel designer in Nepal? NextGen Interiors provides hotel architecture, resort design, luxury interiors, 3D visualization and turnkey hospitality solutions.",
+      "desc_len": 177,
+      "desc_status": "TOO LONG"
+    },
+    {
+      "file": "skin-care-center.html",
+      "title": "SKIN CARE CENTER \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 53,
+      "title_status": "OK",
+      "description": "Skincare Center Interior Design By NextGen Interiors & Architects , Kathmandu.",
+      "desc_len": 78,
+      "desc_status": "TOO SHORT"
+    },
+    {
+      "file": "surkhet-banquet-hall.html",
+      "title": "SURKHET BANQUET HALL  \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 58,
+      "title_status": "OK",
+      "description": "Banquet Hall\u201d Classical exterior & interior architecture by NextGen Interiors,Surkhet, Nepal.",
+      "desc_len": 93,
+      "desc_status": "OK"
+    },
+    {
+      "file": "surkhet-hotel-exterior.html",
+      "title": "SURKHET, HOTEL EXTERIOR \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 60,
+      "title_status": "OK",
+      "description": "Surkhet Hotel Exterior design by NextGen Interiors & Architects,Surkhet, Karnali,Nepal.",
+      "desc_len": 87,
+      "desc_status": "OK"
+    },
+    {
+      "file": "the-luxuary-air-b-and-b.html",
+      "title": "THE LUXUARY AIR B&B  \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 57,
+      "title_status": "OK",
+      "description": "The luxuary air B&B interior design by NextGen Interiors & Architects, Kathmandu, Nepal.",
+      "desc_len": 88,
+      "desc_status": "OK"
+    },
+    {
+      "file": "vanimandal-office.html",
+      "title": "Vanimandal office  \u2014 NextGen Interiors &amp; Architects",
+      "title_len": 55,
+      "title_status": "OK",
+      "description": "Vanimandal Office Interior Design By NextGen Interiors & Architects , Kathmandu.",
+      "desc_len": 80,
+      "desc_status": "OK"
+    },
+    {
+      "file": "workplace.html",
+      "title": "Office Interior Design in Kathmandu | NextGen Interiors",
+      "title_len": 55,
+      "title_status": "OK",
+      "description": "Office interior design in Kathmandu \u2014 modern workplaces, co-working and corporate interiors designed and delivered turnkey by NextGen across Nepal.",
+      "desc_len": 147,
+      "desc_status": "OK"
+    }
+  ],
+  "duplicate_titles": {
+    "Best Banquet Designer in Nepal | Banquet Hall Architecture &amp; Interior Design | NextGen": [
+      "banquet-designer-nepal.html",
+      "blogs/banquet-designer-nepal.html"
+    ],
+    "Best Construction Company in Nepal | Turnkey Building &amp; Interior Construction | NextGen": [
+      "best-construction-company-nepal.html",
+      "blogs/best-construction-company-nepal.html"
+    ],
+    "Best Home Designer in Nepal | Luxury Residential Architecture &amp; Interiors | NextGen": [
+      "best-home-designer-nepal.html",
+      "blogs/best-home-designer-nepal.html"
+    ],
+    "Classical Home Designer in Nepal | Neoclassical Architecture, Interiors &amp; Construction | NextGen": [
+      "blogs/classical-home-designer-nepal.html",
+      "classical-home-designer-nepal.html"
+    ],
+    "Farmhouse Designer in Nepal | Luxury Farmhouse Architecture &amp; Landscaping | NextGen": [
+      "blogs/farmhouse-designer-nepal.html",
+      "farmhouse-designer-nepal.html"
+    ],
+    "Home Interior Design &amp; Residential Architecture in Nepal | NextGen": [
+      "blogs/home-interior-residential-architecture-nepal.html",
+      "home-interior-residential-architecture-nepal.html"
+    ],
+    "Interior Architecture Design &amp; Construction in Nepal | NextGen": [
+      "blogs/interior-architecture-design-construction-nepal.html",
+      "interior-architecture-design-construction-nepal.html"
+    ],
+    "Mustang Hotel Designer | Hotel Architecture &amp; Interior Design in Upper Mustang": [
+      "blogs/mustang-hotel-designer-nepal.html",
+      "mustang-hotel-designer-nepal.html"
+    ],
+    "Office &amp; Commercial Interior Design in Nepal | NextGen Interiors": [
+      "blogs/office-commercial-interior-design-nepal.html",
+      "office-commercial-interior-design-nepal.html"
+    ],
+    "Shinta Mani Inspired Hotel Designer Nepal | NextGen Interiors": [
+      "blogs/shinta-mani-inspired-hotel-designer-nepal.html",
+      "shinta-mani-inspired-hotel-designer-nepal.html"
+    ],
+    "Home Interior Design in Bhaktapur | NextGen Interiors": [
+      "home-interior-design-bhaktapur.html",
+      "locations/home-interior-design-bhaktapur.html"
+    ],
+    "Home Interior Design in Chitwan &amp; Bharatpur | NextGen Interiors": [
+      "home-interior-design-chitwan.html",
+      "locations/home-interior-design-chitwan.html"
+    ],
+    "Hotel Interior Designer in Surkhet | NextGen Interiors": [
+      "hotel-interior-design-surkhet.html",
+      "locations/hotel-interior-design-surkhet.html"
+    ],
+    "Office Interior Design in Lalitpur | NextGen Interiors": [
+      "locations/office-interior-design-lalitpur.html",
+      "office-interior-design-lalitpur.html"
+    ],
+    "Residential Architecture &amp; Building Design in Dang | NextGen": [
+      "locations/residential-architecture-dang.html",
+      "residential-architecture-dang.html"
+    ]
+  },
+  "duplicate_descriptions": {
+    "Looking for the best banquet designer in Nepal? NextGen Interiors &amp; Architects plans, designs &amp; delivers luxury banquet halls, event venues &amp; hospitality architecture across Nepal.": [
+      "banquet-designer-nepal.html",
+      "blogs/banquet-designer-nepal.html"
+    ],
+    "Looking for the best construction company in Nepal? NextGen Interiors &amp; Architects offers full turnkey construction, commercial &amp; home building, interior fit-outs &amp; DPR project management from Baluwatar, Kathmandu.": [
+      "best-construction-company-nepal.html",
+      "blogs/best-construction-company-nepal.html"
+    ],
+    "Looking for the best home designer in Nepal? Discover how NextGen Interiors &amp; Architects designs, builds &amp; turnkey-delivers luxury homes, modern residences, and villas across Kathmandu, Lalitpur, Bhaktapur, Chitwan &amp; Nepal.": [
+      "best-home-designer-nepal.html",
+      "blogs/best-home-designer-nepal.html"
+    ],
+    "Looking for a classical home designer in Nepal? NextGen Interiors &amp; Architects provides neoclassical home architecture, luxury classical interior design, turnkey construction &amp; DPR consulting.": [
+      "blogs/classical-home-designer-nepal.html",
+      "classical-home-designer-nepal.html"
+    ],
+    "Planning a luxury farmhouse in Nepal? Discover how NextGen Interiors &amp; Architects designs, plans &amp; builds eco-farmhouses, weekend retreats &amp; landscape architecture across Nepal.": [
+      "blogs/farmhouse-designer-nepal.html",
+      "farmhouse-designer-nepal.html"
+    ],
+    "Planning a home or villa in Nepal? See how NextGen Interiors &amp; Architects handles home interior design and residential architecture from Baluwatar, Kathmandu.": [
+      "blogs/home-interior-residential-architecture-nepal.html",
+      "home-interior-residential-architecture-nepal.html"
+    ],
+    "Leading interior architecture design and turnkey construction firm in Nepal. NextGen Interiors delivers end-to-end architecture, interior fit-outs, DPR costing &amp; construction supervision from Baluwatar, Kathmandu.": [
+      "blogs/interior-architecture-design-construction-nepal.html",
+      "interior-architecture-design-construction-nepal.html"
+    ],
+    "Looking for a hotel designer in Mustang? NextGen Interiors provides hotel architecture, interior design, resort planning, 3D visualization and turnkey design solutions for Mustang and Upper Mustang.": [
+      "blogs/mustang-hotel-designer-nepal.html",
+      "mustang-hotel-designer-nepal.html"
+    ],
+    "Planning an office fit-out in Kathmandu? See how NextGen Interiors &amp; Architects designs, renovates &amp; turnkey-delivers office and commercial interiors across Nepal.": [
+      "blogs/office-commercial-interior-design-nepal.html",
+      "office-commercial-interior-design-nepal.html"
+    ],
+    "Looking for a luxury hotel designer in Nepal? NextGen Interiors provides hotel architecture, resort design, luxury interiors, 3D visualization and turnkey hospitality solutions.": [
+      "blogs/shinta-mani-inspired-hotel-designer-nepal.html",
+      "shinta-mani-inspired-hotel-designer-nepal.html"
+    ],
+    "Looking for top home interior design in Bhaktapur? NextGen Interiors &amp; Architects has delivered luxury home interiors including the Sandip Giri Home in Sallaghari, Bhaktapur.": [
+      "home-interior-design-bhaktapur.html",
+      "locations/home-interior-design-bhaktapur.html"
+    ],
+    "Looking for top home interior design in Chitwan or Bharatpur? NextGen Interiors &amp; Architects delivers full-home interiors &amp; residential architecture in Chitwan.": [
+      "home-interior-design-chitwan.html",
+      "locations/home-interior-design-chitwan.html"
+    ],
+    "NextGen Interiors &amp; Architects has delivered hotel and banquet hall interior design in Surkhet, Karnali \u2014 turnkey hospitality projects built and handed over on-site.": [
+      "hotel-interior-design-surkhet.html",
+      "locations/hotel-interior-design-surkhet.html"
+    ],
+    "Looking for office interior design in Lalitpur? NextGen Interiors &amp; Architects has delivered corporate office fit-outs including the Vanimandal Office, Lalitpur.": [
+      "locations/office-interior-design-lalitpur.html",
+      "office-interior-design-lalitpur.html"
+    ],
+    "NextGen Interiors &amp; Architects designs residential architecture and building exteriors in Dang, Nepal \u2014 featuring the Bhanu Panta Home and Dang Residence.": [
+      "locations/residential-architecture-dang.html",
+      "residential-architecture-dang.html"
+    ]
+  }
+}
