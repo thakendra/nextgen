@@ -115,10 +115,15 @@ export const project = {
     },
     {
       name: 'intro_text',
-      title: 'Showcase Description (2 Paragraphs recommended)',
+      title: '📝 Showcase Description (write 150–300 words — this is what makes the page rank)',
       type: 'text',
-      rows: 4,
-      description: 'Detailed overview of the project design, materials, and concept.',
+      rows: 10,
+      description:
+        'Every project page currently has under 20 words of text, which is why they do not rank for their own name or location. Cover: (1) the brief — what the client asked for and why, (2) the site — location, size, constraints, (3) 2–3 specific design decisions and the reason for each (materials, layout, lighting), (4) mention the location and service naturally, e.g. "residential interior design in Sallaghari, Bhaktapur", (5) the outcome if you have one. Aim for 150–300 words.',
+      validation: (Rule) =>
+        Rule.min(400).warning(
+          'Under ~400 characters (roughly 70 words) this page counts as thin content and will struggle to rank. Aim for 150–300 words.',
+        ),
     },
     {
       name: 'galleryImages',

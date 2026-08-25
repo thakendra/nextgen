@@ -6,6 +6,7 @@ import urllib.request
 import urllib.parse
 
 from copy_clean import clean_text
+from optimize_meta import shorten_description
 
 PROJECT_ID = "gpyk0ky0"
 DATASET = "production"
@@ -19,7 +20,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <link rel="shortcut icon" href="/logo/favicon.png" />
   <link rel="apple-touch-icon" href="/logo/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{title} — NextGen Interiors &amp; Architects</title>
+  <title>{page_title}</title>
   <meta name="description" content="{desc}" />
   <link rel="canonical" href="https://nextgeninterior.com/{slug}" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -31,14 +32,14 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="NextGen Interiors" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="{title} — NextGen Interiors &amp; Architects" />
+  <meta property="og:title" content="{page_title}" />
   <meta property="og:description" content="{desc}" />
   <meta property="og:url" content="https://nextgeninterior.com/{slug}" />
   <meta property="og:image" content="{hero_image}" />
   <meta property="og:image:alt" content="{title} — NextGen Interiors &amp; Architects" />
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{title} — NextGen Interiors &amp; Architects" />
+  <meta name="twitter:title" content="{page_title}" />
   <meta name="twitter:description" content="{desc}" />
   <meta name="twitter:image" content="{hero_image}" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -409,6 +410,21 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 </body>
 </html>"""
 
+TITLE_MAX = 60
+
+def build_page_title(title):
+    """'<Project> — <brand>' trimmed to what Google actually renders.
+
+    Google cuts a title link at roughly 60 characters, so the brand tail is
+    stepped down — full name, short name, then dropped entirely — until the
+    whole thing fits. The project name itself is never truncated: it is the
+    part someone is searching for."""
+    for brand in (' — NextGen Interiors & Architects', ' — NextGen Interiors', ' — NextGen'):
+        candidate = title + brand
+        if len(candidate) <= TITLE_MAX:
+            return candidate
+    return title
+
 def build_showcase_layout(gallery):
     if not gallery:
         return ""
@@ -589,15 +605,20 @@ def build():
         intro_paragraphs = "\n      ".join(paragraphs) if paragraphs else f"<p>{raw_text}</p>"
         
         desc_raw = p.get('description') or f"{title} — interior architecture and bespoke spaces by NextGen Interiors, {location}."
+        # Pad a short CMS description towards the length Google renders, but
+        # never past it — the old code could only check one suffix and fell back
+        # to a second one unconditionally, which is how several project pages
+        # ended up at 170 characters and got their snippet rewritten.
         desc_clean = desc_raw.strip().rstrip('.')
+        desc = desc_clean + "."
         if len(desc_clean) < 120:
-            suffix = " NextGen Interiors & Architects delivers premium design and construction in Nepal."
-            if len(desc_clean) + len(suffix) <= 165:
-                desc = desc_clean + "." + suffix
-            else:
-                desc = desc_clean + ". NextGen provides premium architecture and interiors in Nepal."
-        else:
-            desc = desc_clean + "."
+            for suffix in (" NextGen Interiors & Architects delivers premium design and construction in Nepal.",
+                           " NextGen provides premium architecture and interiors in Nepal."):
+                padded = desc_clean + "." + suffix
+                if len(padded) <= 160:
+                    desc = padded
+                    break
+        desc = shorten_description(desc)
         cat_name = sub.capitalize()
         cat_slug = sub
         
@@ -622,6 +643,7 @@ def build():
         
         html = PAGE_TEMPLATE.format(
             title=title,
+            page_title=build_page_title(title),
             slug=slug,
             desc=desc,
             hero_image=hero_image,

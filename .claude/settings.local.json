@@ -71,7 +71,10 @@
       "Bash(npx sanity *)",
       "Bash(python -c \"import ast; ast.parse\\(open\\('build_from_sanity.py',encoding='utf-8'\\).read\\(\\)\\); print\\('python OK'\\)\")",
       "Bash(python -c \"import ast; ast.parse\\(open\\('update.py',encoding='utf-8'\\).read\\(\\)\\); print\\('update.py OK'\\)\")",
-      "Bash(python -)"
+      "Bash(python -)",
+      "Bash(python optimize_meta.py --dry-run)",
+      "Bash(python add_service_schema.py)",
+      "Bash(python optimize_meta.py)"
     ]
   }
 }
