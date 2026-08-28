@@ -127,15 +127,15 @@ export const project = {
     },
     {
       name: 'galleryImages',
-      title: 'Inner Gallery Showcase Photos (Max 10, WebP recommended)',
-      description: 'Upload between 1 and 10 high-resolution images. You can select multiple images at once (Ctrl+Click) or drag & drop up to 10 files directly into this box!',
+      title: 'Inner Gallery Showcase Photos (Max 30, WebP recommended)',
+      description: 'Upload between 1 and 30 high-resolution images. You can select multiple images at once (Ctrl+Click) or drag & drop up to 30 files directly into this box!',
       type: 'array',
       options: {
         layout: 'grid',
       },
       validation: (Rule) =>
-        Rule.max(10)
-          .error('Maximum 10 inner gallery photos allowed for optimal loading speed.'),
+        Rule.max(30)
+          .error('Maximum 30 inner gallery photos allowed for optimal loading speed.'),
       of: [
         {
           type: 'image',
