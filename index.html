@@ -376,58 +376,10 @@
        RUNNING PROJECTS AUTO-SLIDER SECTION
        ============================================================ */
     .running-section {
-      background: var(--bg);
-      padding: clamp(60px, 8vw, 100px) 0 clamp(40px, 6vw, 80px);
+      background: var(--ink);
+      padding: 0 0 clamp(40px, 6vw, 80px);
       position: relative;
       overflow: hidden;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .running-header-wrap {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: clamp(24px, 4vw, 40px);
-      padding: 0 var(--pad);
-      max-width: var(--max-w);
-      margin-left: auto;
-      margin-right: auto;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .running-header-left .s-tag {
-      margin-bottom: 8px;
-    }
-    .running-header-left h2 {
-      font-family: var(--f-head);
-      font-size: clamp(36px, 4.5vw, 64px);
-      letter-spacing: 0.06em;
-      color: var(--offwhite);
-      line-height: 0.95;
-      margin: 0;
-    }
-    .running-header-left h2 span {
-      color: var(--blue-mid);
-    }
-    .running-header-left p {
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--mist);
-      margin-top: 10px;
-      max-width: 460px;
-    }
-    .live-sites-pill {
-      font-family: var(--f-body);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #38ef7d;
-      background: rgba(56,239,125,0.08);
-      border: 1px solid rgba(56,239,125,0.28);
-      padding: 9px 16px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
     }
     .running-slider-container {
       width: 100%;
@@ -447,11 +399,11 @@
     }
     .running-slider-container::before {
       left: 0;
-      background: linear-gradient(to right, var(--bg), transparent);
+      background: linear-gradient(to right, var(--ink), transparent);
     }
     .running-slider-container::after {
       right: 0;
-      background: linear-gradient(to left, var(--bg), transparent);
+      background: linear-gradient(to left, var(--ink), transparent);
     }
     .running-slider-track {
       display: flex;
@@ -1025,15 +977,9 @@
        RUNNING PROJECTS AUTO-SLIDER SECTION
        ============================================================ -->
   <section class="running-section" id="running-projects">
-    <div class="running-header-wrap">
-      <div class="running-header-left">
-        <div class="s-tag rv">Ongoing Construction</div>
-        <h2 class="rv">RUNNING <span>PROJECTS</span></h2>
-        <p class="rv">Active architectural and interior construction sites currently being crafted across Nepal.</p>
-      </div>
-      <div class="live-sites-pill rv">
-        <span class="running-badge-dot"></span> 5 LIVE SITES IN PROGRESS
-      </div>
+    <div class="port-cat-strip rv vis" style="padding-top: clamp(24px,4vw,48px); padding-bottom: clamp(16px,2vw,28px);">
+      <div class="port-cat-label">03</div>
+      <h2 class="port-cat-h" style="margin-bottom: 0;">RUNNING PROJECTS</h2>
     </div>
 
     <div class="running-slider-container">
