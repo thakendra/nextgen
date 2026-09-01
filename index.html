@@ -415,57 +415,62 @@
       margin-top: 10px;
       max-width: 460px;
     }
-    .running-nav-btns {
-      display: flex;
-      gap: 10px;
-    }
-    .running-nav-btn {
-      width: 46px;
-      height: 46px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(8,14,28,0.6);
-      color: var(--offwhite);
-      display: flex;
+    .live-sites-pill {
+      font-family: var(--f-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #38ef7d;
+      background: rgba(56,239,125,0.08);
+      border: 1px solid rgba(56,239,125,0.28);
+      padding: 9px 16px;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all .3s var(--ease);
-      backdrop-filter: blur(8px);
-    }
-    .running-nav-btn:hover {
-      border-color: var(--blue-mid);
-      background: var(--blue-mid);
-      color: #fff;
-    }
-    .running-nav-btn svg {
-      width: 18px;
-      height: 18px;
+      gap: 8px;
     }
     .running-slider-container {
       width: 100%;
       overflow: hidden;
       position: relative;
-      padding: 10px 0 20px;
+      padding: 10px 0 24px;
+    }
+    .running-slider-container::before,
+    .running-slider-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: clamp(24px, 5vw, 90px);
+      z-index: 3;
+      pointer-events: none;
+    }
+    .running-slider-container::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg), transparent);
+    }
+    .running-slider-container::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg), transparent);
     }
     .running-slider-track {
       display: flex;
       gap: clamp(16px, 2vw, 24px);
-      padding: 0 var(--pad);
-      scroll-behavior: smooth;
-      overflow-x: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      cursor: grab;
+      width: max-content;
+      animation: runningMarqueeScroll 30s linear infinite;
+      padding: 0 12px;
       user-select: none;
     }
-    .running-slider-track::-webkit-scrollbar {
-      display: none;
+    .running-slider-track:hover,
+    .running-slider-track.is-paused {
+      animation-play-state: paused;
     }
-    .running-slider-track:active {
-      cursor: grabbing;
+    @keyframes runningMarqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
     .running-card {
-      flex: 0 0 clamp(280px, 30vw, 400px);
+      flex: 0 0 clamp(270px, 26vw, 380px);
       height: clamp(380px, 48vh, 520px);
       position: relative;
       overflow: hidden;
@@ -476,7 +481,7 @@
     }
     .running-card:hover {
       transform: translateY(-6px);
-      border-color: rgba(54,159,206,0.5);
+      border-color: rgba(54,159,206,0.6);
     }
     .running-card img {
       position: absolute;
@@ -1026,13 +1031,8 @@
         <h2 class="rv">RUNNING <span>PROJECTS</span></h2>
         <p class="rv">Active architectural and interior construction sites currently being crafted across Nepal.</p>
       </div>
-      <div class="running-nav-btns rv">
-        <button class="running-nav-btn" id="runningPrevBtn" aria-label="Previous Project" title="Previous Project">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="running-nav-btn" id="runningNextBtn" aria-label="Next Project" title="Next Project">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
+      <div class="live-sites-pill rv">
+        <span class="running-badge-dot"></span> 5 LIVE SITES IN PROGRESS
       </div>
     </div>
 
@@ -1100,6 +1100,82 @@
         </div>
 
         <!-- Card 5 -->
+        <div class="running-card" data-title="GOPAL SIR RESIDENCE" data-loc="Tikathali, Lalitpur" data-src="/images/running-gopal-tikathali.webp">
+          <img src="/images/running-gopal-tikathali.webp" alt="Gopal Sir Residence" loading="lazy"/>
+          <div class="running-card-overlay"></div>
+          <div class="running-badge"><span class="running-badge-dot"></span> Under Construction</div>
+          <div class="running-card-info">
+            <h3 class="running-card-title">GOPAL SIR RESIDENCE</h3>
+            <div class="running-card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              Tikathali, Lalitpur
+            </div>
+            <div class="running-card-click-hint">Click to View Photo &rarr;</div>
+          </div>
+        </div>
+
+        <!-- Duplicate Set for Seamless Loop -->
+        <!-- Card 1 Duplicate -->
+        <div class="running-card" data-title="BALKOT RESIDENCE" data-loc="Balkot, Kathmandu" data-src="/images/running-balkot-home.webp">
+          <img src="/images/running-balkot-home.webp" alt="Balkot Residence" loading="lazy"/>
+          <div class="running-card-overlay"></div>
+          <div class="running-badge"><span class="running-badge-dot"></span> Under Construction</div>
+          <div class="running-card-info">
+            <h3 class="running-card-title">BALKOT RESIDENCE</h3>
+            <div class="running-card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              Balkot, Kathmandu
+            </div>
+            <div class="running-card-click-hint">Click to View Photo &rarr;</div>
+          </div>
+        </div>
+
+        <!-- Card 2 Duplicate -->
+        <div class="running-card" data-title="MAHESH SIR RESIDENCE" data-loc="Sinamangal, Kathmandu" data-src="/images/running-mahesh-sinamangal.webp">
+          <img src="/images/running-mahesh-sinamangal.webp" alt="Mahesh Sir Residence" loading="lazy"/>
+          <div class="running-card-overlay"></div>
+          <div class="running-badge"><span class="running-badge-dot"></span> Under Construction</div>
+          <div class="running-card-info">
+            <h3 class="running-card-title">MAHESH SIR RESIDENCE</h3>
+            <div class="running-card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              Sinamangal, Kathmandu
+            </div>
+            <div class="running-card-click-hint">Click to View Photo &rarr;</div>
+          </div>
+        </div>
+
+        <!-- Card 3 Duplicate -->
+        <div class="running-card" data-title="PRABIN GURUNG RESIDENCE" data-loc="Buddhanilkantha, Kathmandu" data-src="/images/running-prabin-gurung.webp">
+          <img src="/images/running-prabin-gurung.webp" alt="Prabin Gurung Residence" loading="lazy"/>
+          <div class="running-card-overlay"></div>
+          <div class="running-badge"><span class="running-badge-dot"></span> Under Construction</div>
+          <div class="running-card-info">
+            <h3 class="running-card-title">PRABIN GURUNG RESIDENCE</h3>
+            <div class="running-card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              Buddhanilkantha, Kathmandu
+            </div>
+            <div class="running-card-click-hint">Click to View Photo &rarr;</div>
+          </div>
+        </div>
+
+        <!-- Card 4 Duplicate -->
+        <div class="running-card" data-title="ROSHAN RESIDENCE" data-loc="Satungal, Kathmandu" data-src="/images/running-roshan-satungal.webp">
+          <img src="/images/running-roshan-satungal.webp" alt="Roshan Residence" loading="lazy"/>
+          <div class="running-card-overlay"></div>
+          <div class="running-badge"><span class="running-badge-dot"></span> Under Construction</div>
+          <div class="running-card-info">
+            <h3 class="running-card-title">ROSHAN RESIDENCE</h3>
+            <div class="running-card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              Satungal, Kathmandu
+            </div>
+            <div class="running-card-click-hint">Click to View Photo &rarr;</div>
+          </div>
+        </div>
+
+        <!-- Card 5 Duplicate -->
         <div class="running-card" data-title="GOPAL SIR RESIDENCE" data-loc="Tikathali, Lalitpur" data-src="/images/running-gopal-tikathali.webp">
           <img src="/images/running-gopal-tikathali.webp" alt="Gopal Sir Residence" loading="lazy"/>
           <div class="running-card-overlay"></div>
@@ -1328,79 +1404,24 @@
       });
     })();
 
-    // RUNNING PROJECTS AUTO-SLIDER & LIGHTBOX MODAL
-    (function initRunningSlider() {
+    // RUNNING PROJECTS AUTO-MARQUEE & LIGHTBOX MODAL
+    (function initRunningMarquee() {
       const track = document.getElementById('runningSliderTrack');
-      const prevBtn = document.getElementById('runningPrevBtn');
-      const nextBtn = document.getElementById('runningNextBtn');
       if (!track) return;
 
-      let isDown = false;
-      let startX, scrollLeft;
-      let autoSlideTimer = null;
-
-      function getCardWidth() {
-        const card = track.querySelector('.running-card');
-        return card ? card.offsetWidth + 20 : 340;
-      }
-
-      function scrollNext() {
-        const maxScroll = track.scrollWidth - track.clientWidth;
-        if (track.scrollLeft >= maxScroll - 15) {
-          track.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          track.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
+      // Pause marquee on hover or touch
+      track.addEventListener('mouseenter', () => track.classList.add('is-paused'));
+      track.addEventListener('mouseleave', () => {
+        if (!modal || !modal.classList.contains('active')) {
+          track.classList.remove('is-paused');
         }
-      }
-
-      function scrollPrev() {
-        if (track.scrollLeft <= 15) {
-          track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });
-        } else {
-          track.scrollBy({ left: -getCardWidth(), behavior: 'smooth' });
+      });
+      track.addEventListener('touchstart', () => track.classList.add('is-paused'), { passive: true });
+      track.addEventListener('touchend', () => {
+        if (!modal || !modal.classList.contains('active')) {
+          track.classList.remove('is-paused');
         }
-      }
-
-      if (nextBtn) nextBtn.addEventListener('click', () => { scrollNext(); restartAutoSlide(); });
-      if (prevBtn) prevBtn.addEventListener('click', () => { scrollPrev(); restartAutoSlide(); });
-
-      function startAutoSlide() {
-        stopAutoSlide();
-        autoSlideTimer = setInterval(scrollNext, 3400);
-      }
-
-      function stopAutoSlide() {
-        if (autoSlideTimer) clearInterval(autoSlideTimer);
-      }
-
-      function restartAutoSlide() {
-        stopAutoSlide();
-        startAutoSlide();
-      }
-
-      track.addEventListener('mouseenter', stopAutoSlide);
-      track.addEventListener('mouseleave', startAutoSlide);
-      track.addEventListener('touchstart', stopAutoSlide, { passive: true });
-      track.addEventListener('touchend', startAutoSlide, { passive: true });
-
-      // Drag / Swipe mouse handlers
-      track.addEventListener('mousedown', (e) => {
-        isDown = true;
-        startX = e.pageX - track.offsetLeft;
-        scrollLeft = track.scrollLeft;
-        stopAutoSlide();
-      });
-      track.addEventListener('mouseleave', () => { isDown = false; });
-      track.addEventListener('mouseup', () => { isDown = false; startAutoSlide(); });
-      track.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - track.offsetLeft;
-        const walk = (x - startX) * 1.5;
-        track.scrollLeft = scrollLeft - walk;
-      });
-
-      startAutoSlide();
+      }, { passive: true });
 
       // Lightbox Modal
       const modal = document.getElementById('runningModal');
@@ -1412,6 +1433,7 @@
 
       document.querySelectorAll('.running-card').forEach(card => {
         card.addEventListener('click', () => {
+          track.classList.add('is-paused');
           const title = card.getAttribute('data-title');
           const loc = card.getAttribute('data-loc');
           const src = card.getAttribute('data-src');
@@ -1429,6 +1451,7 @@
       function closeModal() {
         if (modal) modal.classList.remove('active');
         document.body.style.overflow = '';
+        track.classList.remove('is-paused');
       }
 
       if (modalClose) modalClose.addEventListener('click', closeModal);
