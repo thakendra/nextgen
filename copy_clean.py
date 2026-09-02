@@ -95,7 +95,7 @@ def expand_description(desc, title='', location='', main_cat='', sub_cat=''):
     clauses = [
         u'%s \u2014 turnkey design from concept to handover.' % speciality.capitalize(),
         u'See photos, materials and design details.',
-        u'200+ projects delivered across Nepal.',
+        u'Bespoke architecture and interior design across Nepal.',
     ]
 
     for clause in clauses:
