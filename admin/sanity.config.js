@@ -26,6 +26,9 @@ export default defineConfig({
                   .title('DPR & Landscaping Projects')
                   .filter('_type == "project" && (mainCategory == "dpr-landscaping" || subCategory == "dpr-landscaping")')
               ),
+            S.listItem()
+              .title('📝 Blog Articles & Guides')
+              .child(S.documentTypeList('blog').title('All Blog Articles')),
           ]),
     }),
     visionTool(),

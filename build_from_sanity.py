@@ -581,6 +581,639 @@ def fetch_sanity_data():
         data = json.loads(res.read().decode())
         return data.get('result', [])
 
+def fetch_sanity_blogs():
+    query = """*[_type == "blog"] | order(publishedAt desc, _createdAt desc) {
+        title,
+        "slug": slug.current,
+        category,
+        publishedAt,
+        readTime,
+        author,
+        metaDescription,
+        lede,
+        "coverImage": coalesce(coverImage.asset->url, coverImage.asset.asset->url),
+        content,
+        tags
+    }"""
+    url = f"https://{PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/{DATASET}?query={urllib.parse.quote(query)}"
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req) as res:
+            data = json.loads(res.read().decode())
+            return data.get('result', [])
+    except Exception as e:
+        print(f"Note on Sanity blogs fetch: {e}")
+        return []
+
+def portable_text_to_html(blocks):
+    if not blocks:
+        return ""
+    if isinstance(blocks, str):
+        return blocks
+        
+    html_parts = []
+    current_list_type = None
+    list_items = []
+    
+    def flush_list():
+        nonlocal current_list_type, list_items
+        if list_items:
+            tag = "ul" if current_list_type == "bullet" else "ol"
+            html_parts.append(f"<{tag}>\n" + "\n".join(list_items) + f"\n</{tag}>")
+            list_items = []
+            current_list_type = None
+
+    for block in blocks:
+        if not isinstance(block, dict):
+            continue
+        if block.get('_type') != 'block':
+            continue
+            
+        list_item = block.get('listItem')
+        style = block.get('style', 'normal')
+        children = block.get('children', [])
+        mark_defs = {m.get('_key'): m for m in block.get('markDefs', []) if isinstance(m, dict)}
+        
+        span_texts = []
+        for child in children:
+            if not isinstance(child, dict):
+                continue
+            text = child.get('text', '')
+            marks = child.get('marks', [])
+            
+            import html as pyhtml
+            formatted = pyhtml.escape(text)
+            for mark in marks:
+                if mark == 'strong':
+                    formatted = f"<strong>{formatted}</strong>"
+                elif mark == 'em':
+                    formatted = f"<em>{formatted}</em>"
+                elif mark in mark_defs:
+                    href = mark_defs[mark].get('href', '#')
+                    formatted = f'<a href="{href}">{formatted}</a>'
+            span_texts.append(formatted)
+            
+        inner_html = "".join(span_texts).strip()
+        if not inner_html:
+            continue
+            
+        if list_item:
+            if current_list_type and current_list_type != list_item:
+                flush_list()
+            current_list_type = list_item
+            list_items.append(f"  <li>{inner_html}</li>")
+            continue
+        else:
+            flush_list()
+            
+        if style == 'h2':
+            html_parts.append(f"  <h2>{inner_html}</h2>")
+        elif style == 'h3':
+            html_parts.append(f"  <h3>{inner_html}</h3>")
+        elif style == 'blockquote':
+            html_parts.append(f'  <div class="article-pullquote"><p>{inner_html}</p></div>')
+        else:
+            html_parts.append(f"  <p>{inner_html}</p>")
+            
+    flush_list()
+    return "\n\n".join(html_parts)
+
+BLOG_PAGE_TEMPLATE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon.png" />
+  <link rel="shortcut icon" href="/logo/favicon.png" />
+  <link rel="apple-touch-icon" href="/logo/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{page_title}</title>
+  <meta name="description" content="{desc}"/>
+  <link rel="canonical" href="https://nextgeninterior.com/{slug}"/>
+  <meta name="robots" content="index, follow, max-image-preview:large"/>
+  <meta name="author" content="{author}"/>
+  <meta name="theme-color" content="#0d1520"/>
+  <meta name="geo.region" content="NP"/>
+  <meta name="geo.placename" content="Kathmandu, Nepal"/>
+  <!-- Open Graph -->
+  <meta property="og:type" content="article"/>
+  <meta property="og:site_name" content="NextGen Interiors"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:title" content="{page_title}"/>
+  <meta property="og:description" content="{desc}"/>
+  <meta property="og:url" content="https://nextgeninterior.com/{slug}"/>
+  <meta property="og:image" content="{hero_image}"/>
+  <meta property="og:image:alt" content="{title} | NextGen Interiors"/>
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="{page_title}"/>
+  <meta name="twitter:description" content="{desc}"/>
+  <meta name="twitter:image" content="{hero_image}"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root{{--blue-mid:#369fce;--ink:#0d1520;--offwhite:#f5f2ed;--mist:#8a97aa;--f-head:'Bebas Neue',sans-serif;--f-body:'Poppins',sans-serif;--ease:cubic-bezier(0.16,1,0.3,1);--gap:clamp(20px,5vw,80px);--max:1440px;--read:760px;}}
+    *,*::before,*::after{{box-sizing:border-box;margin:0;padding:0;}}
+    html{{scroll-behavior:smooth;}}
+    body{{font-family:var(--f-body);background:var(--ink);color:var(--offwhite);overflow-x:hidden;cursor:none;}}
+    img{{display:block;max-width:100%;}}
+    .logo-img{{display:block;width:auto!important;height:100%!important;object-fit:contain!important;}}
+    a{{text-decoration:none;color:inherit;}}
+    button{{border:none;background:none;cursor:none;font:inherit;}}
+    ul{{list-style:none;}}
+    ::-webkit-scrollbar{{width:3px;}}
+    ::-webkit-scrollbar-track{{background:var(--ink);}}
+    ::-webkit-scrollbar-thumb{{background:var(--blue-mid);}}
+    .cursor-dot{{width:7px;height:7px;border-radius:50%;background:var(--blue-mid);position:fixed;top:0;left:0;transform:translate(-50%,-50%);z-index:9999;pointer-events:none;transition:width .2s,height .2s;mix-blend-mode:screen;}}
+    .cursor-ring{{width:36px;height:36px;border-radius:50%;border:1px solid rgba(62,159,201,.35);position:fixed;top:0;left:0;transform:translate(-50%,-50%);z-index:9998;pointer-events:none;transition:width .35s var(--ease),height .35s var(--ease),opacity .3s;}}
+    body.c-hover .cursor-dot{{width:52px;height:52px;opacity:.15;}}
+    body.c-hover .cursor-ring{{opacity:0;}}
+    .nav{{position:fixed;top:0;left:0;right:0;z-index:200;padding:22px var(--gap);display:flex;align-items:center;justify-content:space-between;background:rgba(13,21,32,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.05);}}
+    .nav-logo{{height:34px;display:flex;align-items:center;}}
+    .nav-links{{display:flex;gap:32px;align-items:center;}}
+    .nav-links>li{{position:relative;}}
+    .nav-links a,.nav-dropdown-trigger{{font-family:var(--f-body);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,242,237,.45);transition:color .3s;display:flex;align-items:center;gap:5px;cursor:none;position:relative;}}
+    .nav-links a::after{{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--blue-mid);transition:width .4s var(--ease);}}
+    .nav-links a:hover,.nav-links a.active{{color:var(--offwhite);}}
+    .nav-links a.active::after,.nav-links a:hover::after{{width:100%;}}
+    .nav-dropdown-trigger{{background:none;border:none;padding:0;}}
+    .nav-dropdown-trigger svg{{width:10px;height:10px;transition:transform .3s var(--ease);}}
+    .nav-links>li:hover .nav-dropdown-trigger{{color:var(--offwhite);}}
+    .nav-links>li:hover .nav-dropdown-trigger svg{{transform:rotate(180deg);}}
+    .nav-dropdown-wrap{{position:absolute;top:100%;left:50%;transform:translateX(-50%);padding-top:14px;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .28s var(--ease),visibility .28s;z-index:300;}}
+    .nav-links>li:hover .nav-dropdown-wrap{{opacity:1;visibility:visible;pointer-events:all;}}
+    .nav-dropdown{{background:rgba(8,14,24,.98);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);border-top:2px solid var(--blue-mid);min-width:220px;transform:translateY(6px);transition:transform .28s var(--ease);box-shadow:0 20px 60px rgba(0,0,0,.5);}}
+    .nav-links>li:hover .nav-dropdown{{transform:translateY(0);}}
+    .nav-dropdown a{{display:flex;align-items:center;gap:10px;padding:14px 22px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,242,237,.45);border-bottom:1px solid rgba(255,255,255,.04);transition:color .22s,background .22s,padding-left .22s;white-space:nowrap;}}
+    .nav-dropdown a::before{{content:'';width:0;height:1px;background:var(--blue-mid);transition:width .3s var(--ease);flex-shrink:0;}}
+    .nav-dropdown a:last-child{{border-bottom:none;}}
+    .nav-dropdown a::after{{display:none!important;}}
+    .nav-dropdown a:hover{{color:var(--blue-mid);background:rgba(54,159,206,.05);padding-left:28px;}}
+    .nav-dropdown a:hover::before{{width:12px;}}
+    .nav-cta {{ display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-body); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--offwhite); padding: 9px 18px; border: 1px solid rgba(54,159,206,0.5); background: rgba(54,159,206,0.1); white-space: nowrap; transition: background .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease), box-shadow .35s var(--ease), transform .35s var(--ease); }}
+    .nav-cta svg {{ width: 13px; height: 13px; flex-shrink: 0; color: var(--blue-mid); transition: color .35s, transform .45s var(--ease); }}
+    .nav-cta:hover {{ background: var(--blue-mid); border-color: var(--blue-mid); color: var(--ink); box-shadow: 0 6px 22px rgba(54,159,206,0.32); transform: translateY(-1px); }}
+    .nav-cta:hover svg {{ color: var(--ink); transform: rotate(-14deg) scale(1.12); }}
+    .nav-cta:active {{ transform: translateY(0); box-shadow: 0 2px 10px rgba(54,159,206,0.22); }}
+    .nav-menu-btn{{display:none;flex-direction:column;gap:6px;width:26px;cursor:none;}}
+    .nav-menu-btn span{{display:block;width:100%;height:1px;background:var(--offwhite);transition:transform .4s var(--ease),opacity .3s;}}
+    .nav-menu-btn.open span:nth-child(1){{transform:translateY(7px) rotate(45deg);}}
+    .nav-menu-btn.open span:nth-child(2){{opacity:0;}}
+    .nav-menu-btn.open span:nth-child(3){{transform:translateY(-7px) rotate(-45deg);}}
+    .m-menu{{position:fixed;inset:0;z-index:190;background:#080f1c;display:grid;grid-template-rows:auto 1fr auto;opacity:0;visibility:hidden;transition:opacity .55s var(--ease),visibility .55s;overflow-y:auto;}}
+    .m-menu.open{{opacity:1;visibility:visible;}}
+    .m-menu-topbar{{display:flex;align-items:center;justify-content:space-between;padding:22px var(--gap);border-bottom:1px solid rgba(255,255,255,.05);}}
+    .m-menu-body{{padding:32px var(--gap) 24px;}}
+    .m-menu-links>li{{border-bottom:1px solid rgba(255,255,255,.06);}}
+    .m-menu-links a,.m-menu-links .m-menu-acc-btn{{font-family:var(--f-head);font-size:clamp(36px,8vw,60px);letter-spacing:.05em;color:rgba(245,242,237,.85);display:flex;align-items:center;justify-content:space-between;line-height:1;padding:18px 0;transform:translateY(20px);opacity:0;transition:transform .55s var(--ease),opacity .55s var(--ease),color .25s;background:none;border:none;cursor:none;width:100%;}}
+    .m-menu.open .m-menu-links a,.m-menu.open .m-menu-links .m-menu-acc-btn{{transform:translateY(0);opacity:1;}}
+    .m-menu-links a:hover,.m-menu-acc-btn.active,.m-menu-links a.active{{color:var(--blue-mid);}}
+    .m-acc-chevron{{width:22px;height:22px;flex-shrink:0;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;transition:transform .35s var(--ease),border-color .3s;}}
+    .m-acc-chevron svg{{width:12px;height:12px;color:var(--mist);}}
+    .m-menu-acc-btn.active .m-acc-chevron{{transform:rotate(180deg);border-color:var(--blue-mid);}}
+    .m-acc-sub{{max-height:0;overflow:hidden;transition:max-height .45s var(--ease);}}
+    .m-acc-sub.open{{max-height:600px;}}
+    .m-acc-sub-inner{{padding:6px 0 16px;display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+    .m-acc-sub a{{font-family:var(--f-body)!important;font-size:11px!important;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,242,237,.4)!important;padding:12px 14px!important;display:flex!important;align-items:center;gap:8px;transform:none!important;opacity:1!important;border:1px solid rgba(255,255,255,.05)!important;transition:color .2s,border-color .2s,background .2s!important;}
+    .m-acc-sub a::before{{content:'';width:5px;height:1px;background:currentColor;flex-shrink:0;}}
+    .m-acc-sub a:hover{{color:var(--blue-mid)!important;border-color:rgba(54,159,206,.25)!important;}
+    .m-menu-footer{{padding:20px var(--gap) 32px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease) .3s,transform .5s var(--ease) .3s;}
+    .m-menu.open .m-menu-footer{{opacity:1;transform:translateY(0);}}
+    .m-service-label{{font-family:var(--f-body);font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--mist);margin-bottom:6px;}}
+    .m-service-pill{{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border:1px solid rgba(54,159,206,.2);font-family:var(--f-body);font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-mid);}}
+    .m-hq-row{{display:flex;align-items:center;gap:8px;font-family:var(--f-body);font-size:10px;color:rgba(245,242,237,.35);margin-top:6px;}}
+    .m-hq-dot{{width:5px;height:5px;border-radius:50%;background:var(--blue-mid);flex-shrink:0;}}
+    .m-contact-row{{display:flex;flex-direction:column;gap:4px;}
+    .m-contact-row a{{font-family:var(--f-body);font-size:12px;color:rgba(245,242,237,.5);transition:color .25s;transform:none!important;opacity:1!important;}
+    .m-contact-row a:hover{{color:var(--blue-mid);}}
+    .article-hero{{position:relative;height:70vh;min-height:500px;margin-top:78px;overflow:hidden;}}
+    .article-hero img{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}}
+    .article-hero-overlay{{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,21,32,.45) 0%,rgba(13,21,32,.3) 40%,rgba(13,21,32,.95) 100%);z-index:1;}}
+    .article-hero-content{{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:0 var(--gap) clamp(40px,5vw,72px);max-width:var(--max);margin:0 auto;}}
+    .breadcrumb{{display:flex;align-items:center;gap:10px;font-family:var(--f-body);font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,242,237,.6);margin-bottom:22px;}}
+    .breadcrumb a{{color:var(--blue-mid);}}
+    .breadcrumb svg{{width:10px;height:10px;}}
+    .article-category{{display:inline-block;padding:6px 14px;background:var(--blue-mid);color:var(--ink);font-family:var(--f-body);font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;margin-bottom:20px;}}
+    .article-title{{font-family:var(--f-head);font-size:clamp(34px,5vw,72px);letter-spacing:.04em;color:var(--offwhite);line-height:1;max-width:1000px;text-shadow:0 2px 24px rgba(0,0,0,.6);}}
+    .article-meta{{display:flex;align-items:center;gap:14px;font-family:var(--f-body);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);margin-top:22px;flex-wrap:wrap;}}
+    .article-meta .dot{{width:3px;height:3px;border-radius:50%;background:var(--blue-mid);}}
+    .article-meta .by{{color:var(--blue-mid);}}
+    .article-body{{max-width:var(--read);margin:0 auto;padding:clamp(48px,6vw,90px) var(--gap);}}
+    .article-lede{{font-family:var(--f-body);font-size:clamp(16px,1.4vw,19px);font-weight:300;line-height:1.65;color:var(--offwhite);margin-bottom:36px;padding-left:22px;border-left:2px solid var(--blue-mid);}}
+    .article-body h2{{font-family:var(--f-head);font-size:clamp(28px,3vw,40px);letter-spacing:.04em;color:var(--offwhite);line-height:1.1;margin:56px 0 18px;}}
+    .article-body h3{{font-family:var(--f-head);font-size:clamp(22px,2.2vw,28px);letter-spacing:.05em;color:var(--blue-mid);margin:36px 0 14px;}}
+    .article-body p{{font-family:var(--f-body);font-size:14.5px;font-weight:300;line-height:1.85;color:rgba(245,242,237,.78);margin-bottom:18px;}}
+    .article-body p strong{{color:var(--offwhite);font-weight:500;}}
+    .article-body p a{{color:var(--blue-mid);text-decoration:underline;text-underline-offset:3px;}}
+    .article-body em{{color:rgba(245,242,237,.65);font-style:italic;}}
+    .article-body ul,.article-body ol{{margin:16px 0 24px;padding-left:0;}}
+    .article-body li{{font-family:var(--f-body);font-size:14px;font-weight:300;line-height:1.8;color:rgba(245,242,237,.78);padding-left:24px;position:relative;margin-bottom:12px;list-style:none;}}
+    .article-body li::before{{content:'';position:absolute;left:0;top:12px;width:12px;height:1px;background:var(--blue-mid);}}
+    .article-body li strong{{color:var(--offwhite);font-weight:600;}}
+    .article-pullquote{{font-family:var(--f-head);font-size:clamp(24px,2.6vw,32px);letter-spacing:.03em;line-height:1.25;color:var(--offwhite);margin:44px 0;padding:28px 30px;background:rgba(54,159,206,.06);border-left:3px solid var(--blue-mid);}}
+    .article-pullquote::before{{content:'"';font-size:60px;color:var(--blue-mid);float:left;line-height:.7;margin-right:8px;opacity:.5;}}
+    .article-closer{{margin-top:56px;padding-top:36px;border-top:1px solid rgba(255,255,255,.08);font-family:var(--f-body);font-size:13px;font-weight:300;line-height:1.8;color:var(--mist);}}
+    .article-closer strong{{color:var(--offwhite);}}
+    .article-tags{{max-width:var(--read);margin:0 auto;padding:0 var(--gap) clamp(40px,5vw,64px);display:flex;flex-wrap:wrap;gap:8px;}}
+    .tag{{display:inline-flex;align-items:center;padding:7px 14px;border:1px solid rgba(255,255,255,.08);font-family:var(--f-body);font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);transition:color .3s,border-color .3s,background .3s;}}
+    .tag:hover{{color:var(--blue-mid);border-color:rgba(54,159,206,.3);background:rgba(54,159,206,.04);}}
+    .author-strip{{max-width:var(--read);margin:0 auto;padding:clamp(28px,3.5vw,44px) var(--gap);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}}
+    .author-info{{display:flex;align-items:center;gap:16px;}}
+    .author-avatar{{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--blue-mid),rgba(54,159,206,.4));display:flex;align-items:center;justify-content:center;font-family:var(--f-head);font-size:22px;color:var(--ink);letter-spacing:.04em;flex-shrink:0;}}
+    .author-name{{font-family:var(--f-body);font-size:13px;font-weight:500;color:var(--offwhite);letter-spacing:.05em;}
+    .author-role{{font-family:var(--f-body);font-size:10px;font-weight:400;color:var(--mist);letter-spacing:.18em;text-transform:uppercase;margin-top:3px;}
+    .share-row{{display:flex;align-items:center;gap:10px;}}
+    .share-label{{font-family:var(--f-body);font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--mist);margin-right:6px;}
+    .share-btn{{width:36px;height:36px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-family:var(--f-body);font-size:10px;font-weight:600;color:var(--mist);transition:color .3s,border-color .3s,background .3s;}
+    .share-btn:hover{{color:var(--blue-mid);border-color:rgba(54,159,206,.4);background:rgba(54,159,206,.05);}}
+    .related-wrap{{max-width:var(--max);margin:0 auto;padding:clamp(60px,7vw,96px) var(--gap);}}
+    .related-label{{font-family:var(--f-body);font-size:10px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--blue-mid);display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+    .related-label::before{{content:'';width:18px;height:1px;background:var(--blue-mid);}}
+    .related-title{{font-family:var(--f-head);font-size:clamp(36px,4vw,56px);letter-spacing:.05em;color:var(--offwhite);margin-bottom:36px;}
+    .related-grid{{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;}
+    .blog-card{{display:flex;flex-direction:column;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.04);overflow:hidden;cursor:none;transition:border-color .3s,background .3s,transform .4s var(--ease);}}
+    .blog-card:hover{{border-color:rgba(54,159,206,.3);background:rgba(54,159,206,.03);transform:translateY(-4px);}}
+    .blog-card-img{{position:relative;overflow:hidden;aspect-ratio:16/9;}
+    .blog-card-img img{{width:100%;height:100%;object-fit:cover;transition:transform 1.3s var(--ease),filter 1.3s;filter:brightness(.85);}}
+    .blog-card:hover .blog-card-img img{{transform:scale(1.06);filter:brightness(.7);}}
+    .blog-card-cat{{position:absolute;top:16px;left:16px;z-index:2;padding:5px 12px;background:rgba(13,21,32,.85);backdrop-filter:blur(8px);border:1px solid rgba(54,159,206,.3);font-family:var(--f-body);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-mid);}}
+    .blog-card-body{{padding:24px 26px 28px;}}
+    .blog-card-meta{{display:flex;align-items:center;gap:12px;font-family:var(--f-body);font-size:9px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--mist);margin-bottom:12px;}}
+    .blog-card-meta .dot{{width:3px;height:3px;border-radius:50%;background:var(--blue-mid);}}
+    .blog-card-title{{font-family:var(--f-head);font-size:clamp(20px,2vw,26px);letter-spacing:.04em;color:var(--offwhite);line-height:1.1;transition:color .3s;}
+    .blog-card:hover .blog-card-title{{color:var(--blue-mid);}}
+    .back-cta-wrap{{max-width:var(--read);margin:0 auto;padding:0 var(--gap) clamp(40px,5vw,64px);display:flex;justify-content:center;}
+    .back-cta{{display:inline-flex;align-items:center;gap:10px;padding:14px 30px;border:1px solid var(--blue-mid);color:var(--blue-mid);font-family:var(--f-body);font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;transition:background .3s,color .3s;}
+    .back-cta:hover{{background:var(--blue-mid);color:var(--ink);}}
+    .back-cta svg{{width:14px;height:14px;transform:rotate(180deg);}}
+    .rv{{opacity:0;transform:translateY(24px);transition:opacity .85s var(--ease),transform .85s var(--ease);}}
+    .rv.vis{{opacity:1;transform:none;}}
+    .rv.d1{{transition-delay:.07s}}.rv.d2{{transition-delay:.14s}}
+    .footer{{background:#040912;border-top:1px solid rgba(255,255,255,.04);}}
+    .footer-inner{{display:flex;justify-content:space-between;align-items:center;padding:22px var(--gap);flex-wrap:wrap;gap:14px;max-width:var(--max);margin:0 auto;}}
+    .footer-logo{{height:28px;display:flex;align-items:center;}}
+    .footer-copy{{font-family:var(--f-body);font-size:11px;color:var(--mist);letter-spacing:.06em;}}
+    .footer-socials{{display:flex;gap:18px;}}
+    .footer-socials a{{font-family:var(--f-body);font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);transition:color .3s;}}
+    .footer-socials a:hover{{color:var(--blue-mid);}}
+    .wa-bubble{{position:fixed;bottom:28px;right:28px;z-index:8000;}}
+    .wa-btn{{width:52px;height:52px;border-radius:50%;background:#25d366;box-shadow:0 6px 28px rgba(37,211,102,.38);display:flex;align-items:center;justify-content:center;cursor:none;transition:transform .3s var(--ease);animation:waPulse 2.8s ease-in-out infinite;}}
+    @keyframes waPulse{{0%,100%{{box-shadow:0 6px 28px rgba(37,211,102,.38),0 0 0 0 rgba(37,211,102,.32);}}50%{{box-shadow:0 6px 28px rgba(37,211,102,.38),0 0 0 14px rgba(37,211,102,0);}}}}
+    .wa-btn:hover{{transform:scale(1.1);}}
+    .wa-btn svg{{width:26px;height:26px;}}
+    @media(max-width:900px){{.nav-links,.nav-cta{{display:none;}}.nav-menu-btn{{display:flex;}}.related-grid{{grid-template-columns:1fr;}}}}
+  </style>
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{title}",
+    "description": "{desc}",
+    "image": "{hero_image}",
+    "author": {{
+      "@type": "Organization",
+      "name": "NextGen Interiors",
+      "url": "https://nextgeninterior.com"
+    }},
+    "publisher": {{
+      "@type": "Organization",
+      "name": "NextGen Interiors",
+      "logo": {{
+        "@type": "ImageObject",
+        "url": "https://nextgeninterior.com/logo/favicon.png"
+      }}
+    }},
+    "datePublished": "{published_at}",
+    "dateModified": "{published_at}",
+    "url": "https://nextgeninterior.com/{slug}",
+    "mainEntityOfPage": "https://nextgeninterior.com/{slug}"
+  }}
+  </script>
+</head>
+<body>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav class="nav">
+    <a href="/" class="nav-logo">
+      <img src="/logo/favicon.png" class="logo-img" alt="NextGen Interiors"/>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/architecture">Architecture</a></li>
+      <li><a href="/interiors">Interiors</a></li>
+      <li><a href="/dpr-landscaping">DPR &amp; Landscaping</a></li>
+      <li>
+        <button class="nav-dropdown-trigger">Portfolio
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-wrap">
+          <div class="nav-dropdown">
+            <a href="/hospitality">Hospitality</a>
+            <a href="/residential">Residential</a>
+            <a href="/commercial">Commercial</a>
+            <a href="/healthcare">Healthcare</a>
+            <a href="/club-resort">Club or Resort</a>
+            <a href="/education">Education</a>
+            <a href="/workplace">Workplace</a>
+          </div>
+        </div>
+      </li>
+      <li><a href="/blog" class="active">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+      <li><a href="/careers">Careers</a></li>
+    </ul>
+    <a href="tel:+9779849151220" class="nav-cta" aria-label="Call NextGen Interiors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.09 4.18 2 2 0 0 1 4.08 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+977 9849151220</span></a>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="m-menu" id="mMenu">
+    <div class="m-menu-topbar">
+      <div style="height:30px;display:flex;align-items:center;">
+        <img src="/logo/favicon.png" class="logo-img" alt="NextGen Interiors" style="height:28px;"/>
+      </div>
+      <button class="nav-menu-btn open" id="mMenuClose" style="display:flex;"><span></span><span></span><span></span></button>
+    </div>
+    <div class="m-menu-body">
+      <nav>
+        <ul class="m-menu-links">
+          <li><a href="/architecture">Architecture</a></li>
+          <li><a href="/interiors">Interiors</a></li>
+          <li><a href="/dpr-landscaping">DPR &amp; Landscaping</a></li>
+          <li>
+            <button class="m-menu-acc-btn" id="mPortfolioBtn">Portfolio
+              <span class="m-acc-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="m-acc-sub" id="mPortfolioSub">
+              <div class="m-acc-sub-inner">
+                <a href="/hospitality">Hospitality</a>
+                <a href="/residential">Residential</a>
+                <a href="/commercial">Commercial</a>
+                <a href="/healthcare">Healthcare</a>
+                <a href="/club-resort">Club or Resort</a>
+                <a href="/education">Education</a>
+                <a href="/workplace">Workplace</a>
+              </div>
+            </div>
+          </li>
+          <li><a href="/blog" class="active">Blog</a></li>
+          <li><a href="/#contact">Contact</a></li>
+          <li><a href="/careers">Careers</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="m-menu-footer">
+      <div>
+        <div class="m-service-label">Services</div>
+        <span class="m-service-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:8px;height:8px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          All Over Nepal
+        </span>
+      </div>
+      <div class="m-hq-row">
+        <span class="m-hq-dot"></span>
+        <span>Head Office &middot; Baluwatar, Kathmandu</span>
+      </div>
+      <div class="m-contact-row">
+        <a href="tel:+9779849151220">+977 9849151220</a>
+        <a href="mailto:info@nextgeninterior.com">info@nextgeninterior.com</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="article-hero">
+    <img src="{hero_image}" alt="{title}" loading="eager"/>
+    <div class="article-hero-overlay"></div>
+    <div class="article-hero-content">
+      <div class="breadcrumb">
+        <a href="/">Home</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        <a href="/blog">Blog</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        <span style="color:var(--offwhite)">{category}</span>
+      </div>
+      <div class="article-category">{category}</div>
+      <h1 class="article-title">{title}</h1>
+      <div class="article-meta">
+        <span>{published_at}</span>
+        <span class="dot"></span>
+        <span>{read_time}</span>
+        <span class="dot"></span>
+        <span class="by">By {author}</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="article-body">
+    {lede_html}
+    {body_content}
+  </article>
+
+  {tags_html}
+
+  <div class="author-strip">
+    <div class="author-info">
+      <div class="author-avatar">NG</div>
+      <div>
+        <div class="author-name">{author}</div>
+        <div class="author-role">Architecture &amp; Interior Design Experts</div>
+      </div>
+    </div>
+    <div class="share-row">
+      <span class="share-label">Share</span>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnextgeninterior.com%2F{slug}" target="_blank" rel="noopener" class="share-btn" aria-label="Share on Facebook">FB</a>
+      <a href="https://wa.me/?text={title}%20https%3A%2F%2Fnextgeninterior.com%2F{slug}" target="_blank" rel="noopener" class="share-btn" aria-label="Share on WhatsApp">WA</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fnextgeninterior.com%2F{slug}" target="_blank" rel="noopener" class="share-btn" aria-label="Share on LinkedIn">IN</a>
+    </div>
+  </div>
+
+  {related_section_html}
+
+  <div class="back-cta-wrap">
+    <a href="/blog" class="back-cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      All Blog Articles
+    </a>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo"><img src="/logo/favicon.png" class="logo-img" alt="NextGen Interiors"/></div>
+      <div class="footer-copy">&copy; 2026 NextGen Interiors &amp; Architects. All rights reserved.</div>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/share/1B6DkR2r37/" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.tiktok.com/@nextgen_interiors?_t=ZS-8u9bK18vW4x&amp;_r=1" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="wa-bubble">
+    <a href="https://wa.me/9779849151220?text=Hello%20NextGen%2C%20I%20read%20your%20blog%20and%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="wa-btn" aria-label="Chat on WhatsApp">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </a>
+  </div>
+
+  <script>
+    const dot = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    document.addEventListener('mousemove', (e) => {{
+      dot.style.left = e.clientX + 'px';
+      dot.style.top = e.clientY + 'px';
+      ring.style.left = e.clientX + 'px';
+      ring.style.top = e.clientY + 'px';
+    }});
+    document.querySelectorAll('a, button, input, textarea, select').forEach(el => {{
+      el.addEventListener('mouseenter', () => document.body.classList.add('c-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('c-hover'));
+    }});
+    const menuBtn = document.getElementById('menuBtn');
+    const mMenu = document.getElementById('mMenu');
+    const mMenuClose = document.getElementById('mMenuClose');
+    if (menuBtn && mMenu) {{
+      menuBtn.addEventListener('click', () => mMenu.classList.add('open'));
+      mMenuClose.addEventListener('click', () => mMenu.classList.remove('open'));
+    }}
+    const mPortfolioBtn = document.getElementById('mPortfolioBtn');
+    const mPortfolioSub = document.getElementById('mPortfolioSub');
+    if (mPortfolioBtn && mPortfolioSub) {{
+      mPortfolioBtn.addEventListener('click', () => {{
+        mPortfolioBtn.classList.toggle('active');
+        mPortfolioSub.classList.toggle('open');
+      }});
+    }}
+  </script>
+</body>
+</html>
+"""
+
+def build_blog_pages(blogs, base_dir):
+    if not blogs:
+        return
+    print(f"Generating {len(blogs)} Blog pages from Sanity...")
+    
+    for idx, b in enumerate(blogs):
+        slug = (b.get('slug') or '').strip().replace(' ', '-')
+        if not slug:
+            continue
+            
+        title = b.get('title', 'Blog Article').strip()
+        category = b.get('category') or 'Interior Design'
+        raw_date = b.get('publishedAt') or '2026-08-04'
+        read_time = b.get('readTime') or '10 min read'
+        author = b.get('author') or 'NextGen Team'
+        meta_desc = b.get('metaDescription') or f"{title} — Architecture and interior design insights by NextGen Interiors."
+        cover_img = b.get('coverImage') or 'https://nextgeninterior.com/Galleries/GAUTAM%20HOTEL%20interior/5.webp'
+        lede = b.get('lede', '').strip()
+        lede_html = f'<p class="article-lede">{lede}</p>' if lede else ''
+        body_html = portable_text_to_html(b.get('content'))
+        
+        tags = b.get('tags') or []
+        tags_spans = "".join([f'<span class="tag">{t}</span>' for t in tags if t])
+        tags_html = f'<div class="article-tags">\n  {tags_spans}\n</div>' if tags_spans else ''
+        
+        other_blogs = [ob for ob in blogs if (ob.get('slug') or '') != slug]
+        related_cards = []
+        for rob in other_blogs[:2]:
+            r_slug = rob.get('slug')
+            r_title = rob.get('title', '')
+            r_cat = rob.get('category', 'Architecture')
+            r_img = rob.get('coverImage') or cover_img
+            r_meta = f"{rob.get('publishedAt', '')} &middot; {rob.get('readTime', '10 min read')}"
+            related_cards.append(f'''    <a href="/{r_slug}" class="blog-card rv">
+      <div class="blog-card-img"><img src="{r_img}" alt="{r_title}" loading="lazy"/><div class="blog-card-cat">{r_cat}</div></div>
+      <div class="blog-card-body"><div class="blog-card-meta">{r_meta}</div><h3 class="blog-card-title">{r_title}</h3></div>
+    </a>''')
+        
+        related_html = ''
+        if related_cards:
+            related_html = f'''<section class="related-wrap">
+  <div class="related-label">Related Articles</div>
+  <h2 class="related-title">MORE INSIGHTS &amp; GUIDES</h2>
+  <div class="related-grid">
+{chr(10).join(related_cards)}
+  </div>
+</section>'''
+
+        page_title = f"{title} | NextGen Interiors"
+        
+        page_content = BLOG_PAGE_TEMPLATE.format(
+            page_title=page_title,
+            desc=meta_desc,
+            slug=slug,
+            title=title,
+            category=category,
+            published_at=raw_date,
+            read_time=read_time,
+            author=author,
+            hero_image=cover_img,
+            lede_html=lede_html,
+            body_content=body_html,
+            tags_html=tags_html,
+            related_section_html=related_html
+        )
+        
+        root_path = os.path.join(base_dir, f"{slug}.html")
+        with open(root_path, "w", encoding="utf-8") as fp:
+            fp.write(page_content)
+            
+        blogs_dir = os.path.join(base_dir, "blogs")
+        if os.path.exists(blogs_dir):
+            blog_path = os.path.join(blogs_dir, f"{slug}.html")
+            with open(blog_path, "w", encoding="utf-8") as fp:
+                fp.write(page_content)
+                
+        print(f"Generated Blog Page: {slug}.html")
+
+def update_blog_index(blogs, base_dir):
+    if not blogs:
+        return
+    blog_index_path = os.path.join(base_dir, "blog.html")
+    if not os.path.exists(blog_index_path):
+        return
+        
+    with open(blog_index_path, "r", encoding="utf-8") as f:
+        content = f.read()
+        
+    cards = []
+    for b in blogs:
+        slug = (b.get('slug') or '').strip().replace(' ', '-')
+        if not slug:
+            continue
+        title = b.get('title', '').strip()
+        cat = b.get('category', 'Architecture')
+        date_str = b.get('publishedAt', '')
+        read_str = b.get('readTime', '10 min read')
+        img = b.get('coverImage') or 'https://nextgeninterior.com/Galleries/GAUTAM%20HOTEL%20interior/5.webp'
+        lede = b.get('lede') or b.get('metaDescription') or ''
+        
+        cards.append(f'''    <a href="/{slug}" class="blog-card rv">
+      <div class="blog-card-img">
+        <img src="{img}" alt="{title}" loading="lazy"/>
+        <div class="blog-card-cat">{cat}</div>
+      </div>
+      <div class="blog-card-body">
+        <div class="blog-card-meta"><span>{date_str}</span><span class="dot"></span><span>{read_str}</span></div>
+        <h3 class="blog-card-title">{title}</h3>
+        <p class="blog-card-excerpt">{lede[:160]}...</p>
+        <span class="blog-card-read">Read Article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>''')
+    
+    if cards:
+        grid_html = '\n' + '\n'.join(cards) + '\n'
+        content = re.sub(
+            r'(<div class="blog-grid">)[\s\S]*?(</div>\s*</div>\s*(?:<!--\s*NEWSLETTER|<div class="newsletter|<footer|<div class="footer))',
+            r'\1' + grid_html + r'  </div>\n</div>\n\n',
+            content,
+            count=1
+        )
+        with open(blog_index_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"Updated blog.html with {len(cards)} blog posts from Sanity.")
+
 def build():
     projects = fetch_sanity_data()
     print(f"Fetched {len(projects)} projects from Sanity.")
@@ -941,6 +1574,13 @@ def update_homepage_and_categories(projects, base_dir):
         with open(fpath, "w", encoding="utf-8") as f:
             f.write(content)
         print(f"Pre-rendered {fname} with {len(cat_projs)} projects.")
+
+    # 3. Process Blogs from Sanity
+    blogs = fetch_sanity_blogs()
+    if blogs:
+        print(f"Fetched {len(blogs)} blog articles from Sanity.")
+        build_blog_pages(blogs, base_dir)
+        update_blog_index(blogs, base_dir)
 
 SITE = "https://nextgeninterior.com"
 
