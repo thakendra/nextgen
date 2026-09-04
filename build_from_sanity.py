@@ -24,13 +24,13 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <meta name="description" content="{desc}" />
   <link rel="canonical" href="https://nextgeninterior.com/{slug}" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="author" content="NextGen Interiors" />
+  <meta name="author" content="NextGen Architects and Interiors" />
   <meta name="theme-color" content="#0d1520" />
   <meta name="geo.region" content="NP" />
   <meta name="geo.placename" content="Kathmandu, Nepal" />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="NextGen Interiors" />
+  <meta property="og:site_name" content="NextGen Architects and Interiors" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="{page_title}" />
   <meta property="og:description" content="{desc}" />
@@ -223,12 +223,12 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
         "url": "https://nextgeninterior.com/{slug}",
         "author": {{
           "@type": "Organization",
-          "name": "NextGen Interiors & Architects",
+          "name": "NextGen Architects and Interiors",
           "url": "https://nextgeninterior.com"
         }},
         "publisher": {{
           "@type": "Organization",
-          "name": "NextGen Interiors",
+          "name": "NextGen Architects and Interiors",
           "logo": {{
             "@type": "ImageObject",
             "url": "https://nextgeninterior.com/logo/favicon.png"
@@ -697,7 +697,7 @@ BLOG_PAGE_TEMPLATE = """<!DOCTYPE html>
   <meta name="geo.placename" content="Kathmandu, Nepal"/>
   <!-- Open Graph -->
   <meta property="og:type" content="article"/>
-  <meta property="og:site_name" content="NextGen Interiors"/>
+  <meta property="og:site_name" content="NextGen Architects and Interiors" />
   <meta property="og:locale" content="en_US"/>
   <meta property="og:title" content="{page_title}"/>
   <meta property="og:description" content="{desc}"/>
@@ -873,12 +873,12 @@ BLOG_PAGE_TEMPLATE = """<!DOCTYPE html>
     "image": "{hero_image}",
     "author": {{
       "@type": "Organization",
-      "name": "NextGen Interiors",
+      "name": "NextGen Architects and Interiors",
       "url": "https://nextgeninterior.com"
     }},
     "publisher": {{
       "@type": "Organization",
-      "name": "NextGen Interiors",
+      "name": "NextGen Architects and Interiors",
       "logo": {{
         "@type": "ImageObject",
         "url": "https://nextgeninterior.com/logo/favicon.png"

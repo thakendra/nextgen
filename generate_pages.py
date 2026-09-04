@@ -132,13 +132,13 @@ template = """<!DOCTYPE html>
 <meta name="description" content="{desc}" />
   <link rel="canonical" href="{canonical}" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="author" content="NextGen Interiors" />
+  <meta name="author" content="NextGen Architects and Interiors" />
   <meta name="theme-color" content="#0d1520" />
   <meta name="geo.region" content="NP" />
   <meta name="geo.placename" content="Kathmandu, Nepal" />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="NextGen Interiors" />
+  <meta property="og:site_name" content="NextGen Architects and Interiors" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="{title}" />
   <meta property="og:description" content="{desc}" />
