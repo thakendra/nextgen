@@ -77,9 +77,15 @@ COMMON_TAIL = u'''  <!-- ===== COMMON TAIL (shared across all pages) ===== -->
             </div>
           </div>
           <div class="service-locations rv">
-            <div class="service-locations-label">We Serve</div>
+            <div class="service-locations-label">Locations &amp; Regions</div>
             <div class="location-tags">
-              <span class="location-tag">''' + PIN_SVG + u'''All Over Nepal</span>
+              <a href="/locations/home-interior-design-bhaktapur" class="location-tag">''' + PIN_SVG + u'''Bhaktapur</a>
+              <a href="/locations/home-interior-design-chitwan" class="location-tag">''' + PIN_SVG + u'''Chitwan</a>
+              <a href="/locations/office-interior-design-lalitpur" class="location-tag">''' + PIN_SVG + u'''Lalitpur</a>
+              <a href="/locations/residential-architecture-dang" class="location-tag">''' + PIN_SVG + u'''Dang</a>
+              <a href="/locations/hotel-interior-design-surkhet" class="location-tag">''' + PIN_SVG + u'''Surkhet</a>
+              <span class="location-tag">''' + PIN_SVG + u'''Kathmandu</span>
+              <span class="location-tag">''' + PIN_SVG + u'''Pokhara</span>
             </div>
           </div>
           <div class="contact-socials rv">
@@ -87,7 +93,7 @@ COMMON_TAIL = u'''  <!-- ===== COMMON TAIL (shared across all pages) ===== -->
             <a href="https://www.facebook.com/architectsandinteriorshouse" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
             <a href="https://www.linkedin.com/company/nextgen-interiors-architects-pvt-ltd/?originalSubdomain=np" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
             <a href="https://www.youtube.com/@nextgeninteriors" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
-            <a href="https://wa.me/9779849151220" target="_blank" rel="noopener" style="background:rgba(37,211,102,0.12);border-color:rgba(37,211,102,0.28);color:#25d366;" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+            <a href="https://wa.me/9779849151220" target="_blank" rel="nofollow noopener noreferrer" style="background:rgba(37,211,102,0.12);border-color:rgba(37,211,102,0.28);color:#25d366;" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
           </div>
         </div>
         <div class="map-wrap rv d1">
@@ -127,7 +133,7 @@ COMMON_TAIL = u'''  <!-- ===== COMMON TAIL (shared across all pages) ===== -->
 
   <div class="wa-bubble">
     <div class="wa-tooltip">Chat with us on WhatsApp!</div>
-    <a href="https://wa.me/9779849151220?text=Hello%20NextGen%20Interiors%2C%20I%27d%20like%20to%20discuss%20a%20project." class="wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp">''' + WA_SVG + u'''</a>
+    <a href="https://wa.me/9779849151220?text=Hello%20NextGen%20Interiors%2C%20I%27d%20like%20to%20discuss%20a%20project." class="wa-btn" target="_blank" rel="nofollow noopener noreferrer" aria-label="WhatsApp">''' + WA_SVG + u'''</a>
   </div>
   <!-- ===== /COMMON TAIL ===== -->
 '''
