@@ -747,28 +747,79 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "LocalBusiness",
+        "@type": ["HomeAndConstructionBusiness", "ProfessionalService", "LocalBusiness"],
         "@id": "https://nextgeninterior.com/#business",
-        "name": "NextGen Architects and Interiors",
-        "alternateName": ["NextGen Interiors & Architects", "NextGen Architects & Interiors", "NextGen Interiors"],
-        "url": "https://nextgeninterior.com/",
-        "image": "https://nextgeninterior.com/logo/favicon.png",
+        "name": "NextGen Interiors & Architects",
+        "alternateName": [
+          "NextGen Architects and Interiors",
+          "NextGen Architects & Interiors",
+          "NextGen Interiors",
+          "NextGen Interiors & Architects Pvt. Ltd."
+        ],
+        "image": [
+          "https://nextgeninterior.com/logo/logo.png",
+          "https://nextgeninterior.com/logo/favicon.png",
+          "https://cdn.sanity.io/images/gpyk0ky0/production/539e0d3b4ff72f15ec7ef48e88a06cf420af9b02-1913x1336.webp"
+        ],
         "logo": "https://nextgeninterior.com/logo/favicon.png",
-        "description": "NextGen Interiors & Architects is a full-service architecture, construction and interior design company in Kathmandu, Nepal. We design and build villas, farmhouses, resorts, hotels, banquet , homes and bungalows, delivering complete architectural, construction and interior solutions across Nepal.",
-        "telephone": "+977-9849151220",
+        "url": "https://nextgeninterior.com/",
+        "telephone": "+9779849151220",
         "email": "info@nextgeninterior.com",
         "priceRange": "$$",
         "address": {
           "@type": "PostalAddress",
+          "streetAddress": "Thirbam Sadak, Baluwatar",
           "addressLocality": "Kathmandu",
-          "addressRegion": "Bagmati",
+          "addressRegion": "Bagmati Province",
+          "postalCode": "44600",
           "addressCountry": "NP"
         },
-        "areaServed": { "@type": "Country", "name": "Nepal" },
-        "knowsAbout": ["Interior Design", "Architecture", "Hotel Design", "Landscaping", "Detailed Project Reports"],
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "27.7226",
+          "longitude": "85.3312"
+        },
+        "hasMap": "https://maps.google.com/?cid=7584801124458527730",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "07:00",
+            "closes": "20:30"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Friday",
+            "opens": "07:07",
+            "closes": "20:00"
+          }
+        ],
         "sameAs": [
-          "https://www.facebook.com/architectsandinteriorshouse",
-          "https://www.instagram.com/nextgen_interiors_architects"
+          "https://www.facebook.com/architectsandinteriorshouse/",
+          "https://np.linkedin.com/company/nextgen-interiors-architects-pvt-ltd",
+          "https://www.instagram.com/nextgen_interiors_architects",
+          "https://www.youtube.com/@nextgeninteriors"
+        ],
+        "description": "NextGen Interiors & Architects is a full-service architecture, construction and interior design company in Kathmandu, Nepal. We design and build villas, farmhouses, resorts, hotels, banquet halls, homes and bungalows, delivering complete architectural, construction and interior solutions across Nepal.",
+        "areaServed": {
+          "@type": "Country",
+          "name": "Nepal"
+        },
+        "knowsAbout": [
+          "Interior Design",
+          "Architecture",
+          "Residential Construction",
+          "Commercial Fit-outs",
+          "Hotel and Resort Architecture",
+          "Landscape Design",
+          "Detailed Project Reports (DPR)"
         ]
       },
       {
@@ -776,8 +827,14 @@
         "@id": "https://nextgeninterior.com/#website",
         "url": "https://nextgeninterior.com/",
         "name": "NextGen Architects and Interiors",
-        "alternateName": ["NextGen Interiors & Architects", "NextGen Architects & Interiors", "NextGen Interiors"],
-        "publisher": { "@id": "https://nextgeninterior.com/#business" },
+        "alternateName": [
+          "NextGen Interiors & Architects",
+          "NextGen Architects & Interiors",
+          "NextGen Interiors"
+        ],
+        "publisher": {
+          "@id": "https://nextgeninterior.com/#business"
+        },
         "inLanguage": "en"
       }
     ]
