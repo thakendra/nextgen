@@ -74,6 +74,30 @@ for js_file in glob.glob(os.path.join(LOCAL_DIR, "js", "*.js")):
         FILES_TO_SYNC.append(rel)
 
 
+
+# ...and hero images in Galleries/
+HERO_GALLERY_SYNC = [
+    "Galleries/LILLY MAAM EXTERIOR/2.webp",
+    "Galleries/LILLY MAAM EXTERIOR/2-mobile.webp",
+    "Galleries/LOKHANTHALI interior/10.webp",
+    "Galleries/LOKHANTHALI interior/10-mobile.webp",
+    "Galleries/sankhu Architecture/2.webp",
+    "Galleries/sankhu Architecture/2-mobile.webp",
+    "Galleries/NEW PHOTOS/MAYA CAFE kathmandu nepal/jpeg-optimizer_2.webp",
+    "Galleries/NEW PHOTOS/MAYA CAFE kathmandu nepal/jpeg-optimizer_2-mobile.webp",
+    "Galleries/CHITWAN HOME EXTERIOR/2_compressed.webp",
+    "Galleries/CHITWAN HOME EXTERIOR/2_compressed-mobile.webp",
+    "Galleries/NAVYA HOTEL interior/2.webp",
+    "Galleries/NAVYA HOTEL interior/2-mobile.webp",
+    "Galleries/TOKHA EXTERIOR/2_compressed.webp",
+    "Galleries/TOKHA EXTERIOR/2_compressed-mobile.webp",
+    "Galleries/LEMON TREE architecture/1.webp",
+    "Galleries/LEMON TREE architecture/1-mobile.webp",
+]
+for hg in HERO_GALLERY_SYNC:
+    if hg not in FILES_TO_SYNC:
+        FILES_TO_SYNC.append(hg)
+
 def ensure_remote_dir(remote_path):
     """mkdir -p for the remote parent directory."""
     parent = posixpath.dirname(remote_path)

@@ -98,7 +98,7 @@ COMMON_TAIL = u'''  <!-- ===== COMMON TAIL (shared across all pages) ===== -->
         </div>
         <div class="map-wrap rv d1">
           <div class="map-label">''' + PIN_SVG.replace('stroke-width="2"', 'stroke-width="2" width="13" height="13"') + u'''NextGen Interiors &amp; Architects</div>
-          <iframe src="''' + MAP_EMBED + u'''" title="NextGen Interiors &amp; Architects on Google Maps" loading="lazy" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe data-src="''' + MAP_EMBED + u'''" title="NextGen Interiors &amp; Architects on Google Maps" loading="lazy" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>

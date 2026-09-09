@@ -91,3 +91,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.04 });
   document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 });
+
+  // Dynamic Lazy-load Google Maps on scroll
+  const mapWrap = document.querySelector('.map-wrap');
+  if (mapWrap) {
+    const mapObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const iframe = mapWrap.querySelector('iframe[data-src]');
+          if (iframe) {
+            iframe.src = iframe.dataset.src;
+            iframe.removeAttribute('data-src');
+          }
+          obs.unobserve(mapWrap);
+        }
+      });
+    }, { rootMargin: '350px 0px' });
+    mapObserver.observe(mapWrap);
+  }

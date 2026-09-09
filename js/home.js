@@ -31,9 +31,54 @@
     const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});},{threshold:0.06});
     document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
-    // HERO SLIDESHOW
-    const slides=document.querySelectorAll('.hero-bg-slide');let si=0;
-    setInterval(()=>{slides[si].classList.remove('active');si=(si+1)%slides.length;slides[si].classList.add('active');},5200);
+    // HERO SLIDESHOW (PROGRESSIVE LAZY-LOADING)
+    const slides = document.querySelectorAll('.hero-bg-slide');
+    let si = 0;
+    const isMobile = window.innerWidth <= 768;
+
+    function ensureSlideImg(slide) {
+      if (!slide || slide.querySelector('img')) return;
+      const src = isMobile && slide.dataset.mob ? slide.dataset.mob : slide.dataset.src;
+      if (src) {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = slide.dataset.alt || 'NextGen Architecture and Interior Design';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        slide.appendChild(img);
+      }
+    }
+
+    // Preload slide 2 after initial page settles
+    setTimeout(() => { if (slides[1]) ensureSlideImg(slides[1]); }, 2000);
+
+    setInterval(() => {
+      slides[si].classList.remove('active');
+      si = (si + 1) % slides.length;
+      ensureSlideImg(slides[si]);
+      const nextIdx = (si + 1) % slides.length;
+      ensureSlideImg(slides[nextIdx]);
+      slides[si].classList.add('active');
+    }, 5200);
+
+    // DYNAMIC LAZY-LOAD GOOGLE MAPS ON SCROLL
+    (function initLazyMap() {
+      const mapWrap = document.querySelector('.map-wrap');
+      if (!mapWrap) return;
+      const mapObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const iframe = mapWrap.querySelector('iframe[data-src]');
+            if (iframe) {
+              iframe.src = iframe.dataset.src;
+              iframe.removeAttribute('data-src');
+            }
+            obs.unobserve(mapWrap);
+          }
+        });
+      }, { rootMargin: '350px 0px' });
+      mapObserver.observe(mapWrap);
+    })();
 
     // WHATSAPP BUBBLE
     setTimeout(()=>{const wb=document.getElementById('waBubble');wb.style.opacity='1';wb.style.transform='translateY(0)';},2600);
