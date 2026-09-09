@@ -17,6 +17,8 @@ print("Connected to Hostinger!")
 
 # Base files to always sync
 FILES_TO_SYNC = [
+    "logo/logo-nav.webp",
+    "logo/logo.webp",
     "sanity-integration.js",
     "site-common.css",
     "379f8581522c55333d2da688aa273a29.txt",  # IndexNow ownership key
