@@ -83,39 +83,8 @@
     // WHATSAPP BUBBLE
     setTimeout(()=>{const wb=document.getElementById('waBubble');wb.style.opacity='1';wb.style.transform='translateY(0)';},2600);
 
-    // HERO CHAR-BY-CHAR BLUR REVEAL
-    (function buildHeroText() {
-      const lines = [
-        { el: document.getElementById('heroLine1'), words: ['CRAFTING', 'VISIONS,'], accentWord: -1 },
-        { el: document.getElementById('heroLine2'), words: ['BUILDING', 'DREAMS'],  accentWord: 1  }
-      ];
-      const BASE = 0.82;
-      const CHAR_STEP = 0.042;
-      const LINE_OFFSET = 0.10;
-      let idx = 0;
-      lines.forEach((line, li) => {
-        line.el.textContent = '';   // drop the no-JS fallback text before animating
-        line.words.forEach((word, wi) => {
-          if (wi > 0) {
-            const sp = document.createElement('span');
-            sp.className = 'hw-space';
-            line.el.appendChild(sp);
-          }
-          const hw = document.createElement('span');
-          hw.className = 'hw';
-          if (wi === line.accentWord) hw.style.color = 'var(--blue-mid)';
-          Array.from(word).forEach(ch => {
-            const hc = document.createElement('span');
-            hc.className = 'hc';
-            hc.textContent = ch;
-            hc.style.animationDelay = (BASE + li * LINE_OFFSET + idx * CHAR_STEP).toFixed(3) + 's';
-            hw.appendChild(hc);
-            idx++;
-          });
-          line.el.appendChild(hw);
-        });
-      });
-    })();
+    // HERO TITLE: smooth CSS reveal (no DOM destruction)
+    // buildHeroText bypassed to achieve sub-second LCP paint without layout mutation
 
     // RUNNING PROJECTS AUTO-MARQUEE & LIGHTBOX MODAL
     (function initRunningMarquee() {
