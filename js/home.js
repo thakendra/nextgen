@@ -12,8 +12,14 @@
 
     // MOBILE MENU
     const btn=document.getElementById('menuBtn'),mm=document.getElementById('mMenu');
-    function openMenu(){btn.classList.add('open');mm.classList.add('open');document.body.style.overflow='hidden';}
-    function closeMenu(){btn.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}
+    function openMenu(){
+      mm.style.display='grid';
+      requestAnimationFrame(()=>{btn.classList.add('open');mm.classList.add('open');document.body.style.overflow='hidden';});
+    }
+    function closeMenu(){
+      btn.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';
+      setTimeout(()=>{if(!mm.classList.contains('open')) mm.style.display='none';}, 550);
+    }
     btn.addEventListener('click',()=>mm.classList.contains('open')?closeMenu():openMenu());
     document.getElementById('mMenuClose').addEventListener('click', closeMenu);
     mm.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
@@ -127,6 +133,10 @@
         const card = e.target.closest('.running-card');
         if (!card) return;
         track.classList.add('is-paused');
+        if (modal) {
+          modal.style.display = 'flex';
+          requestAnimationFrame(() => modal.classList.add('active'));
+        }
         const title = card.getAttribute('data-title');
         const loc = card.getAttribute('data-loc');
         const src = card.getAttribute('data-src');
