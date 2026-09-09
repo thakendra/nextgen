@@ -61,6 +61,18 @@ for img_ext in ("*.jpg", "*.jpeg", "*.png", "*.webp"):
         if rel not in FILES_TO_SYNC:
             FILES_TO_SYNC.append(rel)
 
+# ...and stylesheets in the css/ subfolder.
+for css_file in glob.glob(os.path.join(LOCAL_DIR, "css", "*.css")):
+    rel = posixpath.join("css", os.path.basename(css_file))
+    if rel not in FILES_TO_SYNC:
+        FILES_TO_SYNC.append(rel)
+
+# ...and scripts in the js/ subfolder.
+for js_file in glob.glob(os.path.join(LOCAL_DIR, "js", "*.js")):
+    rel = posixpath.join("js", os.path.basename(js_file))
+    if rel not in FILES_TO_SYNC:
+        FILES_TO_SYNC.append(rel)
+
 
 def ensure_remote_dir(remote_path):
     """mkdir -p for the remote parent directory."""
