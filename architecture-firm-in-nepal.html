@@ -101,7 +101,7 @@
     .m-menu-footer { padding: 20px var(--gap) 32px; border-top: 1px solid rgba(255,255,255,.06); display: flex; flex-direction: column; gap: 14px; }
 
     /* ===== SIGNATURE ARCHITECTURAL HERO ===== */
-    .af-hero { position: relative; min-height: 92vh; display: flex; align-items: flex-end; padding: clamp(120px,18vh,200px) 0 clamp(50px,7vw,90px); overflow: hidden; }
+    .af-hero { position: relative; min-height: clamp(480px, 62vh, 680px); display: flex; align-items: flex-end; padding: clamp(120px,16vh,180px) 0 clamp(40px,5vw,60px); overflow: hidden; }
     .af-hero-bg { position: absolute; inset: 0; z-index: 0; }
     .af-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; transform: scale(1.03); filter: brightness(0.72) contrast(1.1); }
     .af-hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(8,15,28,0.55) 0%, rgba(8,15,28,0.45) 40%, rgba(8,15,28,0.92) 82%, #080f1c 100%), radial-gradient(circle at 50% 30%, transparent 20%, rgba(8,15,28,0.6) 80%); pointer-events: none; }
@@ -118,7 +118,7 @@
     .af-hero-h1 { font-family: var(--f-head); font-size: clamp(44px,7vw,104px); letter-spacing: .03em; line-height: .92; color: var(--offwhite); margin-bottom: 20px; max-width: 1100px; text-shadow: 0 4px 30px rgba(0,0,0,.7); }
     .af-hero-h1 span { color: var(--blue-mid); }
 
-    .af-hero-lead { font-family: var(--f-body); font-size: clamp(15px,1.6vw,19px); font-weight: 300; line-height: 1.75; color: rgba(245,242,237,.88); max-width: 780px; margin-bottom: 34px; text-shadow: 0 2px 10px rgba(0,0,0,.5); }
+    .af-hero-lead { font-family: var(--f-body); font-size: clamp(15px,1.6vw,19px); font-weight: 300; line-height: 1.75; color: rgba(245,242,237,.88); max-width: 780px; margin-bottom: 0; text-shadow: 0 2px 10px rgba(0,0,0,.5); }
     
     .af-hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: clamp(40px,5vw,60px); }
     .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 15px 32px; background: var(--blue-mid); color: var(--ink); font-family: var(--f-body); font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; border: 1px solid var(--blue-mid); transition: all .35s var(--ease); box-shadow: 0 8px 26px rgba(54,159,206,.3); }
@@ -475,44 +475,6 @@
     <p class="af-hero-lead">
       Transforming landscapes and skylines across Nepal. From bespoke private villas and modern family residences to luxury mountain resorts, high-capacity banquet halls, commercial complexes, and comprehensive DPR master plans &mdash; designed for seismic resilience, timeless aesthetics, and turnkey execution.
     </p>
-
-    <div class="af-hero-actions">
-      <a href="#featured-showcase" class="btn-primary">
-        Explore Projects
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><polyline points="6 9 12 15 18 9"/></svg>
-      </a>
-      <a href="#contact" class="btn-secondary">
-        Book Architecture Consultation
-      </a>
-      <a href="https://wa.me/9779849151220?text=Hello%20NextGen%20Architects%2C%20I%20would%20like%20to%20discuss%20an%20architecture%20project%20in%20Nepal." target="_blank" rel="noopener" class="btn-whatsapp">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        WhatsApp Architect
-      </a>
-    </div>
-
-    <!-- Authority Stats -->
-    <div class="af-stats">
-      <div class="af-stat-card">
-        <div class="af-stat-num">12+</div>
-        <div class="af-stat-label">Years of Mastery</div>
-        <div class="af-stat-sub">Architectural engineering &amp; construction coordination.</div>
-      </div>
-      <div class="af-stat-card">
-        <div class="af-stat-num">150+</div>
-        <div class="af-stat-label">Iconic Projects</div>
-        <div class="af-stat-sub">Delivered residences, villas, resorts &amp; banquets.</div>
-      </div>
-      <div class="af-stat-card">
-        <div class="af-stat-num">7</div>
-        <div class="af-stat-label">Provinces Covered</div>
-        <div class="af-stat-sub">Nationwide design reach from Kathmandu to Karnali.</div>
-      </div>
-      <div class="af-stat-card">
-        <div class="af-stat-num">NBC 105</div>
-        <div class="af-stat-label">Seismic Code Compliant</div>
-        <div class="af-stat-sub">100% earthquake resilient structural engineering.</div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -541,13 +503,6 @@
     <p class="af-sec-intro">
       Explore our curated architectural creations across Nepal &mdash; luxury private residences, boutique mountain hotels, high-capacity banquet palaces, and contemporary commercial headquarters. Every card links directly to the detailed project gallery.
     </p>
-    <div class="pslider-filters">
-      <button type="button" class="pfilter-btn is-active" data-filter="all">All Architecture</button>
-      <button type="button" class="pfilter-btn" data-filter="residential">Residential &amp; Villas</button>
-      <button type="button" class="pfilter-btn" data-filter="hospitality">Hotels &amp; Resorts</button>
-      <button type="button" class="pfilter-btn" data-filter="banquet">Banquet Halls</button>
-      <button type="button" class="pfilter-btn" data-filter="commercial">Commercial Plazas</button>
-    </div>
   </div>
 
   <div class="pslider" data-project-slider role="group" aria-roledescription="carousel" aria-label="Featured architectural projects in Nepal" tabindex="0">

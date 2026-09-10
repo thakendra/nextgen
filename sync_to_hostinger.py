@@ -95,6 +95,8 @@ HERO_GALLERY_SYNC = [
     "Galleries/TOKHA EXTERIOR/2_compressed-mobile.webp",
     "Galleries/LEMON TREE architecture/1.webp",
     "Galleries/LEMON TREE architecture/1-mobile.webp",
+    "Galleries/GAUTAM HOTEL interior/5.webp",
+    "Galleries/NAVYA HOTEL interior/5.webp",
 ]
 for hg in HERO_GALLERY_SYNC:
     if hg not in FILES_TO_SYNC:
