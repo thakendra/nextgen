@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon.png" />
+  <link rel="shortcut icon" href="/logo/favicon.png" />
+  <link rel="apple-touch-icon" href="/logo/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Architecture Firm in Nepal | NextGen Interiors &amp; Architects</title>
+  <meta name="description" content="Looking for an architecture firm in Nepal? NextGen provides residential, villa, hotel, resort, commercial, banquet and building design services across Nepal."/>
+  <link rel="canonical" href="https://nextgeninterior.com/architecture-firm-in-nepal"/>
+  <meta name="robots" content="index, follow, max-image-preview:large"/>
+  <meta name="author" content="NextGen Architects and Interiors" />
+  <meta name="theme-color" content="#0d1520"/>
+  <meta name="geo.region" content="NP"/>
+  <meta name="geo.placename" content="Kathmandu, Nepal"/>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="NextGen Architects and Interiors" />
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:title" content="Architecture Firm in Nepal | NextGen Interiors &amp; Architects"/>
+  <meta property="og:description" content="Looking for an architecture firm in Nepal? NextGen provides residential, villa, hotel, resort, commercial, banquet and building design services across Nepal."/>
+  <meta property="og:url" content="https://nextgeninterior.com/architecture-firm-in-nepal"/>
+  <meta property="og:image" content="https://nextgeninterior.com/Galleries/LILLY%20MAAM%20EXTERIOR/2.webp"/>
+  <meta property="og:image:alt" content="Architecture firm in Nepal — NextGen Interiors &amp; Architects"/>
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Architecture Firm in Nepal | NextGen Interiors &amp; Architects"/>
+  <meta name="twitter:description" content="Looking for an architecture firm in Nepal? NextGen provides residential, villa, hotel, resort, commercial, banquet and building design services across Nepal."/>
+  <meta name="twitter:image" content="https://nextgeninterior.com/Galleries/LILLY%20MAAM%20EXTERIOR/2.webp"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/article.css" />
+  <link rel="stylesheet" href="/site-common.css" />
+  <style>
+    /* ===== FEATURED PROJECT SLIDER =====
+       Slide widths are constant; the centre slide is scaled up rather than
+       resized, so the layout maths in project-slider.js stays stable and every
+       transition runs on transform/opacity only (composited, no layout work).
+       Without JavaScript the viewport falls back to a normal scrollable row
+       with every card at full opacity. */
+    .pshow { background: var(--ink); padding: clamp(54px,8vw,108px) 0 clamp(34px,5vw,70px); overflow: hidden; }
+    .pshow-head { max-width: var(--max); margin: 0 auto; padding: 0 var(--gap) clamp(26px,4vw,46px); }
+    .pshow-tag { font-family: var(--f-body); font-size: 10px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--blue-mid); display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .pshow-tag::before { content: ''; width: 20px; height: 1px; background: var(--blue-mid); }
+    .pshow-h2 { font-family: var(--f-head); font-size: clamp(38px,6vw,86px); line-height: .9; letter-spacing: .03em; color: var(--offwhite); margin: 0 0 14px; }
+    .pshow-h2 span { color: var(--blue-mid); }
+    .pshow-sub { font-family: var(--f-body); font-size: 14px; font-weight: 300; line-height: 1.8; color: var(--mist); max-width: 620px; margin: 0; }
+
+    .pslider { position: relative; }
+    .pslider-viewport { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
+    .pslider.is-ready .pslider-viewport { overflow: hidden; cursor: grab; touch-action: pan-y; }
+    .pslider.is-ready .pslider-viewport:active { cursor: grabbing; }
+    .pslider-track { display: flex; gap: clamp(12px,1.8vw,26px); padding: 0 var(--gap); will-change: transform; }
+    .pslider.is-ready .pslider-track { padding: 0; }
+
+    .pslide { flex: 0 0 clamp(240px,30vw,440px); text-decoration: none; color: inherit; display: block; }
+    .pslide-inner { position: relative; overflow: hidden; background: #080f1c; transform: none; opacity: 1; transition: transform .85s var(--ease), opacity .85s var(--ease); will-change: transform, opacity; }
+    .pslider.is-ready .pslide-inner { transform: scale(.84); opacity: .42; }
+    .pslider.is-ready .pslide.is-active .pslide-inner { transform: scale(1); opacity: 1; }
+
+    .pslide-media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
+    .pslide-media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.01); transition: transform 1.3s var(--ease); }
+    .pslider.is-ready .pslide.is-active .pslide-media img { transform: scale(1.08); }
+    .pslide-grad { position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,11,20,.93) 0%, rgba(6,11,20,.30) 48%, rgba(6,11,20,.04) 100%); }
+    .pslide-line { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--blue-mid); transform: scaleX(0); transform-origin: left; transition: transform .8s var(--ease); }
+    .pslider.is-ready .pslide.is-active .pslide-line { transform: scaleX(1); }
+
+    .pslide-body { position: absolute; left: 0; right: 0; bottom: 0; padding: clamp(16px,2.1vw,28px); }
+    .pslide-cat { display: inline-block; font-family: var(--f-body); font-size: 9px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 8px; }
+    .pslide-name { font-family: var(--f-head); font-size: clamp(21px,2.3vw,38px); line-height: .98; letter-spacing: .05em; color: var(--offwhite); margin: 0 0 7px; text-shadow: 0 2px 22px rgba(0,0,0,.6); }
+    .pslide-loc { display: flex; align-items: center; gap: 6px; font-family: var(--f-body); font-size: 10.5px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: rgba(245,242,237,.55); }
+    .pslide-loc svg { width: 10px; height: 10px; color: var(--blue-mid); flex-shrink: 0; }
+    .pslide-cta { display: inline-flex; align-items: center; gap: 7px; margin-top: 14px; font-family: var(--f-body); font-size: 9.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-mid); }
+    .pslide-cta svg { width: 12px; height: 12px; }
+    /* Text staging is only applied once the slider is running, so the no-JS
+       version shows every card's name, category and location straight away. */
+    .pslider.is-ready .pslide-cat,
+    .pslider.is-ready .pslide-cta { opacity: 0; transform: translateY(9px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    .pslider.is-ready .pslide-name,
+    .pslider.is-ready .pslide-loc { opacity: .75; transform: translateY(5px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    .pslider.is-ready .pslide.is-active .pslide-cat { opacity: 1; transform: none; transition-delay: .14s; }
+    .pslider.is-ready .pslide.is-active .pslide-name { opacity: 1; transform: none; transition-delay: .2s; }
+    .pslider.is-ready .pslide.is-active .pslide-loc { opacity: 1; transform: none; transition-delay: .26s; }
+    .pslider.is-ready .pslide.is-active .pslide-cta { opacity: 1; transform: none; transition-delay: .32s; }
+
+    .pslider-bar { max-width: var(--max); margin: 0 auto; padding: clamp(22px,3vw,38px) var(--gap) 0; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .pslider-meta { display: flex; align-items: center; gap: 14px; min-height: 20px; }
+    .pslider-cat { font-family: var(--f-body); font-size: 10px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--blue-mid); }
+    .pslider-count { font-family: var(--f-body); font-size: 10px; font-weight: 500; letter-spacing: .2em; color: rgba(245,242,237,.35); }
+    .pslider-dots { display: flex; align-items: center; gap: 7px; }
+    .pslider-dot { width: 24px; height: 2px; padding: 0; border: none; background: rgba(255,255,255,.16); cursor: pointer; transition: background .45s var(--ease), transform .45s var(--ease); }
+    .pslider-dot.is-active { background: var(--blue-mid); transform: scaleY(2.5); }
+    .pslider-nav { display: flex; gap: 8px; }
+    .pslider-btn { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.14); background: transparent; color: rgba(245,242,237,.5); cursor: pointer; transition: border-color .35s, color .35s, background .35s; }
+    .pslider-btn:hover { border-color: var(--blue-mid); color: var(--blue-mid); background: rgba(54,159,206,.08); }
+    .pslider-btn svg { width: 16px; height: 16px; }
+    .pshow-all { max-width: var(--max); margin: 0 auto; padding: clamp(24px,3vw,40px) var(--gap) 0; }
+
+    @media (max-width: 900px) {
+      .pslide { flex-basis: 76vw; }
+      .pslider.is-ready .pslide-inner { transform: scale(.92); opacity: .5; }
+      .pslider-bar { justify-content: center; }
+    }
+    @media (max-width: 560px) {
+      .pslide { flex-basis: 82vw; }
+      .pslider-nav { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pslide-inner, .pslide-media img, .pslide-cat, .pslide-name, .pslide-loc, .pslide-cta, .pslider-track { transition: none !important; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://nextgeninterior.com/#organization",
+        "name": "NextGen Interiors & Architects",
+        "alternateName": "NextGen Interiors",
+        "url": "https://nextgeninterior.com/",
+        "telephone": "+977-9849151220",
+        "email": "info@nextgeninterior.com",
+        "image": "https://nextgeninterior.com/logo/favicon.png",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Baluwatar",
+          "addressLocality": "Kathmandu",
+          "addressRegion": "Bagmati",
+          "addressCountry": "NP"
+        },
+        "areaServed": { "@type": "Country", "name": "Nepal" }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://nextgeninterior.com/architecture-firm-in-nepal#service",
+        "name": "Architecture Services in Nepal",
+        "serviceType": "Architectural design and planning",
+        "description": "Architectural design, planning and construction coordination for residential, villa, hotel, resort, commercial and banquet projects across Nepal.",
+        "url": "https://nextgeninterior.com/architecture-firm-in-nepal",
+        "provider": { "@id": "https://nextgeninterior.com/#organization" },
+        "areaServed": [
+          { "@type": "Country", "name": "Nepal" },
+          { "@type": "City", "name": "Kathmandu" },
+          { "@type": "City", "name": "Lalitpur" },
+          { "@type": "City", "name": "Bhaktapur" },
+          { "@type": "City", "name": "Pokhara" },
+          { "@type": "City", "name": "Chitwan" }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Architecture Services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Residential Architecture" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Villa Architecture" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Hotel Architecture" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Resort Architecture" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Commercial Architecture" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Banquet Architecture" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Facade Design" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Master Planning" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "DPR & Landscape Planning" } }
+          ]
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nextgeninterior.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Architecture Firm in Nepal", "item": "https://nextgeninterior.com/architecture-firm-in-nepal" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://nextgeninterior.com/architecture-firm-in-nepal#faq",
+        "mainEntity": [
+          { "@type": "Question", "name": "Who is the best architecture firm in Nepal?", "acceptedAnswer": { "@type": "Answer", "text": "The right architecture firm depends on your project type, location, budget, design requirements and scope of service. When evaluating an architecture company in Nepal, look at relevant project experience, design quality, technical capability, communication, documentation and ability to coordinate with construction." } },
+          { "@type": "Question", "name": "How much does an architect cost in Nepal?", "acceptedAnswer": { "@type": "Answer", "text": "Architecture fees vary depending on project type, building size, complexity, scope of drawings, visualization requirements, DPR requirements, approvals and construction involvement. The best way to receive an appropriate estimate is to provide the project site and basic requirements for an indicative scope and fee." } },
+          { "@type": "Question", "name": "Does NextGen provide architecture services outside Kathmandu?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. NextGen is based in Baluwatar, Kathmandu and provides services across Nepal." } },
+          { "@type": "Question", "name": "Does NextGen design houses and residences?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Residential architecture is one of NextGen's core project categories, including modern homes, residences and villas." } },
+          { "@type": "Question", "name": "Does NextGen provide hotel architecture in Nepal?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. NextGen provides hotel and resort architecture services including concept development, master planning, hotel floor planning, guest room planning, restaurant and banquet planning, landscape coordination and construction documentation." } },
+          { "@type": "Question", "name": "Can you design a resort in Nepal?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Resort planning can include site analysis, master planning, accommodation placement, circulation, landscape coordination, recreational areas and future expansion planning." } },
+          { "@type": "Question", "name": "Do you design commercial buildings?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Commercial architecture is one of NextGen's project categories, including commercial building design and mixed-use developments." } },
+          { "@type": "Question", "name": "Do you provide 3D architectural visualization?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. 3D visualization is included within NextGen's architectural service approach and can be used to communicate the proposed building's exterior, facade and overall design direction." } },
+          { "@type": "Question", "name": "Can architecture and interior design be handled by the same company?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. An integrated architecture and interior design workflow can help coordinate the building's exterior, floor planning and interior spaces from the beginning." } },
+          { "@type": "Question", "name": "How do I start an architecture project with NextGen?", "acceptedAnswer": { "@type": "Answer", "text": "Contact NextGen with your site location, land size, project type and basic requirements. The Baluwatar office location, phone number and email are listed on the site for project enquiries." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+
+<nav class="nav">
+  <a href="/" class="nav-logo"><img src="/logo/logo-nav.webp?v=2" class="logo-img" alt="NextGen Interiors &amp; Architects" width="126" height="36" fetchpriority="high"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="architecture" class="active">Architecture</a></li>
+    <li><a href="interiors">Interiors</a></li>
+    <li><a href="dpr-landscaping">DPR &amp; Landscaping</a></li>
+    <li>
+      <button class="nav-dropdown-trigger">Portfolio
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="nav-dropdown-wrap">
+        <div class="nav-dropdown">
+          <a href="hospitality">Hospitality</a>
+          <a href="residential">Residential</a>
+          <a href="commercial">Commercial</a>
+          <a href="healthcare">Healthcare</a>
+          <a href="club-resort">Club or Resort</a>
+          <a href="education">Education</a>
+          <a href="workplace">Workplace</a>
+        </div>
+      </div>
+    </li>
+    <li><a href="blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="careers">Careers</a></li>
+  </ul>
+  <a href="tel:+9779849151220" class="nav-cta" aria-label="Call NextGen Interiors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.09 4.18 2 2 0 0 1 4.08 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+977 9849151220</span></a>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="m-menu" id="mMenu">
+  <div class="m-menu-topbar">
+    <div style="height:30px;display:flex;align-items:center;">
+      <img src="logo/favicon.png" class="logo-img" alt="NextGen Interiors" style="height:28px;"/>
+    </div>
+    <button class="nav-menu-btn open" id="mMenuClose" style="display:flex;"><span></span><span></span><span></span></button>
+  </div>
+  <div class="m-menu-body">
+    <nav>
+      <ul class="m-menu-links">
+        <li><a href="architecture" class="active">Architecture</a></li>
+        <li><a href="interiors">Interiors</a></li>
+        <li><a href="dpr-landscaping">DPR &amp; Landscaping</a></li>
+        <li>
+          <button class="m-menu-acc-btn" id="mPortfolioBtn">Portfolio
+            <span class="m-acc-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="m-acc-sub" id="mPortfolioSub">
+            <div class="m-acc-sub-inner">
+              <a href="hospitality">Hospitality</a>
+              <a href="residential">Residential</a>
+              <a href="commercial">Commercial</a>
+              <a href="healthcare">Healthcare</a>
+              <a href="club-resort">Club or Resort</a>
+              <a href="education">Education</a>
+              <a href="workplace">Workplace</a>
+            </div>
+          </div>
+        </li>
+        <li><a href="blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="careers">Careers</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="m-menu-footer">
+    <div>
+      <div class="m-service-label">Services</div>
+      <span class="m-service-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:8px;height:8px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        All Over Nepal
+      </span>
+      <div class="m-hq-row"><span class="m-hq-dot"></span>Head Office &mdash; Baluwatar, Kathmandu</div>
+    </div>
+    <div class="m-contact-row">
+      <a href="tel:+9779849151220">+977 9849151220</a>
+      <!--email_off--><a href="mailto:info@nextgeninterior.com">info@nextgeninterior.com</a><!--/email_off-->
+    </div>
+  </div>
+</div>
+
+<section class="article-hero">
+  <img src="/Galleries/LILLY MAAM EXTERIOR/2.webp" alt="Modern residential architecture project by NextGen Interiors in Nepal" loading="eager" fetchpriority="high"/>
+  <div class="article-hero-overlay"></div>
+  <div class="article-hero-content">
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span style="color:var(--offwhite)">Architecture Firm in Nepal</span>
+    </div>
+    <div class="article-category">ARCHITECTURE</div>
+    <h1 class="article-title">ARCHITECTURE FIRM IN NEPAL &mdash; ARCHITECTURAL DESIGN, PLANNING &amp; CONSTRUCTION SOLUTIONS</h1>
+    <div class="article-meta">
+      <span>Baluwatar, Kathmandu</span>
+      <span class="dot"></span>
+      <span>Serving all of Nepal</span>
+      <span class="dot"></span>
+      <span class="by">NextGen Interiors &amp; Architects</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+
+  <p class="article-lede">
+    Architectural design, planning and construction coordination for homes, villas, hotels, resorts, banquets and commercial buildings across Nepal.
+  </p>
+
+  <p>
+    Looking for an <strong>architecture firm in Nepal</strong> to turn your property, land or development idea into a functional and visually compelling space? NextGen Interiors &amp; Architects provides comprehensive <a href="architecture">architecture services in Nepal</a> for residential, commercial, hospitality and specialised projects.
+  </p>
+  <p>
+    From modern homes and luxury villas to hotels, resorts, banquets, commercial buildings and large-scale developments, our architecture team combines creative design, technical planning and practical project understanding to develop spaces designed for real people, real sites and real business requirements.
+  </p>
+  <p>
+    Based in Baluwatar, Kathmandu, NextGen serves clients across Nepal with architectural design, exterior and facade design, 3D visualisation, DPR, landscaping, planning, approvals and construction coordination. Whether you are planning a new house, a luxury residence, a villa, a hotel, a resort, a banquet hall, a commercial building or a larger development, our approach is to take the project from initial concept through detailed design and toward execution.
+  </p>
+  <p>
+    <strong>Planning a project in Nepal? Talk to our architecture team about your site, requirements and vision.</strong>
+  </p>
+
+  <h2>Architecture Firm in Nepal for Residential, Commercial &amp; Hospitality Projects</h2>
+  <p>
+    Architecture is more than creating an attractive building. A successful building needs to respond to its site, climate, users, budget, regulations, functionality and long-term purpose. At NextGen Interiors &amp; Architects, we approach every project by understanding these factors before developing the architectural concept.
+  </p>
+  <p>Our architectural work covers a wide range of building types, including:</p>
+  <ul>
+    <li>Residential houses and homes</li>
+    <li>Luxury residences and villas</li>
+    <li>Apartment and multi-unit developments</li>
+    <li>Hotels, resorts and boutique hotels</li>
+    <li>Banquet halls and event venues</li>
+    <li>Restaurants and cafes</li>
+    <li>Commercial and office buildings</li>
+    <li>Mixed-use developments</li>
+    <li>Institutional and hospitality developments</li>
+    <li>Building facade and exterior design</li>
+    <li>Master planning and site development</li>
+  </ul>
+  <p>
+    Our existing architecture portfolio includes residential projects, hotel exteriors and banquet hall projects across Kathmandu and other parts of Nepal.
+  </p>
+</article>
+
+<!-- ===== OUR INTERESTING PROJECTS =====
+     The slides between the markers below are generated by
+     build_from_sanity.py from the Sanity project list. Do not hand-edit them —
+     run `python build_from_sanity.py` instead. Everything is real HTML so the
+     project names, categories, locations and links are crawlable without JS. -->
+<section class="pshow" aria-labelledby="pshowTitle">
+  <div class="pshow-head rv">
+    <div class="pshow-tag">Featured Architecture Projects</div>
+    <h2 class="pshow-h2" id="pshowTitle">OUR INTERESTING <span>PROJECTS</span></h2>
+    <p class="pshow-sub">A selection of architectural spaces designed with purpose, character and detail &mdash; residences, hotels, banquets and commercial buildings built across Nepal.</p>
+  </div>
+
+  <div class="pslider" data-project-slider role="group" aria-roledescription="carousel" aria-label="Featured architecture projects" tabindex="0">
+    <div class="pslider-viewport">
+      <div class="pslider-track">
+<!-- PROJECT-SLIDER:START -->
+        <a class="pslide" href="prabin-gurung" data-name="PRABIN GURUNG RESIDENCE" data-category="MODERN RESIDENCE">
+          <div class="pslide-inner">
+            <div class="pslide-media">
+              <img src="https://cdn.sanity.io/images/gpyk0ky0/production/772dd0461291d72e30ec698c9e6f46a3d9e3d90b-1000x695.webp?w=800&amp;h=1000&amp;fit=crop&amp;auto=format" alt="PRABIN GURUNG RESIDENCE — MODERN RESIDENCE project by NextGen Interiors in Buddhanilkhantha, Kathmandu" loading="lazy" decoding="async" width="800" height="1000"/>
+              <div class="pslide-grad"></div>
+              <div class="pslide-line"></div>
+            </div>
+            <div class="pslide-body">
+              <span class="pslide-cat">MODERN RESIDENCE</span>
+              <h3 class="pslide-name">PRABIN GURUNG RESIDENCE</h3>
+              <span class="pslide-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Buddhanilkhantha, Kathmandu</span>
+              <span class="pslide-cta">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="pslide" href="bexton-avenue" data-name="BEXTON AVENUE" data-category="Private Home" data-featured="true">
+          <div class="pslide-inner">
+            <div class="pslide-media">
+              <img src="https://cdn.sanity.io/images/gpyk0ky0/production/be30377ade92275157860cd0428a8f30490ea8cd-1000x692.webp?w=800&amp;h=1000&amp;fit=crop&amp;auto=format" alt="BEXTON AVENUE — Private Home project by NextGen Interiors in Australia" loading="lazy" decoding="async" width="800" height="1000"/>
+              <div class="pslide-grad"></div>
+              <div class="pslide-line"></div>
+            </div>
+            <div class="pslide-body">
+              <span class="pslide-cat">Private Home</span>
+              <h3 class="pslide-name">BEXTON AVENUE</h3>
+              <span class="pslide-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Australia</span>
+              <span class="pslide-cta">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="pslide" href="dipak-sapkota-residence" data-name="DIPAK SAPKOTA RESIDENCE" data-category="MODERN HOME">
+          <div class="pslide-inner">
+            <div class="pslide-media">
+              <img src="https://cdn.sanity.io/images/gpyk0ky0/production/bff595f206623ca01fe7b2fd89c72d1aa4d75ac8-1000x707.webp?w=800&amp;h=1000&amp;fit=crop&amp;auto=format" alt="DIPAK SAPKOTA RESIDENCE — MODERN HOME project by NextGen Interiors in Dang, Nepal" loading="lazy" decoding="async" width="800" height="1000"/>
+              <div class="pslide-grad"></div>
+              <div class="pslide-line"></div>
+            </div>
+            <div class="pslide-body">
+              <span class="pslide-cat">MODERN HOME</span>
+              <h3 class="pslide-name">DIPAK SAPKOTA RESIDENCE</h3>
+              <span class="pslide-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Dang, Nepal</span>
+              <span class="pslide-cta">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="pslide" href="surkhet-hotel-exterior" data-name="SURKHET, HOTEL EXTERIOR" data-category="Architecture · Hotel Exterior">
+          <div class="pslide-inner">
+            <div class="pslide-media">
+              <img src="https://cdn.sanity.io/images/gpyk0ky0/production/e48f03d32ce6b180dde66cc9875044f4426f0a04-1000x653.webp?w=800&amp;h=1000&amp;fit=crop&amp;auto=format" alt="SURKHET, HOTEL EXTERIOR — Architecture · Hotel Exterior project by NextGen Interiors in Surkhet, Karnali, Nepal" loading="lazy" decoding="async" width="800" height="1000"/>
+              <div class="pslide-grad"></div>
+              <div class="pslide-line"></div>
+            </div>
+            <div class="pslide-body">
+              <span class="pslide-cat">Architecture · Hotel Exterior</span>
+              <h3 class="pslide-name">SURKHET, HOTEL EXTERIOR</h3>
+              <span class="pslide-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Surkhet, Karnali, Nepal</span>
+              <span class="pslide-cta">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="pslide" href="kawality-banquet-hall" data-name="KAWALITY BANQUET HALL" data-category="BANQUET HALL">
+          <div class="pslide-inner">
+            <div class="pslide-media">
+              <img src="https://cdn.sanity.io/images/gpyk0ky0/production/007e5286efc60b1fd49b93c48b7e286c91088c4e-1000x707.webp?w=800&amp;h=1000&amp;fit=crop&amp;auto=format" alt="KAWALITY BANQUET HALL — BANQUET HALL project by NextGen Interiors in Kavrasthali, Nepal, Kathmandu" loading="lazy" decoding="async" width="800" height="1000"/>
+              <div class="pslide-grad"></div>
+              <div class="pslide-line"></div>
+            </div>
+            <div class="pslide-body">
+              <span class="pslide-cat">BANQUET HALL</span>
+              <h3 class="pslide-name">KAWALITY BANQUET HALL</h3>
+              <span class="pslide-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Kavrasthali, Nepal, Kathmandu</span>
+              <span class="pslide-cta">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="pslide" href="surkhet-banquet-hall" data-name="SURKHET BANQUET HALL" data-category="BANQUET HALL">
+          <div class="pslide-inner">
+            <div class="pslide-media">
+              <img src="https://cdn.sanity.io/images/gpyk0ky0/production/2ecb5463d6f3c69527b6489a3c2e077e0aebc654-1000x707.webp?w=800&amp;h=1000&amp;fit=crop&amp;auto=format" alt="SURKHET BANQUET HALL — BANQUET HALL project by NextGen Interiors in Surkhet, Karnali, Nepal" loading="lazy" decoding="async" width="800" height="1000"/>
+              <div class="pslide-grad"></div>
+              <div class="pslide-line"></div>
+            </div>
+            <div class="pslide-body">
+              <span class="pslide-cat">BANQUET HALL</span>
+              <h3 class="pslide-name">SURKHET BANQUET HALL</h3>
+              <span class="pslide-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Surkhet, Karnali, Nepal</span>
+              <span class="pslide-cta">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="pslide" href="kwality-palace-banquet" data-name="KWALITY PALACE BANQUET" data-category="BANQUET HALL">
+          <div class="pslide-inner">
+            <div class="pslide-media">
+              <img src="https://cdn.sanity.io/images/gpyk0ky0/production/36e36b53a530059937010781edbc26217eb3af02-1000x704.webp?w=800&amp;h=1000&amp;fit=crop&amp;auto=format" alt="KWALITY PALACE BANQUET — BANQUET HALL project by NextGen Interiors in Thulo Bharang, Kathmandu Nepal" loading="lazy" decoding="async" width="800" height="1000"/>
+              <div class="pslide-grad"></div>
+              <div class="pslide-line"></div>
+            </div>
+            <div class="pslide-body">
+              <span class="pslide-cat">BANQUET HALL</span>
+              <h3 class="pslide-name">KWALITY PALACE BANQUET</h3>
+              <span class="pslide-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Thulo Bharang, Kathmandu Nepal</span>
+              <span class="pslide-cta">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="pslide" href="amrita-thapa-residence" data-name="AMRITA THAPA RESIDENCE" data-category="Architecture · Exterior">
+          <div class="pslide-inner">
+            <div class="pslide-media">
+              <img src="https://cdn.sanity.io/images/gpyk0ky0/production/6860c80c8e678812f0b0a371613a132503866e60-1000x707.webp?w=800&amp;h=1000&amp;fit=crop&amp;auto=format" alt="AMRITA THAPA RESIDENCE — Architecture · Exterior project by NextGen Interiors in Naikap, Kathmandu" loading="lazy" decoding="async" width="800" height="1000"/>
+              <div class="pslide-grad"></div>
+              <div class="pslide-line"></div>
+            </div>
+            <div class="pslide-body">
+              <span class="pslide-cat">Architecture · Exterior</span>
+              <h3 class="pslide-name">AMRITA THAPA RESIDENCE</h3>
+              <span class="pslide-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Naikap, Kathmandu</span>
+              <span class="pslide-cta">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="pslide" href="naran-lama-home-exterior" data-name="NARAN LAMA HOME EXTERIOR" data-category="Residential · Private Home">
+          <div class="pslide-inner">
+            <div class="pslide-media">
+              <img src="https://cdn.sanity.io/images/gpyk0ky0/production/c2f4e5991f869faa3ee4472dc9a0f8c3696a1a3c-951x668.webp?w=800&amp;h=1000&amp;fit=crop&amp;auto=format" alt="NARAN LAMA HOME EXTERIOR — Residential · Private Home project by NextGen Interiors in Tarkeswor, Kathmandu Nepal" loading="lazy" decoding="async" width="800" height="1000"/>
+              <div class="pslide-grad"></div>
+              <div class="pslide-line"></div>
+            </div>
+            <div class="pslide-body">
+              <span class="pslide-cat">Residential · Private Home</span>
+              <h3 class="pslide-name">NARAN LAMA HOME EXTERIOR</h3>
+              <span class="pslide-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Tarkeswor, Kathmandu Nepal</span>
+              <span class="pslide-cta">View Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </div>
+        </a>
+<!-- PROJECT-SLIDER:END -->
+      </div>
+    </div>
+
+    <div class="pslider-bar">
+      <div class="pslider-meta">
+        <span class="pslider-cat" aria-live="polite"></span>
+        <span class="pslider-count"></span>
+      </div>
+      <div class="pslider-dots" role="tablist" aria-label="Choose project"></div>
+      <div class="pslider-nav">
+        <button type="button" class="pslider-btn" data-pslider="prev" aria-label="Previous project">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button type="button" class="pslider-btn" data-pslider="next" aria-label="Next project">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pshow-all rv">
+    <a href="architecture" class="pslide-cta" style="font-size:10.5px;">
+      View all architecture projects
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<article class="article-body">
+
+  <h2>Our Architectural Design Services in Nepal</h2>
+  <p>
+    We provide architecture services covering the different stages of a project, from initial planning to construction-related documentation and coordination.
+  </p>
+
+  <h3>Architectural Concept Design</h3>
+  <p>Every project starts with an idea. We develop architectural concepts based on your site, requirements, preferred architectural style, functionality and project objectives. The concept stage can include:</p>
+  <ul>
+    <li>Site understanding and design direction</li>
+    <li>Concept development and building massing</li>
+    <li>Spatial planning and preliminary layouts</li>
+    <li>Exterior design direction</li>
+    <li>Material and architectural language</li>
+    <li>3D conceptual visualisation</li>
+  </ul>
+  <p>The objective is to establish a strong design direction before moving into detailed architectural documentation.</p>
+
+  <h3>Residential Architecture</h3>
+  <p>
+    A home should be designed around the people who will live in it. Our residential architecture services cover modern homes, contemporary residences, luxury houses, villas and other private residential developments. We consider site orientation, natural light, ventilation, privacy, room relationships, family requirements, parking, outdoor spaces, future expansion, facade design and the connection between interior and exterior.
+  </p>
+  <p>
+    For clients searching for a <strong>residential architect in Nepal</strong>, <strong>house architect in Kathmandu</strong> or <strong>home architecture in Nepal</strong>, NextGen provides an integrated approach combining architectural planning and design.
+  </p>
+  <p><a href="residential">Explore residential architecture in Nepal &rarr;</a></p>
+
+  <h2>Home Architecture &amp; House Design in Nepal</h2>
+  <p>
+    A well-designed home balances appearance, comfort and functionality. Modern Nepalese homes increasingly require more than a basic floor plan &mdash; homeowners want thoughtful layouts, natural lighting, attractive facades, efficient use of land and architecture that reflects their personality.
+  </p>
+  <p>Our home architecture approach can include:</p>
+  <ul>
+    <li>Modern and contemporary house design</li>
+    <li>Luxury home and residence design</li>
+    <li>Small plot house planning</li>
+    <li>Multi-storey home design</li>
+    <li>Villa-style residences</li>
+    <li>Facade design and landscape integration</li>
+    <li>3D exterior visualisation</li>
+  </ul>
+
+  <h2>Villa Architecture &amp; Luxury Residence Design</h2>
+  <h3>Luxury Villa Design in Nepal</h3>
+  <p>
+    Villas require a different architectural approach from standard residential buildings. The design needs to create a sense of space, privacy, identity and connection between indoor and outdoor areas.
+  </p>
+  <p>Our villa architecture approach can include:</p>
+  <ul>
+    <li>Luxury villa planning and modern villa architecture</li>
+    <li>Resort-style villas and private courtyards</li>
+    <li>Terraces, balconies and outdoor living spaces</li>
+    <li>Swimming-pool integration and landscape planning</li>
+    <li>Premium facade design and indoor-outdoor connections</li>
+  </ul>
+  <p>
+    For clients searching for <strong>villa architect in Nepal</strong>, <strong>luxury villa design in Nepal</strong> or <strong>luxury home designer in Nepal</strong>, the objective is a property that is both visually distinctive and practical to live in.
+  </p>
+
+  <h2>Hotel &amp; Resort Architecture in Nepal</h2>
+  <h3>Hotel Architecture in Nepal</h3>
+  <p>
+    Hospitality architecture requires a balance between guest experience, operational efficiency, brand identity and commercial objectives. NextGen provides architectural services for hotels, resorts and hospitality developments in Nepal, including:
+  </p>
+  <ul>
+    <li>Hotel concept design and master planning</li>
+    <li>Site analysis and hotel floor planning</li>
+    <li>Guest room, lobby and restaurant planning</li>
+    <li>Banquet and conference facilities</li>
+    <li>Commercial kitchen and service-area planning</li>
+    <li>Parking and landscape coordination</li>
+    <li>Sustainable building strategies</li>
+    <li>Construction documentation</li>
+  </ul>
+  <p><a href="hotel-resort-architecture-nepal">Explore hotel &amp; resort architecture in Nepal &rarr;</a></p>
+
+  <h3>Resort Architecture &amp; Master Planning</h3>
+  <p>
+    Nepal has a natural landscape that creates opportunities for mountain resorts, boutique resorts, wellness retreats, eco-resorts and destination hospitality projects. Resort architecture needs to respond to the land rather than simply placing buildings on it.
+  </p>
+  <p>
+    Our resort planning considers site topography, views, building orientation, guest and service circulation, landscape, privacy, outdoor and recreational areas, parking, future expansion, sustainability, and the relationship with the surrounding environment. This matters most where architecture, landscape and natural surroundings need to work together.
+  </p>
+
+  <h2>Commercial Architecture in Nepal</h2>
+  <p>
+    Commercial buildings need to balance design, functionality, circulation, visibility and business requirements. We provide architectural design solutions for office buildings, retail spaces, commercial complexes, mixed-use buildings, restaurants, cafes, business facilities and showrooms.
+  </p>
+  <p>
+    Our process considers customer movement, staff circulation, access, parking, building identity, facade design and the functional requirements of the business. For businesses searching for a <strong>commercial architect in Nepal</strong> or <strong>commercial building design in Kathmandu</strong>, we provide a coordinated approach from concept to documentation.
+  </p>
+  <p><a href="commercial">Commercial architecture and building design &rarr;</a></p>
+
+  <h2>Banquet Hall &amp; Event Venue Architecture</h2>
+  <p>
+    Banquet halls and event venues require careful planning because large numbers of people need to enter, move through and exit the building efficiently. Important design considerations include the main entrance, drop-off area, reception, main hall, dining areas, stage, kitchen, service circulation, washrooms, parking, emergency access, back-of-house areas, and landscape and exterior design.
+  </p>
+  <p>
+    The NextGen architecture portfolio includes banquet projects in Kathmandu and Surkhet, providing directly relevant project experience for this category.
+  </p>
+
+  <h2>Architecture &amp; Construction Planning</h2>
+  <h3>From Architectural Concept to Construction</h3>
+  <p>Good architecture needs to be practical to build. Our approach connects architectural design with the realities of construction:</p>
+  <p>
+    <strong>Site Analysis &rarr; Concept Design &rarr; Planning &rarr; 3D Visualisation &rarr; Detailed Drawings &rarr; DPR &rarr; Approvals &rarr; Construction Coordination</strong>
+  </p>
+  <p>
+    Architecture can also be coordinated with interior design, landscape design, facade design, DPR, construction documentation, site coordination, material planning and project execution.
+  </p>
+
+  <h2>Facade &amp; Exterior Architecture</h2>
+  <h3>Building Facade Design in Nepal</h3>
+  <p>
+    The exterior of a building creates its first impression. A well-designed facade should not only look attractive but also respond to the function, climate, orientation, materials and surrounding context of the building.
+  </p>
+  <p>
+    Our facade design approach covers modern and contemporary facades, luxury residential facades, commercial building facades, hotel exteriors, villa exteriors, material combinations, lighting concepts, window and opening composition, and entrance design. Facade architecture is developed as part of the broader architectural concept rather than as a decorative afterthought.
+  </p>
+
+  <h2>DPR, Planning &amp; Landscape Design</h2>
+  <p>
+    Architecture often needs to connect with broader project planning. For suitable projects our services extend into DPR and landscape-related planning, coordinating site development, land use, building placement, outdoor spaces, landscape, circulation, parking and development planning. A coordinated approach is particularly valuable for hotels, resorts, commercial developments and larger residential projects.
+  </p>
+  <p><a href="dpr-landscaping">DPR and landscape planning &rarr;</a></p>
+
+  <h2>Our Architecture Design Process</h2>
+  <h3>1. Initial Consultation</h3>
+  <p>We begin by understanding your project: project type, site location, land size, requirements, preferred style, approximate scope, budget considerations and development objectives.</p>
+  <h3>2. Site Analysis</h3>
+  <p>The site influences almost every architectural decision &mdash; orientation, access, surrounding buildings, views, topography, sunlight, ventilation, climate, existing conditions and local planning requirements.</p>
+  <h3>3. Concept Development</h3>
+  <p>We develop the architectural concept from the consultation and site analysis, establishing the design language, massing and spatial direction of the project.</p>
+  <h3>4. Architectural Planning &amp; Design</h3>
+  <p>The approved concept becomes a detailed architectural proposal: floor planning, elevations, sections, facade development and other architectural drawings.</p>
+  <h3>5. 3D Visualisation</h3>
+  <p>3D visualisation helps clients understand the proposed building before construction &mdash; exterior appearance, massing, materials, facade, landscape relationship, lighting and spatial character.</p>
+  <h3>6. Documentation &amp; DPR</h3>
+  <p>Detailed documentation and DPR requirements are developed according to the scope of the project.</p>
+  <h3>7. Approvals &amp; Coordination</h3>
+  <p>Where applicable, the design process incorporates coordination related to municipal approvals and project requirements.</p>
+  <h3>8. Construction Coordination</h3>
+  <p>The architectural design is coordinated with execution so the final result stays aligned with the intended design.</p>
+
+  <h2>Why Choose NextGen as Your Architecture Company in Nepal?</h2>
+  <p>Choosing an architecture firm is an important decision, because architectural planning influences the building for many years.</p>
+  <ul>
+    <li><strong>Integrated design approach</strong> &mdash; architecture combined with <a href="interiors">interior design</a>, 3D visualisation, DPR and landscaping.</li>
+    <li><strong>Experience across project types</strong> &mdash; residential, hospitality, commercial and specialised architectural projects.</li>
+    <li><strong>Design for the Nepalese context</strong> &mdash; local conditions, site characteristics, climate, lifestyle and development requirements.</li>
+    <li><strong>Design and function together</strong> &mdash; buildings that are visually strong while remaining practical.</li>
+    <li><strong>From concept to execution</strong> &mdash; concept and planning through documentation and construction coordination.</li>
+    <li><strong>Nationwide service</strong> &mdash; head office in Baluwatar, Kathmandu, serving clients across Nepal.</li>
+  </ul>
+
+  <h2>Architecture Projects We Work On</h2>
+  <p>Whether you are an individual homeowner, investor, developer, hospitality operator or business owner, our architectural services can be tailored to different project requirements.</p>
+  <ul>
+    <li><strong>Residential</strong> &mdash; houses, homes, villas, luxury residences, multi-unit residential projects</li>
+    <li><strong>Hospitality</strong> &mdash; hotels, resorts, boutique hotels, wellness retreats</li>
+    <li><strong>Commercial</strong> &mdash; office buildings, commercial complexes, retail buildings, restaurants, mixed-use developments</li>
+    <li><strong>Event &amp; entertainment</strong> &mdash; banquet halls, event venues, clubhouses, recreational facilities</li>
+    <li><strong>Specialised</strong> &mdash; institutional buildings, <a href="healthcare">healthcare facilities</a>, <a href="education">educational spaces</a>, <a href="workplace">workplace projects</a> and large-scale developments</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+
+  <h3>Who is the best architecture firm in Nepal?</h3>
+  <p>The right architecture firm depends on your project type, location, budget, design requirements and scope of service. When evaluating an architecture company in Nepal, look at relevant project experience, design quality, technical capability, communication, documentation and ability to coordinate with construction.</p>
+
+  <h3>How much does an architect cost in Nepal?</h3>
+  <p>Architecture fees vary depending on project type, building size, complexity, scope of drawings, visualisation requirements, DPR requirements, approvals and construction involvement. The best way to receive an appropriate estimate is to provide the project site and basic requirements for an indicative scope and fee.</p>
+
+  <h3>Does NextGen provide architecture services outside Kathmandu?</h3>
+  <p>Yes. NextGen is based in Baluwatar, Kathmandu and provides services across Nepal.</p>
+
+  <h3>Does NextGen design houses and residences?</h3>
+  <p>Yes. Residential architecture is one of the core project categories at NextGen, including modern homes, residences and villas.</p>
+
+  <h3>Does NextGen provide hotel architecture in Nepal?</h3>
+  <p>Yes. NextGen provides hotel and resort architecture services including concept development, master planning, hotel floor planning, guest room planning, restaurant and banquet planning, landscape coordination and construction documentation.</p>
+
+  <h3>Can you design a resort in Nepal?</h3>
+  <p>Yes. Resort planning can include site analysis, master planning, accommodation placement, circulation, landscape coordination, recreational areas and future expansion planning.</p>
+
+  <h3>Do you design commercial buildings?</h3>
+  <p>Yes. Commercial architecture is one of the project categories at NextGen, including commercial building design and mixed-use developments.</p>
+
+  <h3>Do you provide 3D architectural visualisation?</h3>
+  <p>Yes. 3D visualisation is included within the NextGen architectural service approach and communicates the exterior, facade and overall design direction of the proposed building.</p>
+
+  <h3>Can architecture and interior design be handled by the same company?</h3>
+  <p>Yes. An integrated architecture and interior design workflow helps coordinate the exterior, floor planning and interior spaces of the building from the beginning.</p>
+
+  <h3>How do I start an architecture project with NextGen?</h3>
+  <p>Contact NextGen with your site location, land size, project type and basic requirements. Our Baluwatar office location, phone number and email are listed below for project enquiries.</p>
+
+  <h2>Start Your Architecture Project in Nepal</h2>
+  <p>
+    Planning a home, villa, hotel, resort, banquet, commercial building or other development? The first step is understanding the site and your vision. Share your project requirements with NextGen Interiors &amp; Architects and discuss the architectural possibilities for your property.
+  </p>
+  <p>
+    <strong>NextGen Interiors &amp; Architects</strong><br/>
+    Baluwatar, Kathmandu, Nepal<br/>
+    Phone: <a href="tel:+9779849151220">+977 9849151220</a><br/>
+    <!--email_off-->Email: <a href="mailto:info@nextgeninterior.com">info@nextgeninterior.com</a><!--/email_off--><br/>
+    Serving clients across Nepal.
+  </p>
+  <p><a href="#contact">Start an architecture project &rarr;</a></p>
+
+</article>
+    <!-- ===== COMMON TAIL (shared across all pages) ===== -->
+  <section class="contact sc-section" id="contact">
+    <div class="sc-wrap">
+      <div class="contact-grid">
+        <div>
+          <div class="sc-tag rv">Get In Touch</div>
+          <div class="contact-head rv">
+            <h2>START YOUR<br><span>PROJECT</span></h2>
+            <p>Whether it&rsquo;s your dream home, a boutique hotel, or a commercial space &mdash; send us the site details and what you have in mind. We typically share an indicative scope &amp; fee within 5 working days.</p>
+          </div>
+          <div class="contact-deets rv">
+            <a href="tel:+9779849151220" class="cd-item">
+              <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.09 4.18 2 2 0 0 1 4.08 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+              <div><span class="cd-label">Call Us</span><span class="cd-val">+977 9849151220</span></div>
+            </a>
+            <!--email_off--><a href="mailto:info@nextgeninterior.com" class="cd-item">
+              <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></div>
+              <div><span class="cd-label">Email Us</span><span class="cd-val">info@nextgeninterior.com</span></div>
+            </a><!--/email_off-->
+            <div class="cd-item">
+              <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+              <div><span class="cd-label">Head Office</span><span class="cd-val">Baluwatar, Kathmandu</span></div>
+            </div>
+          </div>
+          <div class="service-locations rv">
+            <div class="service-locations-label">Locations &amp; Regions</div>
+            <div class="location-tags">
+              <a href="/locations/home-interior-design-bhaktapur" class="location-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Bhaktapur</a>
+              <a href="/locations/home-interior-design-chitwan" class="location-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Chitwan</a>
+              <a href="/locations/office-interior-design-lalitpur" class="location-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Lalitpur</a>
+              <a href="/locations/residential-architecture-dang" class="location-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Dang</a>
+              <a href="/locations/hotel-interior-design-surkhet" class="location-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Surkhet</a>
+              <span class="location-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Kathmandu</span>
+              <span class="location-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Pokhara</span>
+            </div>
+          </div>
+          <div class="contact-socials rv">
+            <a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://www.facebook.com/architectsandinteriorshouse" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="https://www.linkedin.com/company/nextgen-interiors-architects-pvt-ltd/?originalSubdomain=np" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="https://www.youtube.com/@nextgeninteriors" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+            <a href="https://wa.me/9779849151220" target="_blank" rel="nofollow noopener noreferrer" style="background:rgba(37,211,102,0.12);border-color:rgba(37,211,102,0.28);color:#25d366;" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+          </div>
+        </div>
+        <div class="map-wrap rv d1">
+          <div class="map-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>NextGen Interiors &amp; Architects</div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56510.56567813358!2d85.29506209077144!3d27.720053990615902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19ae1ff33c11%3A0x6942936f55f67bf2!2sNextGen%20interiors%20and%20architects!5e0!3m2!1sen!2snp!4v1777571670970!5m2!1sen!2snp" title="NextGen Interiors &amp; Architects on Google Maps" loading="lazy" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="partners-section" id="partners">
+    <div class="sc-wrap">
+      <div class="partners-eyebrow rv">Trusted Partner Brands</div>
+      <h2 class="partners-title rv">We Build With The <em>Best</em></h2>
+    </div>
+    <div class="logo-marquee">
+      <div class="logo-track">
+        <div class="logo-item"><img src="/public/Hettich.png" alt="Hettich" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Surya%20ply.png" alt="Surya Ply" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Kohler.jpg" alt="Kohler" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Merino%20Laminates.webp" alt="Merino Laminates" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Advance%20Laminates.png" alt="Advance Laminates" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Sagun%20Ply.jpg" alt="Sagun Ply" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Hafele.png" alt="Häfele" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Favicol.png" alt="Pidilite (Fevicol)" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Greenlam.png" alt="Greenlam Industries" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Action%20tesa.png" alt="Action TESA" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Roco.png" alt="Roca" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Kajaria-Ceramics.webp" alt="Kajaria Ceramics" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Nitco.png" alt="NITCO" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Laminam.webp" alt="Laminam" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Hettich.png" alt="Hettich" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Surya%20ply.png" alt="Surya Ply" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Kohler.jpg" alt="Kohler" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Merino%20Laminates.webp" alt="Merino Laminates" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Advance%20Laminates.png" alt="Advance Laminates" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Sagun%20Ply.jpg" alt="Sagun Ply" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Hafele.png" alt="Häfele" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Favicol.png" alt="Pidilite (Fevicol)" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Greenlam.png" alt="Greenlam Industries" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Action%20tesa.png" alt="Action TESA" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Roco.png" alt="Roca" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Kajaria-Ceramics.webp" alt="Kajaria Ceramics" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Nitco.png" alt="NITCO" loading="lazy"/></div>
+        <div class="logo-item"><img src="/public/Laminam.webp" alt="Laminam" loading="lazy"/></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="sc-wrap">
+      <div class="footer-inner">
+        <div class="footer-logo"><img src="/logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:30px;"/></div>
+        <p class="footer-copy">&copy; 2025 NextGen Interiors &amp; Architects &middot; Baluwatar, Kathmandu, Nepal</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/nextgen_interiors_architects?igsh=OGtuYjZhbmUzamgy" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/architectsandinteriorshouse" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.linkedin.com/company/nextgen-interiors-architects-pvt-ltd/?originalSubdomain=np" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.youtube.com/@nextgeninteriors" target="_blank" rel="noopener">YouTube</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="wa-bubble">
+    <div class="wa-tooltip">Chat with us on WhatsApp!</div>
+    <a href="https://wa.me/9779849151220?text=Hello%20NextGen%20Interiors%2C%20I%27d%20like%20to%20discuss%20a%20project." class="wa-btn" target="_blank" rel="nofollow noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.115 1.523 5.845L.057 23.427a.5.5 0 0 0 .606.63l5.7-1.494A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.17-1.447l-.37-.22-3.38.885.9-3.3-.24-.38A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+  </div>
+  <!-- ===== /COMMON TAIL ===== -->
+
+<script src="/js/main.js" defer></script>
+<script src="/js/project-slider.js" defer></script>
+</body>
+</html>

@@ -113,8 +113,43 @@
     // WHATSAPP BUBBLE
     setTimeout(()=>{const wb=document.getElementById('waBubble');wb.style.opacity='1';wb.style.transform='translateY(0)';},2600);
 
-    // HERO TITLE: smooth CSS reveal (no DOM destruction)
-    // buildHeroText bypassed to achieve sub-second LCP paint without layout mutation
+    // HERO CHAR-BY-CHAR BLUR REVEAL
+    (function buildHeroText() {
+      const line1 = document.getElementById('heroLine1');
+      const line2 = document.getElementById('heroLine2');
+      if (!line1 || !line2) return;
+
+      const lines = [
+        { el: line1, words: ['CRAFTING', 'VISIONS,'], accentWord: -1 },
+        { el: line2, words: ['BUILDING', 'DREAMS'],  accentWord: 1  }
+      ];
+      const BASE = 0.25;
+      const CHAR_STEP = 0.038;
+      const LINE_OFFSET = 0.08;
+      let idx = 0;
+      lines.forEach((line, li) => {
+        line.el.textContent = '';
+        line.words.forEach((word, wi) => {
+          if (wi > 0) {
+            const sp = document.createElement('span');
+            sp.className = 'hw-space';
+            line.el.appendChild(sp);
+          }
+          const hw = document.createElement('span');
+          hw.className = 'hw';
+          if (wi === line.accentWord) hw.style.color = 'var(--blue-mid)';
+          Array.from(word).forEach(ch => {
+            const hc = document.createElement('span');
+            hc.className = 'hc';
+            hc.textContent = ch;
+            hc.style.animationDelay = (BASE + li * LINE_OFFSET + idx * CHAR_STEP).toFixed(3) + 's';
+            hw.appendChild(hc);
+            idx++;
+          });
+          line.el.appendChild(hw);
+        });
+      });
+    })();
 
     // RUNNING PROJECTS AUTO-MARQUEE & LIGHTBOX MODAL
     (function initRunningMarquee() {

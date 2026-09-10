@@ -948,6 +948,9 @@ def build():
     # Pre-render Homepage & Category grids directly into HTML
     update_homepage_and_categories(projects, base_dir)
 
+    # Featured-project sliders on the SEO pillar pages
+    update_pillar_sliders(projects, base_dir)
+
     # Generate updated dynamic sitemap.xml
     generate_sitemap(projects, base_dir)
 
@@ -1309,6 +1312,84 @@ def discover_pages(base_dir):
                 continue  # duplicate; its canonical target is listed instead
             found.append(own)
     return found
+
+
+SLIDER_START = '<!-- PROJECT-SLIDER:START -->'
+SLIDER_END = '<!-- PROJECT-SLIDER:END -->'
+
+# Which projects each pillar page's slider shows. The filter runs over the same
+# Sanity list the rest of the build uses, so a project added in the dashboard
+# appears in the slider on the next build with no hand-editing.
+PILLAR_SLIDERS = {
+    'architecture-firm-in-nepal.html':
+        lambda p: main_category(p) == 'architecture',
+}
+
+
+def slider_card(item, featured):
+    """One slide. Everything a crawler needs — name, category, location, link —
+    is real HTML; project-slider.js only animates what is already here."""
+    alt = '%s — %s project by NextGen Interiors in %s' % (item['title'], item['cat'], item['loc'])
+    return (
+        '        <a class="pslide" href="%s" data-name="%s" data-category="%s"%s>\n'
+        '          <div class="pslide-inner">\n'
+        '            <div class="pslide-media">\n'
+        '              <img src="%s?w=800&amp;h=1000&amp;fit=crop&amp;auto=format" alt="%s" '
+        'loading="lazy" decoding="async" width="800" height="1000"/>\n'
+        '              <div class="pslide-grad"></div>\n'
+        '              <div class="pslide-line"></div>\n'
+        '            </div>\n'
+        '            <div class="pslide-body">\n'
+        '              <span class="pslide-cat">%s</span>\n'
+        '              <h3 class="pslide-name">%s</h3>\n'
+        '              <span class="pslide-loc">%s%s</span>\n'
+        '              <span class="pslide-cta">View Project '
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">'
+        '<path d="M5 12h14M12 5l7 7-7 7"/></svg></span>\n'
+        '            </div>\n'
+        '          </div>\n'
+        '        </a>'
+        % (item['slug'], item['title'], item['cat'],
+           ' data-featured="true"' if featured else '',
+           item['thumb'], alt, item['cat'], item['title'], PIN_SVG, item['loc'])
+    )
+
+
+def update_pillar_sliders(projects, base_dir):
+    for filename, matches in PILLAR_SLIDERS.items():
+        path = os.path.join(base_dir, filename)
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding='utf-8') as handle:
+            markup = handle.read()
+        if SLIDER_START not in markup or SLIDER_END not in markup:
+            print('  ! %s has no PROJECT-SLIDER markers — slider not updated.' % filename)
+            continue
+
+        chosen = [p for p in projects
+                  if matches(p) and p.get('thumbnail') and not is_running(p)]
+        items = [{
+            'slug': (p.get('slug') or '').strip().replace(' ', '-'),
+            'title': (clean_text(p.get('title')) or '').upper(),
+            'loc': clean_location(p.get('location')),
+            'thumb': p.get('thumbnail'),
+            'cat': category_tag(p),
+        } for p in chosen]
+
+        # Open on the second card so the centre slide has a neighbour either
+        # side, which is what makes the layout read as a showcase rather than
+        # a single hero image.
+        featured_index = 1 if len(items) >= 3 else 0
+        cards = '\n'.join(slider_card(item, i == featured_index)
+                          for i, item in enumerate(items))
+
+        head, _, rest = markup.partition(SLIDER_START)
+        _, _, tail = rest.partition(SLIDER_END)
+        markup = '%s%s\n%s\n%s%s' % (head, SLIDER_START, cards, SLIDER_END, tail)
+
+        with open(path, 'w', encoding='utf-8') as handle:
+            handle.write(markup)
+        print('Pre-rendered %s slider with %d projects.' % (filename, len(items)))
 
 
 def generate_sitemap(projects, base_dir):
