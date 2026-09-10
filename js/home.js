@@ -37,35 +37,59 @@
     const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});},{threshold:0.06});
     document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
-    // HERO SLIDESHOW (PROGRESSIVE LAZY-LOADING)
+    // HERO SLIDESHOW (PROGRESSIVE LAZY-LOADING WITH SEAMLESS CROSSFADE)
     const slides = document.querySelectorAll('.hero-bg-slide');
     let si = 0;
-    const isMobile = window.innerWidth <= 768;
 
     function ensureSlideImg(slide) {
-      if (!slide || slide.querySelector('img')) return;
-      const src = isMobile && slide.dataset.mob ? slide.dataset.mob : slide.dataset.src;
-      if (src) {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = slide.dataset.alt || 'NextGen Architecture and Interior Design';
-        img.loading = 'lazy';
-        img.decoding = 'async';
-        slide.appendChild(img);
+      if (!slide || slide.querySelector('img') || !slide.dataset.src) return;
+      const pic = document.createElement('picture');
+      if (slide.dataset.mob) {
+        const srcMob = document.createElement('source');
+        srcMob.media = '(max-width: 768px)';
+        srcMob.srcset = slide.dataset.mob;
+        pic.appendChild(srcMob);
       }
+      const img = document.createElement('img');
+      img.src = slide.dataset.src;
+      img.alt = slide.dataset.alt || 'NextGen Architecture and Interior Design';
+      img.decoding = 'async';
+      img.width = 1600;
+      img.height = 1131;
+      pic.appendChild(img);
+      slide.appendChild(pic);
     }
 
-    // Preload slide 2 after initial page settles
-    setTimeout(() => { if (slides[1]) ensureSlideImg(slides[1]); }, 2000);
+    // Preload slide 1 shortly after page load
+    setTimeout(() => {
+      if (slides.length > 1) ensureSlideImg(slides[1]);
+    }, 600);
 
-    setInterval(() => {
-      slides[si].classList.remove('active');
-      si = (si + 1) % slides.length;
-      ensureSlideImg(slides[si]);
+    function nextHeroSlide() {
+      if (slides.length <= 1) return;
+      const prevIdx = si;
       const nextIdx = (si + 1) % slides.length;
+
       ensureSlideImg(slides[nextIdx]);
-      slides[si].classList.add('active');
-    }, 5200);
+      const upcomingIdx = (nextIdx + 1) % slides.length;
+      ensureSlideImg(slides[upcomingIdx]);
+
+      const prevSlide = slides[prevIdx];
+      const nextSlide = slides[nextIdx];
+
+      // Keep previous slide visible underneath while new slide fades in on top
+      prevSlide.classList.add('prev');
+      prevSlide.classList.remove('active');
+      nextSlide.classList.add('active');
+
+      setTimeout(() => {
+        prevSlide.classList.remove('prev');
+      }, 1800);
+
+      si = nextIdx;
+    }
+
+    setInterval(nextHeroSlide, 5200);
 
     // DYNAMIC LAZY-LOAD GOOGLE MAPS ON SCROLL
     (function initLazyMap() {
