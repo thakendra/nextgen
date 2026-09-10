@@ -41,9 +41,9 @@
   <style>
 :root{--blue-dark:#1a3d6e;--blue:#2969a6;--blue-mid:#369fce;--blue-light:#3e9fc9;--ink:#0d1520;--offwhite:#f5f2ed;--white:#faf8f5;--mist:#8a97aa;--f-head:'Bebas Neue',sans-serif;--f-serif:'Instrument Serif',Georgia,serif;--f-body:'Poppins',sans-serif;--ease:cubic-bezier(0.16,1,0.3,1);--gap:clamp(20px,5vw,80px);--max:1440px}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--f-body);background:var(--ink);color:var(--offwhite);overflow-x:hidden;cursor:none}img{display:block;width:100%;height:100%;object-fit:cover}.logo-img{display:block;width:auto!important;height:100%!important;object-fit:contain!important;max-width:100%}a{text-decoration:none;color:inherit}button{border:none;background:none;cursor:none;font:inherit}ul{list-style:none}.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px var(--gap);display:flex;align-items:center;justify-content:space-between;transition:padding .4s var(--ease),background .4s}.nav.scrolled{background:rgba(13,21,32,0.94);backdrop-filter:blur(14px);padding:14px var(--gap)}.nav-logo{height:36px;display:flex;align-items:center;overflow:visible}.nav-links{display:flex;gap:36px;align-items:center}.nav-links a{font-family:var(--f-body);font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,242,237,0.45)}.nav-cta{font-family:var(--f-body);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(245,242,237,0.4)}.nav-menu-btn{display:none;flex-direction:column;gap:6px;width:26px;cursor:none}.nav-menu-btn span{display:block;width:100%;height:1px;background:var(--offwhite)}@media(max-width:900px){.nav-links,.nav-cta{display:none}.nav-menu-btn{display:flex}}.hero{position:relative;height:100svh;min-height:560px;background:var(--ink);overflow:hidden;display:flex;align-items:center;justify-content:center;contain:layout}.hero-bg{position:absolute;inset:0;z-index:0}.hero-bg-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease}.hero-bg-slide.prev{opacity:1;z-index:1}.hero-bg-slide.active{opacity:1;z-index:2}.hero-bg-slide picture{display:block;width:100%;height:100%}.hero-bg-slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.07);animation:kenBurns 15s ease-in-out infinite alternate}@keyframes kenBurns{from{transform:scale(1.07)}to{transform:scale(1.0) translate(-1%,1%)}}.hero-overlay{position:absolute;inset:0;min-height:400px;contain:layout;background:linear-gradient(to bottom,rgba(13,21,32,0.65) 0%,rgba(13,21,32,0.35) 35%,rgba(13,21,32,0.82) 100%);z-index:2;pointer-events:none}.hero-center{position:relative;z-index:3;text-align:center;display:flex;flex-direction:column;align-items:center;padding:0 16px;max-width:100%}.hero-tagline{font-family:var(--f-body);font-size:11px;font-weight:600;letter-spacing:0.45em;text-transform:uppercase;color:var(--blue-mid);margin-bottom:clamp(14px,2.2vh,22px);opacity:0;animation:fadeSlideUp 0.6s var(--ease) 0.15s forwards;text-shadow:0 1px 12px rgba(0,0,0,0.5)}.hero-title{display:flex;flex-direction:column;align-items:center;gap:4px}.hero-line{font-family:var(--f-serif);font-size:clamp(38px,6.8vw,110px);line-height:0.95;letter-spacing:0.02em;color:var(--offwhite);display:flex;flex-wrap:nowrap;white-space:nowrap;gap:0;text-shadow:0 4px 40px rgba(0,0,0,0.7),0 2px 8px rgba(0,0,0,0.5)}.hw{display:inline-block;white-space:nowrap}.hc{display:inline-block;opacity:0;transform:translateY(16px) scale(0.95);filter:blur(6px);animation:charReveal 0.6s var(--ease) forwards}.hw-space{display:inline-block;width:0.22em}@keyframes charReveal{to{opacity:1;transform:translateY(0) scale(1);filter:blur(0px)}}.hero-sep{width:0;height:1px;background:linear-gradient(to right,transparent,var(--blue-mid),transparent);margin:clamp(14px,2vh,24px) auto 0;animation:ruleGrow 0.8s var(--ease) 1.3s forwards}@keyframes ruleGrow{to{width:260px}}.hero-sub{font-family:var(--f-body);font-size:clamp(10px,1.1vw,12px);font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:rgba(245,242,237,0.75);margin-top:clamp(12px,1.8vh,18px);opacity:0;animation:fadeSlideUp 0.6s var(--ease) 1.5s forwards;text-shadow:0 2px 12px rgba(0,0,0,0.6)}.hero-locations{display:flex;gap:12px;margin-top:clamp(14px,2vh,18px);flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeSlideUp 0.6s var(--ease) 1.7s forwards}.hero-loc-badge{display:flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid rgba(54,159,206,0.35);background:rgba(13,21,32,0.55);backdrop-filter:blur(8px);font-family:var(--f-body);font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,242,237,0.85);transition:transform .3s var(--ease),border-color .3s,background .3s}.hero-loc-badge:hover{transform:translateY(-2px);border-color:var(--blue-mid);background:rgba(54,159,206,0.2);color:#fff}.hero-loc-badge svg{width:10px;height:10px;color:var(--blue-mid);flex-shrink:0}@keyframes fadeSlideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}.hero-scroll{position:absolute;bottom:clamp(20px,4vh,48px);left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 0.8s ease 1.9s forwards}.scroll-track{width:1px;height:48px;background:rgba(255,255,255,0.12);position:relative;overflow:hidden}.scroll-fill{position:absolute;top:-40%;left:0;right:0;height:40%;background:var(--blue-mid);animation:scrollDrop 2.2s ease-in-out infinite}@keyframes scrollDrop{0%{top:-40%}100%{top:110%}}.scroll-word{font-family:var(--f-body);font-size:9px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.35)}.cursor-dot{width:7px;height:7px;border-radius:50%;background:var(--blue-mid);position:fixed;top:0;left:0;transform:translate(-50%,-50%);z-index:9999;pointer-events:none;mix-blend-mode:screen}.cursor-ring{width:36px;height:36px;border-radius:50%;border:1px solid rgba(62,159,201,0.35);position:fixed;top:0;left:0;transform:translate(-50%,-50%);z-index:9998;pointer-events:none}.m-menu{position:fixed;inset:0;z-index:90;display:none;opacity:0;visibility:hidden}.m-menu.open{display:grid;opacity:1;visibility:visible}.running-modal{position:fixed;inset:0;z-index:99999;display:none;opacity:0;pointer-events:none}.running-modal.active{display:flex;opacity:1;pointer-events:auto}@media(max-width:700px){.hero-line{font-size:clamp(36px,10.5vw,56px);letter-spacing:0.06em}}
 .logo-track img{width:120px;height:40px;aspect-ratio:3/1;object-fit:contain}.logo-item{width:176px;height:72px;contain:layout size}@media(max-width:768px){.hero-bg-slide img{animation:none!important}}</style>
-  <link rel="preload" href="/css/home.min.css?v=4" as="style">
-  <link rel="stylesheet" href="/css/home.min.css?v=4" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/css/home.min.css?v=4"></noscript>
+  <link rel="preload" href="/css/home.min.css?v=5" as="style">
+  <link rel="stylesheet" href="/css/home.min.css?v=5" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/home.min.css?v=5"></noscript>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -539,40 +539,96 @@
   </section>
 
     <!-- ARCHITECTURAL FAQ SECTION -->
-  <section class="faq-wrap rv">
+  <section class="faq-wrap rv" id="faq">
     <h2 class="faq-title">FREQUENTLY ASKED <span>QUESTIONS</span></h2>
     <div class="faq-list">
-      <div class="faq-item">
-        <h3 class="faq-q">What services does NextGen Interiors &amp; Architects offer in Nepal?</h3>
-        <p class="faq-a">NextGen is a premier multidisciplinary architecture, structural engineering, interior design, and turnkey construction company based in Baluwatar, Kathmandu. We deliver high-end residential homes, luxury villas, boutique hotels, commercial offices, banquets, and healthcare environments from preliminary concept and 3D visualization through municipal permit approvals to finished turnkey construction.</p>
+      <div class="faq-item is-active">
+        <button type="button" class="faq-q-btn" aria-expanded="true">
+          <span class="faq-q-text">What services does NextGen Interiors &amp; Architects offer in Nepal?</span>
+          <span class="faq-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">NextGen is a premier multidisciplinary architecture, structural engineering, interior design, and turnkey construction company based in Baluwatar, Kathmandu. We deliver high-end residential homes, luxury villas, boutique hotels, commercial offices, banquets, and healthcare environments from preliminary concept and 3D visualization through municipal permit approvals to finished turnkey construction.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <h3 class="faq-q">Where is NextGen located and do you undertake projects outside Kathmandu?</h3>
-        <p class="faq-a">Our design studio and corporate headquarters are located on Thirbam Sadak, Baluwatar, Kathmandu. While based in Kathmandu, NextGen operates nationwide across Nepal, with completed and ongoing landmark architectural and interior projects in Lalitpur, Bhaktapur, Pokhara, Chitwan (Bharatpur), Dang, Surkhet, Biratnagar, and Butwal.</p>
+        <button type="button" class="faq-q-btn" aria-expanded="false">
+          <span class="faq-q-text">Where is NextGen located and do you undertake projects outside Kathmandu?</span>
+          <span class="faq-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">Our design studio and corporate headquarters are located on Thirbam Sadak, Baluwatar, Kathmandu. While based in Kathmandu, NextGen operates nationwide across Nepal, with completed and ongoing landmark architectural and interior projects in Lalitpur, Bhaktapur, Pokhara, Chitwan (Bharatpur), Dang, Surkhet, Biratnagar, and Butwal.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <h3 class="faq-q">What is the advantage of choosing a turnkey design and build contract?</h3>
-        <p class="faq-a">A turnkey contract provides single-point accountability from architectural conception to keys handover. It prevents budget escalation, resolves design discrepancies between architects and contractors before construction begins, ensures strict quality control on imported materials and bespoke joinery, and guarantees timely project delivery within agreed milestones.</p>
+        <button type="button" class="faq-q-btn" aria-expanded="false">
+          <span class="faq-q-text">What is the advantage of choosing a turnkey design and build contract?</span>
+          <span class="faq-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">A turnkey contract provides single-point accountability from architectural conception to keys handover. It prevents budget escalation, resolves design discrepancies between architects and contractors before construction begins, ensures strict quality control on imported materials and bespoke joinery, and guarantees timely project delivery within agreed milestones.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <h3 class="faq-q">Do your building designs comply with Nepal National Building Code (NBC)?</h3>
-        <p class="faq-a">Yes. Every architectural and structural drawing produced by NextGen is fully certified by licensed Nepal Engineering Council (NEC) engineers to comply with NBC 105:2020 seismic standards, municipal bylaws, FAR regulations, and safety mandates for municipal building permits across all municipalities in Nepal.</p>
+        <button type="button" class="faq-q-btn" aria-expanded="false">
+          <span class="faq-q-text">Do your building designs comply with Nepal National Building Code (NBC)?</span>
+          <span class="faq-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">Yes. Every architectural and structural drawing produced by NextGen is fully certified by licensed Nepal Engineering Council (NEC) engineers to comply with NBC 105:2020 seismic standards, municipal bylaws, FAR regulations, and safety mandates for municipal building permits across all municipalities in Nepal.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <h3 class="faq-q">What is the typical timeline for an architectural or interior design project in Nepal?</h3>
-        <p class="faq-a">The timeline depends on the scale and scope of the project. For residential architecture, structural engineering, and municipal permit drawings, the design phase typically takes 4 to 8 weeks. For interior design and turnkey fit-outs, concept design and 3D visualization take 2 to 4 weeks, followed by 6 to 12 weeks for on-site execution, bespoke carpentry, and turnkey handover.</p>
+        <button type="button" class="faq-q-btn" aria-expanded="false">
+          <span class="faq-q-text">What is the typical timeline for an architectural or interior design project in Nepal?</span>
+          <span class="faq-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">The timeline depends on the scale and scope of the project. For residential architecture, structural engineering, and municipal permit drawings, the design phase typically takes 4 to 8 weeks. For interior design and turnkey fit-outs, concept design and 3D visualization take 2 to 4 weeks, followed by 6 to 12 weeks for on-site execution, bespoke carpentry, and turnkey handover.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <h3 class="faq-q">How does NextGen maintain quality across interior materials and bespoke joinery?</h3>
-        <p class="faq-a">We partner directly with leading certified brands including German hardware systems (Häfele, Hettich), premium marine-grade laminates, commercial vitrified tiles, sanitaryware from Kohler and Roca, and seasoned grade-A hardwood. Every component is crafted in our centralized workshop and verified on-site to ensure structural durability, fire safety, and timeless luxury.</p>
+        <button type="button" class="faq-q-btn" aria-expanded="false">
+          <span class="faq-q-text">How does NextGen maintain quality across interior materials and bespoke joinery?</span>
+          <span class="faq-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">We partner directly with leading certified brands including German hardware systems (Häfele, Hettich), premium marine-grade laminates, commercial vitrified tiles, sanitaryware from Kohler and Roca, and seasoned grade-A hardwood. Every component is crafted in our centralized workshop and verified on-site to ensure structural durability, fire safety, and timeless luxury.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <h3 class="faq-q">Do you handle commercial hospitality, resort, and banquet hall architecture in Nepal?</h3>
-        <p class="faq-a">Yes. Hospitality architecture is one of NextGen's signature strengths. We have designed boutique hotels, luxury resorts, banquet complexes, and cafes across Nepal. Our architectural and interior planning prioritizes guest circulation flow, soundproofing acoustics, energy efficiency, life-safety standards, and room yields to maximize commercial profitability.</p>
+        <button type="button" class="faq-q-btn" aria-expanded="false">
+          <span class="faq-q-text">Do you handle commercial hospitality, resort, and banquet hall architecture in Nepal?</span>
+          <span class="faq-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">Yes. Hospitality architecture is one of NextGen's signature strengths. We have designed boutique hotels, luxury resorts, banquet complexes, and cafes across Nepal. Our architectural and interior planning prioritizes guest circulation flow, soundproofing acoustics, energy efficiency, life-safety standards, and room yields to maximize commercial profitability.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <h3 class="faq-q">How do I start a project with NextGen Interiors &amp; Architects?</h3>
-        <p class="faq-a">You can start by booking an initial design consultation with our principal architects. We review your land survey or floor plan, discuss your aesthetic vision, functional requirements, and target budget, and formulate a customized architectural roadmap and fee estimate within 2 to 3 business days.</p>
+        <button type="button" class="faq-q-btn" aria-expanded="false">
+          <span class="faq-q-text">How do I start a project with NextGen Interiors &amp; Architects?</span>
+          <span class="faq-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">You can start by booking an initial design consultation with our principal architects. We review your land survey or floor plan, discuss your aesthetic vision, functional requirements, and target budget, and formulate a customized architectural roadmap and fee estimate within 2 to 3 business days.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -599,6 +655,6 @@
     </a>
   </div>
 
-  <script src="/js/home.js?v=6" defer></script>
+  <script src="/js/home.js?v=7" defer></script>
 </body>
 </html>

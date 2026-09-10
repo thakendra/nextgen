@@ -151,6 +151,28 @@
       });
     })();
 
+    
+    // FAQ ACCORDION DROPDOWN
+    (function initFAQAccordion() {
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        const btn = item.querySelector('.faq-q-btn');
+        if (!btn) return;
+        btn.addEventListener('click', () => {
+          const isActive = item.classList.contains('is-active');
+          faqItems.forEach(other => {
+            other.classList.remove('is-active');
+            const otherBtn = other.querySelector('.faq-q-btn');
+            if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          });
+          if (!isActive) {
+            item.classList.add('is-active');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    })();
+
     // RUNNING PROJECTS AUTO-MARQUEE & LIGHTBOX MODAL
     (function initRunningMarquee() {
       const track = document.getElementById('runningSliderTrack');
