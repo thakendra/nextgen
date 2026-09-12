@@ -83,8 +83,6 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   </script>
 </head>
 <body>
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 
 <nav class="nav">
   <a href="/" class="nav-logo"><img src="logo/logo.png" class="logo-img" alt="NextGen Interiors" style="height:32px;"/></a>
