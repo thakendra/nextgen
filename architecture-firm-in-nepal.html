@@ -50,18 +50,18 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--f-body); background: var(--ink); color: var(--offwhite); overflow-x: hidden; cursor: none; }
+    body { font-family: var(--f-body); background: var(--ink); color: var(--offwhite); overflow-x: hidden; cursor: auto; }
     img { display: block; max-width: 100%; }
     a { text-decoration: none; color: inherit; }
-    button { border: none; background: none; cursor: none; font: inherit; }
+    button { border: none; background: none; cursor: pointer; font: inherit; }
     ul { list-style: none; }
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--ink); }
     ::-webkit-scrollbar-thumb { background: var(--blue-mid); }
 
     /* Custom Cursor */
-    .cursor-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue-mid); position: fixed; top: 0; left: 0; transform: translate(-50%,-50%); z-index: 9999; pointer-events: none; mix-blend-mode: screen; }
-    .cursor-ring { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(54,159,206,.35); position: fixed; top: 0; left: 0; transform: translate(-50%,-50%); z-index: 9998; pointer-events: none; transition: width .35s var(--ease), height .35s var(--ease); }
+    .cursor-dot { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+    .cursor-ring { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
 
     /* Navigation */
     .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 20px var(--gap); display: flex; align-items: center; justify-content: space-between; background: rgba(8,15,28,.95); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(255,255,255,.06); }
@@ -157,7 +157,7 @@
     .pshow { background: #060c17; padding: clamp(60px,8vw,110px) 0; overflow: hidden; border-top: 1px solid rgba(255,255,255,.05); border-bottom: 1px solid rgba(255,255,255,.05); }
     .pshow-head { max-width: var(--max); margin: 0 auto; padding: 0 var(--gap) clamp(24px,3.5vw,42px); }
     .pslider-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; }
-    .pfilter-btn { padding: 9px 18px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); font-family: var(--f-body); font-size: 10px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--mist); cursor: none; transition: all .25s; }
+    .pfilter-btn { padding: 9px 18px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); font-family: var(--f-body); font-size: 10px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--mist); cursor: pointer; transition: all .25s; }
     .pfilter-btn:hover, .pfilter-btn.is-active { background: var(--blue-mid); border-color: var(--blue-mid); color: var(--ink); font-weight: 600; }
 
     .pslider { position: relative; width: 100%; margin: 20px 0 0; }
@@ -194,10 +194,10 @@
     .pslider-cat { font-family: var(--f-body); font-size: 10.5px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--blue-mid); }
     .pslider-count { font-family: var(--f-body); font-size: 10.5px; font-weight: 500; letter-spacing: .2em; color: rgba(245,242,237,.4); }
     .pslider-dots { display: flex; align-items: center; gap: 7px; }
-    .pslider-dot { width: 22px; height: 2px; padding: 0; border: none; background: rgba(255,255,255,.16); cursor: none; transition: all .4s var(--ease); }
+    .pslider-dot { width: 22px; height: 2px; padding: 0; border: none; background: rgba(255,255,255,.16); cursor: pointer; transition: all .4s var(--ease); }
     .pslider-dot.is-active { background: var(--blue-mid); transform: scaleY(2.5); }
     .pslider-nav { display: flex; gap: 8px; }
-    .pslider-btn { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.14); background: transparent; color: rgba(245,242,237,.6); cursor: none; transition: all .3s; }
+    .pslider-btn { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.14); background: transparent; color: rgba(245,242,237,.6); cursor: pointer; transition: all .3s; }
     .pslider-btn:hover { border-color: var(--blue-mid); color: var(--blue-mid); background: rgba(54,159,206,.1); }
     .pslider-btn svg { width: 16px; height: 16px; }
 
@@ -245,7 +245,7 @@
     .af-faq-wrap { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
     .af-faq-item { background: rgba(11,20,34,0.7); border: 1px solid rgba(255,255,255,.07); transition: border-color .3s; }
     .af-faq-item.open { border-color: rgba(54,159,206,.5); }
-    .af-faq-q { width: 100%; padding: 22px 28px; display: flex; align-items: center; justify-content: space-between; text-align: left; font-family: var(--f-head); font-size: clamp(19px,1.8vw,24px); letter-spacing: .03em; color: var(--offwhite); cursor: none; }
+    .af-faq-q { width: 100%; padding: 22px 28px; display: flex; align-items: center; justify-content: space-between; text-align: left; font-family: var(--f-head); font-size: clamp(19px,1.8vw,24px); letter-spacing: .03em; color: var(--offwhite); cursor: pointer; }
     .af-faq-icon { width: 26px; height: 26px; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--blue-mid); transition: transform .3s; }
     .af-faq-item.open .af-faq-icon { transform: rotate(45deg); border-color: var(--blue-mid); }
     .af-faq-a { max-height: 0; overflow: hidden; transition: max-height .4s var(--ease); padding: 0 28px; }
@@ -354,9 +354,6 @@
   </script>
 </head>
 <body>
-
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 
 <!-- NAVIGATION -->
 <nav class="nav">

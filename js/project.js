@@ -1,31 +1,7 @@
 // NextGen Interiors & Architects - Project Showcase Script
 document.addEventListener('DOMContentLoaded', () => {
-  // Cursor Follower
-  const dot = document.getElementById('cursorDot');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-
-  if (dot && ring) {
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX;
-      my = e.clientY;
-      dot.style.left = mx + 'px';
-      dot.style.top = my + 'px';
-    });
-
-    (function animRing() {
-      rx += (mx - rx) * 0.11;
-      ry += (my - ry) * 0.11;
-      ring.style.left = rx + 'px';
-      ring.style.top = ry + 'px';
-      requestAnimationFrame(animRing);
-    })();
-
-    document.querySelectorAll('a, button, .g-card, input, select, textarea').forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('c-hover'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('c-hover'));
-    });
-  }
+  // Cursor Follower (Removed)
+  document.querySelectorAll('.cursor-dot, .cursor-ring, #cursorDot, #cursorRing').forEach(el => el.remove());
 
   // Navigation Menu
   const menuBtn = document.getElementById('menuBtn');
