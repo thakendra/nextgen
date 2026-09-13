@@ -880,12 +880,50 @@ def build():
         eyebrow = p.get('eyebrow') or f"{sub.capitalize()} &middot; NextGen Showcase"
         location = p.get('location') or 'Kathmandu, Nepal'
         intro_heading = p.get('intro_heading') or f"A REFINED<br>{title.upper()}"
-        
         raw_text = p.get('intro_text') or f"{title} is a bespoke project designed by NextGen Interiors, delivering warm layered spaces, curated materials, and timeless architectural form."
+        desc_raw = p.get('description') or f"{title} — bespoke architecture and interior spaces by NextGen Interiors, {location}."
+
+        # Architectural projects text hygiene overrides
+        arch_overrides = {
+            'amrita-thapa-residence': {
+                'intro_heading': 'FINE CLASSICAL EXTERIOR',
+                'intro_text': 'Amrita Thapa Residence — luxury residential architecture and classical exterior design by NextGen Interiors & Architects. A grand classical exterior architecture designed by NextGen Interiors, creating an elegant and prestigious character for this private residence in Naikap, Kathmandu.',
+                'description': 'Amrita Thapa Residence — luxury residential architecture and classical exterior design in Naikap, Kathmandu by NextGen Interiors & Architects.'
+            },
+            'bexton-avenue': {
+                'intro_heading': 'Modern Residential Architecture',
+                'intro_text': 'Modern residential architecture and exterior design in Australia by NextGen Interiors & Architects. Explore the contemporary facade, refined spatial geometry, and bespoke exterior craftsmanship of Bexton Avenue Residence.',
+                'description': 'Bexton Avenue Residence — contemporary residential architecture & exterior design in Australia by NextGen Interiors & Architects.'
+            },
+            'dipak-sapkota-residence': {
+                'intro_heading': 'MODERN ARCHITECTURAL DESIGN',
+                'intro_text': 'Private residential architecture and modern home design in Dang, Nepal by NextGen Interiors & Architects. Explore the contemporary facade, functional spatial planning, and exterior architecture of Dipak Sapkota Residence.',
+                'description': 'Dipak Sapkota Residence — modern residential architecture & exterior design in Dang, Nepal by NextGen Interiors & Architects.'
+            },
+            'prabin-gurung': {
+                'intro_heading': 'Modern Residential Architecture',
+                'intro_text': 'Prabin Gurung Residence is a modern residential architecture and villa design project by NextGen Interiors & Architects, showcasing elegant facade geometry, structural craftsmanship, and bespoke home architecture in Budhanilkantha, Kathmandu.',
+                'description': 'Prabin Gurung Residence — modern residential architecture and villa exterior design in Budhanilkantha, Kathmandu by NextGen Interiors & Architects.'
+            },
+            'surkhet-banquet-hall': {
+                'intro_heading': 'CLASSICAL BANQUET HALL',
+                'intro_text': 'Architecturally planned for large-scale hospitality gatherings, Surkhet Banquet Hall is a landmark commercial building project designed by NextGen Interiors & Architects in Surkhet, Karnali, Nepal. A grand banquet hall blending timeless classical architectural elegance with refined modern structural detailing.',
+                'description': 'Surkhet Banquet Hall — classical banquet hall architecture & commercial venue design in Surkhet, Karnali by NextGen Interiors & Architects.'
+            },
+            'kwality-palace-banquet': {
+                'intro_heading': 'CLASSICAL BANQUET HALL',
+                'intro_text': 'A grand classical banquet hall blending majestic columns, refined architectural details, and luxurious proportions. Designed by NextGen Interiors & Architects in Thulo Bharang, Kathmandu, this landmark commercial project showcases grand exterior architecture and structural elegance.',
+                'description': 'Kwality Palace Banquet — classical banquet hall architecture & commercial building design in Thulo Bharang, Kathmandu by NextGen Interiors & Architects.'
+            }
+        }
+        if slug in arch_overrides:
+            ov = arch_overrides[slug]
+            if ov.get('intro_heading'): intro_heading = ov['intro_heading']
+            if ov.get('intro_text'): raw_text = ov['intro_text']
+            if ov.get('description'): desc_raw = ov['description']
+
         paragraphs = [f"<p>{line.strip()}</p>" for line in raw_text.split('\n') if line.strip()]
         intro_paragraphs = "\n      ".join(paragraphs) if paragraphs else f"<p>{raw_text}</p>"
-        
-        desc_raw = p.get('description') or f"{title} — interior architecture and bespoke spaces by NextGen Interiors, {location}."
         # Pad a short CMS description towards the length Google renders, but
         # never past it — the old code could only check one suffix and fell back
         # to a second one unconditionally, which is how several project pages
