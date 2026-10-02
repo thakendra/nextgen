@@ -76,7 +76,12 @@
       "Bash(python add_service_schema.py)",
       "Bash(python optimize_meta.py)",
       "Bash(grep -rnE \"curl .*\\\\|.*\\(bash|sh\\)|base64 -d|eval \\\\\\\\\\\\$\\\\\\(|nc -|/dev/tcp/|wget .*-O- *\\\\|\" --include=\"*.sh\" --include=\"*.py\" --include=\"claude-seo\" .)",
-      "Bash(bash claude-seo/install.sh)"
+      "Bash(bash claude-seo/install.sh)",
+      "Bash(cd ~/.claude && echo \"=== skills installed ===\" && ls skills/ 2>/dev/null | tr '\\\\n' ' ' && echo && echo && echo \"=== agents installed ===\" && ls agents/*.md 2>/dev/null | wc -l && echo \"agent files\" && echo && echo \"=== runtime ===\" && ls skills/seo/scripts/ 2>/dev/null | head -5)",
+      "Bash(mkdir -p nextgeninterior.com-audit/findings)",
+      "Bash('C:\\\\Users\\\\LOQ/.claude/skills/seo/scripts/claude-seo' run *)",
+      "Bash(xargs -n1 basename)",
+      "Bash(python \"C:/Users/LOQ/AppData/Local/Temp/claude/D--nextgen/4bf33912-fb6c-414d-8cf5-e6a82cf11a21/scratchpad/fix_meta.py\")"
     ]
   }
 }
