@@ -32,7 +32,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/category.css" />
+  <link rel="stylesheet" href="/css/category.css?v=2" />
+  <style>
+    .intro-wrap{max-width:var(--max);margin:0 auto;padding:clamp(28px,3.5vw,48px) var(--gap) clamp(20px,2.5vw,36px)}
+    .intro-tag{font-family:var(--f-body);font-size:10px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--blue-mid);display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .intro-tag::before{content:'';width:18px;height:1px;background:var(--blue-mid)}
+    .intro-text{font-family:var(--f-body);font-size:clamp(14px,1.4vw,17px);font-weight:300;line-height:1.8;color:rgba(245,242,237,0.7);max-width:68ch}
+    .proj-card.span-all,.projects-grid:has(> :only-child) .proj-card{grid-column:1 / -1;height:clamp(380px,62vh,680px)}
+  </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",

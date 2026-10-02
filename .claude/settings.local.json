@@ -74,7 +74,9 @@
       "Bash(python -)",
       "Bash(python optimize_meta.py --dry-run)",
       "Bash(python add_service_schema.py)",
-      "Bash(python optimize_meta.py)"
+      "Bash(python optimize_meta.py)",
+      "Bash(grep -rnE \"curl .*\\\\|.*\\(bash|sh\\)|base64 -d|eval \\\\\\\\\\\\$\\\\\\(|nc -|/dev/tcp/|wget .*-O- *\\\\|\" --include=\"*.sh\" --include=\"*.py\" --include=\"claude-seo\" .)",
+      "Bash(bash claude-seo/install.sh)"
     ]
   }
 }
