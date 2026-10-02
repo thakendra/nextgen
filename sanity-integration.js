@@ -109,8 +109,9 @@ async function renderCategoryGrid() {
     const linkSlug = proj.slug || proj.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
     a.href = linkSlug;
     
+    const isSingle = filtered.length === 1;
     const isFirst = idx === 0;
-    a.className = `proj-card rv vis ${isFirst ? 'span2' : ''}`;
+    a.className = `proj-card rv vis ${isSingle ? 'span-all' : (isFirst ? 'span2' : '')}`;
     
     const catLabel = proj.eyebrow || (proj.subCategory ? proj.subCategory.toUpperCase() : 'PROJECT');
     

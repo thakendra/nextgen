@@ -1220,7 +1220,7 @@ def update_homepage_and_categories(projects, base_dir):
             loc = clean_location(p.get('location'))
             thumb = p.get('thumbnail')
             eyebrow = category_tag(p)
-            is_span2 = 'span2' if idx == 0 else ''
+            is_span2 = 'span-all' if len(cat_projs) == 1 else ('span2' if idx == 0 else '')
             num = str(idx + 1).zfill(2)
             cards.append(f'''    <a href="{slug}" class="proj-card rv vis {is_span2}">
       <img src="{thumb}?w=1200&amp;auto=format" alt="{title}" loading="lazy"/>
