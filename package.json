@@ -1,0 +1,9 @@
+{
+  "name": "nextgen-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NextGen Interiors & Architects official website",
+  "scripts": {
+    "build": "echo 'Static website ready'"
+  }
+}
