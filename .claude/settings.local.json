@@ -81,7 +81,21 @@
       "Bash(mkdir -p nextgeninterior.com-audit/findings)",
       "Bash('C:\\\\Users\\\\LOQ/.claude/skills/seo/scripts/claude-seo' run *)",
       "Bash(xargs -n1 basename)",
-      "Bash(python \"C:/Users/LOQ/AppData/Local/Temp/claude/D--nextgen/4bf33912-fb6c-414d-8cf5-e6a82cf11a21/scratchpad/fix_meta.py\")"
+      "Bash(python \"C:/Users/LOQ/AppData/Local/Temp/claude/D--nextgen/4bf33912-fb6c-414d-8cf5-e6a82cf11a21/scratchpad/fix_meta.py\")",
+      "Bash(npx -v)",
+      "Bash(npx -y lighthouse@12 https://nextgeninterior.com --only-categories=performance,seo,accessibility,best-practices --form-factor=mobile --screenEmulation.mobile --quiet --chrome-flags=\"--headless=new --no-sandbox\" --output=json --output-path=./lh-home.json)",
+      "Bash(echo \"---exit:$?---\")",
+      "Bash('C:\\\\Users\\\\LOQ/.claude/skills/seo/.venv/Scripts/python.exe' ../cwv.py https://nextgeninterior.com/ https://nextgeninterior.com/interiors https://nextgeninterior.com/hotel-resort-designer-nepal)",
+      "Bash('C:\\\\Users\\\\LOQ/.claude/skills/seo/.venv/Scripts/python.exe' -m playwright install chromium chromium-headless-shell)",
+      "Bash(timeout 120 'C:\\\\Users\\\\LOQ/.claude/skills/seo/.venv/Scripts/python.exe' -u -c ' *)",
+      "Bash(echo \"exit=$?\")",
+      "Bash('C:\\\\Users\\\\LOQ/.claude/skills/seo/.venv/Scripts/python.exe' -u -c ' *)",
+      "Bash('C:\\\\Users\\\\LOQ/.claude/skills/seo/.venv/Scripts/python.exe' -u ../weight.py https://nextgeninterior.com/ https://nextgeninterior.com/interiors https://nextgeninterior.com/hotel-resort-designer-nepal)",
+      "Bash(awk '{printf \"%8.0f KB  %s\\\\n\", $5/1024, $NF}')",
+      "Bash(xargs ls -lS)",
+      "Bash('C:\\\\Users\\\\LOQ/.claude/skills/seo/.venv/Scripts/python.exe' -c 'import PIL; print\\('\\\\''Pillow'\\\\'',PIL.__version__\\)')",
+      "Bash('C:\\\\Users\\\\LOQ/.claude/skills/seo/.venv/Scripts/python.exe' -c ' *)",
+      "Bash(git checkout *)"
     ]
   }
 }
